@@ -11,3 +11,15 @@ A huge thank you to the wonderful team of volunteers from Deloitte Adelaide who 
 What a fantastic group, all of whom got stuck into a range of tasks from weeding and mulch spreading to potting table maintenance, pad resurfacing and pricking out of seedlings in the nursery. Big smiles and good cheer all round - a dream team!
 
 Thank you, Deloitte - you are welcome back any time! And thank you to FNPW (Foundation for National Parks & Wildlife) for coordinating this corporate volunteering day.
+
+![](/images/journal/deloitte-taskforce-1.jpg)
+
+![](/images/journal/deloitte-taskforce-2.jpg)
+
+![](/images/journal/deloitte-taskforce-3.jpg)
+
+![](/images/journal/deloitte-taskforce-4.jpg)
+
+![](/images/journal/deloitte-taskforce-5.jpg)
+
+![](/images/journal/deloitte-taskforce-6.jpg)

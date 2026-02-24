@@ -14,4 +14,8 @@ However, an initial search for a rural hideaway revealed something very differen
 
 Now the Forktree Project has begun - an ambitious but exciting project to bring this spot back to life so that its natural ecosystem can thrive and support the biodiversity endemic to the local area.
 
-Let's get started - there's important work to be done.
+Let’s get started - there’s important work to be done.
+
+            A spectacular setting, but this land is crying out to be restored to the way it should be.
+
+![](/images/journal/beginnings-1.jpg)

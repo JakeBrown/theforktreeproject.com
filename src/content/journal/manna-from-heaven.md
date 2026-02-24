@@ -13,3 +13,5 @@ Look at the size of this tree! What a thrill to see it standing tall and triumph
 In time this section of the property will be lush with manna gum community vegetation, a biodiverse ecosystem that will provide habitat for a wide range of native fauna, including hopefully koalas (manna gums are the preferred food source for koalas).
 
 We are excited to watch this space - and, at the rate these manna gums are growing, maybe not for long!
+
+![](/images/journal/manna-from-heaven-1.jpg)

@@ -6,10 +6,20 @@ image: "/images/journal/planting-prep.jpg"
 excerpt: "It is already the beginning of June, and we are getting ready for our first big week of planting, with 200 Year 7 students from Adelaide Botanic High School due to visit."
 ---
 
-It is already the beginning of June, and we are getting ready for our first big week of planting, with 200 Year 7 students from Adelaide Botanic High School due to visit.
+As we get started on planting season 2023, there’s still work to be done in the nursery, ensuring that plants will be ready to be planted throughout the winter, and some for next year too.
 
-This time last year (and the years before that) we were already well and truly under way with planting by the beginning of June, but this year is different. It shouldn't be this dry at this time of year - the challenge this presents when digging holes for planting is a sobering reminder of the realities of climate change.
+As usual our aim is to plant a range of upper-storey, mid-storey and under-storey species so as to establish biodiverse native habitat for native fauna. The last six months in the nursery have been busy as the Forktree nursery team have overseen the propagating and nurturing of our saplings, tending to them and keeping them healthy, ensuring they are ready on time - and having fun along the way.
 
-It also reminds us why habitat restoration is so important: trees and shrubs are climate moderators, generating over 40% of the precipitation over land via evaporation and transpiration of water from their leaves. Land clearance reduces rainfall; habitat restoration increases it and, crucially, moderates it.
+Many thanks to all the team and also to the volunteers working alongside them - your work is invaluable.
 
-So let's get planting!
+![](/images/journal/planting-prep-1.jpg)
+
+![](/images/journal/planting-prep-2.jpg)
+
+![](/images/journal/planting-prep-3.jpg)
+
+![](/images/journal/planting-prep-4.jpg)
+
+![](/images/journal/planting-prep-5.jpg)
+
+![](/images/journal/planting-prep-6.jpg)

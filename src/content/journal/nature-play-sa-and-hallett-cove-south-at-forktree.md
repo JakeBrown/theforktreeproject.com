@@ -6,7 +6,7 @@ image: "/images/journal/nature-play-sa-and-hallett-cove-south-at-forktree.jpg"
 excerpt: "A great day at The Forktree Project last week with Hallett Cove South Primary School and Abe and Cam from Nature Play SA."
 ---
 
-A great day at The Forktree Project last week with Hallett Cove South Primary School and Abe and Cam from Nature Play SA.
+A great day at The Forktree Project last week with Hallett Cove South Primary School and Abe and Cam from Nature Play SA .
 
 The Yr 5/6 students planted a range of pink gum community species to enrich habitat on a high, north-facing slope and prepared a lower, gully-side site by positioning stakes in planting clusters for red gum community species. Thank you, HCSPS!
 
@@ -27,3 +27,9 @@ Central to the Forktree education program is a belief in the power of learning b
 And from Nature Play SA: "it was a wonderful inflection point for their learning... The most interesting part for us was how the kids were able to transfer what they learned with you back to the school context... They had thoughtfully staked [their school planting project], dug the holes and planted and boxed just the way you taught them. It was a long day, but again, the sense of pride and ownership was gold."
 
 Amazing! Well done, HCSPS Yr 5/6s!
+
+![](/images/journal/nature-play-sa-and-hallett-cove-south-at-forktree-1.jpg)
+
+![](/images/journal/nature-play-sa-and-hallett-cove-south-at-forktree-2.png)
+
+![](/images/journal/nature-play-sa-and-hallett-cove-south-at-forktree-3.jpeg)
