@@ -54,6 +54,44 @@ const { Content } = await render(post);
 
 </PageLayout>
 
+<script>
+  // Wrap consecutive image-only paragraphs into gallery divs
+  const content = document.querySelector('.blog-post__content');
+  if (content) {
+    const children = Array.from(content.children);
+    let i = 0;
+    while (i < children.length) {
+      const el = children[i];
+      // Check if this is a paragraph containing only an image
+      if (el.tagName === 'P' && el.children.length === 1 && el.children[0].tagName === 'IMG') {
+        // Collect consecutive image paragraphs
+        const group = [el];
+        let j = i + 1;
+        while (j < children.length) {
+          const next = children[j];
+          if (next.tagName === 'P' && next.children.length === 1 && next.children[0].tagName === 'IMG') {
+            group.push(next);
+            j++;
+          } else {
+            break;
+          }
+        }
+        // Wrap in gallery div
+        const gallery = document.createElement('div');
+        gallery.className = group.length === 1 ? 'gallery gallery--single' : 'gallery';
+        el.before(gallery);
+        for (const p of group) {
+          gallery.appendChild(p.children[0]); // Move img out of p
+          p.remove();
+        }
+        i = j;
+      } else {
+        i++;
+      }
+    }
+  }
+</script>
+
 <style>
   .blog-post {
     padding: var(--space-2xl) 0 var(--space-xl);
@@ -114,7 +152,52 @@ const { Content } = await render(post);
   }
 
   .blog-post__content :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Gallery grid */
+  .blog-post__content :global(.gallery) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
     margin: 2em 0;
+  }
+
+  .blog-post__content :global(.gallery img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1;
+  }
+
+  /* Single image in gallery stays full width */
+  .blog-post__content :global(.gallery--single) {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-post__content :global(.gallery--single img) {
+    aspect-ratio: auto;
+  }
+
+  /* Odd last image spans full width */
+  .blog-post__content :global(.gallery > :last-child:nth-child(odd)) {
+    grid-column: 1 / -1;
+  }
+
+  .blog-post__content :global(.gallery > :last-child:nth-child(odd) img) {
+    aspect-ratio: 16 / 9;
+  }
+
+  @media (max-width: 640px) {
+    .blog-post__content :global(.gallery) {
+      grid-template-columns: 1fr;
+    }
+
+    .blog-post__content :global(.gallery img) {
+      aspect-ratio: auto;
+    }
   }
 
   .blog-post__content :global(a) {
