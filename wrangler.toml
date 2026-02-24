@@ -1,4 +1,4 @@
-name = "theforktreeproject-com"
+name = "theforktreeprojectdotcom"
 main = "./dist/_worker.js/index.js"
 compatibility_date = "2026-02-24"
 compatibility_flags = ["nodejs_compat"]
