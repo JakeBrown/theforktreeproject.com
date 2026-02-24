@@ -2,9 +2,17 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('journal')).sort(
+const POSTS_PER_PAGE = 10;
+
+const allPosts = (await getCollection('journal')).sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
+
+const url = new URL(Astro.request.url);
+const currentPage = Math.max(1, parseInt(url.searchParams.get('page') || '1'));
+const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+const start = (currentPage - 1) * POSTS_PER_PAGE;
+const posts = allPosts.slice(start, start + POSTS_PER_PAGE);
 ---
 
 <PageLayout title="Journal — The Forktree Project" description="The Forktree Project story - follow our rewilding journey." headerVariant="dark">
@@ -49,6 +57,22 @@ const posts = (await getCollection('journal')).sort(
         </div>
       ) : (
         <p class="journal-empty">Journal posts coming soon. Check back for updates on our rewilding journey.</p>
+      )}
+
+      {totalPages > 1 && (
+        <nav class="pagination" aria-label="Journal pagination">
+          {currentPage > 1 && (
+            <a href={currentPage === 2 ? '/journal' : `/journal?page=${currentPage - 1}`} class="pagination__link">
+              &larr; Newer
+            </a>
+          )}
+          <span class="pagination__info">Page {currentPage} of {totalPages}</span>
+          {currentPage < totalPages && (
+            <a href={`/journal?page=${currentPage + 1}`} class="pagination__link">
+              Older &rarr;
+            </a>
+          )}
+        </nav>
       )}
     </div>
   </section>
@@ -150,5 +174,35 @@ const posts = (await getCollection('journal')).sort(
     text-align: center;
     color: var(--color-text-secondary);
     padding: var(--space-xl) 0;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg) 0 0;
+  }
+
+  .pagination__link {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: opacity var(--transition-normal);
+  }
+
+  .pagination__link:hover {
+    opacity: 0.6;
+  }
+
+  .pagination__info {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    color: var(--color-text-secondary);
   }
 </style>
