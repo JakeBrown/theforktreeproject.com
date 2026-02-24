@@ -1,0 +1,292 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="The Forktree Project">
+  <Header />
+
+  <!-- Section Nav Dots -->
+  <nav class="index-nav" aria-label="Page sections">
+    <a href="#banner" class="index-nav__item active" data-section="banner">
+      <div class="index-nav__dot"></div>
+      <div class="index-nav__label"><span>Banner</span></div>
+    </a>
+    <a href="#story-1" class="index-nav__item" data-section="story-1">
+      <div class="index-nav__dot"></div>
+      <div class="index-nav__label"><span>Story 1</span></div>
+    </a>
+    <a href="#story-2" class="index-nav__item" data-section="story-2">
+      <div class="index-nav__dot"></div>
+      <div class="index-nav__label"><span>Story 2</span></div>
+    </a>
+  </nav>
+
+  <!-- Banner Section -->
+  <section id="banner" class="index-section index-section--banner">
+    <div class="index-section__content index-section__content--center">
+      <div class="banner-text">
+        <h1>Re-wilding.</h1>
+        <h1>It&rsquo;s in our nature.</h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story 1 - Stats -->
+  <section id="story-1" class="index-section index-section--story1">
+    <div class="index-section__content index-section__content--right">
+      <div class="story-text">
+        <h2>Global extinction rates of plants and animals are 100 times higher because of us.</h2>
+        <h2>Australia is one of seven countries responsible for more than half of global biodiversity loss.</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story 2 - Hope -->
+  <section id="story-2" class="index-section index-section--story2">
+    <div class="index-section__content index-section__content--left">
+      <div class="story-text">
+        <h2>If we planted trees on all the suitable spare land that existed globally, we could store over 200 billion tonnes of carbon and buy 20 years in the fight against climate change.</h2>
+        <h2>Australia is one of the top countries globally with such tree-planting potential.</h2>
+      </div>
+    </div>
+    <div class="index-section__cta">
+      <a href="/about-us" class="btn--cta">Project Overview &gt;&gt;</a>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  // Section nav active state on scroll
+  const sections = document.querySelectorAll('.index-section');
+  const navItems = document.querySelectorAll('.index-nav__item');
+
+  function updateActiveNav() {
+    const scrollPos = window.scrollY + window.innerHeight / 2;
+    sections.forEach((section, i) => {
+      const top = section.offsetTop;
+      const bottom = top + section.offsetHeight;
+      if (scrollPos >= top && scrollPos < bottom) {
+        navItems.forEach(n => n.classList.remove('active'));
+        navItems[i]?.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+</script>
+
+<style>
+  /* Index Nav Dots */
+  .index-nav {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  .index-nav__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: white;
+  }
+
+  .index-nav__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    background: transparent;
+    transition: all 0.3s ease;
+  }
+
+  .index-nav__item.active .index-nav__dot {
+    background: white;
+    border-color: white;
+  }
+
+  .index-nav__label {
+    display: none;
+    font-family: var(--font-heading);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    order: -1;
+  }
+
+  .index-nav__item:hover .index-nav__label {
+    display: block;
+  }
+
+  /* Index Sections */
+  .index-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--color-text-light);
+    overflow: hidden;
+  }
+
+  .index-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  /* Banner */
+  .index-section--banner {
+    min-height: 100vh;
+    background-color: #000000;
+    background-image: url('/images/hero/home-banner.jpg');
+  }
+
+  .index-section--banner::before {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  /* Story 1 */
+  .index-section--story1 {
+    min-height: 85vh;
+    background-color: #1a1a1a;
+    background-image: url('/images/hero/home-story1.jpg');
+  }
+
+  .index-section--story1::before {
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  /* Story 2 */
+  .index-section--story2 {
+    min-height: 100vh;
+    background-color: #1a1a1a;
+    background-image: url('/images/hero/home-story2.jpg');
+  }
+
+  .index-section--story2::before {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  /* Content Layout */
+  .index-section__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1600px;
+    padding: 180px 100px;
+  }
+
+  .index-section__content--center {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .index-section__content--right {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .index-section__content--left {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .banner-text {
+    max-width: 750px;
+  }
+
+  .banner-text h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 8.5vw, 110px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: normal;
+    color: white;
+  }
+
+  .story-text {
+    max-width: 50%;
+  }
+
+  .story-text h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.1rem, 2.7vw, 35px);
+    font-weight: 500;
+    line-height: 1.0;
+    color: white;
+    margin-bottom: 2rem;
+  }
+
+  /* CTA Button */
+  .index-section__cta {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 100px 80px;
+  }
+
+  .btn--cta {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: white;
+    border: 2px solid white;
+    padding: 13px 26px;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+  }
+
+  .btn--cta:hover {
+    background-color: white;
+    color: #000;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .index-nav {
+      display: none;
+    }
+
+    .index-section {
+      background-attachment: scroll;
+    }
+
+    .index-section__content {
+      padding: 100px 30px;
+    }
+
+    .index-section__content--right,
+    .index-section__content--left {
+      justify-content: center;
+    }
+
+    .story-text {
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .index-section__cta {
+      padding: 0 30px 60px;
+    }
+  }
+</style>

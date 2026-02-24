@@ -1,0 +1,186 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout title="Education — The Forktree Project" description="Experiential sustainability education for young people at The Forktree Project.">
+
+  <!-- Education Hero Section -->
+  <section class="edu-section edu-section--hero" style="background-image: url('/images/education/education-hero.jpg'); background-color: #2a3a2a;">
+    <div class="edu-section__content edu-section__content--center">
+      <div class="edu-text edu-text--wide">
+        <h1>Experiential Sustainability Education</h1>
+
+        <div class="edu-body">
+          <p>A key part of the mission of The Forktree Project is to educate young people about biodiversity, the importance of habitat restoration and the need for sustainable choices in all areas of our lives.</p>
+
+          <p>The Forktree Project Education Program is underpinned by a passionate belief in both the value of genuine, hands-on experiential learning and the importance of empowering young people to be part of the solution to the climate and biodiversity crises through active involvement in habitat restoration.</p>
+
+          <p>It is also built on a conviction that time spent in and caring for nature is hugely beneficial to the mental health and wellbeing of individuals and communities.</p>
+
+          <p>The Forktree Project takes pride in working closely with schools to link students&rsquo; experiences to different learning areas of the Australian Curriculum, as well as SACE and IB curricula, according to each school&rsquo;s specific needs. To read what other schools have to say, read our testimonials by <a href="/testimonials">clicking here.</a></p>
+
+          <p>The Forktree Project welcomes both primary and secondary schools for day excursions, overnight camping experiences and extended programs.</p>
+
+          <p><strong>Please get in touch &ndash; we would love to welcome you and your students to Forktree!</strong></p>
+
+          <p>Click below for additional information:</p>
+
+          <ul class="edu-downloads">
+            <li><a href="/documents/forktree-education-intro.pdf">&ndash;</a></li>
+            <li><a href="/documents/forktree-education-overview.pdf">&ndash;</a></li>
+            <li><a href="/documents/forktree-wellbeing.pdf">&ndash;</a></li>
+          </ul>
+
+          <div class="edu-cta">
+            <a href="/join-us" class="btn--cta">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carbon Assessment Section -->
+  <section class="edu-section" style="background-image: url('/images/education/carbon-hero.jpg'); background-color: #1a2a1a;">
+    <div class="edu-section__content edu-section__content--center">
+      <div class="edu-text edu-text--wide">
+        <h1>Carbon Assessment Methodologies</h1>
+
+        <div class="edu-body">
+          <p>Small/medium sized properties in Australia have a significant role to play in protecting biodiversity and combatting climate change through sequestering carbon dioxide.</p>
+
+          <p>However, to enable them to better perform this role, carbon funding needs to be made more accessible to encourage landowners to make the effort to restore the land. The current Australian carbon credit system for small/medium-sized properties is complex and prohibitively expensive.</p>
+
+          <p>Forktree is trialling several methodologies for quantifying carbon stored in both the soil and trees and plants on the site and will use these experiences both to work out carbon sequestration rates and also to inform discussions on improving the policy framework to accept simpler processes.</p>
+
+          <p>For more information on The Forktree Project&rsquo;s carbon assessment trials, or to get involved, please contact us.</p>
+
+          <div class="edu-cta">
+            <a href="/join-us" class="btn--cta">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  .edu-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--color-text-light);
+    overflow: hidden;
+  }
+
+  .edu-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+  }
+
+  .edu-section__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1600px;
+    padding: 180px 100px;
+  }
+
+  .edu-section__content--center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .edu-text {
+    max-width: 50%;
+  }
+
+  .edu-text--wide {
+    max-width: 65%;
+    text-align: center;
+  }
+
+  .edu-text h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: var(--space-lg);
+  }
+
+  .edu-body p {
+    font-family: var(--font-body);
+    font-size: clamp(0.85rem, 1.3vw, 1rem);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+
+  .edu-body a {
+    color: white;
+    text-decoration: underline;
+  }
+
+  .edu-body a:hover {
+    opacity: 0.7;
+  }
+
+  .edu-downloads {
+    margin: var(--space-sm) 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .edu-downloads a {
+    font-size: 1.2rem;
+  }
+
+  .edu-cta {
+    margin-top: var(--space-md);
+  }
+
+  .btn--cta {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: white;
+    border: 2px solid white;
+    padding: 13px 26px;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+  }
+
+  .btn--cta:hover {
+    background-color: white;
+    color: #000;
+  }
+
+  @media (max-width: 768px) {
+    .edu-section {
+      background-attachment: scroll;
+      min-height: auto;
+    }
+
+    .edu-section__content {
+      padding: 100px 30px;
+    }
+
+    .edu-text,
+    .edu-text--wide {
+      max-width: 100%;
+    }
+  }
+</style>

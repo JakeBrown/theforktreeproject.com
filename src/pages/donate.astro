@@ -1,0 +1,115 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout title="Donate to Forktree — The Forktree Project" description="Help us to re-establish habitat on a degraded property in South Australia's Fleurieu Peninsula." headerVariant="dark">
+
+  <section class="donate-page">
+    <div class="donate-page__inner">
+      <h1>Help us to re-establish habitat!</h1>
+
+      <div class="donate-logos">
+        <img src="/images/donate/donate-hero.jpg" alt="The Forktree Project and Australian Geographic Society" loading="lazy" />
+      </div>
+
+      <div class="donate-text">
+        <p>Help us to return a degraded 53-hectare former pastoral property in South Australia&rsquo;s Fleurieu Peninsula back to nature by re-establishing tens of thousands of native trees, shrubs and grasses, which will in turn bring back native animals, insects and birds as well as sequester tens of thousands of tonnes of carbon.</p>
+
+        <p>The Forktree Project is proud to be supported by the <a href="https://www.australiangeographic.com.au/category/society/" target="_blank" rel="noopener noreferrer">Australian Geographic Society</a>, which gives donors to the Society the ability to choose The Forktree Project as their preferred cause for their funds.</p>
+
+        <p><strong>To donate to Forktree, access The Forktree Project fundraising page on the Society&rsquo;s website via the button below and make your donation there.</strong></p>
+
+        <div class="donate-cta">
+          <a href="https://www.australiangeographic.com.au/society/fundraising/2021/08/australian-geographic-supports-forktree-project/" target="_blank" rel="noopener noreferrer" class="btn--donate">Donate Now</a>
+        </div>
+
+        <p>The Society will give the funds you donate via its Forktree Project fundraising page to us here at Forktree.</p>
+
+        <p><strong>All donations to the Australian Geographic Society-Forktree Project fund are tax deductible.</strong></p>
+
+        <p>Updates on the progress of our re-wilding work with can be found via <a href="/journal">our blog</a> or in the <a href="https://www.australiangeographic.com.au/category/society/ag-society-news/" target="_blank" rel="noopener noreferrer">Australian Geographic Society newsletter</a>.</p>
+
+        <p>Your support is greatly appreciated and will help us make a difference.</p>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  .donate-page {
+    padding-top: var(--header-height);
+  }
+
+  .donate-page__inner {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-md) var(--space-xl);
+    text-align: center;
+  }
+
+  .donate-page h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 8vw, 6.875rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: var(--space-lg);
+  }
+
+  .donate-logos {
+    margin: 0 auto var(--space-lg);
+    max-width: 500px;
+  }
+
+  .donate-logos img {
+    width: 100%;
+    height: auto;
+  }
+
+  .donate-text {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .donate-text p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .donate-text a:not(.btn--donate) {
+    color: var(--color-text);
+    text-decoration: underline;
+  }
+
+  .donate-text a:not(.btn--donate):hover {
+    opacity: 0.7;
+  }
+
+  .donate-cta {
+    text-align: center;
+    margin: var(--space-md) 0;
+  }
+
+  .btn--donate {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--color-text);
+    border: 2px solid var(--color-text);
+    padding: 25px 46px;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+  }
+
+  .btn--donate:hover {
+    background-color: var(--color-text);
+    color: white;
+  }
+</style>

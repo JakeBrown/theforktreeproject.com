@@ -1,0 +1,233 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout title="About Us — The Forktree Project" description="The Forktree Project is a registered charity whose goal is to return a degraded 133-acre former pastoral property in South Australia's Fleurieu Peninsula back to nature.">
+
+  <!-- Intro Section -->
+  <section class="about-section about-section--intro" style="background-image: url('/images/about/about-hero.jpg'); background-color: #2a3a2a;">
+    <div class="about-section__content about-section__content--center">
+      <div class="about-text about-text--wide">
+        <h2>The Forktree Project is a registered charity whose goal is to return a degraded 133-acre former pastoral property in South Australia&rsquo;s Fleurieu Peninsula back to nature.</h2>
+        <h2 class="about-text__sub">This involves re-establishing tens of thousands of native trees and shrubs on the property, which will in turn bring back native animals, insects and birds as well as sequester tens of thousands of tonnes of carbon. To put it in perspective, the average Australian&rsquo;s carbon footprint each year is roughly 25 tonnes.</h2>
+      </div>
+    </div>
+    <div class="about-section__scroll">
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L10 10L19 1" stroke="white" stroke-width="2"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- The Idea -->
+  <section class="about-section about-section--idea" style="background-image: url('/images/about/about-idea.jpg'); background-color: #1a2a1a;">
+    <div class="about-section__content about-section__content--left">
+      <div class="about-text">
+        <h2>The Idea</h2>
+        <p>Restoring this once pristine land in such an incredible part of Australia is important to do, coming at a globally critical time for species/habitat loss and climate change.</p>
+        <p>The Fleurieu Peninsula of South Australia is a perfect place to do this, given the richness of its natural habitat and its proximity to a major population centre.</p>
+        <p>The Forktree Project began in April 2019 when the property was purchased and the vision was born. See the Journal to follow the story of how the project has progressed since then.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Team -->
+  <section class="about-section about-section--team" style="background-image: url('/images/about/about-impact.jpg'); background-color: #2a3a2a;">
+    <div class="about-section__content about-section__content--right">
+      <div class="about-text">
+        <h2>The Team</h2>
+        <p><strong>Tim Jarvis AM</strong> who leads the project is an environmental scientist, author, film maker, adventurer and public speaker with Masters degrees in environmental science and environmental law. He is committed to finding pragmatic solutions to major environmental issues related to climate change and biodiversity loss. He was conferred a Member of the Order of Australia (AM) for services to environment, community and exploration in the 2010 Australian honours list, and Conservationist of the Year in 2016 (Australian Geographic Society), and is Global Ambassador to international sustainability NGO WWF.</p>
+        <p><strong>Elizabeth Blumer</strong> brings a range of experience to The Forktree Project including teaching, educational wellbeing governance, writing and editing, and is excited by the project&rsquo;s educational and wellbeing potential. It goes without saying that she is an enthusiastic tree planter.</p>
+        <p>Cinematographer <strong>Miles Rowland&rsquo;s</strong> stunning camerawork graces this website. His images and moving footage camerawork play a vital role in the documenting of the Forktree Project story.</p>
+        <p class="about-text__note">The Forktree Project is a registered charity that relies on the work of volunteers and the generous support of several corporate organisations. Their support is key to the project&rsquo;s continued success - many thanks to them all.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact -->
+  <section class="about-section about-section--impact" style="background-image: url('/images/about/about-idea.jpg'); background-color: #1a2a1a;">
+    <div class="about-section__content about-section__content--left">
+      <div class="about-text">
+        <h2>Impact</h2>
+        <p>Forktree has two levels of impact. The first is the practical work being done on the ground which includes:</p>
+        <ul class="about-list">
+          <li>Restoring Forktree as closely as possible to the way it was prior to 19th-century clearance for pastoral use. This involves planting tens of thousands of native trees, shrubs grasses and encouraging natural regeneration to occur. Over time Forktree will provide valuable habitat for native flora and fauna as well as sequestering tens of thousands of tonnes of CO2 to help combat climate change.</li>
+          <li>Converting the old shed into an interpretive centre to provide sustainability advice and education, and establishing a seed nursery to grow native plants and trees, in particular those impacted by bush fires.</li>
+        </ul>
+        <p>The second is about showing how smaller land holdings like Forktree can make a meaningful contribution to combatting climate change and arresting biodiversity loss. (Small/medium sized farms constitute nearly 10% of Australia&rsquo;s agricultural land, covering tens of millions of hectares.) This includes:</p>
+        <ul class="about-list">
+          <li>Trialling easier ways to calculate carbon sequestration in order to improve access by owners of small/medium sized properties to carbon funding, thereby encouraging habitat restoration.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="about-section__cta">
+      <a href="/goals" class="btn--cta">Our Goals &gt;&gt;</a>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  .about-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--color-text-light);
+    overflow: hidden;
+  }
+
+  .about-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+
+  .about-section__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1600px;
+    padding: 180px 100px;
+  }
+
+  .about-section__content--center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .about-section__content--left {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .about-section__content--right {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .about-text {
+    max-width: 50%;
+  }
+
+  .about-text--wide {
+    max-width: 65%;
+    text-align: center;
+  }
+
+  .about-text h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.1rem, 2.7vw, 35px);
+    font-weight: 500;
+    line-height: 1.0;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text__sub {
+    font-weight: 300 !important;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem) !important;
+    line-height: 1.6 !important;
+    opacity: 0.9;
+  }
+
+  .about-text p {
+    font-family: var(--font-body);
+    font-size: clamp(0.85rem, 1.3vw, 1rem);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+
+  .about-text__note {
+    font-style: italic;
+    margin-top: 2rem;
+  }
+
+  .about-list {
+    margin: 0.5rem 0 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .about-list li {
+    list-style: disc;
+    margin-bottom: 0.75rem;
+    font-size: clamp(0.85rem, 1.3vw, 1rem);
+    line-height: 1.7;
+    opacity: 0.9;
+  }
+
+  .about-section__scroll {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    opacity: 0.7;
+    animation: bounceDown 2s ease-in-out infinite;
+  }
+
+  @keyframes bounceDown {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  .about-section__cta {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 100px 80px;
+  }
+
+  .btn--cta {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: white;
+    border: 2px solid white;
+    padding: 13px 26px;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+  }
+
+  .btn--cta:hover {
+    background-color: white;
+    color: #000;
+  }
+
+  @media (max-width: 768px) {
+    .about-section {
+      background-attachment: scroll;
+      min-height: auto;
+    }
+
+    .about-section__content {
+      padding: 100px 30px;
+    }
+
+    .about-section__content--left,
+    .about-section__content--right,
+    .about-section__content--center {
+      justify-content: center;
+    }
+
+    .about-text,
+    .about-text--wide {
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .about-section__cta {
+      padding: 0 30px 60px;
+    }
+  }
+</style>

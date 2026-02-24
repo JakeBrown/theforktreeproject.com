@@ -1,0 +1,219 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout title="Goals — The Forktree Project" description="The Forktree Project is a habitat restoration and environmental charity involved in returning a degraded farm back to nature.">
+
+  <!-- Banner -->
+  <section class="goal-section goal-section--banner" style="background-image: url('/images/goals/goals-banner.jpg'); background-color: #2a3a2a;">
+    <div class="goal-section__content goal-section__content--center">
+      <div class="goal-text goal-text--wide">
+        <h2>The Forktree Project is a habitat restoration and environmental charity involved in returning a degraded farm back to nature.</h2>
+        <h2 class="goal-text__sub">Our goals:</h2>
+      </div>
+    </div>
+    <div class="goal-section__scroll">
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L10 10L19 1" stroke="white" stroke-width="2"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Goal 1 -->
+  <section class="goal-section" style="background-image: url('/images/goals/goal-1.jpg'); background-color: #1a2a1a;">
+    <div class="goal-section__content goal-section__content--center">
+      <div class="goal-text goal-text--wide">
+        <span class="goal-number">1</span>
+        <h2 class="goal-heading">RESTORE NATIVE VEGETATION ON SITE TO PROVIDE HABITAT FOR NATIVE SPECIES AND HELP COMBAT CLIMATE CHANGE THROUGH REWILDING AND REGENERATIVE AGRICULTURE</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- Goal 2 -->
+  <section class="goal-section" style="background-image: url('/images/goals/goal-2.jpg'); background-color: #2a3a2a;">
+    <div class="goal-section__content goal-section__content--left">
+      <div class="goal-text">
+        <span class="goal-number">2</span>
+        <h2 class="goal-heading">OPERATE A NURSERY AND RARE SEED ORCHARD TO GROW NATIVE PLANTS AND HELP SAFEGUARD RARE ENDEMIC SPECIES FROM EXTINCTION</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- Goal 3 -->
+  <section class="goal-section" style="background-image: url('/images/goals/goal-3.jpg'); background-color: #1a2a1a;">
+    <div class="goal-section__content goal-section__content--center">
+      <div class="goal-text">
+        <span class="goal-number">3</span>
+        <h2 class="goal-heading">PROVIDE ENVIRONMENTAL AND EXPERIENTIAL EDUCATION TO SCHOOLS, CORPORATE AND COMMUNITY GROUPS, POLICY MAKERS AND LAND OWNERS</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- Goal 4 -->
+  <section class="goal-section" style="background-image: url('/images/goals/goal-4.jpg'); background-color: #2a3a2a;">
+    <div class="goal-section__content goal-section__content--right">
+      <div class="goal-text">
+        <span class="goal-number">4</span>
+        <h2 class="goal-heading">BE AN OPEN-SOURCE, OUTCOME-FOCUSED EXAMPLE OF HOW IMPROVED LAND, WATER, ENERGY AND WASTE MANAGEMENT CAN ACHIEVE REGENERATIVE OUTCOMES</h2>
+      </div>
+    </div>
+    <div class="goal-section__cta">
+      <a href="/education1" class="btn--cta">Resources &gt;&gt;</a>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  .goal-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--color-text-light);
+    overflow: hidden;
+  }
+
+  .goal-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+
+  .goal-section__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1600px;
+    padding: 180px 100px;
+  }
+
+  .goal-section__content--center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .goal-section__content--left {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .goal-section__content--right {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .goal-text {
+    max-width: 50%;
+  }
+
+  .goal-text--wide {
+    max-width: 60%;
+    text-align: center;
+  }
+
+  .goal-text h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.1rem, 2.7vw, 35px);
+    font-weight: 500;
+    line-height: 1.0;
+    margin-bottom: 1.5rem;
+  }
+
+  .goal-text__sub {
+    margin-top: 1rem;
+  }
+
+  .goal-number {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: var(--space-md);
+  }
+
+  .goal-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 2.2vw, 1.5rem) !important;
+    font-weight: 500 !important;
+    line-height: 1.0 !important;
+    letter-spacing: 0.02em;
+  }
+
+  .goal-section__scroll {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    opacity: 0.7;
+    animation: bounceDown 2s ease-in-out infinite;
+  }
+
+  @keyframes bounceDown {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  .goal-section__cta {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 100px 80px;
+  }
+
+  .btn--cta {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: white;
+    border: 2px solid white;
+    padding: 13px 26px;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+  }
+
+  .btn--cta:hover {
+    background-color: white;
+    color: #000;
+  }
+
+  @media (max-width: 768px) {
+    .goal-section {
+      background-attachment: scroll;
+      min-height: auto;
+      min-height: 70vh;
+    }
+
+    .goal-section__content {
+      padding: 100px 30px;
+    }
+
+    .goal-section__content--left,
+    .goal-section__content--right,
+    .goal-section__content--center {
+      justify-content: center;
+    }
+
+    .goal-text,
+    .goal-text--wide {
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .goal-section__cta {
+      padding: 0 30px 60px;
+    }
+  }
+</style>

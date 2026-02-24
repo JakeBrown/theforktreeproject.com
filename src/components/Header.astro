@@ -1,0 +1,177 @@
+---
+import MobileNav from './MobileNav.tsx';
+
+interface Props {
+  variant?: 'light' | 'dark';
+}
+
+const { variant = 'light' } = Astro.props;
+
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'The Project', href: '/about-us' },
+  { label: 'Goals', href: '/goals' },
+  { label: 'Education', href: '/education1' },
+  { label: 'Supporters', href: '/supporters' },
+  { label: 'Journal', href: '/journal' },
+  { label: 'Donate', href: '/donate' },
+  { label: 'Join Us', href: '/join-us' },
+];
+
+const currentPath = Astro.url.pathname;
+const headerClass = `header header--${variant}`;
+---
+
+<header class={headerClass}>
+  <div class="header__inner">
+    <div class="header__left">
+      <a href="/" class="header__logo" aria-label="The Forktree Project - Home">
+        <img src="/images/logo.png" alt="The Forktree Project" width="50" height="77" />
+      </a>
+    </div>
+
+    <div class="header__center">
+      <nav class="header__nav" aria-label="Main navigation">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={['header__nav-link', { active: currentPath === item.href }]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <div class="header__right">
+      <a
+        href="https://www.instagram.com/forktreeproject/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Follow us on Instagram"
+        class="header__social-link"
+      >
+        <svg width="20" height="20" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="60" height="60" rx="16" />
+          <circle cx="32" cy="32" r="16" />
+          <circle cx="50" cy="14" r="4" fill="currentColor" stroke="none" />
+        </svg>
+      </a>
+    </div>
+
+    <MobileNav client:load navItems={navItems} currentPath={currentPath} />
+  </div>
+</header>
+
+<style>
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: var(--header-height);
+  }
+
+  .header__inner {
+    padding: 25px 100px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+
+  .header__left {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .header__logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .header__logo img {
+    height: 100px;
+    width: auto;
+  }
+
+  .header__center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .header__nav-link {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 7px 10px;
+    transition: opacity var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  /* Light variant: white text for dark backgrounds */
+  .header--light .header__nav-link {
+    color: var(--color-text-light);
+  }
+
+  .header--light .header__social-link {
+    color: var(--color-text-light);
+  }
+
+  /* Dark variant: dark text for light backgrounds */
+  .header--dark .header__nav-link {
+    color: var(--color-text);
+  }
+
+  .header--dark .header__social-link {
+    color: var(--color-text);
+  }
+
+  .header__nav-link:hover,
+  .header__nav-link.active {
+    opacity: 0.6;
+  }
+
+  .header__right {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .header__social-link {
+    transition: opacity var(--transition-fast);
+    display: flex;
+    align-items: center;
+  }
+
+  .header__social-link:hover {
+    opacity: 0.6;
+  }
+
+  @media (max-width: 1024px) {
+    .header__inner {
+      padding: 15px 30px;
+    }
+
+    .header__center {
+      display: none;
+    }
+
+    .header__right {
+      display: none;
+    }
+  }
+</style>

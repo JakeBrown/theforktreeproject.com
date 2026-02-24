@@ -1,0 +1,238 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout title="Supporters — The Forktree Project" description="Many thanks to the organisations who generously support The Forktree Project.">
+
+  <!-- Hero Banner -->
+  <section class="supp-section supp-section--hero" style="background-image: url('/images/supporters/supporters-hero.jpg'); background-color: #2a3a2a;">
+    <div class="supp-section__content supp-section__content--center">
+      <div class="supp-text supp-text--wide">
+        <h1>Supporters</h1>
+        <p>Many thanks to the following organisations for their generous support:</p>
+
+        <h3 class="supp-label">Supporting Partners:</h3>
+        <div class="supp-logos">
+          <img src="/images/supporters/supporting-partners.png" alt="Supporting Partners logos" loading="lazy" />
+        </div>
+
+        <h3 class="supp-label">Supporters:</h3>
+        <div class="supp-logos">
+          <img src="/images/supporters/supporters.png" alt="Supporter logos" loading="lazy" />
+        </div>
+      </div>
+    </div>
+    <div class="supp-section__scroll">
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L10 10L19 1" stroke="white" stroke-width="2"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Advisory Supporters -->
+  <section class="supp-advisory">
+    <div class="container--narrow">
+      <p class="supp-advisory__text">We are also grateful to the following organisations for their specialist advisory support.</p>
+      <p class="supp-advisory__text">If you are interested in providing guidance or support to The Forktree Project, please contact us.</p>
+      <div class="supp-logos supp-logos--light">
+        <img src="/images/supporters/advisory-supporters.png" alt="Advisory supporter logos" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="supp-testimonials" style="background-image: url('/images/supporters/supporters-hero.jpg'); background-color: #1a2a1a;">
+    <div class="supp-section__content supp-section__content--center">
+      <div class="supp-text supp-text--wide">
+        <h1>Testimonials</h1>
+
+        <blockquote class="testimonial">
+          <p>&ldquo;The Forktree Project provides students and teachers alike with a hands-on understanding around the importance of maintaining and developing our native biodiversity. On site students learn by doing, concreting ideas of sustainability, circular economy and carbon sequestration, all under the tutelage of a highly skilled and knowledgeable team. A perfect choice for students from Reception through to Year 12.&rdquo;</p>
+          <cite>&ndash; Blackwood High School</cite>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p>&ldquo;Visiting The Forktree Project with our Year 8 cohort is one of the most hands-on and valuable excursions I have attended. Our students absolutely thrived while working under the guidance of Tim and Liz and their team. The students learnt about sustainability and circular economy by getting stuck into some hard work and our school is incredibly lucky to have a relationship with The Forktree Project. Learning doesn&rsquo;t get any more hands-on and tangible than this!&rdquo;</p>
+          <cite>&ndash; Tatachilla Lutheran College</cite>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p>&ldquo;Liz and Tim work tirelessly to promote and support efforts to protect the integrity of our environment. Their important vision has attracted a multidisciplinary team who are committed to combatting climate change through encouraging sustainable practices, restoring habitat through rewilding and focusing on sequestration. Forktree enables students to participate in a range of tasks that show them they are quite literally planting the seeds of a greener future - a concrete, tangible means of combatting climate anxiety among the next generation. Our school will continue visiting Forktree to supplement students&rsquo; environmental education with practical application. The Forktree Project offers an effective platform for students to think globally and act locally. It is a relationship we are proud of and look forward to seeing thrive.&rdquo;</p>
+          <cite>&ndash; Prince Alfred College</cite>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p>&ldquo;Our students have expressed their excitement and satisfaction with the project, with students commenting that it was their favourite learning activity for the year! We are grateful for the opportunity to be part of The Forktree Project and look forward to continuing our involvement in the future. We wholeheartedly endorse this initiative and encourage other schools to participate and experience the benefits for themselves.&rdquo;</p>
+          <cite>&ndash; Adelaide Botanic High School</cite>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p>&ldquo;Annesley&rsquo;s collaboration with The Forktree Project has been transformative. The bespoke extended program developed by The Forktree Project not only addressed our specific outcomes but also gave students a sense of ownership of the Carrickalinga site. The sequential approach has undoubtedly left a lasting mark on our students giving them confidence when leading their peers through various experiences related to the amazing work that the Forktree Project team are doing.&rdquo;</p>
+          <cite>&ndash; Annesley Junior School</cite>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p>&ldquo;Operation Flinders Next Step program absolutely loved our time at Forktree - it was eye-opening for the young people to see what is being achieved by the project and to have the ability to engage in a practical, hands-on, real-life effort. To be able to camp onsite at such a beautiful location was amazing and the young people loved being able to go for walks, do yoga and immerse themselves in the beautiful surroundings. Tim and Liz are incredible ambassadors and live by example, working hard alongside the young people.&rdquo;</p>
+          <cite>&ndash; Operation Flinders</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  .supp-section--hero,
+  .supp-testimonials {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--color-text-light);
+    overflow: hidden;
+  }
+
+  .supp-section--hero::before,
+  .supp-testimonials::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+  }
+
+  .supp-section__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1600px;
+    padding: 180px 100px;
+  }
+
+  .supp-section__content--center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .supp-text {
+    max-width: 50%;
+  }
+
+  .supp-text--wide {
+    max-width: 80%;
+    text-align: center;
+  }
+
+  .supp-text h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: var(--space-md);
+  }
+
+  .supp-text > p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-bottom: var(--space-lg);
+  }
+
+  .supp-label {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    margin-bottom: var(--space-md);
+  }
+
+  .supp-logos {
+    margin-bottom: var(--space-lg);
+  }
+
+  .supp-logos img {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  /* Advisory (light bg) */
+  .supp-advisory {
+    padding: var(--space-xl) 0;
+    text-align: center;
+    background: white;
+  }
+
+  .supp-advisory__text {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+  }
+
+  .supp-logos--light {
+    margin-top: var(--space-md);
+  }
+
+  /* Testimonials */
+  .testimonial {
+    margin-bottom: var(--space-lg);
+    text-align: left;
+  }
+
+  .testimonial p {
+    font-family: var(--font-body);
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    font-style: italic;
+    line-height: 1.8;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+  }
+
+  .testimonial cite {
+    display: block;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.85rem;
+    opacity: 0.8;
+  }
+
+  .supp-section__scroll {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    opacity: 0.7;
+    animation: bounceDown 2s ease-in-out infinite;
+  }
+
+  @keyframes bounceDown {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  @media (max-width: 768px) {
+    .supp-section--hero,
+    .supp-testimonials {
+      background-attachment: scroll;
+      min-height: auto;
+    }
+
+    .supp-section__content {
+      padding: 100px 30px;
+    }
+
+    .supp-text,
+    .supp-text--wide {
+      max-width: 100%;
+    }
+  }
+</style>

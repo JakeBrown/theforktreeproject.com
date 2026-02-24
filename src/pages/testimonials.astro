@@ -1,0 +1,123 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout title="Testimonials — The Forktree Project" description="Read what schools have to say about The Forktree Project Education Program.">
+
+  <section class="testimonials-section" style="background-image: url('/images/supporters/supporters-hero.jpg'); background-color: #2a3a2a;">
+    <div class="testimonials-section__content">
+      <div class="testimonials-inner">
+        <h1>Testimonials</h1>
+
+        <blockquote class="testimonial">
+          <p>&ldquo;The Forktree Project provides students and teachers alike with a hands-on understanding around the importance of maintaining and developing our native biodiversity. On site students learn by doing, concreting ideas of sustainability, circular economy and carbon sequestration, all under the tutelage of a highly skilled and knowledgeable team. A perfect choice for students from Reception through to Year 12.&rdquo;</p>
+          <cite>&ndash; Blackwood High School</cite>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p>&ldquo;Visiting The Forktree Project with our Year 8 cohort is one of the most hands-on and valuable excursions I have attended. Our students absolutely thrived while working under the guidance of Tim and Liz and their team. The students learnt about sustainability and circular economy by getting stuck into some hard work and our school is incredibly lucky to have a relationship with The Forktree Project. Learning doesn&rsquo;t get any more hands-on and tangible than this!&rdquo;</p>
+          <cite>&ndash; Tatachilla Lutheran College</cite>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p>&ldquo;Liz and Tim work tirelessly to promote and support efforts to protect the integrity of our environment. Their important vision has attracted a multidisciplinary team who are committed to combatting climate change through encouraging sustainable practices, restoring habitat through rewilding and focusing on sequestration. Forktree enables students to participate in a range of tasks that show them they are quite literally planting the seeds of a greener future - a concrete, tangible means of combatting climate anxiety among the next generation. Our school will continue visiting Forktree to supplement students&rsquo; environmental education with practical application. The Forktree Project offers an effective platform for students to think globally and act locally. It is a relationship we are proud of and look forward to seeing thrive.&rdquo;</p>
+          <cite>&ndash; Prince Alfred College</cite>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p>&ldquo;Our students have expressed their excitement and satisfaction with the project, with students commenting that it was their favourite learning activity for the year! We are grateful for the opportunity to be part of The Forktree Project and look forward to continuing our involvement in the future. We wholeheartedly endorse this initiative and encourage other schools to participate and experience the benefits for themselves.&rdquo;</p>
+          <cite>&ndash; Adelaide Botanic High School</cite>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p>&ldquo;Annesley&rsquo;s collaboration with The Forktree Project has been transformative. The bespoke extended program developed by The Forktree Project not only addressed our specific outcomes but also gave students a sense of ownership of the Carrickalinga site. The sequential approach has undoubtedly left a lasting mark on our students giving them confidence when leading their peers through various experiences related to the amazing work that the Forktree Project team are doing.&rdquo;</p>
+          <cite>&ndash; Annesley Junior School</cite>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p>&ldquo;Operation Flinders Next Step program absolutely loved our time at Forktree - it was eye-opening for the young people to see what is being achieved by the project and to have the ability to engage in a practical, hands-on, real-life effort. To be able to camp onsite at such a beautiful location was amazing and the young people loved being able to go for walks, do yoga and immerse themselves in the beautiful surroundings. Tim and Liz are incredible ambassadors and live by example, working hard alongside the young people.&rdquo;</p>
+          <cite>&ndash; Operation Flinders</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  .testimonials-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--color-text-light);
+    overflow: hidden;
+  }
+
+  .testimonials-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+
+  .testimonials-section__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1600px;
+    padding: 180px 100px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .testimonials-inner {
+    max-width: 750px;
+    text-align: center;
+  }
+
+  .testimonials-inner h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: var(--space-xl);
+  }
+
+  .testimonial {
+    margin-bottom: var(--space-lg);
+    text-align: left;
+  }
+
+  .testimonial p {
+    font-family: var(--font-body);
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    font-style: italic;
+    line-height: 1.8;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+  }
+
+  .testimonial cite {
+    display: block;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.85rem;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 768px) {
+    .testimonials-section {
+      background-attachment: scroll;
+      min-height: auto;
+    }
+
+    .testimonials-section__content {
+      padding: 100px 30px;
+    }
+  }
+</style>

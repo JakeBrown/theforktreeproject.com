@@ -1,0 +1,67 @@
+---
+---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <a href="https://www.acnc.gov.au/" target="_blank" rel="noopener noreferrer" class="footer__badge">
+      <img
+        src="/images/acnc-badge.png"
+        alt="ACNC Registered Charity"
+        width="150"
+        height="150"
+        loading="lazy"
+      />
+    </a>
+
+    <a
+      href="https://www.instagram.com/forktreeproject/"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Follow us on Instagram"
+      class="footer__social"
+    >
+      <svg width="20" height="20" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="60" height="60" rx="16" />
+        <circle cx="32" cy="32" r="16" />
+        <circle cx="50" cy="14" r="4" fill="currentColor" stroke="none" />
+      </svg>
+    </a>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: var(--space-xl) 0 var(--space-lg);
+    background: white;
+  }
+
+  .footer__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .footer__badge img {
+    opacity: 0.9;
+    transition: opacity var(--transition-fast);
+  }
+
+  .footer__badge:hover img {
+    opacity: 1;
+  }
+
+  .footer__social {
+    color: var(--color-text);
+    transition: opacity var(--transition-fast);
+    display: flex;
+    align-items: center;
+  }
+
+  .footer__social:hover {
+    opacity: 0.6;
+  }
+</style>

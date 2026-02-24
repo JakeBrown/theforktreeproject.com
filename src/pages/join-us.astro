@@ -1,0 +1,92 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ContactForm from '../components/ContactForm.tsx';
+---
+
+<PageLayout title="Join Us — The Forktree Project" description="Find out how to support The Forktree Project through volunteering, in-kind support or tax deductible donation.">
+
+  <!-- Hero -->
+  <section class="join-hero" style="background-image: url('/images/join-us/join-hero.jpg'); background-color: #2a3a2a;">
+    <div class="join-hero__content">
+      <h1>Join Us</h1>
+      <div class="join-hero__text">
+        <p>The Forktree Project is a charity registered with the Australian Charities and Not for Profits Commission (ACNC).</p>
+        <p>To find out more about how to support the Project, whether via volunteering, in-kind support or tax deductible donation, or to enquire about The Forktree Project Education Program, please get in touch via the contact form below.</p>
+        <p class="join-hero__volunteer">TO SIGN UP FOR UPCOMING VOLUNTEERING DAYS, CLICK HERE</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="join-form">
+    <div class="container--narrow">
+      <ContactForm client:load />
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  .join-hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--color-text-light);
+    overflow: hidden;
+  }
+
+  .join-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+
+  .join-hero__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 700px;
+    padding: 180px 30px 100px;
+  }
+
+  .join-hero h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+  }
+
+  .join-hero__text p {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+  }
+
+  .join-hero__volunteer {
+    font-family: var(--font-heading) !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    margin-top: var(--space-md) !important;
+  }
+
+  .join-form {
+    padding: var(--space-xl) 0;
+    background: white;
+  }
+
+  @media (max-width: 768px) {
+    .join-hero {
+      background-attachment: scroll;
+    }
+  }
+</style>

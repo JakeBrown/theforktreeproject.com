@@ -1,0 +1,149 @@
+---
+import { getCollection, render } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('journal');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<PageLayout title={`${post.data.title} — The Forktree Project`} description={post.data.excerpt || ''}>
+
+  <article class="blog-post">
+    <div class="container--narrow">
+      <header class="blog-post__header">
+        <h1>{post.data.title}</h1>
+        <div class="blog-post__meta">
+          {post.data.author && <span class="blog-post__author">{post.data.author}</span>}
+          {post.data.date && (
+            <time datetime={new Date(post.data.date).toISOString()}>
+              {new Date(post.data.date).toLocaleDateString('en-AU', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </time>
+          )}
+        </div>
+      </header>
+
+      {post.data.image && (
+        <div class="blog-post__hero">
+          <img src={post.data.image} alt={post.data.title} />
+        </div>
+      )}
+
+      <div class="blog-post__content">
+        <Content />
+      </div>
+
+      <footer class="blog-post__footer">
+        <a href="/journal" class="link-arrow">&lt;&lt; Back to Journal</a>
+      </footer>
+    </div>
+  </article>
+
+</PageLayout>
+
+<style>
+  .blog-post {
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .blog-post__header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+  }
+
+  .blog-post__header h1 {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    margin-bottom: var(--space-sm);
+  }
+
+  .blog-post__meta {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .blog-post__author::after {
+    content: '·';
+    margin-left: 0.5rem;
+  }
+
+  .blog-post__hero {
+    margin-bottom: var(--space-lg);
+  }
+
+  .blog-post__hero img {
+    width: 100%;
+    height: auto;
+  }
+
+  .blog-post__content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+  }
+
+  .blog-post__content :global(p) {
+    margin-bottom: 1.5em;
+  }
+
+  .blog-post__content :global(h2) {
+    font-size: 1.5rem;
+    margin: 2em 0 1em;
+    color: var(--color-text);
+  }
+
+  .blog-post__content :global(h3) {
+    font-size: 1.25rem;
+    margin: 1.5em 0 0.75em;
+    color: var(--color-text);
+  }
+
+  .blog-post__content :global(img) {
+    margin: 2em 0;
+  }
+
+  .blog-post__content :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .blog-post__content :global(ul),
+  .blog-post__content :global(ol) {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5em;
+  }
+
+  .blog-post__content :global(li) {
+    list-style: disc;
+    margin-bottom: 0.5em;
+  }
+
+  .blog-post__footer {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .link-arrow {
+    font-weight: 500;
+    color: var(--color-text);
+    transition: opacity var(--transition-normal);
+  }
+
+  .link-arrow:hover {
+    opacity: 0.6;
+  }
+</style>
