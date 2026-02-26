@@ -6,7 +6,9 @@ interface Props {
 }
 
 const { title, description = '', ogImage = '/images/logo.png' } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://www.theforktreeproject.com');
+const siteBase = Astro.site?.toString().replace(/\/$/, '') || 'https://www.theforktreeproject.com';
+const canonicalURL = new URL(Astro.url.pathname, siteBase);
+const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `${siteBase}${ogImage}`;
 ---
 
 <!doctype html>
@@ -33,13 +35,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://www.thef
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={absoluteOgImage} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={absoluteOgImage} />
 
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -48,7 +50,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://www.thef
       "url": "https://www.theforktreeproject.com",
       "name": "The Forktree Project",
       "description": description,
-      "image": ogImage
+      "image": absoluteOgImage
     })} />
   </head>
   <body>

@@ -20,7 +20,7 @@ const posts = allPosts.slice(start, start + POSTS_PER_PAGE);
   <section class="journal-header">
     <div class="container--narrow">
       <h2><strong>The Forktree Story</strong></h2>
-      <p>The Forktree Project is a journey, the first steps of which were taken when the property was purchased in April 2019. The blog posts below tell the story of how this journey is unfolding.</p>
+      <p>The Forktree Project is a journey, the first steps of which were taken when the property was purchased in April 2019. The blog posts below tell the story of how this journey is unfolding. To read the story from the beginning, <a href="/journal/beginnings" class="journal-link">click here.</a></p>
     </div>
   </section>
 
@@ -63,13 +63,12 @@ const posts = allPosts.slice(start, start + POSTS_PER_PAGE);
         <nav class="pagination" aria-label="Journal pagination">
           {currentPage > 1 && (
             <a href={currentPage === 2 ? '/journal' : `/journal?page=${currentPage - 1}`} class="pagination__link">
-              &larr; Newer
+              Newer
             </a>
           )}
-          <span class="pagination__info">Page {currentPage} of {totalPages}</span>
           {currentPage < totalPages && (
             <a href={`/journal?page=${currentPage + 1}`} class="pagination__link">
-              Older &rarr;
+              Older
             </a>
           )}
         </nav>
@@ -199,10 +198,12 @@ const posts = allPosts.slice(start, start + POSTS_PER_PAGE);
     opacity: 0.6;
   }
 
-  .pagination__info {
-    font-family: var(--font-heading);
-    font-size: 0.75rem;
-    letter-spacing: 1px;
+  .journal-link {
+    text-decoration: underline;
     color: var(--color-text-secondary);
+  }
+
+  .journal-link:hover {
+    opacity: 0.6;
   }
 </style>
