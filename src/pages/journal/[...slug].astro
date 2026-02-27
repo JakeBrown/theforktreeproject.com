@@ -20,9 +20,13 @@ export async function getStaticPaths() {
 
 const { post, prevPost, nextPost } = Astro.props;
 const { Content } = await render(post);
+
+const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const postDate = new Date(post.data.date);
+const formattedDate = `${monthNames[postDate.getUTCMonth()]} ${postDate.getUTCDate()}, ${postDate.getUTCFullYear()}`;
 ---
 
-<PageLayout title={`${post.data.title} — The Forktree Project`} description={post.data.excerpt || ''}>
+<PageLayout title={`${post.data.title} — The Forktree Project`} description={post.data.excerpt || ''} headerVariant="dark">
 
   <article class="blog-post">
     <div class="container--narrow">
@@ -30,11 +34,7 @@ const { Content } = await render(post);
         <h1>{post.data.title}</h1>
         {post.data.date && (
           <time class="blog-post__date" datetime={new Date(post.data.date).toISOString()}>
-            {new Date(post.data.date).toLocaleDateString('en-AU', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
+            {formattedDate}
           </time>
         )}
       </header>
@@ -136,7 +136,8 @@ const { Content } = await render(post);
 
 <style>
   .blog-post {
-    padding: var(--space-2xl) 0 var(--space-xl);
+    padding-top: calc(var(--header-height) + var(--space-lg));
+    padding-bottom: var(--space-xl);
   }
 
   .blog-post__header {
@@ -149,7 +150,7 @@ const { Content } = await render(post);
     font-size: clamp(1.75rem, 3.5vw, 2.5rem);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 6px;
+    letter-spacing: 0.5px;
     line-height: 1;
     margin-bottom: var(--space-sm);
   }
@@ -159,6 +160,7 @@ const { Content } = await render(post);
     font-family: var(--font-heading);
     font-size: 0.8rem;
     letter-spacing: 0.5px;
+    text-transform: uppercase;
     color: var(--color-text-secondary);
   }
 
