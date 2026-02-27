@@ -54,7 +54,7 @@ button {
   --color-text-light: #ffffff;
   --color-bg: #ffffff;
   --color-bg-dark: #000000;
-  --color-bg-overlay: rgba(0, 0, 0, 0.5);
+  --color-bg-overlay: rgba(0, 0, 0, 0.2);
   --color-border: #e0e0e0;
 
   /* Typography — Jost ≈ futura-pt, Source Sans 3 ≈ proxima-nova */
