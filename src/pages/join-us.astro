@@ -12,7 +12,7 @@ import ContactForm from '../components/ContactForm.tsx';
       <div class="join-hero__text">
         <p>The Forktree Project is a charity registered with the Australian Charities and Not for Profits Commission (ACNC).</p>
         <p>To find out more about how to support the Project, whether via volunteering, in-kind support or tax deductible donation, or to enquire about The Forktree Project Education Program, please get in touch via the contact form below.</p>
-        <p class="join-hero__volunteer">TO SIGN UP FOR UPCOMING VOLUNTEERING DAYS, CLICK HERE</p>
+        <p class="join-hero__volunteer">TO SIGN UP FOR UPCOMING VOLUNTEERING DAYS, <a href="https://www.theforktreeproject.com/volunteer-form" class="join-hero__link">CLICK HERE</a></p>
       </div>
     </div>
   </section>
@@ -81,6 +81,15 @@ import ContactForm from '../components/ContactForm.tsx';
     font-weight: 600 !important;
     letter-spacing: 2px !important;
     margin-top: var(--space-md) !important;
+  }
+
+  .join-hero__link {
+    color: white;
+    text-decoration: underline;
+  }
+
+  .join-hero__link:hover {
+    opacity: 0.7;
   }
 
   .join-form {
