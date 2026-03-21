@@ -3,9 +3,10 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  norobots?: boolean;
 }
 
-const { title, description = '', ogImage = '/images/logo.png' } = Astro.props;
+const { title, description = '', ogImage = '/images/logo.png', norobots = false } = Astro.props;
 const siteBase = Astro.site?.toString().replace(/\/$/, '') || 'https://www.theforktreeproject.com';
 const canonicalURL = new URL(Astro.url.pathname, siteBase);
 const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `${siteBase}${ogImage}`;
@@ -22,6 +23,7 @@ const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `${siteBase}${ogI
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
+    {norobots && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
     <!-- Google Fonts: Jost (≈ futura-pt) + Source Sans 3 (≈ proxima-nova) -->

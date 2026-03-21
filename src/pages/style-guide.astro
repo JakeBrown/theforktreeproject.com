@@ -1,0 +1,404 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const logoAssets = [
+  { name: 'Green Fill', file: 'ForktreeGreen_Fill', bg: 'light', hasJpg: true },
+  { name: 'Green Fill Icon', file: 'ForktreeGreen_Fill_Icon', bg: 'light', icon: true, hasJpg: true },
+  { name: 'Green Outline', file: 'ForktreeGreen_Outline', bg: 'light', hasJpg: true },
+  { name: 'Green Outline Icon', file: 'ForktreeGreen_Outline_Icon', bg: 'light', icon: true, hasJpg: true },
+  { name: 'White Fill', file: 'ForktreeWhite_Fill', bg: 'dark', hasJpg: false },
+  { name: 'White Fill Icon', file: 'ForktreeWhite_Fill_Icon', bg: 'dark', icon: true, hasJpg: false },
+  { name: 'White Outline', file: 'ForktreeWhite_Outline', bg: 'dark', hasJpg: false },
+  { name: 'White Outline Icon', file: 'ForktreeWhite_Outline_Icon', bg: 'dark', icon: true, hasJpg: false },
+  { name: 'Black Fill', file: 'ForktreeBlack_Fill', bg: 'light', hasJpg: true },
+  { name: 'Black Fill Icon', file: 'ForktreeBlack_Fill_Icon', bg: 'light', icon: true, hasJpg: true },
+  { name: 'Black Outline', file: 'ForktreeBlack_Outline', bg: 'light', hasJpg: true },
+  { name: 'Black Outline Icon', file: 'ForktreeBlack_Outline_Icon', bg: 'light', icon: true, hasJpg: true },
+];
+
+const colours = [
+  { name: 'Primary Green', hex: '#3a7d32' },
+  { name: 'Primary Dark', hex: '#2d5a27' },
+  { name: 'Primary Light', hex: '#5a9e52' },
+  { name: 'Forktree Green', hex: '#00A651' },
+  { name: 'Text', hex: '#1a1a1a' },
+  { name: 'Text Secondary', hex: '#555555' },
+  { name: 'White', hex: '#ffffff' },
+  { name: 'Black', hex: '#000000' },
+];
+
+const greenAssets = logoAssets.filter(a => a.name.startsWith('Green'));
+const whiteAssets = logoAssets.filter(a => a.name.startsWith('White'));
+const blackAssets = logoAssets.filter(a => a.name.startsWith('Black'));
+---
+
+<PageLayout title="Style Guide — The Forktree Project" description="Brand style guide and downloadable assets for The Forktree Project." norobots={true}>
+
+  <!-- Hero -->
+  <section class="sg-hero">
+    <div class="sg-container">
+      <img src="/images/logo.png" alt="The Forktree Project" class="sg-hero__logo" />
+      <h1 class="sg-hero__title">Brand Style Guide</h1>
+      <p class="sg-hero__subtitle">Visual reference &amp; downloadable assets</p>
+    </div>
+  </section>
+
+  <!-- Colours -->
+  <section class="sg-section">
+    <div class="sg-container">
+      <h2 class="sg-section__title">Colours</h2>
+      <div class="sg-swatches">
+        {colours.map(c => (
+          <div class="sg-swatch">
+            <div class="sg-swatch__preview" style={`background-color: ${c.hex}; ${c.hex === '#ffffff' ? 'border: 1px solid #e0e0e0;' : ''}`}></div>
+            <p class="sg-swatch__name">{c.name}</p>
+            <p class="sg-swatch__hex">{c.hex}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Typography -->
+  <section class="sg-section sg-section--alt">
+    <div class="sg-container">
+      <h2 class="sg-section__title">Typography</h2>
+      <div class="sg-type-grid">
+        <div class="sg-type-card">
+          <p class="sg-type-card__label">Headings</p>
+          <p class="sg-type-card__sample" style="font-family: var(--font-heading); font-size: 2rem; font-weight: 700;">Jost</p>
+          <p class="sg-type-card__note">Approximation of Futura PT. Used for all headings and display text.</p>
+          <p class="sg-type-card__specimen" style="font-family: var(--font-heading);">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>abcdefghijklmnopqrstuvwxyz<br/>0123456789</p>
+        </div>
+        <div class="sg-type-card">
+          <p class="sg-type-card__label">Body</p>
+          <p class="sg-type-card__sample" style="font-family: var(--font-body); font-size: 2rem; font-weight: 400;">Source Sans 3</p>
+          <p class="sg-type-card__note">Approximation of Proxima Nova. Used for body text and UI elements.</p>
+          <p class="sg-type-card__specimen" style="font-family: var(--font-body);">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>abcdefghijklmnopqrstuvwxyz<br/>0123456789</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Downloadable Assets -->
+  <section class="sg-section">
+    <div class="sg-container">
+      <h2 class="sg-section__title">Downloadable Assets</h2>
+      <p class="sg-section__desc">Click to download individual logo files. PNG files have transparent backgrounds.</p>
+
+      <h3 class="sg-group-title">Green</h3>
+      <div class="sg-asset-grid">
+        {greenAssets.map(asset => (
+          <div class="sg-asset-card">
+            <div class={`sg-asset-card__preview ${asset.bg === 'dark' ? 'sg-asset-card__preview--dark' : ''}`}>
+              <img src={`/images/logos/png/${asset.file}.png`} alt={asset.name} class={asset.icon ? 'sg-asset-card__img--icon' : 'sg-asset-card__img'} />
+            </div>
+            <div class="sg-asset-card__info">
+              <p class="sg-asset-card__name">{asset.name}</p>
+              <div class="sg-asset-card__buttons">
+                <a href={`/images/logos/png/${asset.file}.png`} download class="sg-btn sg-btn--primary">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  PNG
+                </a>
+                {asset.hasJpg && (
+                  <a href={`/images/logos/jpg/${asset.file}.jpg`} download class="sg-btn sg-btn--secondary">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    JPG
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h3 class="sg-group-title">White <span class="sg-group-title__note">(for dark backgrounds)</span></h3>
+      <div class="sg-asset-grid">
+        {whiteAssets.map(asset => (
+          <div class="sg-asset-card">
+            <div class={`sg-asset-card__preview ${asset.bg === 'dark' ? 'sg-asset-card__preview--dark' : ''}`}>
+              <img src={`/images/logos/png/${asset.file}.png`} alt={asset.name} class={asset.icon ? 'sg-asset-card__img--icon' : 'sg-asset-card__img'} />
+            </div>
+            <div class="sg-asset-card__info">
+              <p class="sg-asset-card__name">{asset.name}</p>
+              <div class="sg-asset-card__buttons">
+                <a href={`/images/logos/png/${asset.file}.png`} download class="sg-btn sg-btn--primary">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  PNG
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h3 class="sg-group-title">Black</h3>
+      <div class="sg-asset-grid">
+        {blackAssets.map(asset => (
+          <div class="sg-asset-card">
+            <div class={`sg-asset-card__preview ${asset.bg === 'dark' ? 'sg-asset-card__preview--dark' : ''}`}>
+              <img src={`/images/logos/png/${asset.file}.png`} alt={asset.name} class={asset.icon ? 'sg-asset-card__img--icon' : 'sg-asset-card__img'} />
+            </div>
+            <div class="sg-asset-card__info">
+              <p class="sg-asset-card__name">{asset.name}</p>
+              <div class="sg-asset-card__buttons">
+                <a href={`/images/logos/png/${asset.file}.png`} download class="sg-btn sg-btn--primary">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  PNG
+                </a>
+                {asset.hasJpg && (
+                  <a href={`/images/logos/jpg/${asset.file}.jpg`} download class="sg-btn sg-btn--secondary">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    JPG
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- PDF -->
+      <div class="sg-pdf-note">
+        <p><strong>Vector format for print:</strong>
+          <a href="/images/logos/ForktreeGreen_Fill.pdf" download class="sg-pdf-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            ForktreeGreen_Fill.pdf
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  /* Hero */
+  .sg-hero {
+    padding: 6rem 0 3rem;
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(58, 125, 50, 0.08), transparent);
+  }
+  .sg-hero__logo {
+    height: 80px;
+    width: auto;
+    margin: 0 auto 1.5rem;
+  }
+  .sg-hero__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3rem) !important;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+  .sg-hero__subtitle {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* Container */
+  .sg-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Sections */
+  .sg-section {
+    padding: 4rem 0;
+  }
+  .sg-section--alt {
+    background: #f9f9f9;
+  }
+  .sg-section__title {
+    font-family: var(--font-heading);
+    font-size: 1.75rem !important;
+    font-weight: 700;
+    color: var(--color-text);
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .sg-section__desc {
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+  }
+
+  /* Colour Swatches */
+  .sg-swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1.5rem;
+  }
+  .sg-swatch__preview {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 12px;
+  }
+  .sg-swatch__name {
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    color: var(--color-text);
+  }
+  .sg-swatch__hex {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* Typography cards */
+  .sg-type-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  .sg-type-card {
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 2rem;
+    background: white;
+  }
+  .sg-type-card__label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+  }
+  .sg-type-card__sample {
+    margin-bottom: 0.5rem;
+  }
+  .sg-type-card__note {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+  }
+  .sg-type-card__specimen {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text);
+  }
+
+  /* Group titles */
+  .sg-group-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem !important;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 2rem 0 1rem;
+  }
+  .sg-group-title__note {
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* Asset Grid */
+  .sg-asset-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  @media (min-width: 768px) {
+    .sg-asset-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* Asset Card */
+  .sg-asset-card {
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .sg-asset-card__preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 140px;
+    padding: 1.5rem;
+    background: #fafafa;
+  }
+  .sg-asset-card__preview--dark {
+    background: #1a1a1a;
+  }
+  .sg-asset-card__img {
+    height: 56px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  .sg-asset-card__img--icon {
+    height: 72px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  .sg-asset-card__info {
+    padding: 1rem;
+    border-top: 1px solid var(--color-border);
+    background: white;
+  }
+  .sg-asset-card__name {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+  .sg-asset-card__buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  /* Buttons */
+  .sg-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+  .sg-btn--primary {
+    background: var(--color-primary);
+    color: white;
+  }
+  .sg-btn--primary:hover {
+    background: var(--color-primary-dark);
+  }
+  .sg-btn--secondary {
+    background: white;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+  .sg-btn--secondary:hover {
+    background: #f5f5f5;
+  }
+
+  /* PDF note */
+  .sg-pdf-note {
+    margin-top: 2rem;
+    padding: 1.25rem 1.5rem;
+    background: #f5f5f5;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+  .sg-pdf-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .sg-pdf-link:hover {
+    color: var(--color-primary-dark);
+  }
+</style>

@@ -1,7 +1,16 @@
 {
   "permissions": {
     "allow": [
-      "Skill(agent-browser)"
+      "Skill(agent-browser)",
+      "WebFetch(domain:www.theforktreeproject.com)",
+      "Bash(curl -s \"https://www.theforktreeproject.com/journal?format=json\" | python3 -c \"\nimport json, sys\ndata = json.load\\(sys.stdin\\)\nitems = data.get\\('items', []\\)\nfor item in items:\n    slug = item.get\\('urlId', 'unknown'\\)\n    img = item.get\\('assetUrl', ''\\) or item.get\\('imageUrl', ''\\) or ''\n    print\\(f'{slug}|{img}'\\)\nprint\\(f'---TOTAL: {len\\(items\\)}---'\\)\n\" 2>&1)",
+      "Bash(for offset in 0 10 20 30; do\n  curl -s \"https://www.theforktreeproject.com/journal?format=json&offset=$offset\" | python3 -c \"\nimport json, sys\ndata = json.load\\(sys.stdin\\)\nitems = data.get\\('items', []\\)\nfor item in items:\n    slug = item.get\\('urlId', 'unknown'\\)\n    img = item.get\\('assetUrl', ''\\)\n    print\\(f'{slug}|{img}'\\)\n\" 2>/dev/null\ndone)",
+      "Bash(python3:*)",
+      "WebFetch(domain:theforktreeprojectdotcom.jake8335.workers.dev)",
+      "Bash(curl:*)",
+      "Bash(git commit:*)",
+      "Bash(agent-browser open \"https://www.theforktreeproject.com/journal/friends-of-forktree-planting-day-2025\" && agent-browser wait --load networkidle && agent-browser eval --stdin <<'EVALEOF'\nlet title = document.querySelector\\('.Blog-header h1, .BlogItem-title, article h1'\\);\nlet body = document.querySelector\\('.sqs-block-content p, article p, .Blog-content p'\\);\nlet results = {};\nif \\(title\\) {\n  let s = window.getComputedStyle\\(title\\);\n  results.title = {font: s.fontFamily, size: s.fontSize, weight: s.fontWeight, transform: s.textTransform, letterSpacing: s.letterSpacing, lineHeight: s.lineHeight};\n}\nif \\(body\\) {\n  let s = window.getComputedStyle\\(body\\);\n  results.body = {font: s.fontFamily, size: s.fontSize, weight: s.fontWeight, lineHeight: s.lineHeight};\n}\nJSON.stringify\\(results\\);\nEVALEOF)",
+      "Bash(git add src/pages/journal/\\\\\\\\[...slug\\\\\\\\].astro && git commit -m \"$\\(cat <<'EOF'\nFix journal article layout: remove hero image, match Squarespace styling\n\n- Remove hero image from article pages \\(featured image only used on listing\\)\n- Title: uppercase with 6px letter-spacing to match original\n- Body text: weight 600, 18px to match original proxima-nova styling\n- Remove author display \\(original only shows date\\)\n- Nav titles: uppercase with letter-spacing\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\" && git push 2>&1)"
     ]
   }
 }
