@@ -57,9 +57,9 @@ button {
   --color-bg-overlay: rgba(0, 0, 0, 0);
   --color-border: #e0e0e0;
 
-  /* Typography — Jost ≈ futura-pt, Source Sans 3 ≈ proxima-nova */
-  --font-heading: 'Jost', 'Futura', 'Century Gothic', sans-serif;
-  --font-body: 'Source Sans 3', 'Proxima Nova', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Typography */
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Poppins', sans-serif;
 
   /* Spacing */
   --space-xs: 0.5rem;

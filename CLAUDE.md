@@ -9,7 +9,7 @@
 ## Stack
 - Astro 5 with SSR mode (`output: 'server'`) and Cloudflare Workers adapter
 - Content collections for journal posts (`src/content/journal/`)
-- Google Fonts: Jost (headings) + Source Sans 3 (body) as approximations for original Adobe Fonts (futura-pt + proxima-nova)
+- Google Fonts: Poppins (headings + body) to match forktree.app
 
 ## Key Notes
 - Journal post pages use `export const prerender = true` for static generation in SSR mode
