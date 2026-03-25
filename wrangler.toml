@@ -3,6 +3,11 @@ main = "./dist/_worker.js/index.js"
 compatibility_date = "2026-02-24"
 compatibility_flags = ["nodejs_compat"]
 
+routes = [
+  { pattern = "theforktreeproject.com", custom_domain = true },
+  { pattern = "www.theforktreeproject.com", custom_domain = true }
+]
+
 [assets]
 directory = "./dist"
 binding = "ASSETS"
