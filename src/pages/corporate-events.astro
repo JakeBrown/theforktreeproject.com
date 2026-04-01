@@ -44,7 +44,7 @@ const photos = [
   <section class="ce-hero" style="background-image: url('/images/corporate-events/img_4690.jpg'); background-color: #2a3a2a;">
     <div class="ce-hero__content">
       <h1>Corporate Events Venue</h1>
-      <p class="ce-hero__tagline">A tastefully restored shearing shed with modern amenities, rustic charm and panoramic ocean views</p>
+      <p class="ce-hero__tagline"><span class="ce-hero__tagline-text">A tastefully restored shearing shed with modern amenities, rustic charm and panoramic ocean views</span></p>
     </div>
     <div class="ce-hero__scroll">
       <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,15 +89,41 @@ const photos = [
   <section class="ce-gallery">
     <div class="ce-gallery__inner">
       <h2>Our Venue</h2>
-      <div class="ce-gallery__grid">
-        {photos.map((photo) => (
+      <div class="ce-gallery__featured">
+        <a href={`/images/corporate-events/${photos[0]}`} class="ce-gallery__hero-img" target="_blank">
+          <img src={`/images/corporate-events/${photos[0]}`} alt="The Forktree Project venue" loading="lazy" />
+        </a>
+      </div>
+      <div class="ce-gallery__grid" id="gallery-grid">
+        {photos.slice(1, 8).map((photo) => (
           <a href={`/images/corporate-events/${photo}`} class="ce-gallery__item" target="_blank">
             <img src={`/images/corporate-events/${photo}`} alt="The Forktree Project venue" loading="lazy" />
           </a>
         ))}
       </div>
+      <div class="ce-gallery__overflow" id="gallery-overflow">
+        {photos.slice(8).map((photo) => (
+          <a href={`/images/corporate-events/${photo}`} class="ce-gallery__item" target="_blank">
+            <img src={`/images/corporate-events/${photo}`} alt="The Forktree Project venue" loading="lazy" />
+          </a>
+        ))}
+      </div>
+      <button class="ce-gallery__toggle" id="gallery-toggle" type="button">
+        View all {photos.length} photos
+      </button>
     </div>
   </section>
+
+  <script>
+    const toggle = document.getElementById('gallery-toggle');
+    const overflow = document.getElementById('gallery-overflow');
+    if (toggle && overflow) {
+      toggle.addEventListener('click', () => {
+        const expanded = overflow.classList.toggle('ce-gallery__overflow--visible');
+        toggle.textContent = expanded ? 'Show fewer photos' : `View all ${overflow.querySelectorAll('a').length + 8} photos`;
+      });
+    }
+  </script>
 
   <!-- Testimonials -->
   <section class="ce-section ce-section--testimonials" style="background-image: url('/images/corporate-events/img_4656.jpg'); background-color: #1a2a1a;">
@@ -193,7 +219,15 @@ const photos = [
     font-size: clamp(1rem, 1.8vw, 1.3rem);
     font-weight: 300;
     line-height: 1.6;
-    opacity: 0.9;
+  }
+
+  .ce-hero__tagline-text {
+    background: rgba(0, 0, 0, 0.55);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    display: inline-block;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
 
   .ce-hero__scroll {
@@ -318,6 +352,8 @@ const photos = [
     font-weight: 700;
     font-size: 1.1em;
     flex-shrink: 0;
+    width: 1.2em;
+    text-align: center;
     line-height: 1.7;
   }
 
@@ -341,10 +377,44 @@ const photos = [
     margin-bottom: var(--space-xl);
   }
 
+  .ce-gallery__featured {
+    margin-bottom: 12px;
+  }
+
+  .ce-gallery__hero-img {
+    display: block;
+    overflow: hidden;
+    border-radius: 6px;
+    aspect-ratio: 21 / 9;
+    width: 100%;
+  }
+
+  .ce-gallery__hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .ce-gallery__hero-img:hover img {
+    transform: scale(1.03);
+  }
+
   .ce-gallery__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 12px;
+  }
+
+  .ce-gallery__overflow {
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .ce-gallery__overflow--visible {
+    display: grid;
   }
 
   .ce-gallery__item {
@@ -363,6 +433,25 @@ const photos = [
 
   .ce-gallery__item:hover img {
     transform: scale(1.05);
+  }
+
+  .ce-gallery__toggle {
+    display: block;
+    margin: 1.5rem auto 0;
+    padding: 0.75rem 2rem;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .ce-gallery__toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.7);
   }
 
   /* Testimonials */
@@ -517,8 +606,13 @@ const photos = [
       padding: 60px 20px;
     }
 
-    .ce-gallery__grid {
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    .ce-gallery__hero-img {
+      aspect-ratio: 16 / 9;
+    }
+
+    .ce-gallery__grid,
+    .ce-gallery__overflow {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 8px;
     }
 
