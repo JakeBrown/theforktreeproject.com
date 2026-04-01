@@ -362,7 +362,9 @@ const photos = [
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 45%, rgba(0, 0, 0, 0.35) 0%, transparent 100%),
+      rgba(0, 0, 0, 0.35);
     z-index: 1;
   }
 
@@ -384,13 +386,14 @@ const photos = [
 
   .ce-hero__tagline {
     font-family: var(--font-body);
-    font-size: clamp(1rem, 1.8vw, 1.3rem);
-    font-weight: 300;
-    line-height: 1.6;
+    font-size: clamp(1.15rem, 1.8vw, 1.3rem);
+    font-weight: 400;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
   }
 
   .ce-hero__tagline-text {
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 0, 0, 0.4);
   }
 
   .ce-hero__scroll {
