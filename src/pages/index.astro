@@ -158,7 +158,9 @@ import Footer from '../components/Footer.astro';
   }
 
   .index-section--banner::before {
-    background: rgba(0, 0, 0, 0);
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 45%, rgba(0, 0, 0, 0.35) 0%, transparent 100%),
+      rgba(0, 0, 0, 0.25);
   }
 
   /* Story 1 */
@@ -169,7 +171,9 @@ import Footer from '../components/Footer.astro';
   }
 
   .index-section--story1::before {
-    background: rgba(0, 0, 0, 0);
+    background:
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(0, 0, 0, 0.35) 0%, transparent 100%),
+      rgba(0, 0, 0, 0.3);
   }
 
   /* Story 2 */
@@ -180,7 +184,9 @@ import Footer from '../components/Footer.astro';
   }
 
   .index-section--story2::before {
-    background: rgba(0, 0, 0, 0);
+    background:
+      radial-gradient(ellipse 60% 60% at 30% 50%, rgba(0, 0, 0, 0.35) 0%, transparent 100%),
+      rgba(0, 0, 0, 0.3);
   }
 
   /* Content Layout */
@@ -212,11 +218,6 @@ import Footer from '../components/Footer.astro';
     max-width: 750px;
     position: relative;
     padding: 1rem 1.5rem;
-    background: rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    border-radius: 8px;
-    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);
   }
 
   .banner-text h1 {
@@ -226,17 +227,13 @@ import Footer from '../components/Footer.astro';
     line-height: 1.1;
     letter-spacing: normal;
     color: white;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 0, 0, 0.4);
   }
 
   .story-text {
     max-width: 50%;
     position: relative;
     padding: 1rem 1.5rem;
-    background: rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    border-radius: 8px;
-    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);
   }
 
   .story-text h2 {
@@ -247,6 +244,7 @@ import Footer from '../components/Footer.astro';
     letter-spacing: 0.04em;
     color: white;
     margin-bottom: 2rem;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 0, 0, 0.4);
   }
 
   .story-text h2:last-child {
