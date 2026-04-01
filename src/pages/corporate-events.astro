@@ -281,7 +281,7 @@ const photos = [
             <div class="ce-testimonial-card__body">
               <p class="ce-testimonial-card__pullquote">The Forktree Project is a compelling alternative to a traditional corporate function centre.</p>
               <div class="ce-testimonial-card__full" id="testimonial-pew">
-                <p>We recently hosted a corporate event for 30 people at the Forktree Project and it exceeded our expectations in every respect. The thoughtfully renovated farmhouse, featuring an expansive deck with stunning ocean views, has been beautifully crafted using recycled and environmentally sustainable materials. The meeting room offers an excellent setting for focused, productive work, while the generous breakout spaces provide a seamless and spacious connection with the surrounding natural landscape. With its breathtaking outlook and purpose-designed spaces, the Forktree Project is a compelling alternative to a traditional corporate function centre.</p>
+                <p>We recently hosted a corporate event for 30 people at the Forktree Project and it exceeded our expectations in every respect. The thoughtfully renovated farmhouse, featuring an expansive deck with stunning ocean views, has been beautifully crafted using recycled and environmentally sustainable materials. The meeting room offers an excellent setting for focused, productive work, while the generous breakout spaces provide a seamless and spacious connection with the surrounding natural landscape. With its breathtaking outlook and purpose-designed spaces, <mark class="ce-testimonial-card__highlight">the Forktree Project is a compelling alternative to a traditional corporate function centre.</mark></p>
               </div>
               <button class="ce-testimonial-card__toggle" data-target="testimonial-pew" type="button">Read full testimonial</button>
             </div>
@@ -296,7 +296,7 @@ const photos = [
               <div class="ce-testimonial-card__full" id="testimonial-epa">
                 <p>The Environment Protection Authority thanks the Forktree Project team for providing a meaningful setting for our senior leadership group at Forktree. The day offered a valuable opportunity to step outside our usual environment and reconnect with the land in a way that was practical, reflective and genuinely meaningful.</p>
                 <p>Through expertly guided, hands-on nursery activities, time spent working with the soil, and shared conversations in a natural setting, leaders were encouraged to slow down, observe the impact of the season on the land, and engage with environmental stewardship at a human scale. The structure of the day supported thoughtful discussion while allowing space for connection and reflection.</p>
-                <p>The experience reinforced the importance of grounding environmental leadership in real-world systems and care for land beyond the office or boardroom. It provided a shared reference point for reflection, learning and collective purpose.</p>
+                <p><mark class="ce-testimonial-card__highlight">The experience reinforced the importance of grounding environmental leadership in real-world systems and care for land beyond the office or boardroom.</mark> It provided a shared reference point for reflection, learning and collective purpose.</p>
                 <p>We extend our thanks to Tim, Liz, Fleur, and the Forktree team for the care, expertise and generosity they brought to the day. The team&rsquo;s thoughtful guidance and strong connection to place created an experience that will stay with our leaders well beyond the visit.</p>
               </div>
               <button class="ce-testimonial-card__toggle" data-target="testimonial-epa" type="button">Read full testimonial</button>
@@ -724,6 +724,14 @@ const photos = [
     margin-bottom: 1rem;
     color: #fff;
     opacity: 1;
+  }
+
+  .ce-testimonial-card__highlight {
+    background: rgba(34, 197, 94, 0.15);
+    color: inherit;
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    border-bottom: 2px solid rgba(34, 197, 94, 0.4);
   }
 
   .ce-testimonial-card__full {
