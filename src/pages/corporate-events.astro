@@ -114,17 +114,6 @@ const photos = [
       });
     }
 
-    // Testimonial expand/collapse
-    document.querySelectorAll('.ce-testimonial-card__toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = document.getElementById(btn.dataset.target);
-        if (target) {
-          const expanded = target.classList.toggle('ce-testimonial-card__full--visible');
-          btn.textContent = expanded ? 'Show less' : 'Read full testimonial';
-        }
-      });
-    });
-
     // Lightbox
     (() => {
       const lightbox = document.getElementById('lightbox');
@@ -276,30 +265,22 @@ const photos = [
         <h2>What People Are Saying</h2>
         <div class="ce-testimonials__grid">
 
-          <blockquote class="ce-testimonial-card" data-testimonial="pew">
+          <blockquote class="ce-testimonial-card">
             <div class="ce-testimonial-card__quote" aria-hidden="true">&ldquo;</div>
             <div class="ce-testimonial-card__body">
-              <p class="ce-testimonial-card__pullquote">The Forktree Project is a compelling alternative to a traditional corporate function centre.</p>
-              <div class="ce-testimonial-card__full" id="testimonial-pew">
-                <p>We recently hosted a corporate event for 30 people at the Forktree Project and it exceeded our expectations in every respect. The thoughtfully renovated farmhouse, featuring an expansive deck with stunning ocean views, has been beautifully crafted using recycled and environmentally sustainable materials. The meeting room offers an excellent setting for focused, productive work, while the generous breakout spaces provide a seamless and spacious connection with the surrounding natural landscape. With its breathtaking outlook and purpose-designed spaces, <mark class="ce-testimonial-card__highlight">the Forktree Project is a compelling alternative to a traditional corporate function centre.</mark></p>
-              </div>
-              <button class="ce-testimonial-card__toggle" data-target="testimonial-pew" type="button">Read full testimonial</button>
+              <p>We recently hosted a corporate event for 30 people at the Forktree Project and it exceeded our expectations in every respect. The thoughtfully renovated farmhouse, featuring an expansive deck with stunning ocean views, has been beautifully crafted using recycled and environmentally sustainable materials. The meeting room offers an excellent setting for focused, productive work, while the generous breakout spaces provide a seamless and spacious connection with the surrounding natural landscape. With its breathtaking outlook and purpose-designed spaces, <span class="ce-testimonial-card__highlight">the Forktree Project is a compelling alternative to a traditional corporate function centre.</span></p>
             </div>
             <div class="ce-testimonial-card__divider"></div>
             <cite class="ce-testimonial-card__cite">Pew Charitable Trusts</cite>
           </blockquote>
 
-          <blockquote class="ce-testimonial-card" data-testimonial="epa">
+          <blockquote class="ce-testimonial-card">
             <div class="ce-testimonial-card__quote" aria-hidden="true">&ldquo;</div>
             <div class="ce-testimonial-card__body">
-              <p class="ce-testimonial-card__pullquote">The experience reinforced the importance of grounding environmental leadership in real-world systems and care for land beyond the office or boardroom.</p>
-              <div class="ce-testimonial-card__full" id="testimonial-epa">
-                <p>The Environment Protection Authority thanks the Forktree Project team for providing a meaningful setting for our senior leadership group at Forktree. The day offered a valuable opportunity to step outside our usual environment and reconnect with the land in a way that was practical, reflective and genuinely meaningful.</p>
-                <p>Through expertly guided, hands-on nursery activities, time spent working with the soil, and shared conversations in a natural setting, leaders were encouraged to slow down, observe the impact of the season on the land, and engage with environmental stewardship at a human scale. The structure of the day supported thoughtful discussion while allowing space for connection and reflection.</p>
-                <p><mark class="ce-testimonial-card__highlight">The experience reinforced the importance of grounding environmental leadership in real-world systems and care for land beyond the office or boardroom.</mark> It provided a shared reference point for reflection, learning and collective purpose.</p>
-                <p>We extend our thanks to Tim, Liz, Fleur, and the Forktree team for the care, expertise and generosity they brought to the day. The team&rsquo;s thoughtful guidance and strong connection to place created an experience that will stay with our leaders well beyond the visit.</p>
-              </div>
-              <button class="ce-testimonial-card__toggle" data-target="testimonial-epa" type="button">Read full testimonial</button>
+              <p>The Environment Protection Authority thanks the Forktree Project team for providing a meaningful setting for our senior leadership group at Forktree. The day offered a valuable opportunity to step outside our usual environment and reconnect with the land in a way that was practical, reflective and genuinely meaningful.</p>
+              <p>Through expertly guided, hands-on nursery activities, time spent working with the soil, and shared conversations in a natural setting, leaders were encouraged to slow down, observe the impact of the season on the land, and engage with environmental stewardship at a human scale. The structure of the day supported thoughtful discussion while allowing space for connection and reflection.</p>
+              <p><span class="ce-testimonial-card__highlight">The experience reinforced the importance of grounding environmental leadership in real-world systems and care for land beyond the office or boardroom.</span> It provided a shared reference point for reflection, learning and collective purpose.</p>
+              <p>We extend our thanks to Tim, Liz, Fleur, and the Forktree team for the care, expertise and generosity they brought to the day. The team&rsquo;s thoughtful guidance and strong connection to place created an experience that will stay with our leaders well beyond the visit.</p>
             </div>
             <div class="ce-testimonial-card__divider"></div>
             <cite class="ce-testimonial-card__cite">The Environment Protection Authority SA</cite>
@@ -714,51 +695,14 @@ const photos = [
     margin: 1.25rem 0 1rem;
   }
 
-  .ce-testimonial-card__pullquote {
-    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  .ce-testimonial-card__highlight {
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
     font-weight: 600;
-    line-height: 1.4;
-    font-style: italic;
     font-family: var(--font-heading);
-    letter-spacing: -0.01em;
-    margin-bottom: 1rem;
+    line-height: 1.5;
     color: #fff;
     opacity: 1;
-  }
-
-  .ce-testimonial-card__highlight {
-    background: rgba(34, 197, 94, 0.15);
-    color: inherit;
-    padding: 0.1em 0.3em;
-    border-radius: 3px;
-    border-bottom: 2px solid rgba(34, 197, 94, 0.4);
-  }
-
-  .ce-testimonial-card__full {
-    display: none;
-    margin-top: 0.75rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .ce-testimonial-card__full--visible {
-    display: block;
-  }
-
-  .ce-testimonial-card__toggle {
     background: none;
-    border: none;
-    color: #22c55e;
-    cursor: pointer;
-    font-size: 0.85rem;
-    padding: 0.25rem 0;
-    font-family: var(--font-body);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  .ce-testimonial-card__toggle:hover {
-    color: #4ade80;
   }
 
   .ce-testimonial-card__cite {
