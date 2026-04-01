@@ -54,7 +54,7 @@ const photos = [
   </section>
 
   <!-- Intro -->
-  <section class="ce-section ce-section--intro" style="background-image: url('/images/corporate-events/img_4693.jpg'); background-color: #1a2a1a;">
+  <section class="ce-section ce-section--intro ce-section--plain">
     <div class="ce-section__content ce-section__content--center">
       <div class="ce-text ce-text--wide">
         <p>Come and have your next corporate event, off-siter, strategy session or team-building day at The Forktree Project, with our tastefully restored shearing shed offering a wonderful combination of modern amenities, rustic charm and panoramic views of the ocean.</p>
@@ -65,7 +65,7 @@ const photos = [
   </section>
 
   <!-- Facilities -->
-  <section class="ce-section ce-section--facilities" style="background-image: url('/images/corporate-events/img_4701.jpg'); background-color: #2a3a2a;">
+  <section class="ce-section ce-section--facilities ce-section--plain ce-section--alt">
     <div class="ce-section__content ce-section__content--left">
       <div class="ce-text">
         <h2>Facilities</h2>
@@ -177,7 +177,7 @@ const photos = [
   </section>
 
   <!-- CTA -->
-  <section class="ce-section ce-section--cta" style="background-image: url('/images/corporate-events/img_4688.jpg'); background-color: #2a3a2a;">
+  <section class="ce-section ce-section--cta ce-section--plain">
     <div class="ce-section__content ce-section__content--center">
       <div class="ce-cta">
         <h2>Get in Touch</h2>
@@ -221,7 +221,11 @@ const photos = [
     z-index: 2;
     text-align: center;
     max-width: 800px;
-    padding: 0 30px;
+    padding: 1.5rem 2.5rem;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 12px;
   }
 
   .ce-hero__content h1 {
@@ -229,13 +233,7 @@ const photos = [
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 700;
     letter-spacing: 0.04em;
-    margin-bottom: 1rem;
-    background: rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    display: inline-block;
-    padding: 0.5rem 1.5rem;
-    border-radius: 8px;
+    margin-bottom: 0.75rem;
   }
 
   .ce-hero__tagline {
@@ -246,14 +244,7 @@ const photos = [
   }
 
   .ce-hero__tagline-text {
-    background: rgba(0, 0, 0, 0.45);
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    display: inline-block;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    display: inline;
   }
 
   .ce-hero__scroll {
@@ -292,6 +283,43 @@ const photos = [
     inset: 0;
     background: rgba(0, 0, 0, 0.25);
     z-index: 1;
+  }
+
+  .ce-section--plain {
+    background: #fafaf9;
+    color: #1a1a1a;
+    min-height: auto;
+  }
+
+  .ce-section--plain::before {
+    display: none;
+  }
+
+  .ce-section--alt {
+    background: #f0efed;
+  }
+
+  .ce-section--plain .ce-text,
+  .ce-section--plain .ce-text--wide {
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    max-width: 800px;
+  }
+
+  .ce-section--plain .ce-list__icon {
+    color: #00A651;
+  }
+
+  .ce-section--plain .ce-text h2 {
+    color: #1a1a1a;
+  }
+
+  .ce-section--plain .ce-text p,
+  .ce-section--plain .ce-list li {
+    opacity: 1;
+    color: #333;
   }
 
   .ce-section__content {
@@ -492,11 +520,11 @@ const photos = [
     font-weight: 700;
     text-align: center;
     margin-bottom: var(--space-xl);
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     display: inline-block;
-    padding: 0.5rem 1.5rem;
+    padding: 0.4rem 1.5rem;
     border-radius: 8px;
   }
 
@@ -618,11 +646,22 @@ const photos = [
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
   }
 
+  .ce-section--plain .ce-cta {
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+  }
+
   .ce-cta h2 {
     font-family: var(--font-heading);
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 700;
     margin-bottom: 1rem;
+  }
+
+  .ce-section--plain .ce-cta h2 {
+    color: #1a1a1a;
   }
 
   .ce-cta p {
@@ -632,10 +671,18 @@ const photos = [
     opacity: 0.9;
   }
 
+  .ce-section--plain .ce-cta p {
+    color: #333;
+  }
+
   .ce-cta a {
     color: white;
     text-decoration: underline;
     text-underline-offset: 3px;
+  }
+
+  .ce-section--plain .ce-cta a {
+    color: #00A651;
   }
 
   .ce-cta a:hover {
