@@ -212,7 +212,7 @@ const photos = [
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.35) 60%, rgba(0, 0, 0, 0.15) 100%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.05) 100%);
     z-index: 1;
   }
 
@@ -230,6 +230,12 @@ const photos = [
     font-weight: 700;
     letter-spacing: 0.04em;
     margin-bottom: 1rem;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
   }
 
   .ce-hero__tagline {
@@ -240,14 +246,14 @@ const photos = [
   }
 
   .ce-hero__tagline-text {
-    background: rgba(0, 0, 0, 0.65);
-    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.45);
+    padding: 0.75rem 1.5rem;
     border-radius: 8px;
     display: inline-block;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
 
   .ce-hero__scroll {
@@ -284,7 +290,7 @@ const photos = [
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.25);
     z-index: 1;
   }
 
