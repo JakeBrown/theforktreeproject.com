@@ -79,20 +79,20 @@ const photos = [
     <div class="ce-gallery__inner">
       <h2>Our Venue</h2>
       <div class="ce-gallery__featured">
-        <a href={`/images/corporate-events/${photos[0]}`} class="ce-gallery__hero-img" target="_blank">
+        <a href={`/images/corporate-events/${photos[0]}`} class="ce-gallery__hero-img" data-lightbox="0">
           <img src={`/images/corporate-events/${photos[0]}`} alt="The Forktree Project venue" loading="lazy" />
         </a>
       </div>
       <div class="ce-gallery__grid" id="gallery-grid">
-        {photos.slice(1, 8).map((photo) => (
-          <a href={`/images/corporate-events/${photo}`} class="ce-gallery__item" target="_blank">
+        {photos.slice(1, 8).map((photo, i) => (
+          <a href={`/images/corporate-events/${photo}`} class="ce-gallery__item" data-lightbox={i + 1}>
             <img src={`/images/corporate-events/${photo}`} alt="The Forktree Project venue" loading="lazy" />
           </a>
         ))}
       </div>
       <div class="ce-gallery__overflow" id="gallery-overflow">
-        {photos.slice(8).map((photo) => (
-          <a href={`/images/corporate-events/${photo}`} class="ce-gallery__item" target="_blank">
+        {photos.slice(8).map((photo, i) => (
+          <a href={`/images/corporate-events/${photo}`} class="ce-gallery__item" data-lightbox={i + 8}>
             <img src={`/images/corporate-events/${photo}`} alt="The Forktree Project venue" loading="lazy" />
           </a>
         ))}
@@ -104,6 +104,7 @@ const photos = [
   </section>
 
   <script>
+    // Gallery expand/collapse
     const toggle = document.getElementById('gallery-toggle');
     const overflow = document.getElementById('gallery-overflow');
     if (toggle && overflow) {
@@ -113,6 +114,7 @@ const photos = [
       });
     }
 
+    // Testimonial expand/collapse
     document.querySelectorAll('.ce-testimonial-card__toggle').forEach(btn => {
       btn.addEventListener('click', () => {
         const target = document.getElementById(btn.dataset.target);
@@ -122,6 +124,149 @@ const photos = [
         }
       });
     });
+
+    // Lightbox
+    (() => {
+      const lightbox = document.getElementById('lightbox');
+      const backdrop = document.getElementById('lightbox-backdrop');
+      const closeBtn = document.getElementById('lightbox-close');
+      const prevBtn = document.getElementById('lightbox-prev');
+      const nextBtn = document.getElementById('lightbox-next');
+      const stage = document.getElementById('lightbox-stage');
+      const img = document.getElementById('lightbox-img');
+      const counter = document.getElementById('lightbox-counter');
+
+      // Collect all photo URLs from gallery links
+      const links = Array.from(document.querySelectorAll('[data-lightbox]'));
+      const photoUrls = links.map(a => a.getAttribute('href'));
+      let current = 0;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchDeltaX = 0;
+      let swiping = false;
+
+      function preload(index) {
+        if (index >= 0 && index < photoUrls.length) {
+          const i = new Image();
+          i.src = photoUrls[index];
+        }
+      }
+
+      function show(index) {
+        current = index;
+        img.classList.remove('ce-lightbox__img--loaded');
+        img.src = photoUrls[current];
+        counter.textContent = `${current + 1} / ${photoUrls.length}`;
+        prevBtn.style.display = current === 0 ? 'none' : '';
+        nextBtn.style.display = current === photoUrls.length - 1 ? 'none' : '';
+        // Preload neighbours
+        preload(current - 1);
+        preload(current + 1);
+      }
+
+      function open(index) {
+        show(index);
+        lightbox.classList.add('ce-lightbox--open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        img.addEventListener('load', onImgLoad, { once: true });
+      }
+
+      function close() {
+        lightbox.classList.remove('ce-lightbox--open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        img.src = '';
+      }
+
+      function onImgLoad() {
+        img.classList.add('ce-lightbox__img--loaded');
+      }
+
+      img.addEventListener('load', onImgLoad);
+
+      // Click handlers on gallery items
+      links.forEach((link) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const idx = parseInt(link.dataset.lightbox, 10);
+          open(idx);
+        });
+      });
+
+      // Navigation
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (current > 0) show(current - 1);
+      });
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (current < photoUrls.length - 1) show(current + 1);
+      });
+
+      // Close
+      closeBtn.addEventListener('click', close);
+      backdrop.addEventListener('click', close);
+
+      // Keyboard
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('ce-lightbox--open')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft' && current > 0) show(current - 1);
+        if (e.key === 'ArrowRight' && current < photoUrls.length - 1) show(current + 1);
+      });
+
+      // Touch swipe
+      stage.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchDeltaX = 0;
+        swiping = false;
+      }, { passive: true });
+
+      stage.addEventListener('touchmove', (e) => {
+        touchDeltaX = e.touches[0].clientX - touchStartX;
+        const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
+        // Only swipe if horizontal movement dominates
+        if (Math.abs(touchDeltaX) > 15 && Math.abs(touchDeltaX) > deltaY) {
+          swiping = true;
+          img.style.transform = `translateX(${touchDeltaX}px)`;
+          img.style.transition = 'none';
+        }
+      }, { passive: true });
+
+      stage.addEventListener('touchend', () => {
+        if (!swiping) return;
+        img.style.transition = 'transform 0.3s ease';
+        const threshold = 60;
+        if (touchDeltaX < -threshold && current < photoUrls.length - 1) {
+          img.style.transform = 'translateX(-100vw)';
+          setTimeout(() => {
+            img.style.transition = 'none';
+            img.style.transform = 'translateX(100vw)';
+            show(current + 1);
+            requestAnimationFrame(() => {
+              img.style.transition = 'transform 0.3s ease';
+              img.style.transform = 'translateX(0)';
+            });
+          }, 250);
+        } else if (touchDeltaX > threshold && current > 0) {
+          img.style.transform = 'translateX(100vw)';
+          setTimeout(() => {
+            img.style.transition = 'none';
+            img.style.transform = 'translateX(-100vw)';
+            show(current - 1);
+            requestAnimationFrame(() => {
+              img.style.transition = 'transform 0.3s ease';
+              img.style.transform = 'translateX(0)';
+            });
+          }, 250);
+        } else {
+          img.style.transform = 'translateX(0)';
+        }
+        swiping = false;
+      }, { passive: true });
+    })();
   </script>
 
   <!-- Testimonials -->
@@ -174,6 +319,22 @@ const photos = [
       </div>
     </div>
   </section>
+
+  <!-- Lightbox -->
+  <div class="ce-lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Photo viewer">
+    <div class="ce-lightbox__backdrop" id="lightbox-backdrop"></div>
+    <button class="ce-lightbox__close" id="lightbox-close" type="button" aria-label="Close">&times;</button>
+    <div class="ce-lightbox__counter" id="lightbox-counter"></div>
+    <button class="ce-lightbox__nav ce-lightbox__nav--prev" id="lightbox-prev" type="button" aria-label="Previous photo">
+      <svg width="24" height="44" viewBox="0 0 24 44" fill="none"><path d="M22 2L2 22L22 42" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="ce-lightbox__nav ce-lightbox__nav--next" id="lightbox-next" type="button" aria-label="Next photo">
+      <svg width="24" height="44" viewBox="0 0 24 44" fill="none"><path d="M2 2L22 22L2 42" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="ce-lightbox__stage" id="lightbox-stage">
+      <img class="ce-lightbox__img" id="lightbox-img" src="" alt="The Forktree Project venue" />
+    </div>
+  </div>
 
 </PageLayout>
 
@@ -738,6 +899,154 @@ const photos = [
 
     .ce-text {
       max-width: 65%;
+    }
+  }
+
+  /* Lightbox */
+  .ce-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .ce-lightbox--open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .ce-lightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    cursor: pointer;
+  }
+
+  .ce-lightbox__close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    z-index: 10;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s, transform 0.2s;
+    padding: 8px;
+  }
+
+  .ce-lightbox__close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .ce-lightbox__counter {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    user-select: none;
+  }
+
+  .ce-lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    cursor: pointer;
+    padding: 16px 12px;
+    border-radius: 8px;
+    opacity: 0.6;
+    transition: opacity 0.2s, background 0.2s;
+  }
+
+  .ce-lightbox__nav:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .ce-lightbox__nav--prev {
+    left: 16px;
+  }
+
+  .ce-lightbox__nav--next {
+    right: 16px;
+  }
+
+  .ce-lightbox__stage {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 60px 80px;
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+
+  .ce-lightbox__img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .ce-lightbox__img--loaded {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .ce-lightbox__stage {
+      padding: 50px 12px;
+    }
+
+    .ce-lightbox__nav {
+      padding: 12px 8px;
+    }
+
+    .ce-lightbox__nav--prev {
+      left: 6px;
+    }
+
+    .ce-lightbox__nav--next {
+      right: 6px;
+    }
+
+    .ce-lightbox__nav svg {
+      width: 18px;
+      height: 32px;
+    }
+
+    .ce-lightbox__close {
+      top: 10px;
+      right: 12px;
+      font-size: 2rem;
+    }
+
+    .ce-lightbox__counter {
+      top: 14px;
+      font-size: 0.8rem;
     }
   }
 </style>
