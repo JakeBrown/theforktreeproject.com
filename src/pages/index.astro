@@ -210,11 +210,13 @@ import Footer from '../components/Footer.astro';
 
   .banner-text {
     max-width: 750px;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 2.5rem 3rem;
-    border-radius: 12px;
+    position: relative;
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    border-radius: 8px;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);
   }
 
   .banner-text h1 {
@@ -228,20 +230,27 @@ import Footer from '../components/Footer.astro';
 
   .story-text {
     max-width: 50%;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 2.5rem 3rem;
-    border-radius: 12px;
+    position: relative;
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    border-radius: 8px;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);
   }
 
   .story-text h2 {
     font-family: var(--font-heading);
-    font-size: clamp(1.1rem, 2.7vw, 35px);
+    font-size: clamp(0.85rem, 1.6vw, 20px);
     font-weight: 500;
-    line-height: 1.0;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
     color: white;
     margin-bottom: 2rem;
+  }
+
+  .story-text h2:last-child {
+    margin-bottom: 0;
   }
 
   /* CTA Button */
