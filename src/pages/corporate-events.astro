@@ -1,27 +1,29 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 
+const mainImage = '23.jpg';  // Kitchen with glasses across to sitting area
+
 const photos = [
-  'photo-30-3-2026-15-21-53.jpg',    // 1. Kitchen front on
-  'photo-31-3-2026-14-14-57.jpg',    // 2. Lecture room
-  'img_4656.jpg',                     // 3. Small break out room
-  'photo-30-3-2026-15-25-28.jpg',    // 4. From above
-  'photo-30-3-2026-15-35-39.jpg',    // 5. Kitchen with glasses
-  'photo-30-3-2026-15-19-34.jpg',    // 6. Arty floral display
-  'photo-30-3-2026-15-11-11.jpg',    // 7. Close up of sitting area
-  'photo-30-3-2026-15-37-50.jpg',    // 8. Arty floral display and wine bottle
-  'img_4774.jpg',                     // 9. Deck
-  'photo-31-3-2026-11-49-14.jpg',    // 10. Bench and view
-  'photo-31-3-2026-11-45-53.jpg',    // 11. Fire pit
-  'img_4701.jpg',                     // 12. View of house from distance
-  'img_4690.jpg',                     // 13. View of house from across garden
+  '18.jpg',   // Kitchen front on
+  '36.jpg',   // Lecture room
+  '2.jpg',    // Small break out room
+  '20.jpg',   // From above
+  '22.jpg',   // Kitchen with glasses
+  '17.jpg',   // Arty floral display
+  '14.jpg',   // Close up of sitting area
+  '26.jpg',   // Arty floral display and wine bottle
+  '12.jpg',   // Deck
+  '33.jpg',   // Bench and view
+  '31.jpg',   // Fire pit
+  '9.jpg',    // View of house from distance
+  '5.jpg',    // View of house from across garden
 ];
 ---
 
 <PageLayout title="Corporate Events Venue — The Forktree Project" description="Host your next corporate event, off-siter or team-building day at The Forktree Project's restored shearing shed with modern amenities, rustic charm and panoramic ocean views.">
 
   <!-- Hero -->
-  <section class="ce-hero" style="background-image: url('/images/corporate-events/img_4690.jpg'); background-color: #2a3a2a;">
+  <section class="ce-hero" style="background-image: url('/images/corporate-events/5.jpg'); background-color: #2a3a2a;">
     <div class="ce-hero__content">
       <h1>Corporate events at The Forktree Project</h1>
       <p class="ce-hero__tagline"><span class="ce-hero__tagline-text">Rustic charm. Modern amenities. Stunning views. Perfect for inspiration and innovation.</span></p>
@@ -69,26 +71,26 @@ const photos = [
     <div class="ce-gallery__inner">
       <h2>Our Venue</h2>
       <div class="ce-gallery__featured">
-        <a href={`/images/corporate-events/${photos[0]}`} class="ce-gallery__hero-img" data-lightbox="0">
-          <img src={`/images/corporate-events/${photos[0]}`} alt="The Forktree Project venue" loading="lazy" />
+        <a href={`/images/corporate-events/${mainImage}`} class="ce-gallery__hero-img" data-lightbox="0">
+          <img src={`/images/corporate-events/${mainImage}`} alt="The Forktree Project venue" loading="lazy" />
         </a>
       </div>
       <div class="ce-gallery__grid" id="gallery-grid">
-        {photos.slice(1, 8).map((photo, i) => (
+        {photos.slice(0, 7).map((photo, i) => (
           <a href={`/images/corporate-events/${photo}`} class="ce-gallery__item" data-lightbox={i + 1}>
             <img src={`/images/corporate-events/${photo}`} alt="The Forktree Project venue" loading="lazy" />
           </a>
         ))}
       </div>
       <div class="ce-gallery__overflow" id="gallery-overflow">
-        {photos.slice(8).map((photo, i) => (
+        {photos.slice(7).map((photo, i) => (
           <a href={`/images/corporate-events/${photo}`} class="ce-gallery__item" data-lightbox={i + 8}>
             <img src={`/images/corporate-events/${photo}`} alt="The Forktree Project venue" loading="lazy" />
           </a>
         ))}
       </div>
       <button class="ce-gallery__toggle" id="gallery-toggle" type="button">
-        View all {photos.length} photos
+        View all {photos.length + 1} photos
       </button>
     </div>
   </section>
@@ -100,7 +102,7 @@ const photos = [
     if (toggle && overflow) {
       toggle.addEventListener('click', () => {
         const expanded = overflow.classList.toggle('ce-gallery__overflow--visible');
-        toggle.textContent = expanded ? 'Show fewer photos' : `View all ${overflow.querySelectorAll('a').length + 8} photos`;
+        toggle.textContent = expanded ? 'Show fewer photos' : `View all ${overflow.querySelectorAll('a').length + 8} photos`;  // 7 grid + 1 main + overflow
       });
     }
 
@@ -260,7 +262,7 @@ const photos = [
   </script>
 
   <!-- Testimonials -->
-  <section class="ce-section ce-section--testimonials" style="background-image: url('/images/corporate-events/img_4690.jpg'); background-color: #1a2a1a;">
+  <section class="ce-section ce-section--testimonials" style="background-image: url('/images/corporate-events/5.jpg'); background-color: #1a2a1a;">
     <div class="ce-section__content ce-section__content--center">
       <div class="ce-testimonials">
         <h2>What People Are Saying</h2>
