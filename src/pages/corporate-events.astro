@@ -50,18 +50,22 @@ const photos = [
     <div class="ce-section__content ce-section__content--left">
       <div class="ce-text">
         <h2>Facilities</h2>
-        <ul class="ce-list">
-          <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Wifi throughout</li>
-          <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Open plan kitchen and common room for onsite catering with tea and coffee-making facilities, microwave, fridge and oven</li>
-          <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Main lecture room for up to 30 people with AV facilities</li>
-          <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Covered verandah with sea views to take time out or run sessions outside</li>
-          <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> 4 break-out rooms for smaller groups</li>
-          <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> 3 wheelchair-accessible toilets/bathrooms</li>
-          <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> BBQ and pizza oven</li>
-          <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Wheelchair access throughout</li>
-          <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> A range of experiential activities involving nursery work or tree planting available upon request</li>
-          <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Ample on-site parking</li>
-        </ul>
+        <div class="ce-facilities-columns">
+          <ul class="ce-list">
+            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Wifi throughout</li>
+            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Main lecture room for up to 30 people with AV facilities</li>
+            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> 4 break-out rooms for smaller groups</li>
+            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> BBQ and pizza oven</li>
+            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> A range of experiential activities involving nursery work or tree planting available upon request</li>
+          </ul>
+          <ul class="ce-list">
+            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Open plan kitchen and common room for onsite catering with tea and coffee-making facilities, microwave, fridge and oven</li>
+            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Covered verandah with sea views to take time out or run sessions outside</li>
+            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> 3 wheelchair-accessible toilets/bathrooms</li>
+            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Wheelchair access throughout</li>
+            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Ample on-site parking</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -522,13 +526,24 @@ const photos = [
     margin-top: 1rem;
   }
 
+  /* Facilities columns */
+  .ce-facilities-columns {
+    display: flex;
+    gap: 2rem;
+    margin-top: 0.5rem;
+  }
+
+  .ce-facilities-columns .ce-list {
+    flex: 1;
+  }
+
   /* Facilities list */
   .ce-list {
-    margin: 0.5rem 0 0;
+    margin: 0;
     padding: 0;
     list-style: none;
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 0.75rem;
   }
 
@@ -868,9 +883,9 @@ const photos = [
       text-align: center;
     }
 
-    .ce-list {
-      grid-template-columns: 1fr;
-      text-align: left;
+    .ce-facilities-columns {
+      flex-direction: column;
+      gap: 0.75rem;
     }
 
     .ce-list li {
@@ -905,10 +920,6 @@ const photos = [
   }
 
   @media (min-width: 769px) {
-    .ce-list {
-      grid-template-columns: 1fr 1fr;
-      gap: 0.5rem 2rem;
-    }
 
     .ce-text {
       max-width: 65%;
