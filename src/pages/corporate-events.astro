@@ -390,6 +390,7 @@ const photos = [
   }
 
   .ce-hero__tagline-text {
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
   }
 
   .ce-hero__scroll {
@@ -844,6 +845,12 @@ const photos = [
   @media (max-width: 768px) {
     .ce-hero {
       background-attachment: scroll;
+      background-position: center bottom;
+    }
+
+    .ce-hero__content {
+      margin-bottom: auto;
+      padding-top: 30vh;
     }
 
     .ce-section {
