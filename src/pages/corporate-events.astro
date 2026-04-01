@@ -1,0 +1,441 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const photos = [
+  'img_4593.jpg',
+  'img_4656.jpg',
+  'img_4657.jpg',
+  'img_4688.jpg',
+  'img_4690.jpg',
+  'img_4691.jpg',
+  'img_4693.jpg',
+  'img_4696.jpg',
+  'img_4701.jpg',
+  'img_4702.jpg',
+  'photo-30-3-2026,-15-11-11.jpg',
+  'photo-30-3-2026,-15-17-11.jpg',
+  'photo-30-3-2026,-15-19-23.jpg',
+  'photo-30-3-2026,-15-19-34.jpg',
+  'photo-30-3-2026,-15-21-53.jpg',
+  'photo-30-3-2026,-15-22-01.jpg',
+  'photo-30-3-2026,-15-25-28.jpg',
+  'photo-30-3-2026,-15-26-35.jpg',
+  'photo-30-3-2026,-15-35-39.jpg',
+  'photo-30-3-2026,-15-36-56.jpg',
+  'photo-30-3-2026,-15-37-18.jpg',
+  'photo-30-3-2026,-15-37-27.jpg',
+  'photo-30-3-2026,-15-37-50.jpg',
+  'photo-30-3-2026,-15-38-39.jpg',
+  'photo-30-3-2026,-15-39-13.jpg',
+  'photo-30-3-2026,-15-39-34.jpg',
+  'photo-31-3-2026,-11-03-20.jpg',
+  'photo-31-3-2026,-11-45-53.jpg',
+  'photo-31-3-2026,-11-47-47.jpg',
+  'photo-31-3-2026,-11-49-14.jpg',
+  'photo-31-3-2026,-11-54-07.jpg',
+  'photo-31-3-2026,-14-07-49.jpg',
+  'photo-31-3-2026,-14-14-57.jpg',
+];
+---
+
+<PageLayout title="Corporate Events Venue — The Forktree Project" description="Host your next corporate event, off-siter or team-building day at The Forktree Project's restored shearing shed with modern amenities, rustic charm and panoramic ocean views.">
+
+  <!-- Hero -->
+  <section class="ce-hero" style="background-image: url('/images/corporate-events/img_4656.jpg'); background-color: #2a3a2a;">
+    <div class="ce-hero__content">
+      <h1>Corporate Events Venue</h1>
+      <p class="ce-hero__tagline">A tastefully restored shearing shed with modern amenities, rustic charm and panoramic ocean views</p>
+    </div>
+    <div class="ce-hero__scroll">
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L10 10L19 1" stroke="white" stroke-width="2"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="ce-section ce-section--intro" style="background-image: url('/images/corporate-events/img_4693.jpg'); background-color: #1a2a1a;">
+    <div class="ce-section__content ce-section__content--center">
+      <div class="ce-text ce-text--wide">
+        <p>Come and have your next corporate event, off-siter, strategy session or team-building day at The Forktree Project, with our tastefully restored shearing shed offering a wonderful combination of modern amenities, rustic charm and panoramic views of the ocean.</p>
+        <p>Perfect surroundings to talk strategy or re-energise your team.</p>
+        <p class="ce-text__location">One hour from Adelaide CBD &mdash; going against the flow of traffic!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Facilities -->
+  <section class="ce-section ce-section--facilities" style="background-image: url('/images/corporate-events/img_4701.jpg'); background-color: #2a3a2a;">
+    <div class="ce-section__content ce-section__content--left">
+      <div class="ce-text">
+        <h2>Facilities</h2>
+        <ul class="ce-list">
+          <li>Wifi throughout</li>
+          <li>3 wheelchair-accessible toilets/bathrooms</li>
+          <li>Wheelchair access throughout</li>
+          <li>Main lecture room for up to 30 people with AV facilities</li>
+          <li>4 break-out rooms for smaller groups</li>
+          <li>Open plan kitchen and common room for onsite catering with tea and coffee-making facilities, microwave, fridge and oven</li>
+          <li>Covered verandah with sea views to take time out or run sessions outside</li>
+          <li>BBQ and pizza oven</li>
+          <li>Ample on-site parking</li>
+          <li>A range of experiential activities involving nursery work or tree planting available upon request</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery -->
+  <section class="ce-gallery">
+    <div class="ce-gallery__inner">
+      <h2>Our Venue</h2>
+      <div class="ce-gallery__grid">
+        {photos.map((photo) => (
+          <a href={`/images/corporate-events/${photo}`} class="ce-gallery__item" target="_blank">
+            <img src={`/images/corporate-events/${photo}`} alt="The Forktree Project venue" loading="lazy" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="ce-section ce-section--testimonials" style="background-image: url('/images/corporate-events/img_4690.jpg'); background-color: #1a2a1a;">
+    <div class="ce-section__content ce-section__content--center">
+      <div class="ce-text ce-text--wide">
+        <h2>What People Are Saying</h2>
+
+        <blockquote class="ce-testimonial">
+          <p>&ldquo;We recently hosted a corporate event for 30 people at the Forktree Project and it exceeded our expectations in every respect. The thoughtfully renovated farmhouse, featuring an expansive deck with stunning ocean views, has been beautifully crafted using recycled and environmentally sustainable materials. The meeting room offers an excellent setting for focused, productive work, while the generous breakout spaces provide a seamless and spacious connection with the surrounding natural landscape. With its breathtaking outlook and purpose-designed spaces, the Forktree Project is a compelling alternative to a traditional corporate function centre.&rdquo;</p>
+          <cite>&ndash; Nicole Gaunt, Operations Officer, Pew Charitable Trusts</cite>
+        </blockquote>
+
+        <blockquote class="ce-testimonial">
+          <p>The Environment Protection Authority thanks the Forktree Project team for providing a meaningful setting for our senior leadership group at Forktree. The day offered a valuable opportunity to step outside our usual environment and reconnect with the land in a way that was practical, reflective and genuinely meaningful.</p>
+          <p>Through expertly guided, hands-on nursery activities, time spent working with the soil, and shared conversations in a natural setting, leaders were encouraged to slow down, observe the impact of the season on the land, and engage with environmental stewardship at a human scale. The structure of the day supported thoughtful discussion while allowing space for connection and reflection.</p>
+          <p>The experience reinforced the importance of grounding environmental leadership in real-world systems and care for land beyond the office or boardroom. It provided a shared reference point for reflection, learning and collective purpose.</p>
+          <p>We extend our thanks to Tim, Liz, Fleur, and the Forktree team for the care, expertise and generosity they brought to the day. The team&rsquo;s thoughtful guidance and strong connection to place created an experience that will stay with our leaders well beyond the visit.</p>
+          <cite>&ndash; The Environment Protection Authority SA</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="ce-section ce-section--cta" style="background-image: url('/images/corporate-events/img_4688.jpg'); background-color: #2a3a2a;">
+    <div class="ce-section__content ce-section__content--center">
+      <div class="ce-cta">
+        <h2>Get in Touch</h2>
+        <p>Email us at <a href="mailto:hello@theforktreeproject.com">hello@theforktreeproject.com</a> or call on <a href="tel:+61457492386">0457 492 386</a> for details.</p>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  /* Hero */
+  .ce-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--color-text-light);
+    overflow: hidden;
+  }
+
+  .ce-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
+    z-index: 1;
+  }
+
+  .ce-hero__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    padding: 0 30px;
+  }
+
+  .ce-hero__content h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+  }
+
+  .ce-hero__tagline {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    font-weight: 300;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  .ce-hero__scroll {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    opacity: 0.7;
+    animation: bounceDown 2s ease-in-out infinite;
+  }
+
+  @keyframes bounceDown {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* Sections */
+  .ce-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--color-text-light);
+    overflow: hidden;
+  }
+
+  .ce-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    z-index: 1;
+  }
+
+  .ce-section__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1600px;
+    padding: 180px 100px;
+  }
+
+  .ce-section__content--center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .ce-section__content--left {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .ce-text {
+    max-width: 50%;
+    position: relative;
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    border-radius: 8px;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .ce-text--wide {
+    max-width: 750px;
+    text-align: center;
+  }
+
+  .ce-text h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: var(--space-lg);
+  }
+
+  .ce-text p {
+    font-family: var(--font-body);
+    font-size: clamp(0.85rem, 1.3vw, 1rem);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+
+  .ce-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ce-text__location {
+    font-style: italic;
+    font-weight: 600;
+    margin-top: 1rem;
+  }
+
+  /* Facilities list */
+  .ce-list {
+    margin: 0.5rem 0 0;
+    padding-left: 1.5rem;
+  }
+
+  .ce-list li {
+    list-style: disc;
+    margin-bottom: 0.75rem;
+    font-size: clamp(0.85rem, 1.3vw, 1rem);
+    line-height: 1.7;
+    opacity: 0.9;
+  }
+
+  /* Gallery */
+  .ce-gallery {
+    background: #111;
+    color: var(--color-text-light);
+    padding: 100px 60px;
+  }
+
+  .ce-gallery__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .ce-gallery__inner h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .ce-gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+
+  .ce-gallery__item {
+    display: block;
+    overflow: hidden;
+    border-radius: 4px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .ce-gallery__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .ce-gallery__item:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Testimonials */
+  .ce-testimonial {
+    margin-bottom: var(--space-lg);
+    text-align: left;
+  }
+
+  .ce-testimonial p {
+    font-family: var(--font-body);
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    font-style: italic;
+    line-height: 1.8;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+  }
+
+  .ce-testimonial cite {
+    display: block;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.85rem;
+    opacity: 0.8;
+  }
+
+  /* CTA */
+  .ce-section--cta {
+    min-height: 60vh;
+  }
+
+  .ce-cta {
+    text-align: center;
+    max-width: 600px;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    border-radius: 8px;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .ce-cta h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .ce-cta p {
+    font-family: var(--font-body);
+    font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+    line-height: 1.7;
+    opacity: 0.9;
+  }
+
+  .ce-cta a {
+    color: white;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .ce-cta a:hover {
+    opacity: 0.8;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .ce-hero {
+      background-attachment: scroll;
+    }
+
+    .ce-section {
+      background-attachment: scroll;
+      min-height: auto;
+    }
+
+    .ce-section__content {
+      padding: 100px 30px;
+    }
+
+    .ce-section__content--left,
+    .ce-section__content--center {
+      justify-content: center;
+    }
+
+    .ce-text,
+    .ce-text--wide {
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .ce-gallery {
+      padding: 60px 20px;
+    }
+
+    .ce-gallery__grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px;
+    }
+
+    .ce-section--cta {
+      min-height: auto;
+    }
+  }
+</style>
