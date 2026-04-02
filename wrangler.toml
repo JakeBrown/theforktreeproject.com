@@ -13,5 +13,9 @@ routes = [
 directory = "./dist"
 binding = "ASSETS"
 
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+dataset = "forktree_pageviews"
+
 [observability]
 enabled = true
