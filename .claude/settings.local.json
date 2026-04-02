@@ -15,7 +15,9 @@
       "Bash(grep -l \"astro:assets\\\\|astro/components\" /Users/jakebrown/gits/theforktreeproject.com/src/pages/*.astro)",
       "Bash(find /Users/jakebrown/gits/theforktreeproject.com/src -name \"*.astro\" -exec grep -H \"Image\\\\|getImage\" {} \\\\;)",
       "Bash(npx astro:*)",
-      "Bash(ls /Users/jakebrown/gits/theforktreeproject.com/dist/_astro/*.webp)"
+      "Bash(ls /Users/jakebrown/gits/theforktreeproject.com/dist/_astro/*.webp)",
+      "Bash(ls -la /Users/jakebrown/gits/theforktreeproject.com/node_modules/astro/*.d.ts)",
+      "Bash(grep -l \"ANALYTICS\\\\|writeDataPoint\\\\|forktree_pageviews\" dist/_worker.js/*.js)"
     ]
   }
 }
