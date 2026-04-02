@@ -80,36 +80,16 @@ const photos = [
         </a>
       </div>
       <div class="ce-gallery__grid" id="gallery-grid">
-        {photos.slice(0, 7).map((photo, i) => (
-          <a href={`/images/corporate-events/${photo}`} class="ce-gallery__item" data-lightbox={i + 1}>
+        {photos.map((photo, i) => (
+          <a href={`/images/corporate-events/${photo}`} class={`ce-gallery__item${i === photos.length - 1 && photos.length % 2 !== 0 ? ' ce-gallery__item--last-odd' : ''}`} data-lightbox={i + 1}>
             <img src={`/images/corporate-events/${photo}`} alt="The Forktree Project venue" loading="lazy" />
           </a>
         ))}
       </div>
-      <div class="ce-gallery__overflow" id="gallery-overflow">
-        {photos.slice(7).map((photo, i) => (
-          <a href={`/images/corporate-events/${photo}`} class="ce-gallery__item" data-lightbox={i + 8}>
-            <img src={`/images/corporate-events/${photo}`} alt="The Forktree Project venue" loading="lazy" />
-          </a>
-        ))}
-      </div>
-      <button class="ce-gallery__toggle" id="gallery-toggle" type="button">
-        View all {photos.length + 1} photos
-      </button>
     </div>
   </section>
 
   <script>
-    // Gallery expand/collapse
-    const toggle = document.getElementById('gallery-toggle');
-    const overflow = document.getElementById('gallery-overflow');
-    if (toggle && overflow) {
-      toggle.addEventListener('click', () => {
-        const expanded = overflow.classList.toggle('ce-gallery__overflow--visible');
-        toggle.textContent = expanded ? 'Show fewer photos' : `View all ${overflow.querySelectorAll('a').length + 8} photos`;  // 7 grid + 1 main + overflow
-      });
-    }
-
     // Testimonial expand/collapse
     document.querySelectorAll('.ce-testimonial-card__toggle').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -615,22 +595,16 @@ const photos = [
     gap: 12px;
   }
 
-  .ce-gallery__overflow {
-    display: none;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 12px;
-    margin-top: 12px;
-  }
-
-  .ce-gallery__overflow--visible {
-    display: grid;
-  }
-
   .ce-gallery__item {
     display: block;
     overflow: hidden;
     border-radius: 4px;
     aspect-ratio: 4 / 3;
+  }
+
+  .ce-gallery__item--last-odd {
+    grid-column: span 2;
+    aspect-ratio: 21 / 9;
   }
 
   .ce-gallery__item img {
@@ -644,24 +618,7 @@ const photos = [
     transform: scale(1.05);
   }
 
-  .ce-gallery__toggle {
-    display: block;
-    margin: 1.5rem auto 0;
-    padding: 0.75rem 2rem;
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    color: white;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
-  }
 
-  .ce-gallery__toggle:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.7);
-  }
 
   /* Testimonials */
   .ce-testimonials {
@@ -900,10 +857,14 @@ const photos = [
       aspect-ratio: 16 / 9;
     }
 
-    .ce-gallery__grid,
-    .ce-gallery__overflow {
+    .ce-gallery__grid {
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 8px;
+    }
+
+    .ce-gallery__item--last-odd {
+      grid-column: span 1;
+      aspect-ratio: 4 / 3;
     }
 
     .ce-testimonial-card {
