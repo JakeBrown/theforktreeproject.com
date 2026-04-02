@@ -1,29 +1,48 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import { Image, getImage } from 'astro:assets';
 
-const mainImage = '23.jpg';  // Kitchen with glasses across to sitting area
+import img2 from '../assets/images/corporate-events/2.jpg';
+import img5 from '../assets/images/corporate-events/5.jpg';
+import img9 from '../assets/images/corporate-events/9.jpg';
+import img12 from '../assets/images/corporate-events/12.jpg';
+import img14 from '../assets/images/corporate-events/14.jpg';
+import img17 from '../assets/images/corporate-events/17.jpg';
+import img18 from '../assets/images/corporate-events/18.jpg';
+import img20 from '../assets/images/corporate-events/20.jpg';
+import img22 from '../assets/images/corporate-events/22.jpg';
+import img23 from '../assets/images/corporate-events/23.jpg';
+import img26 from '../assets/images/corporate-events/26.jpg';
+import img31 from '../assets/images/corporate-events/31.jpg';
+import img33 from '../assets/images/corporate-events/33.jpg';
+import img36 from '../assets/images/corporate-events/36.jpg';
+
+const mainImage = img23;  // Kitchen with glasses across to sitting area
 
 const photos = [
-  '18.jpg',   // Kitchen front on
-  '36.jpg',   // Lecture room
-  '2.jpg',    // Small break out room
-  '20.jpg',   // From above
-  '22.jpg',   // Kitchen with glasses
-  '17.jpg',   // Arty floral display
-  '14.jpg',   // Close up of sitting area
-  '26.jpg',   // Arty floral display and wine bottle
-  '12.jpg',   // Deck
-  '33.jpg',   // Bench and view
-  '31.jpg',   // Fire pit
-  '9.jpg',    // View of house from distance
-  '5.jpg',    // View of house from across garden
+  img18,   // Kitchen front on
+  img36,   // Lecture room
+  img2,    // Small break out room
+  img20,   // From above
+  img22,   // Kitchen with glasses
+  img17,   // Arty floral display
+  img14,   // Close up of sitting area
+  img26,   // Arty floral display and wine bottle
+  img12,   // Deck
+  img33,   // Bench and view
+  img31,   // Fire pit
+  img9,    // View of house from distance
+  img5,    // View of house from across garden
 ];
+
+const heroBg = await getImage({ src: img5, width: 1920, format: 'webp' });
+const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' });
 ---
 
 <PageLayout title="Corporate Events Venue — The Forktree Project" description="Host your next corporate event, off-siter or team-building day at The Forktree Project's restored shearing shed with modern amenities, rustic charm and panoramic ocean views.">
 
   <!-- Hero -->
-  <section class="ce-hero" style="background-image: url('/images/corporate-events/5.jpg'); background-color: #2a3a2a;">
+  <section class="ce-hero" style={`background-image: url('${heroBg.src}'); background-color: #2a3a2a;`}>
     <div class="ce-hero__content">
       <h1>Corporate events at The Forktree Project</h1>
       <p class="ce-hero__tagline"><span class="ce-hero__tagline-text">Rustic charm. Modern amenities. Stunning views. Perfect for inspiration and innovation.</span></p>
@@ -37,10 +56,14 @@ const photos = [
 
   <!-- Intro -->
   <section class="ce-section ce-section--intro ce-section--plain">
-    <div class="ce-section__content ce-section__content--center">
-      <div class="ce-text ce-text--wide">
-        <p>Host your next corporate event, off-siter, strategy session or team-building day at The Forktree Project. Our beautifully restored shearing shed blends modern amenities with rustic charm, all set against panoramic ocean views, creating the perfect space to plan, connect, and recharge your team.</p>
-        <p>Run on renewable energy, our fully off-grid venue is ideal for organisations looking to reduce their impact on the planet while enjoying a unique and inspiring setting. Conveniently located just one hour from the Adelaide CBD&mdash;against the flow of traffic!</p>
+    <div class="ce-intro">
+      <div class="ce-intro__text">
+        <p class="ce-intro__lead">Host your next corporate event, off-siter, strategy session or team-building day at The Forktree Project.</p>
+        <p class="ce-intro__body">Our beautifully restored shearing shed blends modern amenities with rustic charm, all set against panoramic ocean views, creating the perfect space to plan, connect, and recharge your team.</p>
+        <p class="ce-intro__body">Run on renewable energy, our fully off-grid venue is ideal for organisations looking to reduce their impact on the planet while enjoying a unique and inspiring setting. Conveniently located just one hour from the Adelaide CBD&mdash;against the flow of traffic!</p>
+      </div>
+      <div class="ce-intro__image">
+        <img src="/images/corporate-events/14.jpg" alt="The Forktree Project sitting area" loading="lazy" />
       </div>
     </div>
   </section>
@@ -422,6 +445,55 @@ const photos = [
 
   .ce-section--alt {
     background: #f0efed;
+  }
+
+  /* Intro split layout */
+  .ce-intro {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 60px;
+  }
+
+  .ce-intro__text {
+    flex: 1;
+  }
+
+  .ce-intro__lead {
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.35;
+    color: #1a1a1a;
+    margin-bottom: 1.25rem;
+  }
+
+  .ce-intro__body {
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 1rem;
+  }
+
+  .ce-intro__body:last-child {
+    margin-bottom: 0;
+  }
+
+  .ce-intro__image {
+    flex: 0 0 40%;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .ce-intro__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 3 / 4;
+    border-radius: 8px;
   }
 
   .ce-section--plain .ce-text,
@@ -810,6 +882,21 @@ const photos = [
 
   /* Responsive */
   @media (max-width: 768px) {
+    .ce-intro {
+      flex-direction: column;
+      padding: 60px 20px;
+      gap: 2rem;
+    }
+
+    .ce-intro__image {
+      flex: none;
+      width: 100%;
+    }
+
+    .ce-intro__image img {
+      aspect-ratio: 16 / 9;
+    }
+
     .ce-hero {
       background-attachment: scroll;
       background-position: center bottom;
