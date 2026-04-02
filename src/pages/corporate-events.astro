@@ -114,12 +114,13 @@ const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' })
   </section>
 
   <script>
-    // Testimonial expand
+    // Testimonial expand/collapse
     document.querySelectorAll('.ce-testimonial-card__toggle').forEach(btn => {
       btn.addEventListener('click', () => {
         const card = btn.closest('[data-testimonial]');
         if (card) {
-          card.classList.add('ce-testimonial-card--open');
+          const isOpen = card.classList.toggle('ce-testimonial-card--open');
+          btn.innerHTML = isOpen ? '&larr; Show less' : 'Read full testimonial &rarr;';
         }
       });
     });
@@ -768,7 +769,8 @@ const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' })
   }
 
   .ce-testimonial-card--open .ce-testimonial-card__toggle {
-    display: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.8rem;
   }
 
   .ce-testimonial-card__highlight {
