@@ -276,32 +276,28 @@ const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' })
         <div class="ce-testimonials__grid">
 
           <blockquote class="ce-testimonial-card">
-            <div class="ce-testimonial-card__quote" aria-hidden="true">&ldquo;</div>
             <div class="ce-testimonial-card__body">
-              <p class="ce-testimonial-card__pullquote">The Forktree Project is a compelling alternative to a traditional corporate function centre.</p>
+              <p class="ce-testimonial-card__pullquote">&ldquo;The Forktree Project is a compelling alternative to a traditional corporate function centre.&rdquo;</p>
+              <cite class="ce-testimonial-card__cite">&mdash; Pew Charitable Trusts</cite>
               <div class="ce-testimonial-card__full" id="testimonial-pew">
-                <p>We recently hosted a corporate event for 30 people at the Forktree Project and it exceeded our expectations in every respect. The thoughtfully renovated farmhouse, featuring an expansive deck with stunning ocean views, has been beautifully crafted using recycled and environmentally sustainable materials. The meeting room offers an excellent setting for focused, productive work, while the generous breakout spaces provide a seamless and spacious connection with the surrounding natural landscape. With its breathtaking outlook and purpose-designed spaces, <span class="ce-testimonial-card__highlight">the Forktree Project is a compelling alternative to a traditional corporate function centre.</span></p>
+                <p>We recently hosted a corporate event for 30 people at the Forktree Project and it exceeded our expectations in every respect. The thoughtfully renovated farmhouse, featuring an expansive deck with stunning ocean views, has been beautifully crafted using recycled and environmentally sustainable materials. The meeting room offers an excellent setting for focused, productive work, while the generous breakout spaces provide a seamless and spacious connection with the surrounding natural landscape. With its breathtaking outlook and purpose-designed spaces, the Forktree Project is a compelling alternative to a traditional corporate function centre.</p>
               </div>
-              <button class="ce-testimonial-card__toggle" data-target="testimonial-pew" type="button">Read full testimonial</button>
+              <button class="ce-testimonial-card__toggle" data-target="testimonial-pew" type="button">Read full testimonial &rarr;</button>
             </div>
-            <div class="ce-testimonial-card__divider"></div>
-            <cite class="ce-testimonial-card__cite">Pew Charitable Trusts</cite>
           </blockquote>
 
           <blockquote class="ce-testimonial-card">
-            <div class="ce-testimonial-card__quote" aria-hidden="true">&ldquo;</div>
             <div class="ce-testimonial-card__body">
-              <p class="ce-testimonial-card__pullquote">The experience reinforced the importance of grounding environmental leadership in real-world systems and care for land beyond the office or boardroom.</p>
+              <p class="ce-testimonial-card__pullquote">&ldquo;The experience reinforced the importance of grounding environmental leadership in real-world systems and care for land beyond the office or boardroom.&rdquo;</p>
+              <cite class="ce-testimonial-card__cite">&mdash; The Environment Protection Authority SA</cite>
               <div class="ce-testimonial-card__full" id="testimonial-epa">
                 <p>The Environment Protection Authority thanks the Forktree Project team for providing a meaningful setting for our senior leadership group at Forktree. The day offered a valuable opportunity to step outside our usual environment and reconnect with the land in a way that was practical, reflective and genuinely meaningful.</p>
                 <p>Through expertly guided, hands-on nursery activities, time spent working with the soil, and shared conversations in a natural setting, leaders were encouraged to slow down, observe the impact of the season on the land, and engage with environmental stewardship at a human scale. The structure of the day supported thoughtful discussion while allowing space for connection and reflection.</p>
-                <p><span class="ce-testimonial-card__highlight">The experience reinforced the importance of grounding environmental leadership in real-world systems and care for land beyond the office or boardroom.</span> It provided a shared reference point for reflection, learning and collective purpose.</p>
+                <p>The experience reinforced the importance of grounding environmental leadership in real-world systems and care for land beyond the office or boardroom. It provided a shared reference point for reflection, learning and collective purpose.</p>
                 <p>We extend our thanks to Tim, Liz, Fleur, and the Forktree team for the care, expertise and generosity they brought to the day. The team&rsquo;s thoughtful guidance and strong connection to place created an experience that will stay with our leaders well beyond the visit.</p>
               </div>
-              <button class="ce-testimonial-card__toggle" data-target="testimonial-epa" type="button">Read full testimonial</button>
+              <button class="ce-testimonial-card__toggle" data-target="testimonial-epa" type="button">Read full testimonial &rarr;</button>
             </div>
-            <div class="ce-testimonial-card__divider"></div>
-            <cite class="ce-testimonial-card__cite">The Environment Protection Authority SA</cite>
           </blockquote>
 
         </div>
@@ -719,24 +715,15 @@ const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' })
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-radius: 10px;
-    border-left: 4px solid #16a34a;
+    border-left: none;
     padding: 2rem 2rem 1.5rem;
     margin: 0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   }
 
-  .ce-testimonial-card__quote {
-    font-family: Georgia, serif;
-    font-size: 5rem;
-    line-height: 0.8;
-    color: #22c55e;
-    opacity: 0.8;
-    margin-bottom: -0.5rem;
-  }
-
   .ce-testimonial-card__body p {
     font-family: var(--font-body);
-    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
     font-style: italic;
     line-height: 1.8;
     opacity: 0.85;
@@ -748,33 +735,16 @@ const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' })
     margin-bottom: 0;
   }
 
-  .ce-testimonial-card__divider {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.15);
-    margin: 1.25rem 0 1rem;
-  }
-
   .ce-testimonial-card__pullquote {
-    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    font-size: clamp(1.4rem, 2.8vw, 2rem);
     font-weight: 600;
     line-height: 1.4;
     font-style: italic;
     font-family: var(--font-heading);
     letter-spacing: -0.01em;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     color: #fff;
     opacity: 1;
-  }
-
-  .ce-testimonial-card__highlight {
-    font-size: clamp(1.05rem, 1.5vw, 1.15rem);
-    font-weight: 600;
-    color: #fff;
-    opacity: 1;
-    background: rgba(34, 197, 94, 0.12);
-    padding: 0.1em 0.3em;
-    border-radius: 3px;
-    border-bottom: 2px solid rgba(34, 197, 94, 0.4);
   }
 
   .ce-testimonial-card__full {
@@ -791,34 +761,27 @@ const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' })
   .ce-testimonial-card__toggle {
     background: none;
     border: none;
-    color: #22c55e;
+    color: rgba(255, 255, 255, 0.5);
     cursor: pointer;
     font-size: 0.85rem;
     padding: 0.25rem 0;
     font-family: var(--font-body);
-    text-decoration: underline;
-    text-underline-offset: 2px;
+    text-decoration: none;
+    letter-spacing: 0.03em;
   }
 
   .ce-testimonial-card__toggle:hover {
-    color: #4ade80;
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .ce-testimonial-card__cite {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
+    display: block;
     font-style: normal;
-    font-weight: 700;
-    font-size: 0.95rem;
-    opacity: 0.85;
-    text-align: left;
-  }
-
-  .ce-testimonial-card__cite span {
-    font-weight: 400;
-    font-size: 0.85rem;
+    font-weight: 600;
+    font-size: clamp(1rem, 1.3vw, 1.1rem);
     opacity: 0.7;
+    text-align: left;
+    margin-bottom: 1rem;
   }
 
   /* CTA */
