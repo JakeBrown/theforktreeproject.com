@@ -42,12 +42,12 @@ const heroBg = await getImage({ src: img5, width: 1920, format: 'webp' });
 const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' });
 ---
 
-<PageLayout title="Corporate Events Venue — The Forktree Project" description="Host your next corporate event, off-siter or team-building day at The Forktree Project's restored shearing shed with modern amenities, rustic charm and panoramic ocean views.">
+<PageLayout title="Venue Hire at The Forktree Project" description="Host your next off-siter, strategy session or team-building day at The Forktree Project's restored shearing shed with modern amenities, rustic charm and panoramic ocean views.">
 
   <!-- Hero -->
   <section class="ce-hero" style={`background-image: url('${heroBg.src}'); background-color: #2a3a2a;`}>
     <div class="ce-hero__content">
-      <h1>Corporate events at The Forktree Project</h1>
+      <h1>Venue Hire at The Forktree Project</h1>
       <p class="ce-hero__tagline"><span class="ce-hero__tagline-text">Rustic charm. Modern amenities. Stunning views. Perfect for inspiration and innovation.</span></p>
     </div>
     <div class="ce-hero__scroll">
@@ -59,9 +59,10 @@ const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' })
 
   <!-- Intro -->
   <section class="ce-section ce-section--intro ce-section--plain">
+    <h3 class="ce-section__subtitle">Businesses and Teams</h3>
     <div class="ce-intro">
       <div class="ce-intro__text">
-        <p class="ce-intro__lead">Host your next corporate event, off-siter, strategy session or team-building day at The Forktree Project.</p>
+        <p class="ce-intro__lead">Host your next off-siter, strategy session or team-building day at The Forktree Project.</p>
         <p class="ce-intro__body">Our beautifully restored shearing shed blends modern amenities with rustic charm, all set against panoramic ocean views, creating the perfect space to plan, connect, and recharge your team.</p>
         <p class="ce-intro__body">Run on renewable energy, our fully off-grid venue is ideal for organisations looking to reduce their impact on the planet while enjoying a unique and inspiring setting. Conveniently located just one hour from the Adelaide CBD&mdash;against the flow of traffic!</p>
       </div>
@@ -83,11 +84,11 @@ const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' })
             <li><TreePine class="ce-list__icon" size={22} /> A range of experiential activities involving nursery work or tree planting available upon request</li>
           </ul>
           <ul class="ce-list">
-            <li><UtensilsCrossed class="ce-list__icon" size={22} /> Open plan kitchen and common room for onsite catering with tea and coffee-making facilities, microwave, fridge and oven</li>
+            <li><UtensilsCrossed class="ce-list__icon" size={22} /> Open-plan kitchen and common room for on-site catering with tea and coffee-making facilities, microwave, fridge and oven</li>
             <li><Sun class="ce-list__icon" size={22} /> Covered verandah with sea views to take time out or run sessions outside</li>
-            <li><Accessibility class="ce-list__icon" size={22} /> 3 wheelchair-accessible toilets/bathrooms</li>
-            <li><Accessibility class="ce-list__icon" size={22} /> Wheelchair access throughout</li>
-            <li><Car class="ce-list__icon" size={22} /> Ample on-site parking</li>
+            <li><Accessibility class="ce-list__icon" size={22} /> Wheelchair accessible, including 3 accessible toilets/bathrooms</li>
+            <li><Car class="ce-list__icon" size={22} /> Ample on-site parking, including disabled parking spaces</li>
+            <li><UtensilsCrossed class="ce-list__icon" size={22} /> Catering available upon request</li>
           </ul>
         </div>
       </div>
@@ -447,6 +448,18 @@ const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' })
 
   .ce-section--alt {
     background: #f0efed;
+  }
+
+  .ce-section__subtitle {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--color-text);
+    margin: 0;
+    padding: 80px 60px 0;
   }
 
   /* Intro split layout */
