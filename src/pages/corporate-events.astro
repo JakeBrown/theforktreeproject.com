@@ -2,6 +2,8 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import { Image, getImage } from 'astro:assets';
 
+export const prerender = true;
+
 import img2 from '../assets/images/corporate-events/2.jpg';
 import img5 from '../assets/images/corporate-events/5.jpg';
 import img9 from '../assets/images/corporate-events/9.jpg';
@@ -63,7 +65,7 @@ const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' })
         <p class="ce-intro__body">Run on renewable energy, our fully off-grid venue is ideal for organisations looking to reduce their impact on the planet while enjoying a unique and inspiring setting. Conveniently located just one hour from the Adelaide CBD&mdash;against the flow of traffic!</p>
       </div>
       <div class="ce-intro__image">
-        <img src="/images/corporate-events/14.jpg" alt="The Forktree Project sitting area" loading="lazy" />
+        <Image src={img14} alt="The Forktree Project sitting area" width={800} loading="lazy" />
       </div>
     </div>
   </section>
@@ -98,14 +100,14 @@ const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' })
     <div class="ce-gallery__inner">
       <h2>Our Venue</h2>
       <div class="ce-gallery__featured">
-        <a href={`/images/corporate-events/${mainImage}`} class="ce-gallery__hero-img" data-lightbox="0">
-          <img src={`/images/corporate-events/${mainImage}`} alt="The Forktree Project venue" loading="lazy" />
+        <a href={mainImage.src} class="ce-gallery__hero-img" data-lightbox="0">
+          <Image src={mainImage} alt="The Forktree Project venue" width={1400} loading="lazy" />
         </a>
       </div>
       <div class="ce-gallery__grid" id="gallery-grid">
         {photos.map((photo, i) => (
-          <a href={`/images/corporate-events/${photo}`} class={`ce-gallery__item${i === photos.length - 1 && photos.length % 2 !== 0 ? ' ce-gallery__item--last-odd' : ''}`} data-lightbox={i + 1}>
-            <img src={`/images/corporate-events/${photo}`} alt="The Forktree Project venue" loading="lazy" />
+          <a href={photo.src} class={`ce-gallery__item${i === photos.length - 1 && photos.length % 2 !== 0 ? ' ce-gallery__item--last-odd' : ''}`} data-lightbox={i + 1}>
+            <Image src={photo} alt="The Forktree Project venue" width={500} loading="lazy" />
           </a>
         ))}
       </div>
@@ -269,7 +271,7 @@ const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' })
   </script>
 
   <!-- Testimonials -->
-  <section class="ce-section ce-section--testimonials" style="background-image: url('/images/corporate-events/5.jpg'); background-color: #1a2a1a;">
+  <section class="ce-section ce-section--testimonials" style={`background-image: url('${testimonialBg.src}'); background-color: #1a2a1a;`}>
     <div class="ce-section__content ce-section__content--center">
       <div class="ce-testimonials">
         <h2>What People Are Saying</h2>
