@@ -1,6 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import { Image, getImage } from 'astro:assets';
+import { Wifi, Presentation, DoorOpen, Flame, TreePine, UtensilsCrossed, Sun, Accessibility, Car } from 'lucide-astro';
 
 export const prerender = true;
 
@@ -75,18 +76,18 @@ const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' })
         <h2>Facilities</h2>
         <div class="ce-facilities-columns">
           <ul class="ce-list">
-            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Wifi throughout</li>
-            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Main lecture room for up to 30 people with AV facilities</li>
-            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> 4 break-out rooms for smaller groups</li>
-            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> BBQ and pizza oven</li>
-            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> A range of experiential activities involving nursery work or tree planting available upon request</li>
+            <li><Wifi class="ce-list__icon" size={22} /> Wifi throughout</li>
+            <li><Presentation class="ce-list__icon" size={22} /> Main lecture room for up to 30 people with AV facilities</li>
+            <li><DoorOpen class="ce-list__icon" size={22} /> 4 break-out rooms for smaller groups</li>
+            <li><Flame class="ce-list__icon" size={22} /> BBQ and pizza oven</li>
+            <li><TreePine class="ce-list__icon" size={22} /> A range of experiential activities involving nursery work or tree planting available upon request</li>
           </ul>
           <ul class="ce-list">
-            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Open plan kitchen and common room for onsite catering with tea and coffee-making facilities, microwave, fridge and oven</li>
-            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Covered verandah with sea views to take time out or run sessions outside</li>
-            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> 3 wheelchair-accessible toilets/bathrooms</li>
-            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Wheelchair access throughout</li>
-            <li><span class="ce-list__icon" aria-hidden="true">&#10003;</span> Ample on-site parking</li>
+            <li><UtensilsCrossed class="ce-list__icon" size={22} /> Open plan kitchen and common room for onsite catering with tea and coffee-making facilities, microwave, fridge and oven</li>
+            <li><Sun class="ce-list__icon" size={22} /> Covered verandah with sea views to take time out or run sessions outside</li>
+            <li><Accessibility class="ce-list__icon" size={22} /> 3 wheelchair-accessible toilets/bathrooms</li>
+            <li><Accessibility class="ce-list__icon" size={22} /> Wheelchair access throughout</li>
+            <li><Car class="ce-list__icon" size={22} /> Ample on-site parking</li>
           </ul>
         </div>
       </div>
@@ -606,12 +607,11 @@ const testimonialBg = await getImage({ src: img5, width: 1920, format: 'webp' })
   }
 
   .ce-list__icon {
-    color: #22c55e;
-    font-weight: 700;
-    font-size: 0.95em;
+    color: #00A651;
     flex-shrink: 0;
-    width: 1em;
-    text-align: center;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
   }
 
   /* Gallery */

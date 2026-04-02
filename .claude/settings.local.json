@@ -10,7 +10,12 @@
       "Bash(curl:*)",
       "Bash(git commit:*)",
       "Bash(agent-browser open \"https://www.theforktreeproject.com/journal/friends-of-forktree-planting-day-2025\" && agent-browser wait --load networkidle && agent-browser eval --stdin <<'EVALEOF'\nlet title = document.querySelector\\('.Blog-header h1, .BlogItem-title, article h1'\\);\nlet body = document.querySelector\\('.sqs-block-content p, article p, .Blog-content p'\\);\nlet results = {};\nif \\(title\\) {\n  let s = window.getComputedStyle\\(title\\);\n  results.title = {font: s.fontFamily, size: s.fontSize, weight: s.fontWeight, transform: s.textTransform, letterSpacing: s.letterSpacing, lineHeight: s.lineHeight};\n}\nif \\(body\\) {\n  let s = window.getComputedStyle\\(body\\);\n  results.body = {font: s.fontFamily, size: s.fontSize, weight: s.fontWeight, lineHeight: s.lineHeight};\n}\nJSON.stringify\\(results\\);\nEVALEOF)",
-      "Bash(git add src/pages/journal/\\\\\\\\[...slug\\\\\\\\].astro && git commit -m \"$\\(cat <<'EOF'\nFix journal article layout: remove hero image, match Squarespace styling\n\n- Remove hero image from article pages \\(featured image only used on listing\\)\n- Title: uppercase with 6px letter-spacing to match original\n- Body text: weight 600, 18px to match original proxima-nova styling\n- Remove author display \\(original only shows date\\)\n- Nav titles: uppercase with letter-spacing\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\" && git push 2>&1)"
+      "Bash(git add src/pages/journal/\\\\\\\\[...slug\\\\\\\\].astro && git commit -m \"$\\(cat <<'EOF'\nFix journal article layout: remove hero image, match Squarespace styling\n\n- Remove hero image from article pages \\(featured image only used on listing\\)\n- Title: uppercase with 6px letter-spacing to match original\n- Body text: weight 600, 18px to match original proxima-nova styling\n- Remove author display \\(original only shows date\\)\n- Nav titles: uppercase with letter-spacing\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\" && git push 2>&1)",
+      "Bash(find /Users/jakebrown/gits/theforktreeproject.com/src -name \"*.astro\" -exec grep -l \"Image\\\\s*from\" {} \\\\;)",
+      "Bash(grep -l \"astro:assets\\\\|astro/components\" /Users/jakebrown/gits/theforktreeproject.com/src/pages/*.astro)",
+      "Bash(find /Users/jakebrown/gits/theforktreeproject.com/src -name \"*.astro\" -exec grep -H \"Image\\\\|getImage\" {} \\\\;)",
+      "Bash(npx astro:*)",
+      "Bash(ls /Users/jakebrown/gits/theforktreeproject.com/dist/_astro/*.webp)"
     ]
   }
 }
