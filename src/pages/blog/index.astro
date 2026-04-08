@@ -15,12 +15,12 @@ const start = (currentPage - 1) * POSTS_PER_PAGE;
 const posts = allPosts.slice(start, start + POSTS_PER_PAGE);
 ---
 
-<PageLayout title="Journal — The Forktree Project" description="The Forktree Project story - follow our rewilding journey." headerVariant="dark">
+<PageLayout title="Blog — The Forktree Project" description="The Forktree Project story - follow our rewilding journey." headerVariant="dark">
 
   <section class="journal-header">
     <div class="container--narrow">
       <h2><strong>THE FORKTREE STORY</strong></h2>
-      <p>The Forktree Project is a journey, the first steps of which were taken when the property was purchased in April 2019. The blog posts below tell the story of how this journey is unfolding. To read the story from the beginning, <a href="/journal/beginnings" class="journal-link">click here.</a></p>
+      <p>The Forktree Project is a journey, the first steps of which were taken when the property was purchased in April 2019. The blog posts below tell the story of how this journey is unfolding. To read the story from the beginning, <a href="/blog/beginnings" class="journal-link">click here.</a></p>
     </div>
   </section>
 
@@ -29,7 +29,7 @@ const posts = allPosts.slice(start, start + POSTS_PER_PAGE);
       {posts.length > 0 ? (
         <div class="posts-grid">
           {posts.map((post) => (
-            <a href={`/journal/${post.id}`} class="post-card">
+            <a href={`/blog/${post.id}`} class="post-card">
               <div class="post-card__image">
                 {post.data.image ? (
                   <img src={post.data.image} alt={post.data.title} loading="lazy" />
@@ -40,7 +40,6 @@ const posts = allPosts.slice(start, start + POSTS_PER_PAGE);
               <div class="post-card__content">
                 <h3 class="post-card__title">{post.data.title}</h3>
                 <div class="post-card__meta">
-                  {post.data.author && <span>{post.data.author}</span>}
                   {post.data.date && (
                     <time datetime={new Date(post.data.date).toISOString()}>
                       {new Date(post.data.date).toLocaleDateString('en-AU', {
@@ -56,18 +55,18 @@ const posts = allPosts.slice(start, start + POSTS_PER_PAGE);
           ))}
         </div>
       ) : (
-        <p class="journal-empty">Journal posts coming soon. Check back for updates on our rewilding journey.</p>
+        <p class="journal-empty">Blog posts coming soon. Check back for updates on our rewilding journey.</p>
       )}
 
       {totalPages > 1 && (
-        <nav class="pagination" aria-label="Journal pagination">
+        <nav class="pagination" aria-label="Blog pagination">
           {currentPage > 1 && (
-            <a href={currentPage === 2 ? '/journal' : `/journal?page=${currentPage - 1}`} class="pagination__link">
+            <a href={currentPage === 2 ? '/blog' : `/blog?page=${currentPage - 1}`} class="pagination__link">
               Newer
             </a>
           )}
           {currentPage < totalPages && (
-            <a href={`/journal?page=${currentPage + 1}`} class="pagination__link">
+            <a href={`/blog?page=${currentPage + 1}`} class="pagination__link">
               Older
             </a>
           )}
@@ -147,7 +146,7 @@ const posts = allPosts.slice(start, start + POSTS_PER_PAGE);
 
   .post-card__title {
     font-family: var(--font-heading);
-    font-size: 0.75rem;
+    font-size: 1rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;

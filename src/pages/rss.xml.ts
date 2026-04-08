@@ -8,14 +8,14 @@ export async function GET(context: APIContext) {
   );
 
   return rss({
-    title: 'The Forktree Project — Journal',
+    title: 'The Forktree Project — Blog',
     description: 'Follow the rewilding journey of The Forktree Project, a habitat restoration charity on South Australia\'s Fleurieu Peninsula.',
     site: context.site!.toString(),
     items: posts.map((post) => ({
       title: post.data.title,
       pubDate: new Date(post.data.date),
       description: post.data.excerpt || '',
-      link: `/journal/${post.id}`,
+      link: `/blog/${post.id}`,
     })),
   });
 }

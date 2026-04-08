@@ -11,15 +11,29 @@ import PageLayout from '../layouts/PageLayout.astro';
         <h1>Supporters</h1>
         <p>Many thanks to the following organisations for their generous support:</p>
 
-        <h3 class="supp-label">Supporting Partners:</h3>
-        <div class="supp-logos">
-          <img src="/images/supporters/supporting-partners.png" alt="Supporting Partners logos" loading="lazy" />
-        </div>
+        <h3 class="supp-label">Principal Sponsors:</h3>
+        <ul class="supp-list">
+          <li>CHU</li>
+          <li>Fleet Space Technologies</li>
+          <li>FNPW</li>
+          <li>Bank Australia</li>
+          <li>Planet Wild</li>
+          <li>Terra Artemis Foundation</li>
+          <li>South Australia Government</li>
+        </ul>
 
         <h3 class="supp-label">Supporters:</h3>
-        <div class="supp-logos">
-          <img src="/images/supporters/supporters.png" alt="Supporter logos" loading="lazy" />
-        </div>
+        <ul class="supp-list">
+          <li>Lamb &amp; Walters</li>
+          <li>Botanic Gardens of SA</li>
+          <li>Australian Geographic</li>
+          <li>Regenerate Australia</li>
+          <li>Wild Pacific Media</li>
+          <li>Lehane Giving Fund</li>
+          <li>Murray Business Solutions</li>
+          <li>Snow Legal</li>
+          <li>BCB</li>
+        </ul>
       </div>
     </div>
     <div class="supp-section__scroll">
@@ -156,6 +170,22 @@ import PageLayout from '../layouts/PageLayout.astro';
     letter-spacing: 2.4px;
     text-transform: uppercase;
     margin-bottom: var(--space-md);
+  }
+
+  .supp-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-lg);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.5rem;
+  }
+
+  .supp-list li {
+    font-family: var(--font-body);
+    font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+    opacity: 0.9;
   }
 
   .supp-logos {
