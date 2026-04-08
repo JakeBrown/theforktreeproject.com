@@ -138,9 +138,16 @@ import Footer from '../components/Footer.astro';
     justify-content: center;
     background-size: cover;
     background-position: center;
-    background-attachment: scroll;
+    background-attachment: fixed;
     color: var(--color-text-light);
     overflow: hidden;
+  }
+
+  /* Disable parallax on mobile/touch — broken on iOS, janky on Android */
+  @media (hover: none) {
+    .index-section {
+      background-attachment: scroll;
+    }
   }
 
   .index-section::before {
