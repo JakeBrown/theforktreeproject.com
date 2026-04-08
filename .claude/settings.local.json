@@ -17,7 +17,8 @@
       "Bash(npx astro:*)",
       "Bash(ls /Users/jakebrown/gits/theforktreeproject.com/dist/_astro/*.webp)",
       "Bash(ls -la /Users/jakebrown/gits/theforktreeproject.com/node_modules/astro/*.d.ts)",
-      "Bash(grep -l \"ANALYTICS\\\\|writeDataPoint\\\\|forktree_pageviews\" dist/_worker.js/*.js)"
+      "Bash(grep -l \"ANALYTICS\\\\|writeDataPoint\\\\|forktree_pageviews\" dist/_worker.js/*.js)",
+      "Read(//Users/jakebrown/.pi/agent/skills/cloudflare-ai-gateway/**)"
     ]
   }
 }
