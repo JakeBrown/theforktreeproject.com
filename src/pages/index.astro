@@ -25,6 +25,7 @@ import Footer from '../components/Footer.astro';
 
   <!-- Banner Section -->
   <section id="banner" class="index-section index-section--banner">
+    <div class="index-section__bg" data-parallax></div>
     <div class="index-section__content index-section__content--center">
       <div class="banner-text">
         <h1>Re-wilding.</h1>
@@ -35,6 +36,7 @@ import Footer from '../components/Footer.astro';
 
   <!-- Story 1 - Stats -->
   <section id="story-1" class="index-section index-section--story1">
+    <div class="index-section__bg" data-parallax></div>
     <div class="index-section__content index-section__content--right">
       <div class="story-text">
         <h2>Global extinction rates of plants and animals are 100 times higher because of us.</h2>
@@ -45,6 +47,7 @@ import Footer from '../components/Footer.astro';
 
   <!-- Story 2 - Hope -->
   <section id="story-2" class="index-section index-section--story2">
+    <div class="index-section__bg" data-parallax></div>
     <div class="index-section__content index-section__content--left">
       <div class="story-text">
         <h2>If we planted trees on all the suitable spare land that existed globally, we could store over 200 billion tonnes of carbon and buy 20 years in the fight against climate change.</h2>
@@ -136,11 +139,18 @@ import Footer from '../components/Footer.astro';
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll;
     color: var(--color-text-light);
     overflow: hidden;
+  }
+
+  /* Parallax background layer — translated by JS */
+  .index-section__bg {
+    position: absolute;
+    inset: -20% 0; /* 20% extra top/bottom for parallax travel room */
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+    z-index: 0;
   }
 
   .index-section::before {
@@ -154,6 +164,9 @@ import Footer from '../components/Footer.astro';
   .index-section--banner {
     min-height: 100vh;
     background-color: #000000;
+  }
+
+  .index-section--banner .index-section__bg {
     background-image: url('/images/hero/home-banner.jpg');
   }
 
@@ -167,6 +180,9 @@ import Footer from '../components/Footer.astro';
   .index-section--story1 {
     min-height: 85vh;
     background-color: #1a1a1a;
+  }
+
+  .index-section--story1 .index-section__bg {
     background-image: url('/images/hero/home-story1.jpg');
   }
 
@@ -180,6 +196,9 @@ import Footer from '../components/Footer.astro';
   .index-section--story2 {
     min-height: 100vh;
     background-color: #1a1a1a;
+  }
+
+  .index-section--story2 .index-section__bg {
     background-image: url('/images/hero/home-story2.jpg');
   }
 
@@ -307,3 +326,39 @@ import Footer from '../components/Footer.astro';
     }
   }
 </style>
+
+<script>
+  const speed = 0.4; // 0 = no movement, 1 = moves with scroll
+  const bgs = document.querySelectorAll('[data-parallax]');
+  
+  function updateParallax() {
+    for (const bg of bgs) {
+      const section = bg.parentElement;
+      if (!section) continue;
+      const rect = section.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      // Only update when section is in view
+      if (rect.bottom < 0 || rect.top > viewH) continue;
+      // Progress: 0 when section enters bottom, 1 when exits top
+      const progress = (viewH - rect.top) / (viewH + rect.height);
+      // Translate from -20% to +20% of section height (matches inset: -20%)
+      const translate = (progress - 0.5) * speed * rect.height;
+      (bg as HTMLElement).style.transform = `translate3d(0, ${translate}px, 0)`;
+    }
+  }
+
+  // Use rAF for smooth updates
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateParallax();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Initial position
+  updateParallax();
+</script>
