@@ -1,0 +1,170 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Oldest first — the page reads top-to-bottom as a timeline of the project.
+const allPosts = (await getCollection('journal')).sort(
+  (a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime()
+);
+
+// Group by year
+const postsByYear = new Map<number, typeof allPosts>();
+for (const post of allPosts) {
+  const year = new Date(post.data.date).getFullYear();
+  if (!postsByYear.has(year)) postsByYear.set(year, []);
+  postsByYear.get(year)!.push(post);
+}
+const years = Array.from(postsByYear.keys()).sort((a, b) => a - b);
+---
+
+<PageLayout title="Archive — The Forktree Project" description="The full Forktree Project story — every post since the beginning, in chronological order." headerVariant="dark">
+
+  <section class="archive-header">
+    <div class="container--narrow">
+      <h1>The Forktree Story</h1>
+      <p>Every post since we began, in order. The first steps were taken when the property was purchased in April 2019. This is the full journal of how the project has unfolded since.</p>
+      <p class="archive-header__back"><a href="/blog">&larr; Back to latest posts</a></p>
+    </div>
+  </section>
+
+  <section class="archive">
+    <div class="container--narrow">
+      {years.map((year) => (
+        <div class="archive-year">
+          <h2 class="archive-year__heading">{year}</h2>
+          <ul class="archive-list">
+            {postsByYear.get(year)!.map((post) => (
+              <li class="archive-item">
+                <a href={`/blog/${post.id}`} class="archive-item__link">
+                  <time class="archive-item__date" datetime={new Date(post.data.date).toISOString()}>
+                    {new Date(post.data.date).toLocaleDateString('en-AU', { month: 'short', day: 'numeric' })}
+                  </time>
+                  <span class="archive-item__title">{post.data.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  .archive-header {
+    padding-top: calc(var(--header-height) + var(--space-lg));
+    padding-bottom: var(--space-lg);
+    text-align: center;
+  }
+
+  .archive-header h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+    line-height: 1.1;
+  }
+
+  .archive-header p {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto var(--space-sm);
+  }
+
+  .archive-header__back {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: var(--space-md);
+  }
+
+  .archive-header__back a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .archive-header__back a:hover {
+    opacity: 0.6;
+  }
+
+  .archive {
+    padding: 0 0 var(--space-xl);
+  }
+
+  .archive-year {
+    margin-bottom: var(--space-xl);
+    position: relative;
+  }
+
+  .archive-year__heading {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    color: var(--color-text);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: var(--space-md);
+  }
+
+  .archive-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .archive-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .archive-item:last-child {
+    border-bottom: none;
+  }
+
+  .archive-item__link {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1.5rem;
+    align-items: baseline;
+    padding: 0.9rem 0;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity var(--transition-fast);
+  }
+
+  .archive-item__link:hover {
+    opacity: 0.6;
+  }
+
+  .archive-item__date {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+  }
+
+  .archive-item__title {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.4;
+    color: var(--color-text);
+  }
+
+  @media (max-width: 640px) {
+    .archive-item__link {
+      grid-template-columns: 60px 1fr;
+      gap: 1rem;
+    }
+
+    .archive-item__title {
+      font-size: 0.95rem;
+    }
+  }
+</style>
