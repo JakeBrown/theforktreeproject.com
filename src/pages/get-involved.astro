@@ -10,8 +10,9 @@ import PageLayout from '../layouts/PageLayout.astro';
       <h1>Get Involved</h1>
       <div class="join-hero__text">
         <p>The Forktree Project is a charity registered with the Australian Charities and Not for Profits Commission (ACNC).</p>
-        <p>To find out more about how to support the Project, whether via volunteering, in-kind support or tax deductible donation, or to enquire about The Forktree Project Education Program, click below to email us for more information.</p>
+        <p>To find out more about how to support the Project, whether via volunteering, in-kind support or tax deductible donation, or to enquire about The Forktree Project Education Program, please get in touch.</p>
       </div>
+      <p class="join-hero__cta-label">Email us for more information</p>
       <a href="mailto:hello@theforktreeproject.com?subject=Forktree%20Website%20Enquiry" class="join-hero__cta">
         hello@theforktreeproject.com
       </a>
@@ -64,6 +65,16 @@ import PageLayout from '../layouts/PageLayout.astro';
     line-height: 1.7;
     opacity: 0.9;
     margin-bottom: 1rem;
+  }
+
+  .join-hero__cta-label {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 0.75rem;
   }
 
   .join-hero__cta {
