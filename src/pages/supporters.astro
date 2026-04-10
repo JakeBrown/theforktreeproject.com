@@ -2,11 +2,14 @@
 import PageLayout from '../layouts/PageLayout.astro';
 ---
 
-<PageLayout title="Supporters — The Forktree Project" description="Many thanks to the organisations who generously support The Forktree Project.">
+<PageLayout title="Supporters — The Forktree Project" description="Many thanks to the organisations who generously support The Forktree Project." headerVariant="dark">
 
   <!-- Logo Wall -->
   <section class="supp-wall">
     <div class="supp-wall__inner">
+
+      <h1 class="supp-wall__title">Supporters</h1>
+      <p class="supp-wall__intro">Many thanks to the following organisations for their generous support.</p>
 
       <h2 class="supp-wall__heading">Principal Sponsors</h2>
       <div class="supp-wall__grid">
@@ -234,7 +237,8 @@ import PageLayout from '../layouts/PageLayout.astro';
 
   /* Logo Wall */
   .supp-wall {
-    padding: var(--space-xl) 0;
+    /* top padding clears the fixed header */
+    padding: calc(var(--header-height) + var(--space-lg)) 0 var(--space-xl);
     background: #f7f6f1;
   }
 
@@ -242,6 +246,25 @@ import PageLayout from '../layouts/PageLayout.astro';
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 30px;
+  }
+
+  .supp-wall__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    text-align: center;
+    color: var(--color-text);
+    margin: 0 0 var(--space-sm);
+  }
+
+  .supp-wall__intro {
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto var(--space-xl);
   }
 
   .supp-wall__heading {
