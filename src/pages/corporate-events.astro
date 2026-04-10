@@ -23,7 +23,7 @@ import img36 from '../assets/images/corporate-events/36.jpg';
 const mainImage = img23;  // Kitchen with glasses across to sitting area
 
 const photos = [
-  img5,    // View of house from across garden
+  img23,   // Kitchen with glasses across to sitting area
   img36,   // Lecture room
   img2,    // Small break out room
   img20,   // From above
@@ -35,10 +35,10 @@ const photos = [
   img33,   // Bench and view
   img31,   // Fire pit
   img9,    // View of house from distance
-  img18,   // Kitchen front on
+  img5,    // View of house from across garden
 ];
 
-const heroBg = await getImage({ src: img23, width: 1920, format: 'webp' });
+const heroBg = await getImage({ src: img5, width: 1920, format: 'webp' });
 const testimonialBg = await getImage({ src: img9, width: 1920, format: 'webp' });
 ---
 
@@ -708,7 +708,7 @@ const testimonialBg = await getImage({ src: img9, width: 1920, format: 'webp' })
 
   /* Testimonials */
   .ce-testimonials {
-    max-width: 500px;
+    max-width: 1100px;
     width: 100%;
     text-align: center;
   }
@@ -722,9 +722,16 @@ const testimonialBg = await getImage({ src: img9, width: 1920, format: 'webp' })
   }
 
   .ce-testimonials__grid {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .ce-testimonials__grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .ce-testimonial-card {
