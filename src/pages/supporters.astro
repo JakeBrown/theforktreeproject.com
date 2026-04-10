@@ -25,9 +25,9 @@ import PageLayout from '../layouts/PageLayout.astro';
       <h2 class="supp-wall__heading">Supporters</h2>
       <div class="supp-wall__grid">
         <div class="supp-card" data-name="Botanic Gardens of South Australia"><img src="/images/supporters/logos/botanic-gardens.png" alt="Botanic Gardens of South Australia" loading="lazy" /></div>
-        <div class="supp-card" data-name="Australian Geographic"><img src="/images/supporters/logos/australian-geographic.png" alt="Australian Geographic" loading="lazy" /></div>
+        <div class="supp-card" data-name="Australian Geographic"><img src="/images/supporters/logos/australian-geographic.svg" alt="Australian Geographic" loading="lazy" /></div>
         <div class="supp-card" data-name="Wild Pacific Media"><img src="/images/supporters/logos/wild-pacific-media.png" alt="Wild Pacific Media" loading="lazy" /></div>
-        <div class="supp-card" data-name="Planet Ark Seedling Bank"><img src="/images/supporters/logos/planet-ark-seedling-bank.png" alt="Planet Ark Seedling Bank" loading="lazy" /></div>
+        <div class="supp-card supp-card--dark" data-name="Planet Ark Seedling Bank"><img src="/images/supporters/logos/planet-ark-seedling-bank.png" alt="Planet Ark Seedling Bank" loading="lazy" /></div>
         <div class="supp-card" data-name="Murray Business Solutions"><img src="/images/supporters/logos/murray-business-solutions.png" alt="Murray Business Solutions" loading="lazy" /></div>
         <div class="supp-card" data-name="Snow Legal"><img src="/images/supporters/logos/snow-legal.png" alt="Snow Legal" loading="lazy" /></div>
         <div class="supp-card supp-card--text" data-name="Lamb &amp; Walters"><span>Lamb &amp; Walters</span></div>
@@ -329,6 +329,16 @@ import PageLayout from '../layouts/PageLayout.astro';
     font-size: 1rem;
     text-align: center;
     line-height: 1.3;
+  }
+
+  /* Dark card for logos designed to sit on a dark background */
+  .supp-card--dark {
+    background: #1f2a1f;
+  }
+
+  .supp-card--dark::after {
+    background: #1f2a1f;
+    color: rgba(255, 255, 255, 0.9);
   }
 
   /* Hover label showing full organisation name */
