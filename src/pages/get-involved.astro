@@ -19,6 +19,7 @@ import ContactForm from '../components/ContactForm.tsx';
   <!-- Contact Form -->
   <section class="join-form">
     <div class="container--narrow">
+      <p class="join-form__email">Or email us directly at <a href="mailto:hello@theforktreeproject.com?subject=I'd%20like%20to%20get%20involved">hello@theforktreeproject.com</a></p>
       <ContactForm client:load />
     </div>
   </section>
@@ -91,6 +92,19 @@ import ContactForm from '../components/ContactForm.tsx';
   .join-form {
     padding: var(--space-xl) 0;
     background: white;
+  }
+
+  .join-form__email {
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .join-form__email a {
+    color: var(--color-text);
+    font-weight: 600;
+    text-decoration: underline;
   }
 
   @media (max-width: 768px) {
