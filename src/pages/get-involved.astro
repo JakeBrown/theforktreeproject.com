@@ -6,7 +6,7 @@ import ContactForm from '../components/ContactForm.tsx';
 <PageLayout title="Get Involved — The Forktree Project" description="Find out how to support The Forktree Project through volunteering, in-kind support or tax deductible donation.">
 
   <!-- Hero -->
-  <section class="join-hero" style="background-image: url('/images/join-us/join-hero.jpg'); background-color: #2a3a2a;">
+  <section class="join-hero" style="background-color: #2a3a2a;">
     <div class="join-hero__content">
       <h1>Get Involved</h1>
       <div class="join-hero__text">
@@ -33,9 +33,6 @@ import ContactForm from '../components/ContactForm.tsx';
     display: flex;
     align-items: center;
     justify-content: center;
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll;
     color: var(--color-text-light);
     overflow: hidden;
   }
@@ -43,8 +40,12 @@ import ContactForm from '../components/ContactForm.tsx';
   .join-hero::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0);
+    /* expand past edges so the blur doesn't show a soft halo */
+    inset: -30px;
+    background-image: url('/images/join-us/join-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(12px) brightness(0.35);
     z-index: 1;
   }
 
