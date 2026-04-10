@@ -9,31 +9,7 @@ import PageLayout from '../layouts/PageLayout.astro';
     <div class="supp-section__content supp-section__content--center">
       <div class="supp-text supp-text--wide">
         <h1>Supporters</h1>
-        <p>Many thanks to the following organisations for their generous support:</p>
-
-        <h3 class="supp-label">Principal Sponsors:</h3>
-        <ul class="supp-list">
-          <li>CHU</li>
-          <li>Fleet Space Technologies</li>
-          <li>FNPW</li>
-          <li>Bank Australia</li>
-          <li>Planet Wild</li>
-          <li>Terra Artemis Foundation</li>
-          <li>South Australia Government</li>
-        </ul>
-
-        <h3 class="supp-label">Supporters:</h3>
-        <ul class="supp-list">
-          <li>Lamb &amp; Walters</li>
-          <li>Botanic Gardens of SA</li>
-          <li>Australian Geographic</li>
-          <li>Regenerate Australia</li>
-          <li>Wild Pacific Media</li>
-          <li>Lehane Giving Fund</li>
-          <li>Murray Business Solutions</li>
-          <li>Snow Legal</li>
-          <li>BCB</li>
-        </ul>
+        <p>Many thanks to the following organisations for their generous support.</p>
       </div>
     </div>
     <div class="supp-section__scroll">
@@ -43,14 +19,36 @@ import PageLayout from '../layouts/PageLayout.astro';
     </div>
   </section>
 
-  <!-- Advisory Supporters -->
-  <section class="supp-advisory">
-    <div class="container--narrow">
-      <p class="supp-advisory__text">We are also grateful to the following organisations for their specialist advisory support.</p>
-      <p class="supp-advisory__text">If you are interested in providing guidance or support to The Forktree Project, please contact us.</p>
-      <div class="supp-logos supp-logos--light">
-        <img src="/images/supporters/advisory-supporters.png" alt="Advisory supporter logos" loading="lazy" />
+  <!-- Logo Wall -->
+  <section class="supp-wall">
+    <div class="supp-wall__inner">
+
+      <h2 class="supp-wall__heading">Principal Sponsors</h2>
+      <div class="supp-wall__grid">
+        <div class="supp-card"><img src="/images/supporters/logos/chu.png" alt="CHU" loading="lazy" /></div>
+        <div class="supp-card"><img src="/images/supporters/logos/fleet-space.png" alt="Fleet Space Technologies" loading="lazy" /></div>
+        <div class="supp-card"><img src="/images/supporters/logos/fnpw.png" alt="Foundation for National Parks &amp; Wildlife" loading="lazy" /></div>
+        <div class="supp-card"><img src="/images/supporters/logos/bank-australia.svg" alt="Bank Australia" loading="lazy" /></div>
+        <div class="supp-card supp-card--text"><span>Planet Wild</span></div>
+        <div class="supp-card supp-card--text"><span>Terra Artemis Foundation</span></div>
+        <div class="supp-card supp-card--text"><span>Government of South Australia</span></div>
       </div>
+
+      <h2 class="supp-wall__heading">Supporters</h2>
+      <div class="supp-wall__grid">
+        <div class="supp-card"><img src="/images/supporters/logos/botanic-gardens.png" alt="Botanic Gardens of South Australia" loading="lazy" /></div>
+        <div class="supp-card"><img src="/images/supporters/logos/australian-geographic.png" alt="Australian Geographic" loading="lazy" /></div>
+        <div class="supp-card"><img src="/images/supporters/logos/wild-pacific-media.png" alt="Wild Pacific Media" loading="lazy" /></div>
+        <div class="supp-card"><img src="/images/supporters/logos/planet-ark-seedling-bank.png" alt="Planet Ark Seedling Bank" loading="lazy" /></div>
+        <div class="supp-card"><img src="/images/supporters/logos/murray-business-solutions.png" alt="Murray Business Solutions" loading="lazy" /></div>
+        <div class="supp-card"><img src="/images/supporters/logos/snow-legal.png" alt="Snow Legal" loading="lazy" /></div>
+        <div class="supp-card supp-card--text"><span>Lamb &amp; Walters</span></div>
+        <div class="supp-card supp-card--text"><span>Regenerate Australia</span></div>
+        <div class="supp-card supp-card--text"><span>Lehane Giving Fund</span></div>
+        <div class="supp-card supp-card--text"><span>BCB</span></div>
+      </div>
+
+      <p class="supp-wall__cta">If you are interested in providing guidance or support to The Forktree Project, please <a href="/get-involved">get in touch</a>.</p>
     </div>
   </section>
 
@@ -249,22 +247,78 @@ import PageLayout from '../layouts/PageLayout.astro';
     margin: 0 auto;
   }
 
-  /* Advisory (light bg) */
-  .supp-advisory {
+  /* Logo Wall */
+  .supp-wall {
     padding: var(--space-xl) 0;
+    background: #f7f6f1;
+  }
+
+  .supp-wall__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .supp-wall__heading {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
     text-align: center;
-    background: white;
-  }
-
-  .supp-advisory__text {
     color: var(--color-text-secondary);
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 0.5rem;
+    margin: var(--space-lg) 0 var(--space-md);
   }
 
-  .supp-logos--light {
-    margin-top: var(--space-md);
+  .supp-wall__heading:first-child {
+    margin-top: 0;
+  }
+
+  .supp-wall__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .supp-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 8px rgba(0, 0, 0, 0.04);
+    min-height: 130px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .supp-card img {
+    max-width: 100%;
+    max-height: 80px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .supp-card--text {
+    color: var(--color-text-secondary);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .supp-wall__cta {
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    margin-top: var(--space-lg);
+  }
+
+  .supp-wall__cta a {
+    color: var(--color-text-secondary);
+    text-decoration: underline;
   }
 
   /* Testimonials — card style matching corporate events */
