@@ -1,6 +1,5 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import ContactForm from '../components/ContactForm.tsx';
 ---
 
 <PageLayout title="Get Involved — The Forktree Project" description="Find out how to support The Forktree Project through volunteering, in-kind support or tax deductible donation.">
@@ -11,16 +10,11 @@ import ContactForm from '../components/ContactForm.tsx';
       <h1>Get Involved</h1>
       <div class="join-hero__text">
         <p>The Forktree Project is a charity registered with the Australian Charities and Not for Profits Commission (ACNC).</p>
-        <p>To find out more about how to support the Project, whether via volunteering, in-kind support or tax deductible donation, or to enquire about The Forktree Project Education Program, please get in touch via the contact form below.</p>
+        <p>To find out more about how to support the Project, whether via volunteering, in-kind support or tax deductible donation, or to enquire about The Forktree Project Education Program, please get in touch.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- Contact Form -->
-  <section class="join-form">
-    <div class="container--narrow">
-      <p class="join-form__email">Or email us directly at <a href="mailto:hello@theforktreeproject.com?subject=Forktree%20Website%20Enquiry">hello@theforktreeproject.com</a></p>
-      <ContactForm client:load />
+      <a href="mailto:hello@theforktreeproject.com?subject=Forktree%20Website%20Enquiry" class="join-hero__cta">
+        hello@theforktreeproject.com
+      </a>
     </div>
   </section>
 
@@ -72,39 +66,24 @@ import ContactForm from '../components/ContactForm.tsx';
     margin-bottom: 1rem;
   }
 
-  .join-hero__volunteer {
-    font-family: var(--font-heading) !important;
-    font-size: 0.75rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 2px !important;
-    margin-top: var(--space-md) !important;
-  }
-
-  .join-hero__link {
-    color: white;
-    text-decoration: underline;
-  }
-
-  .join-hero__link:hover {
-    opacity: 0.7;
-  }
-
-  .join-form {
-    padding: var(--space-xl) 0;
-    background: white;
-  }
-
-  .join-form__email {
-    text-align: center;
-    color: var(--color-text-secondary);
-    font-size: 1rem;
-    margin-bottom: var(--space-lg);
-  }
-
-  .join-form__email a {
-    color: var(--color-text);
+  .join-hero__cta {
+    display: inline-block;
+    margin-top: var(--space-lg);
+    padding: 1rem 2.5rem;
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 2vw, 1.3rem);
     font-weight: 600;
-    text-decoration: underline;
+    letter-spacing: 1px;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .join-hero__cta:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: white;
   }
 
   @media (max-width: 768px) {
