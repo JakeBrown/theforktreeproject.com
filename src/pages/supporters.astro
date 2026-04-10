@@ -4,48 +4,33 @@ import PageLayout from '../layouts/PageLayout.astro';
 
 <PageLayout title="Supporters — The Forktree Project" description="Many thanks to the organisations who generously support The Forktree Project.">
 
-  <!-- Hero Banner -->
-  <section class="supp-section supp-section--hero" style="background-image: url('/images/supporters/supporters-hero.jpg'); background-color: #2a3a2a;">
-    <div class="supp-section__content supp-section__content--center">
-      <div class="supp-text supp-text--wide">
-        <h1>Supporters</h1>
-        <p>Many thanks to the following organisations for their generous support.</p>
-      </div>
-    </div>
-    <div class="supp-section__scroll">
-      <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1 1L10 10L19 1" stroke="white" stroke-width="2"/>
-      </svg>
-    </div>
-  </section>
-
   <!-- Logo Wall -->
   <section class="supp-wall">
     <div class="supp-wall__inner">
 
       <h2 class="supp-wall__heading">Principal Sponsors</h2>
       <div class="supp-wall__grid">
-        <div class="supp-card"><img src="/images/supporters/logos/chu.png" alt="CHU" loading="lazy" /></div>
-        <div class="supp-card"><img src="/images/supporters/logos/fleet-space.png" alt="Fleet Space Technologies" loading="lazy" /></div>
-        <div class="supp-card"><img src="/images/supporters/logos/fnpw.png" alt="Foundation for National Parks &amp; Wildlife" loading="lazy" /></div>
-        <div class="supp-card"><img src="/images/supporters/logos/bank-australia.svg" alt="Bank Australia" loading="lazy" /></div>
-        <div class="supp-card supp-card--text"><span>Planet Wild</span></div>
-        <div class="supp-card supp-card--text"><span>Terra Artemis Foundation</span></div>
-        <div class="supp-card supp-card--text"><span>Government of South Australia</span></div>
+        <div class="supp-card" data-name="CHU"><img src="/images/supporters/logos/chu.png" alt="CHU" loading="lazy" /></div>
+        <div class="supp-card" data-name="Fleet Space Technologies"><img src="/images/supporters/logos/fleet-space.png" alt="Fleet Space Technologies" loading="lazy" /></div>
+        <div class="supp-card" data-name="Foundation for National Parks &amp; Wildlife"><img src="/images/supporters/logos/fnpw.png" alt="Foundation for National Parks &amp; Wildlife" loading="lazy" /></div>
+        <div class="supp-card" data-name="Bank Australia"><img src="/images/supporters/logos/bank-australia.svg" alt="Bank Australia" loading="lazy" /></div>
+        <div class="supp-card" data-name="Planet Wild"><img src="/images/supporters/logos/planet-wild.svg" alt="Planet Wild" loading="lazy" /></div>
+        <div class="supp-card supp-card--text" data-name="Terra Artemis Foundation"><span>Terra Artemis Foundation</span></div>
+        <div class="supp-card supp-card--text" data-name="Government of South Australia"><span>Government of South Australia</span></div>
       </div>
 
       <h2 class="supp-wall__heading">Supporters</h2>
       <div class="supp-wall__grid">
-        <div class="supp-card"><img src="/images/supporters/logos/botanic-gardens.png" alt="Botanic Gardens of South Australia" loading="lazy" /></div>
-        <div class="supp-card"><img src="/images/supporters/logos/australian-geographic.png" alt="Australian Geographic" loading="lazy" /></div>
-        <div class="supp-card"><img src="/images/supporters/logos/wild-pacific-media.png" alt="Wild Pacific Media" loading="lazy" /></div>
-        <div class="supp-card"><img src="/images/supporters/logos/planet-ark-seedling-bank.png" alt="Planet Ark Seedling Bank" loading="lazy" /></div>
-        <div class="supp-card"><img src="/images/supporters/logos/murray-business-solutions.png" alt="Murray Business Solutions" loading="lazy" /></div>
-        <div class="supp-card"><img src="/images/supporters/logos/snow-legal.png" alt="Snow Legal" loading="lazy" /></div>
-        <div class="supp-card supp-card--text"><span>Lamb &amp; Walters</span></div>
-        <div class="supp-card supp-card--text"><span>Regenerate Australia</span></div>
-        <div class="supp-card supp-card--text"><span>Lehane Giving Fund</span></div>
-        <div class="supp-card supp-card--text"><span>BCB</span></div>
+        <div class="supp-card" data-name="Botanic Gardens of South Australia"><img src="/images/supporters/logos/botanic-gardens.png" alt="Botanic Gardens of South Australia" loading="lazy" /></div>
+        <div class="supp-card" data-name="Australian Geographic"><img src="/images/supporters/logos/australian-geographic.png" alt="Australian Geographic" loading="lazy" /></div>
+        <div class="supp-card" data-name="Wild Pacific Media"><img src="/images/supporters/logos/wild-pacific-media.png" alt="Wild Pacific Media" loading="lazy" /></div>
+        <div class="supp-card" data-name="Planet Ark Seedling Bank"><img src="/images/supporters/logos/planet-ark-seedling-bank.png" alt="Planet Ark Seedling Bank" loading="lazy" /></div>
+        <div class="supp-card" data-name="Murray Business Solutions"><img src="/images/supporters/logos/murray-business-solutions.png" alt="Murray Business Solutions" loading="lazy" /></div>
+        <div class="supp-card" data-name="Snow Legal"><img src="/images/supporters/logos/snow-legal.png" alt="Snow Legal" loading="lazy" /></div>
+        <div class="supp-card supp-card--text" data-name="Lamb &amp; Walters"><span>Lamb &amp; Walters</span></div>
+        <div class="supp-card supp-card--text" data-name="Regenerate Australia"><span>Regenerate Australia</span></div>
+        <div class="supp-card supp-card--text" data-name="Lehane Giving Fund"><span>Lehane Giving Fund</span></div>
+        <div class="supp-card supp-card--text" data-name="BCB"><span>BCB</span></div>
       </div>
 
       <p class="supp-wall__cta">If you are interested in providing guidance or support to The Forktree Project, please <a href="/get-involved">get in touch</a>.</p>
@@ -275,13 +260,16 @@ import PageLayout from '../layouts/PageLayout.astro';
   }
 
   .supp-wall__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1.25rem;
     margin-bottom: var(--space-lg);
   }
 
   .supp-card {
+    position: relative;
+    flex: 0 0 200px;
     background: white;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 8px rgba(0, 0, 0, 0.04);
@@ -290,6 +278,12 @@ import PageLayout from '../layouts/PageLayout.astro';
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .supp-card:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 2px 14px rgba(0, 0, 0, 0.06);
   }
 
   .supp-card img {
@@ -298,6 +292,11 @@ import PageLayout from '../layouts/PageLayout.astro';
     width: auto;
     height: auto;
     object-fit: contain;
+    transition: opacity 0.2s ease;
+  }
+
+  .supp-card:hover img {
+    opacity: 0;
   }
 
   .supp-card--text {
@@ -307,6 +306,36 @@ import PageLayout from '../layouts/PageLayout.astro';
     font-size: 1rem;
     text-align: center;
     line-height: 1.3;
+  }
+
+  /* Hover label showing full organisation name */
+  .supp-card::after {
+    content: attr(data-name);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    text-align: center;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: var(--color-text-secondary);
+    background: white;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  .supp-card:hover::after {
+    opacity: 1;
+  }
+
+  /* Text-only cards already show the name, so no hover overlay */
+  .supp-card--text::after {
+    display: none;
   }
 
   .supp-wall__cta {
