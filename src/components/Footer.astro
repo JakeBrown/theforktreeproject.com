@@ -4,22 +4,11 @@
 <footer class="footer">
   <div class="footer__inner">
 
-    <nav class="footer__links">
-      <a href="/supporters">Supporters</a>
-      <a href="mailto:hello@theforktreeproject.com?subject=Forktree%20Website%20Enquiry">hello@theforktreeproject.com</a>
-    </nav>
-
-    <div class="footer__row">
-      <a href="https://www.acnc.gov.au/" target="_blank" rel="noopener noreferrer" class="footer__badge">
-        <img
-          src="/images/acnc-badge.png"
-          alt="ACNC Registered Charity"
-          width="150"
-          height="150"
-          loading="lazy"
-        />
-      </a>
-
+    <div class="footer__col">
+      <nav class="footer__links">
+        <a href="/supporters">Supporters</a>
+        <a href="mailto:hello@theforktreeproject.com?subject=Forktree%20Website%20Enquiry">hello@theforktreeproject.com</a>
+      </nav>
       <a
         href="https://www.instagram.com/forktreeproject/"
         target="_blank"
@@ -35,29 +24,54 @@
       </a>
     </div>
 
+    <div class="footer__col footer__col--right">
+      <a href="https://www.acnc.gov.au/" target="_blank" rel="noopener noreferrer" class="footer__badge">
+        <img
+          src="/images/acnc-badge.png"
+          alt="ACNC Registered Charity"
+          width="120"
+          height="120"
+          loading="lazy"
+        />
+      </a>
+    </div>
+
   </div>
 </footer>
 
 <style>
   .footer {
     padding: var(--space-xl) 0 var(--space-lg);
-    background: white;
+    background: #1f2a1f;
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .footer__inner {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 var(--space-md);
-    display: flex;
-    flex-direction: column;
+    padding: 0 100px;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
     gap: var(--space-lg);
   }
 
+  .footer__col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .footer__col--right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
   .footer__links {
     display: flex;
-    gap: 2rem;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .footer__links a {
@@ -67,7 +81,7 @@
     letter-spacing: 1.5px;
     text-transform: uppercase;
     text-decoration: none;
-    color: var(--color-text-secondary);
+    color: rgba(255, 255, 255, 0.7);
     transition: opacity var(--transition-fast);
   }
 
@@ -75,15 +89,8 @@
     opacity: 0.6;
   }
 
-  .footer__row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-md);
-  }
-
   .footer__badge img {
-    opacity: 0.9;
+    opacity: 0.8;
     transition: opacity var(--transition-fast);
   }
 
@@ -92,7 +99,7 @@
   }
 
   .footer__social {
-    color: var(--color-text);
+    color: rgba(255, 255, 255, 0.7);
     transition: opacity var(--transition-fast);
     display: flex;
     align-items: center;
@@ -100,5 +107,21 @@
 
   .footer__social:hover {
     opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    .footer__inner {
+      grid-template-columns: 1fr;
+      padding: 0 30px;
+      text-align: center;
+    }
+
+    .footer__col--right {
+      justify-content: center;
+    }
+
+    .footer__links {
+      align-items: center;
+    }
   }
 </style>
