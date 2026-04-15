@@ -11,20 +11,27 @@ import PageLayout from '../layouts/PageLayout.astro';
         <h1>Experiential Education at The Forktree Project</h1>
 
         <div class="edu-body">
-          <p>A key part of the mission of The Forktree Project is to educate young people about biodiversity, the importance of habitat restoration and the need for sustainable choices in all areas of our lives.</p>
+          <h2 class="edu-subhead">Inspiring Young Environmental Stewards</h2>
+          <p>A core part of The Forktree Project&rsquo;s mission is to educate young people about biodiversity, the importance of habitat restoration, and the role sustainable choices play in shaping a healthier future for our planet.</p>
 
-          <p>The Forktree Project Education Program is underpinned by a passionate belief in both the value of genuine, hands-on experiential learning and the importance of empowering young people to be part of the solution to the climate and biodiversity crises through active involvement in habitat restoration.</p>
+          <h2 class="edu-subhead">Learning Through Hands-On Experience</h2>
+          <p>Our Education Program is grounded in a passionate belief in the power of genuine, hands-on learning. By actively participating in habitat restoration, students gain a deeper understanding of the climate and biodiversity crises &mdash; and discover that they can be part of the solution. This practical engagement builds confidence, curiosity, and a sense of agency.</p>
 
-          <p>It is also built on a conviction that time spent in and caring for nature is hugely beneficial to the mental health and wellbeing of individuals and communities.</p>
+          <h2 class="edu-subhead">Supporting Wellbeing Through Nature</h2>
+          <p>We know that time spent in nature, and caring for it, offers profound benefits for mental health and wellbeing. Our programs create opportunities for students to reconnect with the natural world and experience the restorative power of outdoor learning.</p>
 
-          <p>The Forktree Project takes pride in working closely with schools to link students&rsquo; experiences to different learning areas of the Australian Curriculum, as well as SACE and IB curricula, according to each school&rsquo;s specific needs. To read what other schools have to say, read our testimonials by <a href="/testimonials">clicking here.</a></p>
+          <h2 class="edu-subhead">Aligned With Curriculum and School Needs</h2>
+          <p>The Forktree Project works closely with schools to ensure each visit supports key learning objectives. Experiences can be linked to multiple areas of the Australian Curriculum, as well as SACE and IB frameworks, depending on each school&rsquo;s goals.</p>
 
-          <p>The Forktree Project welcomes both primary and secondary schools for day excursions, overnight camping experiences and extended programs.</p>
+          <h2 class="edu-subhead">Extending Learning Beyond the Visit</h2>
+          <p>Each school&rsquo;s Forktree experience is enriched by a bespoke online learning program that extends students&rsquo; engagement beyond their time at Forktree, connecting to curriculum goals, deepening their understanding of environmental stewardship and empowering them to take meaningful action in their own communities.</p>
 
-          <p><a href="https://forktree.app">Click here for more information</a></p>
+          <h2 class="edu-subhead">Find Out More</h2>
+          <p>To learn more about the Forktree Project Education Program, <a href="https://forktree.app">click here</a>.</p>
+          <p>Please <a href="mailto:hello@theforktreeproject.com">get in touch</a> with us &mdash; we&rsquo;d love to hear from you!</p>
 
           <div class="edu-cta">
-            <a href="/get-involved" class="btn--cta">Get in Touch</a>
+            <a href="mailto:hello@theforktreeproject.com" class="btn--cta">Get in Touch</a>
           </div>
         </div>
       </div>
@@ -211,6 +218,15 @@ import PageLayout from '../layouts/PageLayout.astro';
     line-height: 1.8;
     margin-bottom: 1rem;
     opacity: 0.9;
+  }
+
+  .edu-subhead {
+    font-family: var(--font-heading);
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 1.75rem 0 0.5rem;
+    opacity: 0.95;
   }
 
   .edu-body a {

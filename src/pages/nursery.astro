@@ -1,0 +1,182 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout title="Nursery — The Forktree Project" description="The Forktree Project's on-site native plant nursery propagates locally provenanced species for habitat restoration across the Hills and Fleurieu region.">
+
+  <!-- Nursery Hero / Intro -->
+  <section class="nur-section nur-section--hero" style="background-image: url('/images/nursery/img_4232.jpg'); background-color: #2a3a2a;">
+    <div class="nur-section__content nur-section__content--center">
+      <div class="nur-text nur-text--wide">
+        <h1>The Forktree Project Nursery</h1>
+
+        <div class="nur-body">
+          <p>The Forktree Project is proud to play a vital role in regional efforts to halt biodiversity loss through the work of its on-site native plant nursery.</p>
+
+          <p>Our nursery grows a wide range of locally native species for large-scale habitat restoration and conservation projects across the Hills and Fleurieu region, as well as for private landholders committed to restoring ecological health on their properties.</p>
+
+          <p>We work closely with clients to advise on the species best suited to their site, drawing on our team&rsquo;s deep knowledge of local flora and best-practice restoration methods. Our focus is always on rebuilding resilient ecosystems and supporting long-term landscape recovery.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Locally provenanced seed -->
+  <section class="nur-section" style="background-image: url('/images/nursery/img_4220.jpg'); background-color: #1a2a1a;">
+    <div class="nur-section__content nur-section__content--center">
+      <div class="nur-text nur-text--wide">
+        <h2>Locally Provenanced, Locally Grown</h2>
+
+        <div class="nur-body">
+          <p>All plants grown in the Forktree Project Nursery are native to the Hills and Fleurieu region and are propagated from locally provenanced seed.</p>
+
+          <p>In 2026 alone, the nursery produced more than 70,000 seedlings representing over 175 species &mdash; a significant contribution to restoring critical habitat and supporting the return of native wildlife.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rare and endangered -->
+  <section class="nur-section" style="background-image: url('/images/nursery/img_4350.jpg'); background-color: #1a2a1a;">
+    <div class="nur-section__content nur-section__content--center">
+      <div class="nur-text nur-text--wide">
+        <h2>Protecting Rare and Endangered Species</h2>
+
+        <div class="nur-body">
+          <p>The nursery has also become a specialist in the propagation and protection of rare and endangered species, including wetland plants, helping safeguard these ecologically important and increasingly threatened communities.</p>
+
+          <p>To discuss your native plant needs, please contact us at <a href="mailto:nursery@theforktreeproject.com">nursery@theforktreeproject.com</a>. We&rsquo;d be delighted to work with you.</p>
+
+          <div class="nur-cta">
+            <a href="mailto:nursery@theforktreeproject.com" class="btn--cta">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  .nur-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    color: var(--color-text-light);
+    overflow: hidden;
+  }
+
+  .nur-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 45%, rgba(0, 0, 0, 0.35) 0%, transparent 100%),
+      rgba(0, 0, 0, 0.3);
+    z-index: 1;
+  }
+
+  .nur-section__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1600px;
+    padding: 180px 100px;
+  }
+
+  .nur-section__content--center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .nur-text {
+    max-width: 50%;
+    position: relative;
+    padding: 1rem 1.5rem;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .nur-text--wide {
+    max-width: 65%;
+    text-align: center;
+  }
+
+  .nur-text h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: var(--space-lg);
+  }
+
+  .nur-text h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: var(--space-lg);
+  }
+
+  .nur-body p {
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    font-weight: 600;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+
+  .nur-body a {
+    color: white;
+    text-decoration: underline;
+  }
+
+  .nur-body a:hover {
+    opacity: 0.7;
+  }
+
+  .nur-cta {
+    margin-top: var(--space-md);
+  }
+
+  .btn--cta {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: white;
+    border: 2px solid white;
+    padding: 13px 26px;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+  }
+
+  .btn--cta:hover {
+    background-color: white;
+    color: #000;
+  }
+
+  @media (max-width: 768px) {
+    .nur-section {
+      background-attachment: scroll;
+      min-height: auto;
+    }
+
+    .nur-section__content {
+      padding: 100px 30px;
+    }
+
+    .nur-text,
+    .nur-text--wide {
+      max-width: 100%;
+    }
+  }
+</style>
