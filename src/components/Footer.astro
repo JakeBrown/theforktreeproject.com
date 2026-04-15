@@ -4,9 +4,8 @@
 <footer class="footer">
   <div class="footer__inner">
 
-    <div class="footer__col">
+    <div class="footer__col footer__col--contact">
       <nav class="footer__links">
-        <a href="/supporters">Supporters</a>
         <a href="mailto:hello@theforktreeproject.com?subject=Forktree%20Website%20Enquiry">hello@theforktreeproject.com</a>
       </nav>
       <a
@@ -24,7 +23,14 @@
       </a>
     </div>
 
-    <div class="footer__col footer__col--right">
+    <div class="footer__col footer__col--supporters">
+      <p class="footer__kicker">With thanks to</p>
+      <h3 class="footer__heading">Our Supporters</h3>
+      <p class="footer__blurb">The organisations and individuals making our work possible.</p>
+      <a href="/supporters" class="footer__cta">Meet our supporters &rarr;</a>
+    </div>
+
+    <div class="footer__col footer__col--badge">
       <a href="https://www.acnc.gov.au/" target="_blank" rel="noopener noreferrer" class="footer__badge">
         <img
           src="/images/acnc-badge.png"
@@ -51,9 +57,9 @@
     margin: 0 auto;
     padding: 0 100px;
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: var(--space-lg);
+    gap: var(--space-xl);
   }
 
   .footer__col {
@@ -62,10 +68,18 @@
     gap: var(--space-md);
   }
 
-  .footer__col--right {
-    display: flex;
+  .footer__col--contact {
+    align-items: flex-start;
+  }
+
+  .footer__col--supporters {
     align-items: center;
-    justify-content: flex-end;
+    text-align: center;
+    gap: 0.6rem;
+  }
+
+  .footer__col--badge {
+    align-items: flex-end;
   }
 
   .footer__links {
@@ -89,6 +103,54 @@
     opacity: 0.6;
   }
 
+  .footer__kicker {
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0;
+  }
+
+  .footer__heading {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0;
+  }
+
+  .footer__blurb {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 28ch;
+    margin: 0;
+  }
+
+  .footer__cta {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: white;
+    border: 2px solid white;
+    padding: 13px 26px;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    margin-top: 0.5rem;
+  }
+
+  .footer__cta:hover {
+    background-color: white;
+    color: #1f2a1f;
+  }
+
   .footer__badge img {
     opacity: 0.8;
     transition: opacity var(--transition-fast);
@@ -109,15 +171,22 @@
     opacity: 0.6;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .footer__inner {
       grid-template-columns: 1fr;
       padding: 0 30px;
+      gap: var(--space-lg);
       text-align: center;
     }
 
-    .footer__col--right {
-      justify-content: center;
+    .footer__col--contact,
+    .footer__col--supporters,
+    .footer__col--badge {
+      align-items: center;
+    }
+
+    .footer__col--supporters {
+      order: -1;
     }
 
     .footer__links {

@@ -20,22 +20,22 @@ import img31 from '../assets/images/corporate-events/31.jpg';
 import img33 from '../assets/images/corporate-events/33.jpg';
 import img36 from '../assets/images/corporate-events/36.jpg';
 
-const mainImage = img5;  // View of house from across garden
+const mainImage = img5;
+const mainImageAlt = "The Forktree Project's restored shearing shed with pizza oven and native plantings";
 
 const photos = [
-  img23,   // Kitchen with glasses across to sitting area
-  img36,   // Lecture room
-  img2,    // Small break out room
-  img20,   // From above
-  img22,   // Kitchen with glasses
-  img17,   // Arty floral display
-  img14,   // Close up of sitting area
-  img26,   // Arty floral display and wine bottle
-  img12,   // Deck
-  img33,   // Bench and view
-  img31,   // Fire pit
-  img9,    // View of house from distance
-  img5,    // View of house from across garden
+  { image: img23, alt: 'Kitchen looking across to the sitting area, with ocean views through open bifold doors' },
+  { image: img36, alt: 'Main lecture room with chairs arranged in a semicircle facing a large screen' },
+  { image: img2,  alt: 'Small break-out meeting room with rammed-earth wall and timber table' },
+  { image: img20, alt: 'Common room with leather armchairs opening onto the covered deck' },
+  { image: img22, alt: 'Kitchen island with copper pendants, stainless splashback and views across the paddocks' },
+  { image: img17, alt: 'Lounge area with open bifold doors, native planter and exposed timber roof trusses' },
+  { image: img14, alt: 'Sitting area with leather armchairs and a window onto the gum trees' },
+  { image: img26, alt: 'Kitchen bench with a wine bottle, glasses and an ocean view through open doors' },
+  { image: img12, alt: 'Covered deck with dining table and pizza oven, overlooking the restoration site' },
+  { image: img33, alt: 'Bench seat on the clifftop overlooking the ocean and hillside revegetation' },
+  { image: img31, alt: 'Outdoor fire pit with log stump seating and ocean views' },
+  { image: img9,  alt: 'The shearing shed viewed from across the garden through eucalyptus trees' },
 ];
 
 const heroBg = await getImage({ src: img23, width: 1920, format: 'webp' });
@@ -101,13 +101,13 @@ const testimonialBg = await getImage({ src: img9, width: 1920, format: 'webp' })
       <h2>Our Venue</h2>
       <div class="ce-gallery__featured">
         <a href={mainImage.src} class="ce-gallery__hero-img" data-lightbox="0">
-          <Image src={mainImage} alt="The Forktree Project venue" width={1400} loading="lazy" />
+          <Image src={mainImage} alt={mainImageAlt} width={1400} loading="lazy" />
         </a>
       </div>
       <div class="ce-gallery__grid" id="gallery-grid">
         {photos.map((photo, i) => (
-          <a href={photo.src} class={`ce-gallery__item${i === photos.length - 1 && photos.length % 2 !== 0 ? ' ce-gallery__item--last-odd' : ''}`} data-lightbox={i + 1}>
-            <Image src={photo} alt="The Forktree Project venue" width={500} loading="lazy" />
+          <a href={photo.image.src} class={`ce-gallery__item${i === photos.length - 1 && photos.length % 2 !== 0 ? ' ce-gallery__item--last-odd' : ''}`} data-lightbox={i + 1}>
+            <Image src={photo.image} alt={photo.alt} width={500} loading="lazy" />
           </a>
         ))}
       </div>
@@ -137,9 +137,12 @@ const testimonialBg = await getImage({ src: img9, width: 1920, format: 'webp' })
       const img = document.getElementById('lightbox-img');
       const counter = document.getElementById('lightbox-counter');
 
-      // Collect all photo URLs from gallery links
+      // Collect all photo URLs and alts from gallery links
       const links = Array.from(document.querySelectorAll('[data-lightbox]'));
-      const photoUrls = links.map(a => a.getAttribute('href'));
+      const photos = links.map(a => ({
+        url: a.getAttribute('href'),
+        alt: a.querySelector('img')?.getAttribute('alt') || '',
+      }));
       let current = 0;
       let touchStartX = 0;
       let touchStartY = 0;
@@ -147,19 +150,20 @@ const testimonialBg = await getImage({ src: img9, width: 1920, format: 'webp' })
       let swiping = false;
 
       function preload(index) {
-        if (index >= 0 && index < photoUrls.length) {
+        if (index >= 0 && index < photos.length) {
           const i = new Image();
-          i.src = photoUrls[index];
+          i.src = photos[index].url;
         }
       }
 
       function show(index) {
         current = index;
         img.classList.remove('ce-lightbox__img--loaded');
-        img.src = photoUrls[current];
-        counter.textContent = `${current + 1} / ${photoUrls.length}`;
+        img.src = photos[current].url;
+        img.alt = photos[current].alt;
+        counter.textContent = `${current + 1} / ${photos.length}`;
         prevBtn.style.display = current === 0 ? 'none' : '';
-        nextBtn.style.display = current === photoUrls.length - 1 ? 'none' : '';
+        nextBtn.style.display = current === photos.length - 1 ? 'none' : '';
         // Preload neighbours
         preload(current - 1);
         preload(current + 1);
@@ -202,7 +206,7 @@ const testimonialBg = await getImage({ src: img9, width: 1920, format: 'webp' })
       });
       nextBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (current < photoUrls.length - 1) show(current + 1);
+        if (current < photos.length - 1) show(current + 1);
       });
 
       // Close
@@ -214,7 +218,7 @@ const testimonialBg = await getImage({ src: img9, width: 1920, format: 'webp' })
         if (!lightbox.classList.contains('ce-lightbox--open')) return;
         if (e.key === 'Escape') close();
         if (e.key === 'ArrowLeft' && current > 0) show(current - 1);
-        if (e.key === 'ArrowRight' && current < photoUrls.length - 1) show(current + 1);
+        if (e.key === 'ArrowRight' && current < photos.length - 1) show(current + 1);
       });
 
       // Touch swipe
@@ -240,7 +244,7 @@ const testimonialBg = await getImage({ src: img9, width: 1920, format: 'webp' })
         if (!swiping) return;
         img.style.transition = 'transform 0.3s ease';
         const threshold = 60;
-        if (touchDeltaX < -threshold && current < photoUrls.length - 1) {
+        if (touchDeltaX < -threshold && current < photos.length - 1) {
           img.style.transform = 'translateX(-100vw)';
           setTimeout(() => {
             img.style.transition = 'none';
