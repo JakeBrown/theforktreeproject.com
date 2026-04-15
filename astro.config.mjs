@@ -10,4 +10,5 @@ export default defineConfig({
   integrations: [react(), sitemap()],
   adapter: cloudflare(),
   output: 'server',
+  trailingSlash: 'never',
 });

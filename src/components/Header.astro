@@ -140,9 +140,14 @@ const headerClass = `header header--${variant}`;
     color: var(--color-text);
   }
 
-  .header__nav-link:hover,
-  .header__nav-link.active {
+  .header__nav-link:hover {
     opacity: 0.6;
+  }
+
+  .header__nav-link.active {
+    text-decoration: underline;
+    text-underline-offset: 8px;
+    text-decoration-thickness: 2px;
   }
 
   .header__right {
