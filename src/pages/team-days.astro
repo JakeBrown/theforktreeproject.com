@@ -11,23 +11,23 @@ import PageLayout from '../layouts/PageLayout.astro';
         <h1>Team Days at The Forktree Project</h1>
 
         <div class="td-body">
-          <p>At The Forktree Project, we believe that making a hands-on contribution to habitat restoration is not only powerful for the planet &mdash; it&rsquo;s also beneficial for individuals and teams.</p>
-
-          <p>We warmly welcome corporate and community groups who want to take part in meaningful activities such as tree planting, seed propagation, circular-economy projects using repurposed materials, and a wide range of seasonal volunteering tasks.</p>
-
           <p>A team day at Forktree is both a genuine act of environmental stewardship and a memorable team-building experience.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Why -->
-  <section class="td-section" style="background-image: url('/images/team-days/img_4504.jpg'); background-color: #1a2a1a;">
+  <!-- Detail -->
+  <section class="td-section td-section--plain">
     <div class="td-section__content td-section__content--center">
       <div class="td-text td-text--wide">
-        <h2>Why Bring Your Team to The Forktree Project?</h2>
-
         <div class="td-body">
+          <p>At The Forktree Project, we believe that making a hands-on contribution to habitat restoration is not only powerful for the planet &mdash; it&rsquo;s also beneficial for individuals and teams.</p>
+
+          <p>We warmly welcome corporate and community groups who want to take part in meaningful activities such as tree planting, seed propagation, circular-economy projects using repurposed materials, and a wide range of seasonal volunteering tasks.</p>
+
+          <h2>Why Bring Your Team to The Forktree Project?</h2>
+
           <p>Forktree Team Days offer organisations a unique blend of impact, learning, and connection:</p>
 
           <ul class="td-list">
@@ -48,15 +48,7 @@ import PageLayout from '../layouts/PageLayout.astro';
         <h2>What a Team Day Looks Like</h2>
 
         <div class="td-body">
-          <p>Every Team Day is tailored to the needs and interests of the visiting group, as well as seasonal conditions.</p>
-
-          <p>Activities vary throughout the year but may include tree planting, nursery propagation, invasive species management and land maintenance, seed harvesting, as well as circular-economy projects such as building infrastructure from salvaged materials.</p>
-
-          <p>Every task makes a meaningful contribution to biodiversity recovery, the restoration of habitat at Forktree and beyond, and a healthier planet for all.</p>
-
-          <div class="td-cta">
-            <a href="/team-days/schedule" class="btn--cta">See a Sample Schedule &rarr;</a>
-          </div>
+          <p class="td-subhead"><a href="/team-days/schedule">See a sample schedule &rarr;</a></p>
         </div>
       </div>
     </div>
@@ -104,6 +96,53 @@ import PageLayout from '../layouts/PageLayout.astro';
       radial-gradient(ellipse 80% 50% at 50% 45%, rgba(0, 0, 0, 0.35) 0%, transparent 100%),
       rgba(0, 0, 0, 0.3);
     z-index: 1;
+  }
+
+  .td-section--plain {
+    background: #fafaf9;
+    color: #1a1a1a;
+    min-height: auto;
+  }
+
+  .td-section--plain::before {
+    display: none;
+  }
+
+  .td-section--plain .td-text {
+    text-shadow: none;
+    max-width: 800px;
+  }
+
+  .td-section--plain .td-text h2 {
+    color: #1a1a1a;
+  }
+
+  .td-section--plain .td-body p {
+    opacity: 1;
+    color: #333;
+  }
+
+  .td-section--plain .td-list li {
+    opacity: 1;
+    color: #333;
+  }
+
+  .td-section--plain .td-list li::before {
+    color: #00A651;
+  }
+
+  .td-subhead a {
+    color: white;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s ease;
+  }
+
+  .td-subhead a:hover {
+    opacity: 0.7;
   }
 
   .td-section__content {
