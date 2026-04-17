@@ -8,7 +8,7 @@ import PageLayout from '../../layouts/PageLayout.astro';
     <div class="sched__inner">
 
       <header class="sched__header">
-        <p class="sched__kicker">Team Days</p>
+        <p class="sched__kicker"><a href="/team-days">&larr; Team Days</a></p>
         <h1>A Day at Forktree</h1>
         <p class="sched__intro">Every Team Day is tailored to the needs and interests of the visiting group, as well as seasonal conditions. Here&rsquo;s what a typical day looks like.</p>
       </header>
@@ -124,6 +124,16 @@ import PageLayout from '../../layouts/PageLayout.astro';
     text-transform: uppercase;
     color: #00A651;
     margin: 0 0 0.75rem;
+  }
+
+  .sched__kicker a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .sched__kicker a:hover {
+    opacity: 0.7;
   }
 
   .sched__header h1 {
