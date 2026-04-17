@@ -229,20 +229,20 @@ import PageLayout from '../layouts/PageLayout.astro';
     max-width: 800px;
   }
 
-  .td-list--plain li {
+  .td-list.td-list--plain li {
     font-family: var(--font-body);
     font-size: clamp(0.95rem, 1.3vw, 1.1rem);
     line-height: 1.7;
     color: #444;
     margin-bottom: 0.75rem;
-    padding-left: 0;
+    padding-left: 1.25rem;
     position: relative;
   }
 
-  .td-list--plain li::before {
+  .td-list.td-list--plain li::before {
     content: '\2022';
     position: absolute;
-    left: -1.25rem;
+    left: 0;
     color: #00A651;
   }
 
