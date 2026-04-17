@@ -27,34 +27,23 @@ import PageLayout from '../layouts/PageLayout.astro';
   </section>
 
   <!-- Why -->
-  <section class="td-section" style="background-image: url('/images/team-days/img_4504.jpg'); background-color: #1a2a1a;">
-    <div class="td-section__content td-section__content--center">
-      <div class="td-text td-text--wide">
-        <h2>Why Bring Your Team to The Forktree Project?</h2>
-
-        <div class="td-body">
-        </div>
-      </div>
+  <section class="td-section td-section--olive">
+    <p class="td-kicker td-kicker--light">Why Forktree</p>
+    <div class="td-intro">
+      <p class="td-intro__lead td-intro__lead--light">Forktree Team Days offer organisations a unique blend of impact, learning, and connection.</p>
+      <ul class="td-list td-list--olive">
+        <li>Strengthened teamwork through shared activities that are completely different from the everyday work environment.</li>
+        <li>A deep sense of achievement from contributing directly to the fight against climate change and biodiversity loss.</li>
+        <li>Wellbeing benefits that come from spending a day immersed in nature.</li>
+        <li>Rich learning opportunities about biodiversity, ecology, revegetation, and sustainable decision-making from the Forktree Project team.</li>
+      </ul>
     </div>
   </section>
 
-  <!-- Why — bullet points -->
-  <section class="td-section td-section--plain">
-    <div class="td-section__content td-section__content--center">
-      <div class="td-text td-text--wide">
-        <div class="td-body">
-          <p>Forktree Team Days offer organisations a unique blend of impact, learning, and connection:</p>
-
-          <ul class="td-list">
-            <li>Strengthened teamwork through shared activities that are completely different from the everyday work environment.</li>
-            <li>A deep sense of achievement from contributing directly to the fight against climate change and biodiversity loss.</li>
-            <li>Wellbeing benefits that come from spending a day immersed in nature.</li>
-            <li>Rich learning opportunities about biodiversity, ecology, revegetation, and sustainable decision-making from the Forktree Project team.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Team photo -->
+  <div class="td-photo">
+    <img src="/images/team-days/img_4504.jpg" alt="Team group photo at The Forktree Project" loading="lazy" />
+  </div>
 
   <!-- What a day looks like -->
   <section class="td-section" style="background-image: url('/images/team-days/img_4457.jpg'); background-color: #1a2a1a;">
@@ -180,6 +169,62 @@ import PageLayout from '../layouts/PageLayout.astro';
     line-height: 1.35;
     color: #1a1a1a;
     margin-bottom: 1.25rem;
+  }
+
+  .td-section--olive {
+    background: #1f2a1f;
+    color: rgba(255, 255, 255, 0.85);
+    min-height: auto;
+    padding: 0;
+  }
+
+  .td-section--olive::before {
+    display: none;
+  }
+
+  .td-kicker--light {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .td-intro__lead--light {
+    color: #fff;
+  }
+
+  .td-list--olive {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0 0;
+    text-align: left;
+  }
+
+  .td-list--olive li {
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .td-list--olive li::before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .td-photo {
+    width: 100%;
+    line-height: 0;
+  }
+
+  .td-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    max-height: 500px;
   }
 
   .td-intro__body {
