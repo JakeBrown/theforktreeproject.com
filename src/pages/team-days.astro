@@ -330,22 +330,12 @@ import PageLayout from '../layouts/PageLayout.astro';
     margin-bottom: 0.75rem;
     padding-left: 1.5rem;
     position: relative;
-    opacity: 0.9;
   }
 
   .td-list li::before {
-    content: '•';
+    content: '\2022';
     position: absolute;
     left: 0;
-    color: white;
-  }
-
-  .td-list--schedule li::before {
-    content: '';
-  }
-
-  .td-list--schedule li {
-    padding-left: 0;
   }
 
   .td-cta {
