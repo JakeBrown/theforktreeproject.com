@@ -37,11 +37,13 @@ import PageLayout from '../layouts/PageLayout.astro';
         <li>Wellbeing benefits that come from spending a day immersed in nature.</li>
         <li>Rich learning opportunities about biodiversity, ecology, revegetation, and sustainable decision-making from the Forktree Project team.</li>
       </ul>
-      <div class="td-photo">
-        <img src="/images/team-days/img_4504.jpg" alt="Team group photo at The Forktree Project" loading="lazy" />
-      </div>
-      <div class="td-photo">
-        <img src="/images/team-days/img_4457.jpg" alt="Hands-on team day activities at The Forktree Project" loading="lazy" />
+      <div class="td-photos">
+        <div class="td-photo">
+          <img src="/images/team-days/img_4504.jpg" alt="Team group photo at The Forktree Project" loading="lazy" />
+        </div>
+        <div class="td-photo">
+          <img src="/images/team-days/img_4457.jpg" alt="Hands-on team day activities at The Forktree Project" loading="lazy" />
+        </div>
       </div>
     </div>
   </section>
@@ -199,19 +201,31 @@ import PageLayout from '../layouts/PageLayout.astro';
     color: rgba(255, 255, 255, 0.4);
   }
 
-  .td-photo {
-    max-width: 800px;
+  .td-photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: var(--space-xl) 30px;
+    padding: var(--space-lg) 0 0;
+  }
+
+  .td-photo {
     line-height: 0;
   }
 
   .td-photo img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     object-fit: cover;
     border-radius: 12px;
+  }
+
+  @media (max-width: 768px) {
+    .td-photos {
+      grid-template-columns: 1fr;
+    }
   }
 
   .td-intro__body {
