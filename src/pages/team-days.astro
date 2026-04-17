@@ -48,7 +48,11 @@ import PageLayout from '../layouts/PageLayout.astro';
         <h2>What a Team Day Looks Like</h2>
 
         <div class="td-body">
-          <p class="td-subhead"><a href="/team-days/schedule">See a sample schedule &rarr;</a></p>
+          <p>Every Team Day is tailored to the needs and interests of the visiting group, as well as seasonal conditions.</p>
+
+          <div class="td-cta">
+            <a href="/team-days/schedule" class="btn--cta btn--cta-lg">See a Sample Schedule &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -134,20 +138,6 @@ import PageLayout from '../layouts/PageLayout.astro';
 
   .td-section--plain .td-list li::before {
     color: #00A651;
-  }
-
-  .td-subhead a {
-    color: white;
-    text-decoration: none;
-    font-family: var(--font-heading);
-    font-size: clamp(0.85rem, 1.2vw, 1rem);
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    transition: opacity 0.2s ease;
-  }
-
-  .td-subhead a:hover {
-    opacity: 0.7;
   }
 
   .td-section__content {
@@ -262,6 +252,12 @@ import PageLayout from '../layouts/PageLayout.astro';
   .btn--cta:hover {
     background-color: white;
     color: #000;
+  }
+
+  .btn--cta-lg {
+    font-size: 14px;
+    padding: 18px 40px;
+    letter-spacing: 1.5px;
   }
 
   @media (max-width: 768px) {
