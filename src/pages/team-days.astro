@@ -18,24 +18,24 @@ import PageLayout from '../layouts/PageLayout.astro';
   </section>
 
   <!-- Detail -->
-  <section class="td-section td-section--plain td-section--intro">
-    <p class="td-kicker">Team Days</p>
+  <section class="td-section td-section--olive">
+    <p class="td-kicker td-kicker--light">Team Days</p>
     <div class="td-intro">
-      <p class="td-intro__lead">Making a hands-on contribution to habitat restoration is not only powerful for the planet &mdash; it&rsquo;s also beneficial for individuals and teams.</p>
-      <p class="td-intro__body">We warmly welcome corporate and community groups who want to take part in meaningful activities such as tree planting, seed propagation, circular-economy projects using repurposed materials, and a wide range of seasonal volunteering tasks.</p>
-      <p class="td-intro__body">Every Team Day is tailored to the needs and interests of the visiting group, as well as seasonal conditions.</p>
+      <p class="td-intro__lead td-intro__lead--light">Making a hands-on contribution to habitat restoration is not only powerful for the planet &mdash; it&rsquo;s also beneficial for individuals and teams.</p>
+      <p class="td-intro__body td-intro__body--light">We warmly welcome corporate and community groups who want to take part in meaningful activities such as tree planting, seed propagation, circular-economy projects using repurposed materials, and a wide range of seasonal volunteering tasks.</p>
+      <p class="td-intro__body td-intro__body--light">Every Team Day is tailored to the needs and interests of the visiting group, as well as seasonal conditions.</p>
       <div class="td-cta">
-        <a href="/team-days/schedule" class="btn--cta btn--cta-lg td-cta--dark">See a Sample Schedule &rarr;</a>
+        <a href="/team-days/schedule" class="btn--cta btn--cta-lg">See a Sample Schedule &rarr;</a>
       </div>
     </div>
   </section>
 
   <!-- Why -->
-  <section class="td-section td-section--olive">
-    <p class="td-kicker td-kicker--light">Why Forktree</p>
+  <section class="td-section td-section--plain td-section--intro">
+    <p class="td-kicker">Why Forktree</p>
     <div class="td-intro">
-      <p class="td-intro__lead td-intro__lead--light">Forktree Team Days offer organisations a unique blend of impact, learning, and connection.</p>
-      <ul class="td-list td-list--olive">
+      <p class="td-intro__lead">Forktree Team Days offer organisations a unique blend of impact, learning, and connection.</p>
+      <ul class="td-list td-list--plain">
         <li>Strengthened teamwork through shared activities that are completely different from the everyday work environment.</li>
         <li>A deep sense of achievement from contributing directly to the fight against climate change and biodiversity loss.</li>
         <li>Wellbeing benefits that come from spending a day immersed in nature.</li>
@@ -215,6 +215,36 @@ import PageLayout from '../layouts/PageLayout.astro';
     .td-photos {
       grid-template-columns: 1fr;
     }
+  }
+
+  .td-intro__body--light {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .td-list--plain {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0 0;
+    text-align: left;
+    max-width: 800px;
+  }
+
+  .td-list--plain li {
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 0.75rem;
+    padding-left: 1.25rem;
+    position: relative;
+    margin-left: -1.25rem;
+  }
+
+  .td-list--plain li::before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    color: #00A651;
   }
 
   .td-intro__body {
