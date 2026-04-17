@@ -49,7 +49,7 @@ import PageLayout from '../layouts/PageLayout.astro';
   </section>
 
   <!-- What a day looks like -->
-  <section class="td-section td-section--plain">
+  <section class="td-section" style="background-image: url('/images/team-days/img_4291.jpg'); background-color: #1a2a1a;">
     <div class="td-section__content td-section__content--center">
       <div class="td-text td-text--wide">
         <h2>What a Team Day Looks Like</h2>
@@ -58,7 +58,7 @@ import PageLayout from '../layouts/PageLayout.astro';
           <p>Every Team Day is tailored to the needs and interests of the visiting group, as well as seasonal conditions.</p>
 
           <div class="td-cta">
-            <a href="/team-days/schedule" class="btn--cta btn--cta-lg td-cta--dark">See a Sample Schedule &rarr;</a>
+            <a href="/team-days/schedule" class="btn--cta btn--cta-lg">See a Sample Schedule &rarr;</a>
           </div>
         </div>
       </div>
@@ -190,8 +190,9 @@ import PageLayout from '../layouts/PageLayout.astro';
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.75);
     margin-bottom: 0.75rem;
-    padding-left: 1.5rem;
+    padding-left: 1.25rem;
     position: relative;
+    margin-left: -1.25rem;
   }
 
   .td-list--olive li::before {
