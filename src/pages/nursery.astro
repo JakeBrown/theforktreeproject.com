@@ -22,21 +22,21 @@ import PageLayout from '../layouts/PageLayout.astro';
   </section>
 
   <!-- Locally provenanced seed -->
-  <section class="nur-section" style="background-image: url('/images/nursery/img_4220.jpg'); background-color: #1a2a1a;">
+  <section class="nur-section nur-section--plain">
     <div class="nur-section__content nur-section__content--center">
       <div class="nur-text nur-text--wide">
         <h2>Locally Provenanced, Locally Grown</h2>
 
         <div class="nur-body">
-          <p>All plants in The Forktree Project Nursery are grown from seed and plant material of carefully selected provenance to ensure long-term ecological resilience in their destination sites.</p>
+          <p>All plants in The Forktree Project Nursery are <strong>grown from seed and plant material of carefully selected provenance</strong> to ensure long-term ecological resilience in their destination sites.</p>
 
-          <p>Seed and plant materials are responsibly collected by our team from Forktree&rsquo;s own Rare Seed Orchard, the wider property itself and local partner sites, as well as sourced from trusted local suppliers.</p>
+          <p>Seed and plant materials are responsibly collected by our team from <strong>Forktree&rsquo;s own Rare Seed Orchard</strong>, the wider property itself and local partner sites, as well as sourced from trusted local suppliers.</p>
 
-          <p>We are proud of our collaboration with the South Australian Seed Conservation Centre, which enables us to grow and protect rare and endangered species, with a particular focus on wetland species.</p>
+          <p>We are proud of our collaboration with the <strong>South Australian Seed Conservation Centre</strong>, which enables us to grow and protect rare and endangered species, with a particular focus on wetland species.</p>
 
-          <p>We specialise in propagating and protecting rare and endangered species, including wetland plants, helping safeguard these ecologically important and increasingly threatened communities.</p>
+          <p>We specialise in <strong>propagating and protecting rare and endangered species</strong>, including wetland plants, helping safeguard these ecologically important and increasingly threatened communities.</p>
 
-          <p>This year, we are proud to have grown more than 75,000 high&#8209;quality seedlings across over 175 native species in the Forktree Project Nursery.</p>
+          <p>This year, we are proud to have grown <strong>more than 75,000 high&#8209;quality seedlings across over 175 native species</strong> in the Forktree Project Nursery.</p>
         </div>
       </div>
     </div>
@@ -86,6 +86,34 @@ import PageLayout from '../layouts/PageLayout.astro';
       radial-gradient(ellipse 80% 50% at 50% 45%, rgba(0, 0, 0, 0.35) 0%, transparent 100%),
       rgba(0, 0, 0, 0.3);
     z-index: 1;
+  }
+
+  .nur-section--plain {
+    background: #fafaf9;
+    color: #1a1a1a;
+    min-height: auto;
+  }
+
+  .nur-section--plain::before {
+    display: none;
+  }
+
+  .nur-section--plain .nur-text {
+    text-shadow: none;
+  }
+
+  .nur-section--plain .nur-text h2 {
+    color: #1a1a1a;
+  }
+
+  .nur-section--plain .nur-body p {
+    opacity: 1;
+    color: #333;
+  }
+
+  .nur-section--plain .nur-body strong {
+    color: #1a1a1a;
+    font-weight: 600;
   }
 
   .nur-section__content {
