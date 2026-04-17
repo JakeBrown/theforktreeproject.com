@@ -18,15 +18,11 @@ import PageLayout from '../layouts/PageLayout.astro';
   </section>
 
   <!-- Detail -->
-  <section class="td-section td-section--plain">
-    <div class="td-section__content td-section__content--center">
-      <div class="td-text td-text--wide">
-        <div class="td-body">
-          <p>At The Forktree Project, we believe that making a hands-on contribution to habitat restoration is not only powerful for the planet &mdash; it&rsquo;s also beneficial for individuals and teams.</p>
-
-          <p>We warmly welcome corporate and community groups who want to take part in meaningful activities such as tree planting, seed propagation, circular-economy projects using repurposed materials, and a wide range of seasonal volunteering tasks.</p>
-        </div>
-      </div>
+  <section class="td-section td-section--plain td-section--intro">
+    <p class="td-kicker">Team Days</p>
+    <div class="td-intro">
+      <p class="td-intro__lead">Making a hands-on contribution to habitat restoration is not only powerful for the planet &mdash; it&rsquo;s also beneficial for individuals and teams.</p>
+      <p class="td-intro__body">We warmly welcome corporate and community groups who want to take part in meaningful activities such as tree planting, seed propagation, circular-economy projects using repurposed materials, and a wide range of seasonal volunteering tasks.</p>
     </div>
   </section>
 
@@ -157,6 +153,41 @@ import PageLayout from '../layouts/PageLayout.astro';
 
   .td-section--plain .td-list li::before {
     color: #00A651;
+  }
+
+  .td-kicker {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--color-text);
+    margin: 0;
+    padding: 80px 60px 0;
+  }
+
+  .td-intro {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 60px 80px;
+  }
+
+  .td-intro__lead {
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.35;
+    color: #1a1a1a;
+    margin-bottom: 1.25rem;
+  }
+
+  .td-intro__body {
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 0;
   }
 
   .td-section__content {
