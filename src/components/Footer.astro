@@ -9,19 +9,32 @@
       <nav class="footer__links">
         <a href="mailto:hello@theforktreeproject.com?subject=Forktree%20Website%20Enquiry">hello@theforktreeproject.com</a>
       </nav>
-      <a
-        href="https://www.instagram.com/forktreeproject/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Follow us on Instagram"
-        class="footer__social"
-      >
-        <svg width="20" height="20" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="60" height="60" rx="16" />
-          <circle cx="32" cy="32" r="16" />
-          <circle cx="50" cy="14" r="4" fill="currentColor" stroke="none" />
-        </svg>
-      </a>
+      <div class="footer__socials">
+        <a
+          href="https://www.facebook.com/TheForktreeProject/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Follow us on Facebook"
+          class="footer__social"
+        >
+          <svg width="20" height="20" viewBox="0 0 64 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M58 32C58 17.64 46.36 6 32 6S6 17.64 6 32c0 12.97 9.5 23.73 21.94 25.68V39.78h-6.6V32h6.6v-5.93c0-6.52 3.88-10.12 9.82-10.12 2.84 0 5.82.51 5.82.51v6.4h-3.28c-3.23 0-4.24 2-4.24 4.06V32h7.22l-1.15 7.78h-6.07v17.9C48.5 55.73 58 44.97 58 32z"/>
+          </svg>
+        </a>
+        <a
+          href="https://www.instagram.com/forktreeproject/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Follow us on Instagram"
+          class="footer__social"
+        >
+          <svg width="20" height="20" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="60" height="60" rx="16" />
+            <circle cx="32" cy="32" r="16" />
+            <circle cx="50" cy="14" r="4" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+      </div>
     </div>
 
     <div class="footer__col footer__col--supporters">
@@ -137,6 +150,11 @@
 
   .footer__badge:hover img {
     opacity: 1;
+  }
+
+  .footer__socials {
+    display: flex;
+    gap: 0.75rem;
   }
 
   .footer__social {
