@@ -102,10 +102,15 @@ import PageLayout from '../layouts/PageLayout.astro';
     background: #fafaf9;
     color: #1a1a1a;
     min-height: auto;
+    padding: var(--space-xl) 0;
   }
 
   .td-section--plain::before {
     display: none;
+  }
+
+  .td-section--plain .td-section__content {
+    padding: 0 100px;
   }
 
   .td-section--plain .td-text {
