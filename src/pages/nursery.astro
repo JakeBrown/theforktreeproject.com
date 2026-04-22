@@ -11,43 +11,66 @@ import PageLayout from '../layouts/PageLayout.astro';
         <h1>The Forktree Project Nursery</h1>
 
         <div class="nur-body">
-          <p>The Forktree Project is proud to play a vital role in regional efforts to halt biodiversity loss through the work of its on-site native plant nursery.</p>
-
-          <p>Our nursery grows a wide range of endemic native species for large&#8209;scale habitat restoration and conservation projects as well as for private landholders committed to restoring ecological health on their properties &ndash; and, of course, for our own restoration program on the Forktree Project site itself.</p>
-
-          <p>We work closely with clients to advise on the species best suited to their site, drawing on our team&rsquo;s deep knowledge of local flora and best-practice restoration methods. Our focus is always on rebuilding resilient ecosystems and supporting long-term landscape recovery.</p>
+          <p class="nur-tagline">Supporting the region&rsquo;s biodiversity revival.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Locally provenanced seed -->
+  <!-- Supporting Regional Rewilding -->
   <section class="nur-section nur-section--plain">
     <div class="nur-section__content nur-section__content--center">
       <div class="nur-text nur-text--wide">
-        <h2>Locally Provenanced, Locally Grown</h2>
+        <h2>Supporting Regional Rewilding</h2>
 
         <div class="nur-body">
-          <p>All plants in The Forktree Project Nursery are grown from seed and plant material of carefully selected provenance to ensure long-term ecological resilience in their destination sites. Seed and plant materials are responsibly collected by our team from <strong>Forktree&rsquo;s own Rare Seed Orchard</strong>, the wider property itself and local partner sites, as well as sourced from trusted local suppliers.</p>
+          <p>The Forktree Project Nursery grows a wide range of endemic native species to meet the needs of a variety of planting projects, including:</p>
 
-          <p>We are proud of our collaboration with the South Australian Seed Conservation Centre, which enables us to grow and protect rare and endangered species, with a particular focus on wetland species. We specialise in propagating and protecting rare and endangered species, including wetland plants, helping safeguard these ecologically important and increasingly threatened communities.</p>
+          <ul class="nur-list">
+            <li>large&#8209;scale habitat restoration and conservation projects</li>
+            <li>private landholders looking to restore ecological health on their properties</li>
+            <li>our own restoration program on the Forktree Project site itself</li>
+          </ul>
 
-          <p>This year, we are proud to have grown more than 75,000 high&#8209;quality seedlings across over 175 native species in the Forktree Project Nursery.</p>
+          <p>We are proud to have grown over 75,000 plants of over 175 different species in the nursery this year.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Rare and endangered -->
+  <!-- Restoration-led Provenance -->
+  <section class="nur-section nur-section--plain">
+    <div class="nur-section__content nur-section__content--center">
+      <div class="nur-text nur-text--wide">
+        <h2>Restoration-led Provenance</h2>
+
+        <div class="nur-body">
+          <p>All plants in The Forktree Project Nursery are grown from seed and plant material of carefully selected provenance to ensure long-term ecological resilience in their destination sites.</p>
+
+          <p>Seed and plant materials are responsibly collected by the Forktree Nursery team from a range of sources, including:</p>
+
+          <ul class="nur-list">
+            <li>our own Rare Seed Orchard</li>
+            <li>the wider property itself (both remnant vegetation and maturing restoration plants)</li>
+            <li>partner sites</li>
+            <li>trusted local suppliers</li>
+            <li>the South Australian Seed Conservation Centre</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guided by ecological knowledge -->
   <section class="nur-section" style="background-image: url('/images/nursery/img_4350.jpg'); background-color: #1a2a1a;">
     <div class="nur-section__content nur-section__content--center">
       <div class="nur-text nur-text--wide">
-        <h2>Protecting Rare and Endangered Species</h2>
+        <h2>Guided by ecological knowledge</h2>
 
         <div class="nur-body">
-          <p>The nursery has also become a specialist in the propagation and protection of rare and endangered species, including wetland plants, helping safeguard these ecologically important and increasingly threatened communities.</p>
+          <p>We work closely with clients to advise on species best suited to their site, drawing on our team&rsquo;s extensive knowledge of local flora and best-practice restoration methods.</p>
 
-          <p>To discuss your native plant needs, please contact us at <a href="mailto:nursery@theforktreeproject.com">nursery@theforktreeproject.com</a>. We&rsquo;d be delighted to work with you.</p>
+          <p>To discuss your habitat restoration needs, please contact us at <a href="mailto:nursery@theforktreeproject.com">nursery@theforktreeproject.com</a>. We&rsquo;d love to work with you.</p>
 
           <div class="nur-cta">
             <a href="mailto:nursery@theforktreeproject.com" class="btn--cta">Get in Touch</a>
@@ -159,6 +182,37 @@ import PageLayout from '../layouts/PageLayout.astro';
     line-height: 1.8;
     margin-bottom: 1rem;
     opacity: 0.9;
+  }
+
+  .nur-tagline {
+    font-family: var(--font-heading);
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    font-weight: 500;
+    font-style: italic;
+    line-height: 1.4;
+    opacity: 0.95;
+    margin-top: -0.5rem;
+  }
+
+  .nur-list {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin: 0.5rem auto 1.5rem;
+    max-width: 640px;
+    text-align: left;
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    line-height: 1.8;
+    opacity: 0.9;
+  }
+
+  .nur-list li {
+    margin-bottom: 0.35rem;
+  }
+
+  .nur-section--plain .nur-list {
+    color: #333;
+    opacity: 1;
   }
 
   .nur-body a {
