@@ -59,6 +59,19 @@ const formatMonth = (ym: string) => {
     </div>
   </section>
 
+  <!-- Guided by ecological knowledge -->
+  <section class="nur-section nur-section--plain">
+    <p class="nur-kicker">Advice</p>
+    <div class="nur-intro">
+      <p class="nur-intro__lead">Guided by ecological knowledge</p>
+      <p class="nur-intro__body">We work closely with clients to advise on species best suited to their site, drawing on our team&rsquo;s extensive knowledge of local flora and best-practice restoration methods.</p>
+      <p class="nur-intro__body">To discuss your habitat restoration needs, please contact us at <a href="mailto:nursery@theforktreeproject.com">nursery@theforktreeproject.com</a>. We&rsquo;d love to work with you.</p>
+      <div class="nur-cta">
+        <a href="mailto:nursery@theforktreeproject.com" class="btn--cta btn--cta-lg btn--cta-dark">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
   <!-- Plant of the Month -->
   {currentPlant && (
     <section class="nur-section nur-section--potm" style={`background-image: url('${currentPlant.data.image}');`}>
@@ -78,19 +91,6 @@ const formatMonth = (ym: string) => {
       </div>
     </section>
   )}
-
-  <!-- Guided by ecological knowledge -->
-  <section class="nur-section nur-section--advice" style="background-image: url('/images/nursery/img_4350.jpg'); background-color: #1a2a1a;">
-    <p class="nur-kicker nur-kicker--light">Advice</p>
-    <div class="nur-intro">
-      <p class="nur-intro__lead nur-intro__lead--light">Guided by ecological knowledge</p>
-      <p class="nur-intro__body nur-intro__body--light">We work closely with clients to advise on species best suited to their site, drawing on our team&rsquo;s extensive knowledge of local flora and best-practice restoration methods.</p>
-      <p class="nur-intro__body nur-intro__body--light">To discuss your habitat restoration needs, please contact us at <a href="mailto:nursery@theforktreeproject.com">nursery@theforktreeproject.com</a>. We&rsquo;d love to work with you.</p>
-      <div class="nur-cta">
-        <a href="mailto:nursery@theforktreeproject.com" class="btn--cta btn--cta-lg">Get in Touch</a>
-      </div>
-    </div>
-  </section>
 
 </PageLayout>
 
