@@ -1,0 +1,148 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPlants = await getCollection('plants');
+const plants = allPlants.sort((a, b) => b.data.month.localeCompare(a.data.month));
+
+const formatMonth = (ym: string) => {
+  const [year, month] = ym.split('-').map(Number);
+  return new Date(year, month - 1, 1).toLocaleString('en-AU', { month: 'long', year: 'numeric' });
+};
+---
+
+<PageLayout title="Plant of the Month Archive — The Forktree Project" description="Monthly profiles of native plants we propagate at The Forktree Project Nursery." headerVariant="dark">
+
+  <section class="potm-archive">
+    <div class="potm-archive__inner">
+      <p class="potm-archive__kicker">Plant of the Month</p>
+      <h1 class="potm-archive__title">Archive</h1>
+      <p class="potm-archive__intro">Each month we feature a native species from the Forktree Project Nursery.</p>
+
+      <div class="potm-archive__grid">
+        {plants.map((plant) => (
+          <a href={`/nursery/plants/${plant.id}`} class="potm-card">
+            <div class="potm-card__image" style={`background-image: url('${plant.data.image}');`}></div>
+            <div class="potm-card__body">
+              <p class="potm-card__month">{formatMonth(plant.data.month)}</p>
+              <h2 class="potm-card__title">{plant.data.title}</h2>
+              <p class="potm-card__sci"><em>{plant.data.scientificName}</em></p>
+              <p class="potm-card__tag">{plant.data.tagline}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  .potm-archive {
+    padding: calc(var(--header-height) + var(--space-lg)) 0 var(--space-xl);
+    background: #fafaf9;
+  }
+
+  .potm-archive__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .potm-archive__kicker {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin: 0 0 0.75rem;
+    text-align: center;
+  }
+
+  .potm-archive__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    text-align: center;
+    color: var(--color-text);
+    margin: 0 0 var(--space-sm);
+  }
+
+  .potm-archive__intro {
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto var(--space-xl);
+  }
+
+  .potm-archive__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .potm-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .potm-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  .potm-card__image {
+    aspect-ratio: 4 / 3;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .potm-card__body {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  .potm-card__month {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin: 0 0 0.5rem;
+  }
+
+  .potm-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin: 0 0 0.25rem;
+  }
+
+  .potm-card__sci {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin: 0 0 0.5rem;
+  }
+
+  .potm-card__tag {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #444;
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,155 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const plants = await getCollection('plants');
+  return plants.map((plant) => ({
+    params: { slug: plant.id },
+    props: { plant },
+  }));
+}
+
+const { plant } = Astro.props;
+const { Content } = await render(plant);
+
+const formatMonth = (ym: string) => {
+  const [year, month] = ym.split('-').map(Number);
+  return new Date(year, month - 1, 1).toLocaleString('en-AU', { month: 'long', year: 'numeric' });
+};
+---
+
+<PageLayout title={`${plant.data.title} — Plant of the Month — The Forktree Project`} description={plant.data.tagline}>
+
+  <article class="potm-post">
+
+    <section class="potm-post__hero" style={`background-image: url('${plant.data.image}');`}>
+      <div class="potm-post__hero-inner">
+        <p class="potm-post__kicker">Plant of the Month &middot; {formatMonth(plant.data.month)}</p>
+        <h1 class="potm-post__title">{plant.data.title}</h1>
+        <p class="potm-post__sci"><em>{plant.data.scientificName}</em></p>
+        <p class="potm-post__tag">{plant.data.tagline}</p>
+      </div>
+    </section>
+
+    <section class="potm-post__body">
+      <div class="potm-post__body-inner">
+        <Content />
+        <p class="potm-post__back"><a href="/nursery/plants">&larr; Back to the archive</a></p>
+      </div>
+    </section>
+
+  </article>
+
+</PageLayout>
+
+<style>
+  .potm-post__hero {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: calc(var(--header-height) + var(--space-lg)) 30px var(--space-lg);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .potm-post__hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.55) 100%);
+    z-index: 1;
+  }
+
+  .potm-post__hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
+  }
+
+  .potm-post__kicker {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 1rem;
+  }
+
+  .potm-post__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 0.5rem;
+  }
+
+  .potm-post__sci {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 1rem;
+  }
+
+  .potm-post__tag {
+    font-family: var(--font-heading);
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    font-style: italic;
+    color: #fff;
+    margin: 0;
+  }
+
+  .potm-post__body {
+    background: #fafaf9;
+    padding: var(--space-xl) 0;
+  }
+
+  .potm-post__body-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 30px;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #333;
+  }
+
+  .potm-post__body-inner :global(p) {
+    margin: 0 0 1.25rem;
+  }
+
+  .potm-post__body-inner :global(a) {
+    color: #1a1a1a;
+    text-decoration: underline;
+  }
+
+  .potm-post__body-inner :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+  }
+
+  .potm-post__back {
+    margin-top: var(--space-lg);
+    font-size: 0.95rem;
+  }
+
+  .potm-post__back a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .potm-post__back a:hover {
+    color: var(--color-text);
+  }
+</style>

@@ -12,4 +12,16 @@ const journal = defineCollection({
   }),
 });
 
-export const collections = { journal };
+const plants = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/plants' }),
+  schema: z.object({
+    title: z.string(),
+    scientificName: z.string(),
+    tagline: z.string(),
+    month: z.string(),
+    image: z.string(),
+    imageAlt: z.string().optional(),
+  }),
+});
+
+export const collections = { journal, plants };

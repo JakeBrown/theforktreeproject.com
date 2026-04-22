@@ -1,11 +1,21 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPlants = await getCollection('plants');
+const plants = allPlants.sort((a, b) => b.data.month.localeCompare(a.data.month));
+const currentPlant = plants[0];
+
+const formatMonth = (ym: string) => {
+  const [year, month] = ym.split('-').map(Number);
+  return new Date(year, month - 1, 1).toLocaleString('en-AU', { month: 'long', year: 'numeric' });
+};
 ---
 
 <PageLayout title="Nursery — The Forktree Project" description="The Forktree Project's on-site native plant nursery propagates locally provenanced species for habitat restoration across the Hills and Fleurieu region.">
 
   <!-- Hero / Intro -->
-  <section class="nur-section nur-section--hero" style="background-image: url('/images/nursery/img_4232.jpg'); background-color: #2a3a2a;">
+  <section class="nur-section nur-section--hero" style="background-image: url('/images/nursery/img_4232.jpg'); background-color: #1a2a1a;">
     <div class="nur-section__content nur-section__content--center">
       <div class="nur-text nur-text--wide">
         <h1>The Forktree Project Nursery</h1>
@@ -49,15 +59,35 @@ import PageLayout from '../layouts/PageLayout.astro';
     </div>
   </section>
 
+  <!-- Plant of the Month -->
+  {currentPlant && (
+    <section class="nur-section nur-section--potm" style={`background-image: url('${currentPlant.data.image}');`}>
+      <div class="nur-section__content nur-section__content--center">
+        <div class="nur-text nur-text--wide nur-potm">
+          <p class="nur-potm__kicker">Plant of the Month &middot; {formatMonth(currentPlant.data.month)}</p>
+          <h2 class="nur-potm__title">{currentPlant.data.title}</h2>
+          <p class="nur-potm__sci"><em>{currentPlant.data.scientificName}</em></p>
+          <p class="nur-potm__tag">{currentPlant.data.tagline}</p>
+          <div class="nur-cta">
+            <a href={`/nursery/plants/${currentPlant.id}`} class="btn--cta btn--cta-lg">Read more &rarr;</a>
+            {plants.length > 1 && (
+              <a href="/nursery/plants" class="btn--cta btn--cta-lg nur-potm__archive">View archive</a>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
   <!-- Guided by ecological knowledge -->
-  <section class="nur-section nur-section--plain">
-    <p class="nur-kicker">Advice</p>
+  <section class="nur-section nur-section--advice" style="background-image: url('/images/nursery/img_4350.jpg'); background-color: #1a2a1a;">
+    <p class="nur-kicker nur-kicker--light">Advice</p>
     <div class="nur-intro">
-      <p class="nur-intro__lead">Guided by ecological knowledge</p>
-      <p class="nur-intro__body">We work closely with clients to advise on species best suited to their site, drawing on our team&rsquo;s extensive knowledge of local flora and best-practice restoration methods.</p>
-      <p class="nur-intro__body">To discuss your habitat restoration needs, please contact us at <a href="mailto:nursery@theforktreeproject.com">nursery@theforktreeproject.com</a>. We&rsquo;d love to work with you.</p>
+      <p class="nur-intro__lead nur-intro__lead--light">Guided by ecological knowledge</p>
+      <p class="nur-intro__body nur-intro__body--light">We work closely with clients to advise on species best suited to their site, drawing on our team&rsquo;s extensive knowledge of local flora and best-practice restoration methods.</p>
+      <p class="nur-intro__body nur-intro__body--light">To discuss your habitat restoration needs, please contact us at <a href="mailto:nursery@theforktreeproject.com">nursery@theforktreeproject.com</a>. We&rsquo;d love to work with you.</p>
       <div class="nur-cta">
-        <a href="mailto:nursery@theforktreeproject.com" class="btn--cta btn--cta-lg btn--cta-dark">Get in Touch</a>
+        <a href="mailto:nursery@theforktreeproject.com" class="btn--cta btn--cta-lg">Get in Touch</a>
       </div>
     </div>
   </section>
@@ -84,8 +114,8 @@ import PageLayout from '../layouts/PageLayout.astro';
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 50% at 50% 45%, rgba(0, 0, 0, 0.35) 0%, transparent 100%),
-      rgba(0, 0, 0, 0.3);
+      radial-gradient(ellipse 80% 50% at 50% 45%, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.2) 100%),
+      rgba(0, 0, 0, 0.35);
     z-index: 1;
   }
 
@@ -292,6 +322,91 @@ import PageLayout from '../layouts/PageLayout.astro';
   .btn--cta-dark:hover {
     background-color: #1a1a1a;
     color: white;
+  }
+
+  .nur-section--advice {
+    min-height: auto;
+    width: 100%;
+  }
+
+  .nur-section--advice::before {
+    background:
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.75) 100%);
+  }
+
+  .nur-section--advice .nur-kicker,
+  .nur-section--advice .nur-intro {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  .nur-section--potm {
+    min-height: auto;
+  }
+
+  .nur-section--potm::before {
+    background:
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.55) 100%);
+  }
+
+  .nur-section--potm .nur-section__content {
+    padding: 120px 100px;
+  }
+
+  .nur-potm {
+    text-align: center;
+    max-width: 720px;
+  }
+
+  .nur-potm__kicker {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 1rem;
+  }
+
+  .nur-potm__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0 0 0.5rem;
+  }
+
+  .nur-potm__sci {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0 0 1.25rem;
+  }
+
+  .nur-potm__tag {
+    font-family: var(--font-heading);
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    font-style: italic;
+    color: #fff;
+    margin: 0 0 1.75rem;
+  }
+
+  .nur-potm__archive {
+    margin-left: 0.75rem;
+    background: transparent;
+  }
+
+  @media (max-width: 768px) {
+    .nur-section--potm .nur-section__content {
+      padding: 80px 30px;
+    }
+
+    .nur-potm__archive {
+      margin-left: 0;
+      margin-top: 0.75rem;
+    }
   }
 
   @media (max-width: 768px) {
