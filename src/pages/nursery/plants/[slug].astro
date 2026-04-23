@@ -36,6 +36,14 @@ const formatMonth = (ym: string) => {
 
     <section class="potm-post__body">
       <div class="potm-post__body-inner">
+        <div class="potm-post__byline">
+          <img class="potm-post__avatar" src="/images/team/fleur-avatar.jpg" alt="Fleur Brown-Beeby" loading="lazy" />
+          <div class="potm-post__byline-text">
+            <span class="potm-post__byline-kicker">Words by</span>
+            <span class="potm-post__byline-name">Fleur Brown-Beeby</span>
+            <span class="potm-post__byline-role">Nursery Manager</span>
+          </div>
+        </div>
         <Content />
         <p class="potm-post__back"><a href="/nursery/plants">&larr; Back to the archive</a></p>
       </div>
@@ -110,7 +118,7 @@ const formatMonth = (ym: string) => {
 
   .potm-post__body {
     background: #fafaf9;
-    padding: var(--space-xl) 0;
+    padding: var(--space-lg) 0 var(--space-xl);
   }
 
   .potm-post__body-inner {
@@ -125,6 +133,56 @@ const formatMonth = (ym: string) => {
 
   .potm-post__body-inner :global(p) {
     margin: 0 0 1.25rem;
+  }
+
+  .potm-post__byline {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    margin: 0 0 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .potm-post__avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+    border: 3px solid #fff;
+    outline: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .potm-post__byline-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    line-height: 1.25;
+  }
+
+  .potm-post__byline-kicker {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #00A651;
+  }
+
+  .potm-post__byline-name {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--color-text);
+  }
+
+  .potm-post__byline-role {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
   }
 
   .potm-post__body-inner :global(a) {

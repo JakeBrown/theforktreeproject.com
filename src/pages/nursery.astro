@@ -15,7 +15,7 @@ const formatMonth = (ym: string) => {
 <PageLayout title="Nursery — The Forktree Project" description="The Forktree Project's on-site native plant nursery propagates locally provenanced species for habitat restoration across the Hills and Fleurieu region.">
 
   <!-- Hero / Intro -->
-  <section class="nur-section nur-section--hero" style="background-image: url('/images/nursery/img_4232.jpg'); background-color: #1a2a1a;">
+  <section class="nur-section nur-section--hero" style="background-image: url('/images/nursery/img_4350.jpg'); background-color: #1a2a1a;">
     <div class="nur-section__content nur-section__content--center">
       <div class="nur-text nur-text--wide">
         <h1>The Forktree Project Nursery</h1>
@@ -28,22 +28,29 @@ const formatMonth = (ym: string) => {
   </section>
 
   <!-- Supporting Regional Rewilding -->
-  <section class="nur-section nur-section--plain">
-    <p class="nur-kicker">Nursery</p>
-    <div class="nur-intro">
-      <p class="nur-intro__lead">Supporting Regional Rewilding</p>
-      <p class="nur-intro__body">The Forktree Project Nursery grows a wide range of endemic native species to meet the needs of a variety of planting projects, including:</p>
-      <ul class="nur-list nur-list--plain">
-        <li>large&#8209;scale habitat restoration and conservation projects</li>
-        <li>private landholders looking to restore ecological health on their properties</li>
-        <li>our own restoration program on the Forktree Project site itself</li>
-      </ul>
-      <p class="nur-intro__body">We are proud to have grown over 75,000 plants of over 175 different species in the nursery this year.</p>
+  <section class="nur-section nur-section--plain nur-section--left nur-section--with-photo">
+    <div class="nur-split">
+      <div class="nur-split__text">
+        <p class="nur-kicker">Nursery</p>
+        <div class="nur-intro">
+          <p class="nur-intro__lead">Supporting Regional Rewilding</p>
+          <p class="nur-intro__body">The Forktree Project Nursery grows a wide range of endemic native species to meet the needs of a variety of planting projects, including:</p>
+          <ul class="nur-list nur-list--plain">
+            <li>large&#8209;scale habitat restoration and conservation projects</li>
+            <li>private landholders looking to restore ecological health on their properties</li>
+            <li>our own restoration program on the Forktree Project site itself</li>
+          </ul>
+          <p class="nur-intro__body">We are proud to have grown over 75,000 plants of over 175 different species in the nursery this year.</p>
+        </div>
+      </div>
+      <div class="nur-split__photo">
+        <img src="/images/nursery/img_4220.jpg" alt="Nursery team potting seedlings at The Forktree Project" loading="lazy" />
+      </div>
     </div>
   </section>
 
   <!-- Restoration-led Provenance -->
-  <section class="nur-section nur-section--olive">
+  <section class="nur-section nur-section--olive nur-section--right">
     <p class="nur-kicker nur-kicker--light">Provenance</p>
     <div class="nur-intro">
       <p class="nur-intro__lead nur-intro__lead--light">Restoration-led Provenance</p>
@@ -60,14 +67,21 @@ const formatMonth = (ym: string) => {
   </section>
 
   <!-- Guided by ecological knowledge -->
-  <section class="nur-section nur-section--plain">
-    <p class="nur-kicker">Advice</p>
-    <div class="nur-intro">
-      <p class="nur-intro__lead">Guided by ecological knowledge</p>
-      <p class="nur-intro__body">We work closely with clients to advise on species best suited to their site, drawing on our team&rsquo;s extensive knowledge of local flora and best-practice restoration methods.</p>
-      <p class="nur-intro__body">To discuss your habitat restoration needs, please contact us at <a href="mailto:nursery@theforktreeproject.com">nursery@theforktreeproject.com</a>. We&rsquo;d love to work with you.</p>
-      <div class="nur-cta">
-        <a href="mailto:nursery@theforktreeproject.com" class="btn--cta btn--cta-lg btn--cta-dark">Get in Touch</a>
+  <section class="nur-section nur-section--plain nur-section--left nur-section--with-photo">
+    <div class="nur-split">
+      <div class="nur-split__text">
+        <p class="nur-kicker">Advice</p>
+        <div class="nur-intro">
+          <p class="nur-intro__lead">Guided by ecological knowledge</p>
+          <p class="nur-intro__body">We work closely with clients to advise on species best suited to their site, drawing on our team&rsquo;s extensive knowledge of local flora and best-practice restoration methods.</p>
+          <p class="nur-intro__body">To discuss your habitat restoration needs, please contact us at <a href="mailto:nursery@theforktreeproject.com">nursery@theforktreeproject.com</a>. We&rsquo;d love to work with you.</p>
+          <div class="nur-cta">
+            <a href="mailto:nursery@theforktreeproject.com" class="btn--cta btn--cta-lg btn--cta-dark">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+      <div class="nur-split__photo">
+        <img src="/images/nursery/img_4232.jpg" alt="Benches of seedlings at The Forktree Project Nursery" loading="lazy" />
       </div>
     </div>
   </section>
@@ -114,8 +128,8 @@ const formatMonth = (ym: string) => {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 50% at 50% 45%, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.2) 100%),
-      rgba(0, 0, 0, 0.35);
+      radial-gradient(ellipse 80% 50% at 50% 45%, rgba(0, 0, 0, 0.35) 0%, transparent 100%),
+      rgba(0, 0, 0, 0.3);
     z-index: 1;
   }
 
@@ -158,9 +172,99 @@ const formatMonth = (ym: string) => {
   }
 
   .nur-intro {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 40px 60px 80px;
+  }
+
+  .nur-section--left .nur-kicker,
+  .nur-section--right .nur-kicker {
+    max-width: 1000px;
+  }
+
+  .nur-section--left .nur-kicker,
+  .nur-section--left .nur-intro,
+  .nur-section--left .nur-photos {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .nur-section--left .nur-kicker {
+    text-align: left;
+  }
+
+  .nur-section--right .nur-kicker,
+  .nur-section--right .nur-intro,
+  .nur-section--right .nur-photos {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .nur-section--right .nur-kicker {
+    text-align: right;
+  }
+
+  .nur-split {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 80px 60px;
+  }
+
+  .nur-split__text {
+    flex: 1 1 50%;
+    min-width: 0;
+  }
+
+  .nur-split__photo {
+    flex: 1 1 50%;
+    line-height: 0;
+  }
+
+  .nur-split__photo img {
+    width: 100%;
+    height: auto;
+    max-height: 560px;
+    object-fit: cover;
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  .nur-section--right.nur-section--with-photo .nur-split {
+    flex-direction: row-reverse;
+  }
+
+  .nur-section--with-photo .nur-kicker {
+    max-width: none;
+    margin: 0;
+    padding: 0 0 0.75rem;
+    text-align: left;
+  }
+
+  .nur-section--with-photo .nur-intro {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media (max-width: 900px) {
+    .nur-split {
+      flex-direction: column;
+      padding: 60px 30px;
+      gap: 2rem;
+    }
+
+    .nur-section--right.nur-section--with-photo .nur-split {
+      flex-direction: column;
+    }
+
+    .nur-split__photo img {
+      max-height: 400px;
+    }
   }
 
   .nur-intro__lead {
