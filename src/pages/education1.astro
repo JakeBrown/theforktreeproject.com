@@ -93,57 +93,34 @@ import PageLayout from '../layouts/PageLayout.astro';
       <p class="edu-intro__body edu-intro__body--light">Contact us to find out more and explore how your school can get involved.</p>
       <div class="edu-cta">
         <a href="mailto:hello@theforktreeproject.com" class="btn--cta btn--cta-lg">Get in Touch</a>
-        <div class="edu-cta__stack">
-          <a href="https://forktree.app" class="btn--cta btn--cta-lg">Go to Portal</a>
-          <span class="edu-cta__sub">for remote and visiting students</span>
-        </div>
+        <a href="https://forktree.app" class="btn--cta btn--cta-lg btn--cta--with-sub">
+          <span class="btn--cta__label">Go to Portal</span>
+          <span class="btn--cta__sub">for remote and visiting students</span>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- Testimonials -->
-  <section class="edu-section edu-section--testimonials" style="background-image: url('/images/education/edu-testimonials-bg.jpg'); background-color: #2a3a2a;">
+  <section class="edu-section edu-section--testimonials">
     <div class="edu-testimonials">
-      <h2 class="edu-intro__lead edu-intro__lead--light edu-testimonials__title">Testimonials</h2>
+      <p class="edu-testimonials__kicker">Testimonials</p>
+      <h2 class="edu-testimonials__title">What schools are saying</h2>
       <div class="edu-testimonials__grid">
 
-        <blockquote class="edu-testimonial-card" data-testimonial>
-          <div class="edu-testimonial-card__body">
-            <div class="edu-testimonial-card__collapsed">
-              <p class="edu-testimonial-card__pullquote">&ldquo;A perfect choice for students from Reception through to Year 12.&rdquo;</p>
-            </div>
-            <div class="edu-testimonial-card__expanded">
-              <p>&ldquo;The Forktree Project provides students and teachers alike with a hands-on understanding around the importance of maintaining and developing our native biodiversity. On site students learn by doing, concreting ideas of sustainability, circular economy and carbon sequestration, all under the tutelage of a highly skilled and knowledgeable team. <span class="edu-testimonial-card__highlight">A perfect choice for students from Reception through to Year 12.</span>&rdquo;</p>
-            </div>
-            <cite class="edu-testimonial-card__cite">&mdash; Blackwood High School</cite>
-            <button class="edu-testimonial-card__toggle" type="button">Read full testimonial &rarr;</button>
-          </div>
+        <blockquote class="edu-tst-card">
+          <p class="edu-tst-card__quote">&ldquo;A perfect choice for students from Reception through to Year 12.&rdquo;</p>
+          <cite class="edu-tst-card__cite">Blackwood High School</cite>
         </blockquote>
 
-        <blockquote class="edu-testimonial-card" data-testimonial>
-          <div class="edu-testimonial-card__body">
-            <div class="edu-testimonial-card__collapsed">
-              <p class="edu-testimonial-card__pullquote">&ldquo;Learning doesn&rsquo;t get any more hands-on and tangible than this!&rdquo;</p>
-            </div>
-            <div class="edu-testimonial-card__expanded">
-              <p>&ldquo;Visiting The Forktree Project with our Year 8 cohort is one of the most hands-on and valuable excursions I have attended. Our students absolutely thrived while working under the guidance of Tim and Liz and their team. The students learnt about sustainability and circular economy by getting stuck into some hard work and our school is incredibly lucky to have a relationship with The Forktree Project. <span class="edu-testimonial-card__highlight">Learning doesn&rsquo;t get any more hands-on and tangible than this!</span>&rdquo;</p>
-            </div>
-            <cite class="edu-testimonial-card__cite">&mdash; Tatachilla Lutheran College</cite>
-            <button class="edu-testimonial-card__toggle" type="button">Read full testimonial &rarr;</button>
-          </div>
+        <blockquote class="edu-tst-card">
+          <p class="edu-tst-card__quote">&ldquo;Learning doesn&rsquo;t get any more hands-on and tangible than this!&rdquo;</p>
+          <cite class="edu-tst-card__cite">Tatachilla Lutheran College</cite>
         </blockquote>
 
-        <blockquote class="edu-testimonial-card" data-testimonial>
-          <div class="edu-testimonial-card__body">
-            <div class="edu-testimonial-card__collapsed">
-              <p class="edu-testimonial-card__pullquote">&ldquo;We wholeheartedly endorse this initiative and encourage other schools to participate and experience the benefits for themselves.&rdquo;</p>
-            </div>
-            <div class="edu-testimonial-card__expanded">
-              <p>&ldquo;Our students have expressed their excitement and satisfaction with the project, with students commenting that it was their favourite learning activity for the year! We are grateful for the opportunity to be part of The Forktree Project and look forward to continuing our involvement in the future. <span class="edu-testimonial-card__highlight">We wholeheartedly endorse this initiative and encourage other schools to participate and experience the benefits for themselves.</span>&rdquo;</p>
-            </div>
-            <cite class="edu-testimonial-card__cite">&mdash; Adelaide Botanic High School</cite>
-            <button class="edu-testimonial-card__toggle" type="button">Read full testimonial &rarr;</button>
-          </div>
+        <blockquote class="edu-tst-card">
+          <p class="edu-tst-card__quote">&ldquo;We wholeheartedly endorse this initiative and encourage other schools to participate.&rdquo;</p>
+          <cite class="edu-tst-card__cite">Adelaide Botanic High School</cite>
         </blockquote>
 
       </div>
@@ -488,18 +465,31 @@ import PageLayout from '../layouts/PageLayout.astro';
     gap: 0.75rem;
   }
 
-  .edu-cta__stack {
+  .btn--cta.btn--cta--with-sub {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.3rem;
+    padding: 12px 32px 10px;
+    line-height: 1;
   }
 
-  .edu-cta__sub {
+  .btn--cta--with-sub .btn--cta__label {
+    font-size: 14px;
+    letter-spacing: 1.5px;
+  }
+
+  .btn--cta--with-sub .btn--cta__sub {
     font-family: var(--font-body);
-    font-size: 0.75rem;
-    letter-spacing: 0.02em;
-    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: none;
+    opacity: 0.75;
+  }
+
+  .btn--cta--with-sub:hover .btn--cta__sub {
+    opacity: 1;
   }
 
   .btn--cta {
@@ -537,162 +527,142 @@ import PageLayout from '../layouts/PageLayout.astro';
     color: white;
   }
 
-  /* Testimonials on photo background */
+  /* Testimonials — editorial + slick */
   .edu-section--testimonials {
     min-height: auto;
+    background: #fafaf9;
   }
 
   .edu-section--testimonials::before {
-    background:
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.6) 100%);
+    display: none;
   }
 
   .edu-testimonials {
-    position: relative;
-    z-index: 2;
-    max-width: 1000px;
+    max-width: 1280px;
     width: 100%;
     margin: 0 auto;
     padding: 100px 60px;
     text-align: center;
   }
 
-  .edu-testimonials .edu-kicker {
-    padding: 0 0 0.5rem;
+  .edu-testimonials__kicker {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #00A651;
+    margin: 0 0 0.75rem;
   }
 
   .edu-testimonials__title {
-    margin: 0 0 2.5rem;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #1a1a1a;
+    margin: 0 0 3.5rem;
   }
 
   .edu-testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .edu-tst-card {
+    position: relative;
+    margin: 0;
+    padding: 3.5rem 1rem 1.5rem;
+    text-align: left;
+    transition: transform 0.35s ease;
+  }
+
+  .edu-tst-card::before {
+    content: '\201C';
+    position: absolute;
+    top: -0.75rem;
+    left: 0;
+    font-family: var(--font-heading);
+    font-size: 5.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #00A651;
+    opacity: 0.22;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+
+  .edu-tst-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .edu-tst-card:hover::before {
+    opacity: 0.42;
+    transform: translateY(-2px);
+  }
+
+  .edu-tst-card__quote {
+    font-family: var(--font-heading);
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #1a1a1a;
+    letter-spacing: -0.005em;
+    margin: 0 0 1.25rem;
+  }
+
+  .edu-tst-card__cite {
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-heading);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #666;
+  }
+
+  .edu-tst-card__cite::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: #00A651;
   }
 
   .edu-testimonials__more {
-    margin: 2.5rem 0 0;
+    margin: 3rem 0 0;
     font-family: var(--font-heading);
-    font-size: 0.95rem;
-    letter-spacing: 0.03em;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
   }
 
   .edu-testimonials__more a {
-    color: #fff;
+    color: #00A651;
     text-decoration: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-    padding-bottom: 2px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
   }
 
   .edu-testimonials__more a:hover {
-    border-bottom-color: #fff;
+    border-bottom-color: #00A651;
   }
 
-  .edu-testimonial-card {
-    position: relative;
-    background: #fff;
-    border: 1px solid #e5e5e2;
-    border-radius: 10px;
-    padding: 2rem 2rem 1.5rem;
-    margin: 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    text-align: left;
-  }
+  @media (max-width: 900px) {
+    .edu-testimonials__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
 
-  .edu-testimonial-card__body p {
-    font-family: var(--font-body);
-    font-size: clamp(0.95rem, 1.3vw, 1.05rem);
-    font-style: italic;
-    line-height: 1.7;
-    color: #444;
-    margin-bottom: 0.75rem;
-  }
-
-  .edu-testimonial-card__pullquote {
-    font-size: clamp(1.25rem, 2.2vw, 1.6rem);
-    font-weight: 600;
-    line-height: 1.4;
-    font-style: italic;
-    font-family: var(--font-heading);
-    letter-spacing: -0.01em;
-    margin-bottom: 0.75rem;
-    color: #1a1a1a;
-  }
-
-  .edu-testimonial-card__collapsed,
-  .edu-testimonial-card__expanded {
-    display: grid;
-    grid-template-rows: 1fr;
-    transition: grid-template-rows 0.45s ease;
-  }
-
-  .edu-testimonial-card__collapsed > *,
-  .edu-testimonial-card__expanded > * {
-    overflow: hidden;
-    min-height: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .edu-testimonial-card__expanded {
-    grid-template-rows: 0fr;
-  }
-
-  .edu-testimonial-card__expanded > * {
-    opacity: 0;
-  }
-
-  .edu-testimonial-card--open .edu-testimonial-card__collapsed {
-    grid-template-rows: 0fr;
-  }
-
-  .edu-testimonial-card--open .edu-testimonial-card__collapsed > * {
-    opacity: 0;
-  }
-
-  .edu-testimonial-card--open .edu-testimonial-card__expanded {
-    grid-template-rows: 1fr;
-  }
-
-  .edu-testimonial-card--open .edu-testimonial-card__expanded > * {
-    opacity: 1;
-    transition-delay: 0.15s;
-  }
-
-  .edu-testimonial-card--open .edu-testimonial-card__toggle {
-    color: #888;
-    font-size: 0.8rem;
-  }
-
-  .edu-testimonial-card__highlight {
-    font-weight: 700;
-    color: #1a1a1a;
-  }
-
-  .edu-testimonial-card__toggle {
-    background: none;
-    border: none;
-    color: #00A651;
-    cursor: pointer;
-    font-size: 0.85rem;
-    padding: 0.25rem 0;
-    font-family: var(--font-body);
-    text-decoration: none;
-    letter-spacing: 0.03em;
-  }
-
-  .edu-testimonial-card__toggle:hover {
-    color: #007a3b;
-  }
-
-  .edu-testimonial-card__cite {
-    display: block;
-    font-style: normal;
-    font-weight: 600;
-    font-size: clamp(1rem, 1.3vw, 1.05rem);
-    color: #666;
-    margin-bottom: 1rem;
+    .edu-testimonials {
+      padding: 80px 24px;
+    }
   }
 
   @media (max-width: 768px) {
@@ -728,14 +698,3 @@ import PageLayout from '../layouts/PageLayout.astro';
   }
 </style>
 
-<script>
-  document.querySelectorAll('.edu-testimonial-card__toggle').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('[data-testimonial]');
-      if (card) {
-        const isOpen = card.classList.toggle('edu-testimonial-card--open');
-        btn.innerHTML = isOpen ? '&larr; Show less' : 'Read full testimonial &rarr;';
-      }
-    });
-  });
-</script>
