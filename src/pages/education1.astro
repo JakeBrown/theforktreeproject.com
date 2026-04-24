@@ -93,6 +93,7 @@ import PageLayout from '../layouts/PageLayout.astro';
       <p class="edu-intro__body edu-intro__body--light">Contact us to find out more and explore how your school can get involved.</p>
       <div class="edu-cta">
         <a href="mailto:hello@theforktreeproject.com" class="btn--cta btn--cta-lg">Get in Touch</a>
+        <a href="https://forktree.app" class="btn--cta btn--cta-lg">Visit forktree.app</a>
       </div>
     </div>
   </section>
@@ -480,6 +481,9 @@ import PageLayout from '../layouts/PageLayout.astro';
 
   .edu-cta {
     margin-top: var(--space-md);
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
   }
 
   .btn--cta {
