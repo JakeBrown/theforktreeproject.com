@@ -67,7 +67,7 @@ import PageLayout from '../layouts/PageLayout.astro';
         </div>
       </div>
       <div class="edu-split__photo">
-        <img src="/images/education/education-bg2.jpg" alt="Students on-site at The Forktree Project" loading="lazy" />
+        <img src="/images/education/forktree-app-program.jpg" class="edu-split__photo-img--top" alt="Sample Forktree online learning program with ACARA curriculum codes" loading="lazy" />
       </div>
     </div>
   </section>
@@ -337,6 +337,10 @@ import PageLayout from '../layouts/PageLayout.astro';
     display: block;
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  .edu-split__photo img.edu-split__photo-img--top {
+    object-position: top;
   }
 
   .edu-section--right.edu-section--with-photo .edu-split {
