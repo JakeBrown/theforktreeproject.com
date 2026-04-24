@@ -73,22 +73,26 @@ import PageLayout from '../layouts/PageLayout.astro';
   </section>
 
   <!-- Join Us From Afar -->
-  <section class="edu-section edu-section--feature" style="background-image: url('/images/education/edu-join-afar.jpg'); background-color: #1a2a1a;">
-    <div class="edu-section__content edu-section__content--center">
-      <div class="edu-text edu-text--wide">
-        <h2>Join Us From Afar</h2>
-        <div class="edu-body">
-          <p>If your school is too far from Forktree for an on-site visit, you can still be part of the Forktree story through our <strong>Remote Education Program</strong>. This option allows schools to:</p>
-          <ul class="edu-list edu-list--feature">
+  <section class="edu-section edu-section--plain edu-section--left edu-section--with-photo">
+    <div class="edu-split">
+      <div class="edu-split__text">
+        <p class="edu-kicker">Remote Education</p>
+        <div class="edu-intro">
+          <p class="edu-intro__lead">Join Us From Afar</p>
+          <p class="edu-intro__body">If your school is too far from Forktree for an on-site visit, you can still be part of the Forktree story through our <strong>Remote Education Program</strong>. This option allows schools to:</p>
+          <ul class="edu-list edu-list--plain">
             <li><strong>Engage with Forktree&rsquo;s environmental learning</strong> from anywhere</li>
             <li><strong>Access tailored online resources</strong> aligned with curriculum goals</li>
             <li><strong>Connect students to a real-world restoration project</strong> without needing to travel</li>
           </ul>
-          <p>Contact us to find out more and explore how your school can get involved.</p>
+          <p class="edu-intro__body">Contact us to find out more and explore how your school can get involved.</p>
           <div class="edu-cta">
-            <a href="mailto:hello@theforktreeproject.com" class="btn--cta btn--cta-lg">Get in Touch</a>
+            <a href="mailto:hello@theforktreeproject.com" class="btn--cta btn--cta-lg btn--cta-dark">Get in Touch</a>
           </div>
         </div>
+      </div>
+      <div class="edu-split__photo">
+        <img src="/images/education/edu-join-afar.jpg" alt="Aerial view of The Forktree Project site and coastline" loading="lazy" />
       </div>
     </div>
   </section>
@@ -206,19 +210,6 @@ import PageLayout from '../layouts/PageLayout.astro';
 
   .edu-section--olive::before {
     display: none;
-  }
-
-  .edu-section--feature {
-    min-height: auto;
-  }
-
-  .edu-section--feature::before {
-    background:
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.7) 100%);
-  }
-
-  .edu-section--feature .edu-section__content {
-    padding: 160px 100px 140px;
   }
 
   .edu-section--cta {
@@ -429,19 +420,6 @@ import PageLayout from '../layouts/PageLayout.astro';
 
   .edu-list--olive li::before {
     color: rgba(255, 255, 255, 0.4);
-  }
-
-  .edu-list--feature {
-    margin: 1rem auto 1.5rem;
-    max-width: 640px;
-  }
-
-  .edu-list--feature li {
-    color: rgba(255, 255, 255, 0.95);
-  }
-
-  .edu-list--feature li::before {
-    color: rgba(255, 255, 255, 0.55);
   }
 
   .edu-section__content {
@@ -688,10 +666,6 @@ import PageLayout from '../layouts/PageLayout.astro';
 
     .edu-section__content {
       padding: 100px 30px;
-    }
-
-    .edu-section--feature .edu-section__content {
-      padding: 80px 30px;
     }
 
     .edu-text,
