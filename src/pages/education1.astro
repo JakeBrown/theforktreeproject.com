@@ -625,20 +625,43 @@ import PageLayout from '../layouts/PageLayout.astro';
     color: #1a1a1a;
   }
 
-  .edu-testimonial-card__collapsed {
-    display: block;
+  .edu-testimonial-card__collapsed,
+  .edu-testimonial-card__expanded {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 0.45s ease;
+  }
+
+  .edu-testimonial-card__collapsed > *,
+  .edu-testimonial-card__expanded > * {
+    overflow: hidden;
+    min-height: 0;
+    transition: opacity 0.3s ease;
   }
 
   .edu-testimonial-card__expanded {
-    display: none;
+    grid-template-rows: 0fr;
+  }
+
+  .edu-testimonial-card__expanded > * {
+    opacity: 0;
   }
 
   .edu-testimonial-card--open .edu-testimonial-card__collapsed {
-    display: none;
+    grid-template-rows: 0fr;
+  }
+
+  .edu-testimonial-card--open .edu-testimonial-card__collapsed > * {
+    opacity: 0;
   }
 
   .edu-testimonial-card--open .edu-testimonial-card__expanded {
-    display: block;
+    grid-template-rows: 1fr;
+  }
+
+  .edu-testimonial-card--open .edu-testimonial-card__expanded > * {
+    opacity: 1;
+    transition-delay: 0.15s;
   }
 
   .edu-testimonial-card--open .edu-testimonial-card__toggle {
