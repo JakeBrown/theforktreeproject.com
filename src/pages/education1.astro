@@ -129,19 +129,6 @@ import PageLayout from '../layouts/PageLayout.astro';
         <blockquote class="edu-testimonial-card" data-testimonial>
           <div class="edu-testimonial-card__body">
             <div class="edu-testimonial-card__collapsed">
-              <p class="edu-testimonial-card__pullquote">&ldquo;The Forktree Project offers an effective platform for students to think globally and act locally.&rdquo;</p>
-            </div>
-            <div class="edu-testimonial-card__expanded">
-              <p>&ldquo;Liz and Tim work tirelessly to promote and support efforts to protect the integrity of our environment. Their important vision has attracted a multidisciplinary team who are committed to combatting climate change through encouraging sustainable practices, restoring habitat through rewilding and focusing on sequestration. Forktree enables students to participate in a range of tasks that show them they are quite literally planting the seeds of a greener future - a concrete, tangible means of combatting climate anxiety among the next generation. Our school will continue visiting Forktree to supplement students&rsquo; environmental education with practical application. <span class="edu-testimonial-card__highlight">The Forktree Project offers an effective platform for students to think globally and act locally.</span> It is a relationship we are proud of and look forward to seeing thrive.&rdquo;</p>
-            </div>
-            <cite class="edu-testimonial-card__cite">&mdash; Prince Alfred College</cite>
-            <button class="edu-testimonial-card__toggle" type="button">Read full testimonial &rarr;</button>
-          </div>
-        </blockquote>
-
-        <blockquote class="edu-testimonial-card" data-testimonial>
-          <div class="edu-testimonial-card__body">
-            <div class="edu-testimonial-card__collapsed">
               <p class="edu-testimonial-card__pullquote">&ldquo;We wholeheartedly endorse this initiative and encourage other schools to participate and experience the benefits for themselves.&rdquo;</p>
             </div>
             <div class="edu-testimonial-card__expanded">
@@ -152,33 +139,10 @@ import PageLayout from '../layouts/PageLayout.astro';
           </div>
         </blockquote>
 
-        <blockquote class="edu-testimonial-card" data-testimonial>
-          <div class="edu-testimonial-card__body">
-            <div class="edu-testimonial-card__collapsed">
-              <p class="edu-testimonial-card__pullquote">&ldquo;The sequential approach has undoubtedly left a lasting mark on our students.&rdquo;</p>
-            </div>
-            <div class="edu-testimonial-card__expanded">
-              <p>&ldquo;Annesley&rsquo;s collaboration with The Forktree Project has been transformative. The bespoke extended program developed by The Forktree Project not only addressed our specific outcomes but also gave students a sense of ownership of the Carrickalinga site. <span class="edu-testimonial-card__highlight">The sequential approach has undoubtedly left a lasting mark on our students</span> giving them confidence when leading their peers through various experiences related to the amazing work that the Forktree Project team are doing.&rdquo;</p>
-            </div>
-            <cite class="edu-testimonial-card__cite">&mdash; Annesley Junior School</cite>
-            <button class="edu-testimonial-card__toggle" type="button">Read full testimonial &rarr;</button>
-          </div>
-        </blockquote>
-
-        <blockquote class="edu-testimonial-card" data-testimonial>
-          <div class="edu-testimonial-card__body">
-            <div class="edu-testimonial-card__collapsed">
-              <p class="edu-testimonial-card__pullquote">&ldquo;Tim and Liz are incredible ambassadors and live by example.&rdquo;</p>
-            </div>
-            <div class="edu-testimonial-card__expanded">
-              <p>&ldquo;Operation Flinders Next Step program absolutely loved our time at Forktree - it was eye-opening for the young people to see what is being achieved by the project and to have the ability to engage in a practical, hands-on, real-life effort. To be able to camp onsite at such a beautiful location was amazing and the young people loved being able to go for walks, do yoga and immerse themselves in the beautiful surroundings. <span class="edu-testimonial-card__highlight">Tim and Liz are incredible ambassadors and live by example,</span> working hard alongside the young people.&rdquo;</p>
-            </div>
-            <cite class="edu-testimonial-card__cite">&mdash; Operation Flinders</cite>
-            <button class="edu-testimonial-card__toggle" type="button">Read full testimonial &rarr;</button>
-          </div>
-        </blockquote>
-
       </div>
+      <p class="edu-testimonials__more">
+        <a href="/testimonials">Read more testimonials from other schools &rarr;</a>
+      </p>
     </div>
   </section>
 
@@ -602,6 +566,25 @@ import PageLayout from '../layouts/PageLayout.astro';
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+  }
+
+  .edu-testimonials__more {
+    margin: 2.5rem 0 0;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+  }
+
+  .edu-testimonials__more a {
+    color: #00A651;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 166, 81, 0.3);
+    padding-bottom: 2px;
+  }
+
+  .edu-testimonials__more a:hover {
+    color: #007a3b;
+    border-bottom-color: #007a3b;
   }
 
   .edu-testimonial-card {
