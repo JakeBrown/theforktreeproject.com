@@ -54,8 +54,62 @@ import Footer from '../components/Footer.astro';
         <h2>Australia is one of the top countries globally with such tree-planting potential.</h2>
       </div>
     </div>
-    <div class="index-section__cta">
-      <a href="/about-us" class="btn--cta">Project Overview &gt;&gt;</a>
+  </section>
+
+  <!-- About: What is The Forktree Project? -->
+  <section class="home-about home-about--plain home-about--center">
+    <div class="home-about__inner">
+      <p class="home-about__kicker">About</p>
+      <h2 class="home-about__lead">What is The Forktree Project?</h2>
+      <p class="home-about__body">The Forktree Project is a registered charity dedicated to widescale habitat and biodiversity restoration throughout the Hills &amp; Fleurieu region and beyond, and to the education, engagement and empowerment of young people and the wider community in habitat restoration.</p>
+    </div>
+  </section>
+
+  <!-- About: Our Vision -->
+  <section class="home-about home-about--olive home-about--left">
+    <div class="home-about__inner">
+      <h2 class="home-about__lead home-about__lead--light">Our Vision</h2>
+      <ul class="home-about__list home-about__list--olive">
+        <li><strong>A fully restored and thriving biodiversity hotspot</strong> on the 54-hectare exemplar Forktree site</li>
+        <li><strong>Restored and enriched biodiversity across the region and beyond</strong>, including on private land</li>
+        <li><strong>An enthused, empowered and engaged younger generation</strong> of environmental stewards</li>
+        <li><strong>Enhanced wellbeing</strong> amongst young people and the wider community as a result of purposeful connection with nature</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- About: Goals -->
+  <section class="home-about home-about--plain home-about--right">
+    <div class="home-about__inner">
+      <h2 class="home-about__lead">Our Goals</h2>
+      <p class="home-about__body">The Forktree Project works to achieve this vision via:</p>
+      <ol class="home-about__goals">
+        <li>the ongoing <a href="/goals"><strong>ecological restoration</strong></a> of the main Forktree site &mdash; an extensively cleared 54ha former pastoral property on the Fleurieu Peninsula &mdash; as an example of what can be achieved</li>
+        <li>the work of its <a href="/nursery"><strong>native plant nursery</strong></a> and rare seed orchard to support region-wide ecological restoration</li>
+        <li>bespoke <a href="/education1"><strong>experiential education</strong></a> programs for school groups and tertiary education students</li>
+        <li>engagement of the wider community through on-site <a href="/team-days"><strong>Team Days</strong></a> and community <a href="/get-involved"><strong>volunteering</strong></a> opportunities</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- About: Team -->
+  <section class="home-about home-about--olive home-about--center">
+    <div class="home-about__inner">
+      <h2 class="home-about__lead home-about__lead--light">The Forktree Team</h2>
+
+      <div class="home-about__bio">
+        <h3 class="home-about__bio-name home-about__bio-name--light">Tim Jarvis AM</h3>
+        <p class="home-about__bio-role">Founder and CEO</p>
+        <p class="home-about__body home-about__body--light">Tim Jarvis AM is an environmental scientist, author, filmmaker and adventurer with Masters degrees in environmental science and environmental law. He is committed to practical solutions to climate change and biodiversity loss. Tim was appointed a Member of the Order of Australia (AM) in 2010 for services to the environment, exploration and community, named Australian Geographic&rsquo;s Conservationist of the Year in 2016, and recognised as South Australia&rsquo;s Australian of the Year in 2024. A believer in deeds over words, he sees the Forktree Project as a powerful example of what purposeful action can achieve.</p>
+      </div>
+
+      <div class="home-about__bio">
+        <h3 class="home-about__bio-name home-about__bio-name--light">Elizabeth Blumer</h3>
+        <p class="home-about__bio-role">COO; Head of Education and Community Outreach</p>
+        <p class="home-about__body home-about__body--light">Elizabeth Blumer is a qualified, registered teacher with more than 15 years&rsquo; experience in middle and high school education, alongside governance experience in educational wellbeing. She holds postgraduate qualifications in Education Wellbeing and Positive Mental Health. Elizabeth brings together her pedagogical experience and her background in writing and editing to lead the development of the Forktree Project Education Program. She is energised by the project&rsquo;s educational and wellbeing potential &mdash; and is, of course, an enthusiastic tree&#8209;planter.</p>
+      </div>
+
+      <p class="home-about__thanks home-about__body--light">The Forktree Project is grateful for the generous efforts of many volunteers. Their support is key to the project&rsquo;s continued success &mdash; our heartfelt thanks to them all.</p>
     </div>
   </section>
 
@@ -297,6 +351,183 @@ import Footer from '../components/Footer.astro';
     color: #000;
   }
 
+  /* About sections (Home ∪ About) */
+  .home-about {
+    position: relative;
+    padding: 100px 60px;
+  }
+
+  .home-about--plain {
+    background-color: #fff;
+    color: var(--color-text);
+  }
+
+  .home-about--olive {
+    background-color: #3a4a2a;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .home-about__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .home-about--left .home-about__inner {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .home-about--right .home-about__inner {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .home-about--center {
+    text-align: center;
+  }
+
+  .home-about__kicker {
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-text);
+    margin: 0 0 1rem;
+  }
+
+  .home-about--olive .home-about__kicker {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .home-about__lead {
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.35;
+    color: #1a1a1a;
+    margin: 0 0 1.5rem;
+  }
+
+  .home-about__lead--light {
+    color: #fff;
+  }
+
+  .home-about__body {
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    line-height: 1.7;
+    color: #444;
+    margin: 0 0 1rem;
+  }
+
+  .home-about__body--light {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .home-about__list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+    text-align: left;
+  }
+
+  .home-about__list li {
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .home-about__list li::before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    color: #00A651;
+  }
+
+  .home-about__list--olive li {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .home-about__goals {
+    list-style: decimal outside;
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    line-height: 1.7;
+    color: #444;
+    padding-left: 1.75rem;
+    margin: 0.5rem 0 0;
+    text-align: left;
+  }
+
+  .home-about__goals li::marker {
+    color: #00A651;
+    font-weight: 700;
+  }
+
+  .home-about__goals li {
+    margin-bottom: 0.75rem;
+  }
+
+  .home-about__goals a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: rgba(0, 166, 81, 0.5);
+    text-underline-offset: 3px;
+  }
+
+  .home-about__goals a:hover {
+    text-decoration-color: #00A651;
+  }
+
+  .home-about__bio {
+    text-align: left;
+    max-width: 820px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .home-about--center .home-about__bio:last-of-type {
+    margin-bottom: 2rem;
+  }
+
+  .home-about__bio-name {
+    font-family: var(--font-heading);
+    font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .home-about__bio-name--light {
+    color: #fff;
+  }
+
+  .home-about__bio-role {
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0.35rem 0 1rem;
+  }
+
+  .home-about--plain .home-about__bio-role {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .home-about__thanks {
+    max-width: 820px;
+    margin: 0 auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-style: italic;
+    text-align: left;
+  }
+
   /* Mobile */
   @media (max-width: 768px) {
     .index-nav {
@@ -323,6 +554,15 @@ import Footer from '../components/Footer.astro';
 
     .index-section__cta {
       padding: 0 30px 60px;
+    }
+
+    .home-about {
+      padding: 70px 30px;
+    }
+
+    .home-about--left .home-about__inner,
+    .home-about--right .home-about__inner {
+      margin: 0 auto;
     }
   }
 </style>
