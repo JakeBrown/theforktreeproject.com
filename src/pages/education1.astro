@@ -5,7 +5,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 <PageLayout title="Education — The Forktree Project" description="Experiential sustainability education for young people at The Forktree Project.">
 
   <!-- Hero -->
-  <section class="edu-section edu-section--hero" style="background-image: url('/images/education/edu-hero-aerial.jpg'); background-color: #2a3a2a;">
+  <section class="edu-section edu-section--hero" style="background-image: url('/images/education/edu-hero.jpg'); background-color: #2a3a2a;">
     <div class="edu-section__content edu-section__content--center">
       <div class="edu-text edu-text--wide">
         <h1>Experiential Education at The Forktree Project</h1>
@@ -57,43 +57,24 @@ import PageLayout from '../layouts/PageLayout.astro';
     </div>
   </section>
 
-  <!-- Extending Learning Beyond the Visit -->
-  <section class="edu-section edu-section--plain edu-section--right edu-section--with-photo">
-    <div class="edu-split">
-      <div class="edu-split__text">
-        <p class="edu-kicker">Online Learning</p>
-        <div class="edu-intro">
-          <p class="edu-intro__lead">Extending Learning Beyond the Visit</p>
-          <p class="edu-intro__body">Each school&rsquo;s Forktree experience is supported by a bespoke online learning program designed to deepen engagement before and after students visit Forktree. Each program:</p>
-          <ul class="edu-list edu-list--plain">
-            <li><strong>Builds on the hands-on experience</strong> students have at Forktree</li>
-            <li><strong>Connects directly</strong> to curriculum goals</li>
-            <li><strong>Strengthens understanding</strong> of environmental stewardship</li>
-            <li><strong>Encourages engagement and pride</strong> in collective achievements</li>
-          </ul>
-        </div>
-      </div>
-      <div class="edu-split__photo">
-        <img src="/images/education/forktree-app-program.jpg" class="edu-split__photo-img--top" alt="Sample Forktree online learning program with ACARA curriculum codes" loading="lazy" />
-      </div>
-    </div>
-  </section>
-
   <!-- Join Us From Afar -->
-  <section class="edu-section edu-section--olive edu-section--left">
-    <p class="edu-kicker edu-kicker--light">Remote Education</p>
+  <section class="edu-section edu-section--plain edu-section--left">
+    <p class="edu-kicker">Remote Education</p>
     <div class="edu-intro">
-      <p class="edu-intro__lead edu-intro__lead--light">Join Us From Afar</p>
-      <p class="edu-intro__body edu-intro__body--light">If your school is too far from Forktree for an on-site visit, you can still be part of the Forktree story through our <strong>Remote Education Program</strong>. This option allows schools to:</p>
-      <ul class="edu-list edu-list--olive">
+      <p class="edu-intro__lead">Join Us From Afar</p>
+      <p class="edu-intro__body">If your school is too far from Forktree for an on-site visit, you can still be part of the Forktree story through our <strong>Remote Education Program</strong>. This option allows schools to:</p>
+      <ul class="edu-list edu-list--plain">
         <li><strong>Engage with Forktree&rsquo;s environmental learning</strong> from anywhere</li>
         <li><strong>Access tailored online resources</strong> aligned with curriculum goals</li>
         <li><strong>Connect students to a real-world restoration project</strong> without needing to travel</li>
       </ul>
-      <p class="edu-intro__body edu-intro__body--light">Contact us to find out more and explore how your school can get involved.</p>
+      <p class="edu-intro__body">Contact us to find out more and explore how your school can get involved.</p>
       <div class="edu-cta">
-        <a href="mailto:hello@theforktreeproject.com" class="btn--cta btn--cta-lg">Get in Touch</a>
-        <a href="https://forktree.app" class="btn--cta btn--cta-lg btn--cta--with-sub">
+        <a href="mailto:hello@theforktreeproject.com" class="btn--cta btn--cta-lg btn--cta-dark btn--cta--with-sub">
+          <span class="btn--cta__label">Get in Touch</span>
+          <span class="btn--cta__sub">for program enquiries</span>
+        </a>
+        <a href="https://forktree.app" class="btn--cta btn--cta-lg btn--cta-dark btn--cta--with-sub">
           <span class="btn--cta__label">Go to Portal</span>
           <span class="btn--cta__sub">for remote and visiting students</span>
         </a>
@@ -527,10 +508,10 @@ import PageLayout from '../layouts/PageLayout.astro';
     color: white;
   }
 
-  /* Testimonials — editorial + slick */
+  /* Testimonials — editorial + slick on dark */
   .edu-section--testimonials {
     min-height: auto;
-    background: #fafaf9;
+    background: #1f2a1f;
   }
 
   .edu-section--testimonials::before {
@@ -551,7 +532,7 @@ import PageLayout from '../layouts/PageLayout.astro';
     font-weight: 500;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: #00A651;
+    color: rgba(0, 198, 98, 0.9);
     margin: 0 0 0.75rem;
   }
 
@@ -560,7 +541,7 @@ import PageLayout from '../layouts/PageLayout.astro';
     font-size: clamp(1.75rem, 3.2vw, 2.5rem);
     font-weight: 700;
     line-height: 1.15;
-    color: #1a1a1a;
+    color: #fff;
     margin: 0 0 3.5rem;
   }
 
@@ -588,8 +569,8 @@ import PageLayout from '../layouts/PageLayout.astro';
     font-size: 5.5rem;
     font-weight: 700;
     line-height: 1;
-    color: #00A651;
-    opacity: 0.22;
+    color: #00C662;
+    opacity: 0.35;
     transition: opacity 0.35s ease, transform 0.35s ease;
   }
 
@@ -598,7 +579,7 @@ import PageLayout from '../layouts/PageLayout.astro';
   }
 
   .edu-tst-card:hover::before {
-    opacity: 0.42;
+    opacity: 0.65;
     transform: translateY(-2px);
   }
 
@@ -608,7 +589,7 @@ import PageLayout from '../layouts/PageLayout.astro';
     font-style: italic;
     font-weight: 500;
     line-height: 1.5;
-    color: #1a1a1a;
+    color: #fff;
     letter-spacing: -0.005em;
     margin: 0 0 1.25rem;
   }
@@ -623,14 +604,14 @@ import PageLayout from '../layouts/PageLayout.astro';
     font-size: 0.72rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #666;
+    color: rgba(255, 255, 255, 0.65);
   }
 
   .edu-tst-card__cite::before {
     content: '';
     width: 24px;
     height: 1px;
-    background: #00A651;
+    background: #00C662;
   }
 
   .edu-testimonials__more {
@@ -643,7 +624,7 @@ import PageLayout from '../layouts/PageLayout.astro';
   }
 
   .edu-testimonials__more a {
-    color: #00A651;
+    color: #00C662;
     text-decoration: none;
     padding-bottom: 3px;
     border-bottom: 1px solid transparent;
@@ -651,7 +632,7 @@ import PageLayout from '../layouts/PageLayout.astro';
   }
 
   .edu-testimonials__more a:hover {
-    border-bottom-color: #00A651;
+    border-bottom-color: #00C662;
   }
 
   @media (max-width: 900px) {
