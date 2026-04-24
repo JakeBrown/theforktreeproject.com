@@ -73,6 +73,15 @@ import Footer from '../components/Footer.astro';
         <li>bespoke <a href="/education1"><strong>experiential education</strong></a> programs for school groups and tertiary education students</li>
         <li>engagement of the wider community through on-site <a href="/team-days"><strong>Team Days</strong></a> and community <a href="/get-involved"><strong>volunteering</strong></a> opportunities</li>
       </ol>
+      <p class="home-about__body home-about__goals-footnote">For more information on each of these goals, click on the links above.</p>
+    </div>
+  </section>
+
+  <!-- About: Why? -->
+  <section class="home-about home-about--plain home-about--center">
+    <div class="home-about__inner">
+      <h2 class="home-about__lead">Why?</h2>
+      <p class="home-about__body home-about__placeholder"><em>Copy to follow &mdash; one or two paragraphs on biodiversity loss, the climate crisis, and our connection with nature.</em></p>
     </div>
   </section>
 
@@ -91,6 +100,30 @@ import Footer from '../components/Footer.astro';
         <h3 class="home-about__bio-name home-about__bio-name--light">Elizabeth Blumer</h3>
         <p class="home-about__bio-role">COO; Head of Education and Community Outreach</p>
         <p class="home-about__body home-about__body--light">Elizabeth Blumer is a qualified, registered teacher with more than 15 years&rsquo; experience in middle and high school education, alongside governance experience in educational wellbeing. She holds postgraduate qualifications in Education Wellbeing and Positive Mental Health. Elizabeth brings together her pedagogical experience and her background in writing and editing to lead the development of the Forktree Project Education Program. She is energised by the project&rsquo;s educational and wellbeing potential &mdash; and is, of course, an enthusiastic tree&#8209;planter.</p>
+      </div>
+
+      <div class="home-about__bio home-about__bio--compact">
+        <h3 class="home-about__bio-name home-about__bio-name--light">Fleur Brown-Beeby</h3>
+        <p class="home-about__bio-role">Nursery Manager</p>
+        <p class="home-about__placeholder home-about__body--light"><em>Bio to follow.</em></p>
+      </div>
+
+      <div class="home-about__bio home-about__bio--compact">
+        <h3 class="home-about__bio-name home-about__bio-name--light">James Owen</h3>
+        <p class="home-about__bio-role">Nursery Project Officer</p>
+        <p class="home-about__placeholder home-about__body--light"><em>Bio to follow.</em></p>
+      </div>
+
+      <div class="home-about__bio home-about__bio--compact">
+        <h3 class="home-about__bio-name home-about__bio-name--light">Oliver Wilson</h3>
+        <p class="home-about__bio-role">Environmental Officer</p>
+        <p class="home-about__placeholder home-about__body--light"><em>Bio to follow.</em></p>
+      </div>
+
+      <div class="home-about__bio home-about__bio--compact">
+        <h3 class="home-about__bio-name home-about__bio-name--light">Maddie Maguire</h3>
+        <p class="home-about__bio-role">Marketing Officer</p>
+        <p class="home-about__placeholder home-about__body--light"><em>Bio to follow.</em></p>
       </div>
 
       <p class="home-about__thanks home-about__body--light">The Forktree Project is grateful for the generous efforts of many volunteers. Their support is key to the project&rsquo;s continued success &mdash; our heartfelt thanks to them all.</p>
@@ -404,6 +437,10 @@ import Footer from '../components/Footer.astro';
     margin: 0 auto 2.5rem;
   }
 
+  .home-about__bio--compact {
+    margin-bottom: 1.5rem;
+  }
+
   .home-about--center .home-about__bio:last-of-type {
     margin-bottom: 2rem;
   }
@@ -441,6 +478,24 @@ import Footer from '../components/Footer.astro';
     border-top: 1px solid rgba(255, 255, 255, 0.15);
     font-style: italic;
     text-align: left;
+  }
+
+  .home-about__goals-footnote {
+    margin-top: 1.5rem;
+    font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+    color: #666;
+  }
+
+  .home-about__placeholder {
+    font-family: var(--font-body);
+    font-size: clamp(0.9rem, 1.2vw, 1rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0;
+  }
+
+  .home-about--plain .home-about__placeholder {
+    color: #888;
   }
 
   /* Mobile */
