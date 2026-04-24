@@ -28,25 +28,32 @@ import PageLayout from '../layouts/PageLayout.astro';
         </div>
       </div>
       <div class="edu-split__photo">
-        <img src="/images/education/edu-students-planting.jpg" alt="Students planting seedlings at The Forktree Project" loading="lazy" />
+        <img src="/images/education/edu-learning.jpg" alt="Students on a revegetation site at The Forktree Project" loading="lazy" />
       </div>
     </div>
   </section>
 
   <!-- Aligned With Curriculum and Wellbeing -->
-  <section class="edu-section edu-section--olive edu-section--right">
-    <p class="edu-kicker edu-kicker--light">Curriculum</p>
-    <div class="edu-intro">
-      <p class="edu-intro__lead edu-intro__lead--light">Aligned With Curriculum and Wellbeing</p>
-      <p class="edu-intro__body edu-intro__body--light">The Forktree Project welcomes both primary and secondary schools for day excursions, overnight camping experiences and extended programs.</p>
-      <p class="edu-intro__body edu-intro__body--light">We work closely with schools to ensure every Forktree visit supports key learning objectives and wellbeing priorities. Programs can be tailored to connect with:</p>
-      <ul class="edu-list edu-list--olive">
-        <li><strong>Australian Curriculum</strong> learning areas and General Capabilities</li>
-        <li><strong>SACE</strong> capabilities and subject goals</li>
-        <li><strong>IB</strong> Primary, Middle and Diploma Program frameworks</li>
-        <li><strong>School-specific wellbeing priorities</strong></li>
-      </ul>
-      <p class="edu-intro__body edu-intro__body--light">This alignment ensures each visit is purposeful, relevant and has lasting impact.</p>
+  <section class="edu-section edu-section--olive edu-section--right edu-section--with-photo">
+    <div class="edu-split">
+      <div class="edu-split__text">
+        <p class="edu-kicker edu-kicker--light">Curriculum</p>
+        <div class="edu-intro">
+          <p class="edu-intro__lead edu-intro__lead--light">Aligned With Curriculum and Wellbeing</p>
+          <p class="edu-intro__body edu-intro__body--light">The Forktree Project welcomes both primary and secondary schools for day excursions, overnight camping experiences and extended programs.</p>
+          <p class="edu-intro__body edu-intro__body--light">We work closely with schools to ensure every Forktree visit supports key learning objectives and wellbeing priorities. Programs can be tailored to connect with:</p>
+          <ul class="edu-list edu-list--olive">
+            <li><strong>Australian Curriculum</strong> learning areas and General Capabilities</li>
+            <li><strong>SACE</strong> capabilities and subject goals</li>
+            <li><strong>IB</strong> Primary, Middle and Diploma Program frameworks</li>
+            <li><strong>School-specific wellbeing priorities</strong></li>
+          </ul>
+          <p class="edu-intro__body edu-intro__body--light">This alignment ensures each visit is purposeful, relevant and has lasting impact.</p>
+        </div>
+      </div>
+      <div class="edu-split__photo">
+        <img src="/images/education/edu-curriculum.jpg" alt="Students recording plant observations at The Forktree Project" loading="lazy" />
+      </div>
     </div>
   </section>
 
@@ -73,21 +80,21 @@ import PageLayout from '../layouts/PageLayout.astro';
   </section>
 
   <!-- Join Us From Afar -->
-  <section class="edu-section edu-section--plain edu-section--left edu-section--with-photo">
+  <section class="edu-section edu-section--olive edu-section--left edu-section--with-photo">
     <div class="edu-split">
       <div class="edu-split__text">
-        <p class="edu-kicker">Remote Education</p>
+        <p class="edu-kicker edu-kicker--light">Remote Education</p>
         <div class="edu-intro">
-          <p class="edu-intro__lead">Join Us From Afar</p>
-          <p class="edu-intro__body">If your school is too far from Forktree for an on-site visit, you can still be part of the Forktree story through our <strong>Remote Education Program</strong>. This option allows schools to:</p>
-          <ul class="edu-list edu-list--plain">
+          <p class="edu-intro__lead edu-intro__lead--light">Join Us From Afar</p>
+          <p class="edu-intro__body edu-intro__body--light">If your school is too far from Forktree for an on-site visit, you can still be part of the Forktree story through our <strong>Remote Education Program</strong>. This option allows schools to:</p>
+          <ul class="edu-list edu-list--olive">
             <li><strong>Engage with Forktree&rsquo;s environmental learning</strong> from anywhere</li>
             <li><strong>Access tailored online resources</strong> aligned with curriculum goals</li>
             <li><strong>Connect students to a real-world restoration project</strong> without needing to travel</li>
           </ul>
-          <p class="edu-intro__body">Contact us to find out more and explore how your school can get involved.</p>
+          <p class="edu-intro__body edu-intro__body--light">Contact us to find out more and explore how your school can get involved.</p>
           <div class="edu-cta">
-            <a href="mailto:hello@theforktreeproject.com" class="btn--cta btn--cta-lg btn--cta-dark">Get in Touch</a>
+            <a href="mailto:hello@theforktreeproject.com" class="btn--cta btn--cta-lg">Get in Touch</a>
           </div>
         </div>
       </div>
@@ -98,10 +105,10 @@ import PageLayout from '../layouts/PageLayout.astro';
   </section>
 
   <!-- Testimonials -->
-  <section class="edu-section edu-section--plain edu-section--testimonials">
+  <section class="edu-section edu-section--testimonials" style="background-image: url('/images/education/edu-testimonials-bg.jpg'); background-color: #2a3a2a;">
     <div class="edu-testimonials">
-      <p class="edu-kicker">Testimonials</p>
-      <h2 class="edu-intro__lead edu-testimonials__title">What schools are saying</h2>
+      <p class="edu-kicker edu-kicker--light">Testimonials</p>
+      <h2 class="edu-intro__lead edu-intro__lead--light edu-testimonials__title">What schools are saying</h2>
       <div class="edu-testimonials__grid">
 
         <blockquote class="edu-testimonial-card" data-testimonial>
@@ -151,14 +158,14 @@ import PageLayout from '../layouts/PageLayout.astro';
   </section>
 
   <!-- Find Out More -->
-  <section class="edu-section edu-section--olive edu-section--cta">
+  <section class="edu-section edu-section--plain edu-section--cta">
     <div class="edu-intro edu-intro--center">
-      <p class="edu-kicker edu-kicker--light edu-kicker--center">Find Out More</p>
-      <p class="edu-intro__lead edu-intro__lead--light">Bring your school to Forktree</p>
-      <p class="edu-intro__body edu-intro__body--light">To learn more about the Forktree Project Education Program, <a href="https://forktree.app">visit the program site</a>.</p>
-      <p class="edu-intro__body edu-intro__body--light">Please get in touch with us &mdash; we&rsquo;d love to hear from you.</p>
+      <p class="edu-kicker edu-kicker--center">Find Out More</p>
+      <p class="edu-intro__lead">Bring your school to Forktree</p>
+      <p class="edu-intro__body">To learn more about the Forktree Project Education Program, <a href="https://forktree.app">visit the program site</a>.</p>
+      <p class="edu-intro__body">Please get in touch with us &mdash; we&rsquo;d love to hear from you.</p>
       <div class="edu-cta">
-        <a href="mailto:hello@theforktreeproject.com" class="btn--cta btn--cta-lg">Get in Touch</a>
+        <a href="mailto:hello@theforktreeproject.com" class="btn--cta btn--cta-lg btn--cta-dark">Get in Touch</a>
       </div>
     </div>
   </section>
@@ -507,16 +514,23 @@ import PageLayout from '../layouts/PageLayout.astro';
     letter-spacing: 1.5px;
   }
 
-  /* Testimonials on plain light background */
+  /* Testimonials on photo background */
   .edu-section--testimonials {
-    padding: 0;
+    min-height: auto;
+  }
+
+  .edu-section--testimonials::before {
+    background:
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.6) 100%);
   }
 
   .edu-testimonials {
+    position: relative;
+    z-index: 2;
     max-width: 1000px;
     width: 100%;
     margin: 0 auto;
-    padding: 80px 60px;
+    padding: 100px 60px;
     text-align: center;
   }
 
@@ -526,6 +540,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 
   .edu-testimonials__title {
     margin: 0 0 2.5rem;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
   }
 
   .edu-testimonials__grid {
@@ -542,15 +557,14 @@ import PageLayout from '../layouts/PageLayout.astro';
   }
 
   .edu-testimonials__more a {
-    color: #00A651;
+    color: #fff;
     text-decoration: none;
-    border-bottom: 1px solid rgba(0, 166, 81, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
     padding-bottom: 2px;
   }
 
   .edu-testimonials__more a:hover {
-    color: #007a3b;
-    border-bottom-color: #007a3b;
+    border-bottom-color: #fff;
   }
 
   .edu-testimonial-card {
