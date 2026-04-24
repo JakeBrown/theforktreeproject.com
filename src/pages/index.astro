@@ -7,22 +7,6 @@ import Footer from '../components/Footer.astro';
 <BaseLayout title="The Forktree Project" description="The Forktree Project is a registered charity re-wilding a 133-acre former pastoral property in South Australia's Fleurieu Peninsula.">
   <Header />
 
-  <!-- Section Nav Dots -->
-  <nav class="index-nav" aria-label="Page sections">
-    <a href="#banner" class="index-nav__item active" data-section="banner">
-      <div class="index-nav__dot"></div>
-      <div class="index-nav__label"><span>Banner</span></div>
-    </a>
-    <a href="#story-1" class="index-nav__item" data-section="story-1">
-      <div class="index-nav__dot"></div>
-      <div class="index-nav__label"><span>Story 1</span></div>
-    </a>
-    <a href="#story-2" class="index-nav__item" data-section="story-2">
-      <div class="index-nav__dot"></div>
-      <div class="index-nav__label"><span>Story 2</span></div>
-    </a>
-  </nav>
-
   <!-- Banner Section -->
   <section id="banner" class="index-section index-section--banner">
     <div class="index-section__bg" data-parallax></div>
@@ -116,76 +100,7 @@ import Footer from '../components/Footer.astro';
   <Footer />
 </BaseLayout>
 
-<script>
-  // Section nav active state on scroll
-  const sections = document.querySelectorAll('.index-section');
-  const navItems = document.querySelectorAll('.index-nav__item');
-
-  function updateActiveNav() {
-    const scrollPos = window.scrollY + window.innerHeight / 2;
-    sections.forEach((section, i) => {
-      const top = section.offsetTop;
-      const bottom = top + section.offsetHeight;
-      if (scrollPos >= top && scrollPos < bottom) {
-        navItems.forEach(n => n.classList.remove('active'));
-        navItems[i]?.classList.add('active');
-      }
-    });
-  }
-
-  window.addEventListener('scroll', updateActiveNav, { passive: true });
-</script>
-
 <style>
-  /* Index Nav Dots */
-  .index-nav {
-    position: fixed;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 90;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 12px;
-  }
-
-  .index-nav__item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    color: white;
-  }
-
-  .index-nav__dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: 1.5px solid rgba(255, 255, 255, 0.7);
-    background: transparent;
-    transition: all 0.3s ease;
-  }
-
-  .index-nav__item.active .index-nav__dot {
-    background: white;
-    border-color: white;
-  }
-
-  .index-nav__label {
-    display: none;
-    font-family: var(--font-heading);
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    white-space: nowrap;
-    order: -1;
-  }
-
-  .index-nav__item:hover .index-nav__label {
-    display: block;
-  }
-
   /* Index Sections */
   .index-section {
     position: relative;
@@ -530,10 +445,6 @@ import Footer from '../components/Footer.astro';
 
   /* Mobile */
   @media (max-width: 768px) {
-    .index-nav {
-      display: none;
-    }
-
     .index-section {
       background-attachment: scroll;
     }
