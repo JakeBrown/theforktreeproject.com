@@ -208,8 +208,22 @@ import PageLayout from '../layouts/PageLayout.astro';
     font-size: clamp(2rem, 3.5vw, 2.75rem);
     font-weight: 700;
     line-height: 1.15;
-    color: #1a1a1a;
-    margin: 0 0 2.5rem;
+    color: var(--color-primary);
+    margin: 0 0 2.75rem;
+    padding-top: 1.25rem;
+    position: relative;
+    display: inline-block;
+  }
+
+  .rest-intro__title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--color-primary);
   }
 
   .rest-intro__sub {
