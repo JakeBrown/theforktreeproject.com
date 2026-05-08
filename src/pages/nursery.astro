@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import ScrollIndicator from '../components/ScrollIndicator.astro';
 import { getCollection } from 'astro:content';
 
 const allPlants = await getCollection('plants');
@@ -25,6 +26,7 @@ const formatMonth = (ym: string) => {
         </div>
       </div>
     </div>
+    <ScrollIndicator />
   </section>
 
   <!-- Supporting Regional Rewilding -->
