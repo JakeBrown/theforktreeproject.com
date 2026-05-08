@@ -14,4 +14,8 @@
 ## Key Notes
 - Journal post pages use `export const prerender = true` for static generation in SSR mode
 - Background images on full-bleed sections use CSS `background-image` with dark overlays
-- The homepage banner section has no background image (just black) - this matches the original
+
+## Section background rule (footer adjacency)
+- The site footer is dark olive `#1f2a1f`. **The last content section before `<Footer />` must NOT also be `#1f2a1f`** — otherwise the footer visually merges into the last section and the page looks like it has no end.
+- Pages that alternate `--plain` (`#fafaf9`) and `--olive` (`#1f2a1f`) sections should plan the alternation so the FINAL section is `--plain`. If you need an even number of content sections, start with `--olive` (right after the hero) and alternate, ending on `--plain`. See `team-days.astro` and `nursery.astro` for the established pattern.
+- Same rule applies to any new section variant — never end a page on the footer's color.

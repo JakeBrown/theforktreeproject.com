@@ -69,10 +69,9 @@ const wider = [
   </section>
 
   <!-- Featured bios — Tim & Liz -->
-  <section class="team-section team-section--plain team-section--featured">
+  <section class="team-section team-section--olive team-section--featured">
     <div class="team-featured">
-      <p class="team-kicker">Leadership</p>
-      <h2 class="team-featured__title">Meet our leaders</h2>
+      <h2 class="team-featured__title team-featured__title--light">Founders &amp; Leadership</h2>
 
       <div class="team-featured__grid">
         {featured.map((person) => (
@@ -87,9 +86,9 @@ const wider = [
               )}
             </div>
             <div class="team-bio__text">
-              <h3 class="team-bio__name">{person.name}</h3>
-              <p class="team-bio__role">{person.role}</p>
-              <p class="team-bio__body">{person.bio}</p>
+              <h3 class="team-bio__name team-bio__name--light">{person.name}</h3>
+              <p class="team-bio__role team-bio__role--light">{person.role}</p>
+              <p class="team-bio__body team-bio__body--light">{person.bio}</p>
             </div>
           </article>
         ))}
@@ -97,11 +96,9 @@ const wider = [
     </div>
   </section>
 
-  <!-- Wider team — placeholder cards -->
-  <section class="team-section team-section--olive team-section--wider">
+  <!-- Wider team — placeholder cards (no heading) -->
+  <section class="team-section team-section--plain team-section--wider">
     <div class="team-wider">
-      <p class="team-kicker team-kicker--light">The Wider Team</p>
-      <h2 class="team-wider__title">More of the Forktree crew</h2>
       <div class="team-wider__grid">
         {wider.map((person) => (
           <div class="team-card">
@@ -116,18 +113,15 @@ const wider = [
             </div>
             <h3 class="team-card__name">{person.name}</h3>
             <p class="team-card__role">{person.role}</p>
-            <p class="team-card__soon">Bio coming soon.</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Volunteers thank-you -->
+  <!-- Volunteers thank-you (no heading, just the paragraph) -->
   <section class="team-section team-section--plain team-section--thanks">
     <div class="team-intro team-intro--center">
-      <p class="team-kicker team-kicker--center">Volunteers</p>
-      <p class="team-intro__lead">With heartfelt thanks</p>
       <p class="team-intro__body">The Forktree Project is grateful for the generous efforts of many volunteers. Their support is key to the project&rsquo;s continued success &mdash; our heartfelt thanks to them all.</p>
     </div>
   </section>
@@ -269,6 +263,10 @@ const wider = [
     text-align: center;
   }
 
+  .team-featured__title--light {
+    color: #fff;
+  }
+
   .team-featured__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -310,6 +308,10 @@ const wider = [
     margin: 0;
   }
 
+  .team-bio__name--light {
+    color: #fff;
+  }
+
   .team-bio__role {
     font-family: var(--font-heading);
     font-size: 0.85rem;
@@ -320,12 +322,20 @@ const wider = [
     margin: 0.4rem 0 1rem;
   }
 
+  .team-bio__role--light {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
   .team-bio__body {
     font-family: var(--font-body);
     font-size: clamp(0.95rem, 1.3vw, 1.05rem);
     line-height: 1.7;
     color: #444;
     margin: 0;
+  }
+
+  .team-bio__body--light {
+    color: rgba(255, 255, 255, 0.85);
   }
 
   /* Wider team */
@@ -377,7 +387,7 @@ const wider = [
     font-size: 1.15rem;
     font-weight: 700;
     line-height: 1.2;
-    color: #fff;
+    color: #1a1a1a;
     margin: 0;
   }
 
@@ -387,16 +397,8 @@ const wider = [
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.65);
+    color: var(--color-primary);
     margin: 0.4rem 0 0.6rem;
-  }
-
-  .team-card__soon {
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.4);
-    margin: 0;
   }
 
   /* Initials avatar — used when no headshot is available */
