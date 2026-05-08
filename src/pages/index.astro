@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<BaseLayout title="The Forktree Project" description="The Forktree Project is a registered charity re-wilding a 133-acre former pastoral property in South Australia's Fleurieu Peninsula.">
+<BaseLayout title="The Forktree Project" description="The Forktree Project is a registered charity restoring habitat and biodiversity across the Hills & Fleurieu region and beyond.">
   <Header />
 
   <!-- Banner Section -->
@@ -18,10 +18,57 @@ import Footer from '../components/Footer.astro';
     </div>
   </section>
 
+  <!-- Introducing The Forktree Project -->
+  <section class="home-section home-section--plain">
+    <div class="home-intro home-intro--center">
+      <p class="home-intro__lead">Introducing The Forktree Project</p>
+      <p class="home-intro__body">The Forktree Project is a registered charity focused on restoring habitat and biodiversity across the Hills &amp; Fleurieu region and beyond. Alongside this core restoration work, we engage and empower young people and the wider community &mdash; bringing others on the journey and helping grow the environmental stewards we need for the future.</p>
+    </div>
+  </section>
+
+  <!-- Our Vision -->
+  <section class="home-section home-section--olive">
+    <div class="home-intro home-intro--center">
+      <p class="home-intro__lead home-intro__lead--light">Our Vision</p>
+      <ul class="home-list home-list--olive home-list--center">
+        <li>A fully restored, thriving biodiversity hotspot on our 54&#8209;hectare Forktree site</li>
+        <li>Improved and enriched biodiversity across the region, including on private land</li>
+        <li>An engaged and empowered younger generation of environmental stewards</li>
+        <li>Enhanced community wellbeing through purposeful connection with nature</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Our Goals -->
+  <section class="home-section home-section--plain">
+    <div class="home-intro home-intro--center">
+      <p class="home-intro__lead">Our Goals</p>
+      <p class="home-intro__body">We work towards this vision through:</p>
+      <ul class="home-list home-list--plain home-list--center">
+        <li><a href="/restoration"><strong>Ecological restoration of the Forktree site</strong></a> &mdash; transforming a cleared and degraded 54&#8209;hectare former pastoral property into a thriving example of what&rsquo;s possible</li>
+        <li><a href="/nursery"><strong>Our native plant nursery and rare seed orchard</strong></a>, supporting region&#8209;wide restoration</li>
+        <li><a href="/education1"><strong>Experiential education programs</strong></a> for school groups and tertiary students</li>
+        <li><a href="/team-days"><strong>Community engagement through Team Days and volunteering opportunities</strong></a></li>
+      </ul>
+      <p class="home-intro__body">For more information on each of these goals, click the links above.</p>
+    </div>
+  </section>
+
+  <!-- Our Team -->
+  <section class="home-section home-section--olive">
+    <div class="home-intro home-intro--center">
+      <p class="home-intro__lead home-intro__lead--light">Our Team</p>
+      <p class="home-intro__body home-intro__body--light">The Forktree Project is led by founders Tim Jarvis AM and Elizabeth Blumer, supported by a dedicated team of ecologists, biologists, educators and land managers who bring deep knowledge and practical experience to our restoration work.</p>
+      <p class="home-intro__body home-intro__body--light">They&rsquo;re joined by a valued group of regular volunteers whose skills, enthusiasm and commitment play a vital role in the project&rsquo;s success.</p>
+      <p class="home-intro__body home-intro__body--light home-team__link"><a href="/team">Click here to meet the Forktree team.</a></p>
+    </div>
+  </section>
+
   <Footer />
 </BaseLayout>
 
 <style>
+  /* Banner ------------------------------------------------------------- */
   .index-section {
     position: relative;
     display: flex;
@@ -91,6 +138,154 @@ import Footer from '../components/Footer.astro';
   @media (max-width: 768px) {
     .index-section__content {
       padding: 100px 30px;
+    }
+  }
+
+  /* Home content sections ---------------------------------------------- */
+  .home-section {
+    position: relative;
+    width: 100%;
+  }
+
+  .home-section--plain {
+    background: #fafaf9;
+    color: #1a1a1a;
+  }
+
+  .home-section--olive {
+    background: #1f2a1f;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .home-intro {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 100px 60px;
+  }
+
+  .home-intro--center {
+    text-align: center;
+  }
+
+  .home-intro__lead {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.25;
+    color: #1a1a1a;
+    margin: 0 0 1.75rem;
+  }
+
+  .home-intro__lead--light {
+    color: #fff;
+  }
+
+  .home-intro__body {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.35vw, 1.15rem);
+    line-height: 1.75;
+    color: #444;
+    margin: 0 auto 1.25rem;
+    max-width: 760px;
+  }
+
+  .home-intro__body--light {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .home-intro__body a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .home-intro__body a:hover {
+    opacity: 0.7;
+  }
+
+  /* Lists --------------------------------------------------------------- */
+  .home-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 1.5rem;
+    text-align: left;
+    max-width: 760px;
+  }
+
+  .home-list--center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .home-list li {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.35vw, 1.15rem);
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .home-list li::before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    font-size: 1.2em;
+    line-height: 1.45;
+  }
+
+  .home-list--plain li {
+    color: #444;
+  }
+
+  .home-list--plain li::before {
+    color: #00A651;
+  }
+
+  .home-list--olive li {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .home-list--olive li::before {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .home-list--plain li a {
+    color: #1a1a1a;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+
+  .home-list--plain li a:hover {
+    color: #00A651;
+  }
+
+  .home-list--olive li a {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Team link --------------------------------------------------------- */
+  .home-team__link {
+    margin-top: 1.5rem;
+  }
+
+  .home-team__link a {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-weight: 500;
+  }
+
+  .home-team__link a:hover {
+    opacity: 0.8;
+  }
+
+  @media (max-width: 768px) {
+    .home-intro {
+      padding: 70px 30px;
     }
   }
 </style>
