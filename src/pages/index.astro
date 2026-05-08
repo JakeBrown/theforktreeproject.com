@@ -2,6 +2,32 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+// TODO(Liz): supply headshots for Tim, Liz, James, Oliver, Maddie; swap initials avatars for <img>.
+// TODO(Liz): confirm Tim's exact title — her draft had "Founder and CEO???".
+const founders = [
+  {
+    name: 'Tim Jarvis AM',
+    role: 'Founder and CEO',
+    photo: null,
+    initials: 'TJ',
+    bio: `Tim Jarvis AM is an environmental scientist, author, filmmaker and adventurer with Master’s degrees in environmental science and environmental law. He is committed to practical solutions to climate change and biodiversity loss. Tim was appointed a Member of the Order of Australia (AM) in 2010 for services to the environment, exploration and community, named Australian Geographic’s Conservationist of the Year in 2016, and recognised as South Australia’s Australian of the Year in 2024. A believer in deeds over words, he sees the Forktree Project as a powerful example of what purposeful action can achieve.`,
+  },
+  {
+    name: 'Elizabeth Blumer',
+    role: 'COO; Head of Education and Community Outreach',
+    photo: null,
+    initials: 'EB',
+    bio: `Elizabeth Blumer is a qualified, registered teacher with more than 15 years’ experience in middle and high school education, alongside governance experience in educational wellbeing. She holds postgraduate qualifications in Education Wellbeing and Positive Mental Health. Elizabeth brings together her pedagogical experience and her background in writing and editing to lead the development of the Forktree Project Education Program. She is energised by the project’s educational and wellbeing potential — and is, of course, an enthusiastic tree-planter.`,
+  },
+];
+
+const wider = [
+  { name: 'Fleur Brown-Beeby', role: 'Nursery Manager', photo: '/images/team/fleur-avatar.jpg', initials: 'FB' },
+  { name: 'James Owen', role: 'Nursery Project Officer', photo: null, initials: 'JO' },
+  { name: 'Oliver Wilson', role: 'Environmental Officer', photo: null, initials: 'OW' },
+  { name: 'Maddie Maguire', role: 'Marketing Officer', photo: null, initials: 'MM' },
+];
 ---
 
 <BaseLayout title="The Forktree Project" description="The Forktree Project is a registered charity restoring habitat and biodiversity across the Hills & Fleurieu region and beyond.">
@@ -55,11 +81,50 @@ import Footer from '../components/Footer.astro';
 
   <!-- Our Team -->
   <section class="home-section home-section--plain">
-    <div class="home-intro home-intro--center">
-      <p class="home-intro__lead">Our Team</p>
-      <p class="home-intro__body">The Forktree Project is led by founders Tim Jarvis AM and Elizabeth Blumer, supported by a dedicated team of ecologists, biologists, educators and land managers who bring deep knowledge and practical experience to our restoration work.</p>
-      <p class="home-intro__body">They&rsquo;re joined by a valued group of regular volunteers whose skills, enthusiasm and commitment play a vital role in the project&rsquo;s success.</p>
-      <p class="home-intro__body home-team__link"><a href="/team">Click here to meet the Forktree team.</a></p>
+    <div class="home-team">
+      <p class="home-intro__lead home-intro__lead--center">Our Team</p>
+      <p class="home-intro__body home-intro__body--center">The Forktree Project is led by founders Tim Jarvis AM and Elizabeth Blumer, supported by a dedicated team of ecologists, biologists, educators and land managers who bring deep knowledge and practical experience to our restoration work.</p>
+
+      <div class="home-bios">
+        {founders.map((person) => (
+          <article class="home-bio">
+            <div class="home-bio__photo">
+              {person.photo ? (
+                <img src={person.photo} alt={person.name} loading="lazy" />
+              ) : (
+                <div class="home-avatar" aria-label={person.name}>
+                  <span>{person.initials}</span>
+                </div>
+              )}
+            </div>
+            <h3 class="home-bio__name">{person.name}</h3>
+            <p class="home-bio__role">{person.role}</p>
+            <p class="home-bio__body">{person.bio}</p>
+          </article>
+        ))}
+      </div>
+
+      <hr class="home-team__divider" aria-hidden="true" />
+
+      <div class="home-crew">
+        {wider.map((person) => (
+          <div class="home-crew__card">
+            <div class="home-crew__photo">
+              {person.photo ? (
+                <img src={person.photo} alt={person.name} loading="lazy" />
+              ) : (
+                <div class="home-avatar home-avatar--sm" aria-label={person.name}>
+                  <span>{person.initials}</span>
+                </div>
+              )}
+            </div>
+            <h4 class="home-crew__name">{person.name}</h4>
+            <p class="home-crew__role">{person.role}</p>
+          </div>
+        ))}
+      </div>
+
+      <p class="home-intro__body home-intro__body--center home-team__closer">The team is joined by a valued group of regular volunteers whose skills, enthusiasm and commitment play a vital role in the project&rsquo;s success &mdash; our heartfelt thanks to them all.</p>
     </div>
   </section>
 
@@ -266,25 +331,199 @@ import Footer from '../components/Footer.astro';
     text-underline-offset: 3px;
   }
 
-  /* Team link --------------------------------------------------------- */
-  .home-team__link {
-    margin-top: 1.5rem;
+  /* Team / founder bios ------------------------------------------------- */
+  .home-team {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 60px;
+    text-align: center;
   }
 
-  .home-team__link a {
+  .home-intro__lead--center {
+    text-align: center;
+  }
+
+  .home-intro__body--center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Founders */
+  .home-bios {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+    margin: 4rem 0 0;
+  }
+
+  .home-bio {
+    text-align: center;
+  }
+
+  .home-bio__photo {
+    line-height: 0;
+    margin: 0 auto 1.5rem;
+    width: 160px;
+    height: 160px;
+  }
+
+  .home-bio__photo img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Avatar fallback (used by founders + wider crew) */
+  .home-avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3a7d32 0%, #2a5c24 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  }
+
+  .home-avatar span {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 2.6rem;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+
+  .home-avatar--sm {
+    width: 100px;
+    height: 100px;
+  }
+
+  .home-avatar--sm span {
+    font-size: 1.6rem;
+  }
+
+  .home-bio__name {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
     color: #1a1a1a;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    font-weight: 500;
+    margin: 0;
   }
 
-  .home-team__link a:hover {
-    color: #00A651;
+  .home-bio__role {
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 0.4rem auto 1.1rem;
+    max-width: 32ch;
+  }
+
+  .home-bio__body {
+    font-family: var(--font-body);
+    font-size: 0.97rem;
+    line-height: 1.7;
+    color: #444;
+    margin: 0 auto;
+    max-width: 46ch;
+    text-align: left;
+  }
+
+  /* Divider between founders and wider crew */
+  .home-team__divider {
+    border: 0;
+    height: 1px;
+    width: 80px;
+    background: rgba(0, 0, 0, 0.15);
+    margin: 4.5rem auto 3.5rem;
+  }
+
+  /* Wider crew */
+  .home-crew {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .home-crew__card {
+    text-align: center;
+  }
+
+  .home-crew__photo {
+    line-height: 0;
+    margin: 0 auto 1rem;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .home-crew__photo img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  .home-crew__name {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .home-crew__role {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 0.35rem 0 0;
+  }
+
+  .home-team__closer {
+    margin-top: 3.5rem;
+    font-style: italic;
+    color: #555;
+  }
+
+  @media (max-width: 900px) {
+    .home-bios {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .home-crew {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.25rem;
+    }
   }
 
   @media (max-width: 768px) {
-    .home-intro {
+    .home-intro,
+    .home-team {
       padding: 70px 30px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .home-crew {
+      grid-template-columns: 1fr;
+      gap: 2rem;
     }
   }
 </style>
