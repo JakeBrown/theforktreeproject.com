@@ -1,0 +1,440 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout title="Restoration — The Forktree Project" description="Ecological restoration at The Forktree Project: returning a 54-hectare former pastoral property on South Australia's Fleurieu Peninsula to full ecological health.">
+
+  <!-- Hero -->
+  <section class="rest-section rest-section--hero" style="background-image: url('/images/education/edu-hero-aerial.jpg'); background-color: #2a3a2a;">
+    <div class="rest-section__content rest-section__content--center">
+      <div class="rest-text rest-text--wide">
+        <h1>Ecological Restoration at The Forktree Project</h1>
+        <div class="rest-body">
+          <p>Bringing the landscape back to life.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beginnings -->
+  <section class="rest-section rest-section--plain rest-section--left">
+    <p class="rest-kicker">Beginnings</p>
+    <div class="rest-intro">
+      <p class="rest-intro__lead">Where it started</p>
+      <p class="rest-intro__body">In 2019, The Forktree Project began restoring an extensively cleared and degraded former pastoral property on South Australia&rsquo;s Fleurieu Peninsula, with the goal of returning it to full ecological health.</p>
+      <p class="rest-intro__body">Since then, more than 30,000 native trees, shrubs, groundcovers and grasses have been planted, with an impressive 90% success rate &mdash; and this is only the beginning.</p>
+    </div>
+  </section>
+
+  <!-- Planning for Success -->
+  <section class="rest-section rest-section--olive rest-section--right">
+    <p class="rest-kicker rest-kicker--light">Planning for Success</p>
+    <div class="rest-intro">
+      <p class="rest-intro__lead rest-intro__lead--light">A carefully researched plan</p>
+      <p class="rest-intro__body rest-intro__body--light">Restoration of the 54&#8209;hectare site is guided by a carefully researched planting plan developed by the Forktree team. This plan draws on:</p>
+      <ul class="rest-list rest-list--olive">
+        <li>Knowledge of local endemic species and their ecological relationships</li>
+        <li>Evidence from remnant trees showing what once thrived on the property</li>
+        <li>Assessment of topography and soil health to match species to place</li>
+        <li>Climate modelling to ensure long-term resilience under a changing climate</li>
+        <li>Best-practice planting methods to establish thriving vegetation associations</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Why We Restore -->
+  <section class="rest-section rest-section--plain rest-section--left">
+    <p class="rest-kicker">Why We Restore</p>
+    <div class="rest-intro">
+      <p class="rest-intro__lead">Habitat, climate and rewilding</p>
+      <p class="rest-intro__body">A restored Forktree site will provide vital habitat for native fauna and sequester tens of thousands of tonnes of CO<sub>2</sub> over the life of the project, contributing to climate change mitigation.</p>
+      <p class="rest-intro__body">Our restoration work also sets the stage for natural processes to rewild the landscape, including the future reintroduction of native animals as ecosystem engineers. The long-term goal is a self-sustaining, fully functioning ecosystem.</p>
+      <p class="rest-intro__body">With climate change and biodiversity loss accelerating, our work gives nature the head start it needs for rewilding to take hold.</p>
+    </div>
+  </section>
+
+  <!-- Journal link (small, neutral) -->
+  <section class="rest-section rest-section--journal">
+    <div class="rest-journal">
+      <p>To read more about the story of The Forktree Project, visit our <a href="/blog">Journal</a>.</p>
+    </div>
+  </section>
+
+  <!-- Restoration Consultation Services -->
+  <section class="rest-section rest-section--olive rest-section--cta-block">
+    <div class="rest-intro rest-intro--center">
+      <p class="rest-kicker rest-kicker--light rest-kicker--center">Restoration Consultation Services</p>
+      <p class="rest-intro__lead rest-intro__lead--light">Sharing what we&rsquo;ve learned</p>
+      <p class="rest-intro__body rest-intro__body--light">Our ongoing work restoring the Forktree site has given us deep, practical insight into what responsible and effective habitat restoration requires &mdash; from planning and species selection to long-term ecological resilience.</p>
+
+      <p class="rest-intro__lead rest-intro__lead--light rest-intro__lead--sub">Supporting your restoration journey</p>
+      <p class="rest-intro__body rest-intro__body--light">If you&rsquo;re planning your own restoration project, we&rsquo;re here to help. We&rsquo;d be delighted to share our experience and work with you to bring nature back across our region.</p>
+
+      <div class="rest-cta">
+        <a href="mailto:hello@theforktreeproject.com" class="btn--cta btn--cta-lg">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  .rest-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    color: var(--color-text-light);
+    overflow: hidden;
+  }
+
+  .rest-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 45%, rgba(0, 0, 0, 0.35) 0%, transparent 100%),
+      rgba(0, 0, 0, 0.3);
+    z-index: 1;
+  }
+
+  .rest-section--plain {
+    background: #fafaf9;
+    color: #1a1a1a;
+    min-height: auto;
+    padding: 0;
+  }
+
+  .rest-section--plain::before {
+    display: none;
+  }
+
+  .rest-section--olive {
+    background: #1f2a1f;
+    color: rgba(255, 255, 255, 0.85);
+    min-height: auto;
+    padding: 0;
+  }
+
+  .rest-section--olive::before {
+    display: none;
+  }
+
+  .rest-section--cta-block {
+    min-height: auto;
+  }
+
+  .rest-kicker {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--color-text);
+    margin: 0;
+    padding: 80px 60px 0;
+  }
+
+  .rest-kicker--light {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .rest-kicker--center {
+    text-align: center;
+  }
+
+  .rest-intro {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 60px 80px;
+  }
+
+  .rest-intro--center {
+    text-align: center;
+    padding: 80px 60px;
+  }
+
+  .rest-intro--center .rest-kicker {
+    padding: 0 0 0.75rem;
+  }
+
+  .rest-intro--center .rest-intro__body {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .rest-section--left .rest-kicker,
+  .rest-section--right .rest-kicker {
+    max-width: 1000px;
+  }
+
+  .rest-section--left .rest-kicker,
+  .rest-section--left .rest-intro {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .rest-section--left .rest-kicker {
+    text-align: left;
+  }
+
+  .rest-section--right .rest-kicker,
+  .rest-section--right .rest-intro {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .rest-section--right .rest-kicker {
+    text-align: right;
+  }
+
+  .rest-intro__lead {
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.35;
+    color: #1a1a1a;
+    margin: 0 0 1.5rem;
+  }
+
+  .rest-intro__lead--light {
+    color: #fff;
+  }
+
+  .rest-intro__lead--sub {
+    margin-top: 2rem;
+  }
+
+  .rest-intro__body {
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    line-height: 1.7;
+    color: #444;
+    margin: 0 0 1rem;
+    max-width: 800px;
+  }
+
+  .rest-intro__body--light {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .rest-intro__body sub {
+    font-size: 0.7em;
+  }
+
+  .rest-intro__body a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  .rest-intro__body a:hover {
+    opacity: 0.7;
+  }
+
+  .rest-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 1.5rem;
+    text-align: left;
+    max-width: 720px;
+  }
+
+  .rest-list li {
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    line-height: 1.7;
+    margin-bottom: 0.6rem;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .rest-list li::before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+  }
+
+  .rest-list--plain li {
+    color: #444;
+  }
+
+  .rest-list--plain li::before {
+    color: #00A651;
+  }
+
+  .rest-list--olive li {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .rest-list--olive li::before {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .rest-section__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1600px;
+    padding: 180px 100px;
+  }
+
+  .rest-section__content--center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .rest-text {
+    max-width: 50%;
+    position: relative;
+    padding: 1rem 1.5rem;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .rest-text--wide {
+    max-width: 70%;
+    text-align: center;
+  }
+
+  .rest-text h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    margin-bottom: var(--space-lg);
+  }
+
+  .rest-body p {
+    font-family: var(--font-body);
+    font-size: clamp(1.15rem, 1.8vw, 1.3rem);
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+
+  .rest-body a {
+    color: white;
+    text-decoration: underline;
+  }
+
+  /* Journal link section — small, neutral, slim */
+  .rest-section--journal {
+    min-height: auto;
+    background: #fafaf9;
+    color: #1a1a1a;
+  }
+
+  .rest-section--journal::before {
+    display: none;
+  }
+
+  .rest-journal {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 60px 60px;
+    text-align: center;
+  }
+
+  .rest-journal p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+  }
+
+  .rest-journal a {
+    color: #00A651;
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  .rest-journal a:hover {
+    opacity: 0.75;
+  }
+
+  .rest-cta {
+    margin-top: var(--space-md);
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .btn--cta {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: white;
+    border: 2px solid white;
+    padding: 13px 26px;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+  }
+
+  .btn--cta:hover {
+    background-color: white;
+    color: #000;
+  }
+
+  .btn--cta-lg {
+    font-size: 14px;
+    padding: 18px 40px;
+    letter-spacing: 1.5px;
+  }
+
+  .btn--cta-dark {
+    color: #1a1a1a;
+    border-color: #1a1a1a;
+  }
+
+  .btn--cta-dark:hover {
+    background-color: #1a1a1a;
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    .rest-section {
+      background-attachment: scroll;
+      min-height: auto;
+    }
+
+    .rest-section__content {
+      padding: 100px 30px;
+    }
+
+    .rest-text,
+    .rest-text--wide {
+      max-width: 100%;
+    }
+
+    .rest-intro {
+      padding: 30px 30px 60px;
+    }
+
+    .rest-intro--center {
+      padding: 60px 30px;
+    }
+
+    .rest-kicker {
+      padding: 60px 30px 0;
+    }
+
+    .rest-journal {
+      padding: 30px 30px 50px;
+    }
+  }
+</style>
+</content>
+</invoke>
