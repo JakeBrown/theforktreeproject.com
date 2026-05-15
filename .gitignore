@@ -30,6 +30,7 @@ pnpm-debug.log*
 
 # editor
 .vscode/
+.claude/worktrees/
 
 # Dolt database files (added by bd init)
 .dolt/
