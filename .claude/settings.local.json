@@ -18,7 +18,25 @@
       "Bash(ls /Users/jakebrown/gits/theforktreeproject.com/dist/_astro/*.webp)",
       "Bash(ls -la /Users/jakebrown/gits/theforktreeproject.com/node_modules/astro/*.d.ts)",
       "Bash(grep -l \"ANALYTICS\\\\|writeDataPoint\\\\|forktree_pageviews\" dist/_worker.js/*.js)",
-      "Read(//Users/jakebrown/.pi/agent/skills/cloudflare-ai-gateway/**)"
+      "Read(//Users/jakebrown/.pi/agent/skills/cloudflare-ai-gateway/**)",
+      "mcp__pi-tools__brave_search",
+      "Bash(mkdir -p /tmp/forktree-dropbox)",
+      "Read(//tmp/**)",
+      "Bash(npm run *)",
+      "mcp__pi-tools__email_search",
+      "mcp__pi-tools__email_get_thread",
+      "mcp__cloudflare-api__execute",
+      "mcp__pi-tools__email_download_attachment",
+      "mcp__neo__email_search",
+      "mcp__neo__email_read",
+      "mcp__neo__email_archive",
+      "Bash(agent-browser eval *)",
+      "Bash(agent-browser screenshot *)",
+      "Bash(sips -Z 1400 /tmp/edu-join4.png --out /tmp/edu-join4-s.png)",
+      "Bash(agent-browser open *)",
+      "Bash(claude mcp *)",
+      "mcp__fastmail__search_email",
+      "mcp__fastmail__read_email"
     ]
   }
 }
