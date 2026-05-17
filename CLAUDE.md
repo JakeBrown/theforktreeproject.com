@@ -1,5 +1,10 @@
 # The Forktree Project - Astro Site
 
+## Issue Tracking
+- This repo uses **wedow/ticket** via the `tk` CLI. Tickets are stored in `.tickets/` and should be committed with related changes.
+- Do **not** use Beads/`bd`; legacy `.beads/` state has been migrated and is ignored.
+- Useful commands: `tk ready`, `tk show <id>`, `tk create`, `tk start <id>`, `tk close <id>`.
+
 ## Deployment
 - Deployment is via **git push** to the main branch. Cloudflare Pages/Workers automatically builds and deploys on push.
 - Do NOT use `npx wrangler deploy` directly.

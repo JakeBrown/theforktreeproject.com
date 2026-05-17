@@ -32,6 +32,7 @@ pnpm-debug.log*
 .vscode/
 .claude/worktrees/
 
-# Dolt database files (added by bd init)
+# Legacy Beads/Dolt state (issue tracking now uses .tickets/ via tk)
+.beads/
 .dolt/
 *.db
