@@ -1,6 +1,6 @@
 ---
 id: the-f79i
-status: in_progress
+status: closed
 deps: []
 links: []
 created: 2026-05-20T04:18:11Z
@@ -27,3 +27,11 @@ From Liz's 14 May 'progress' email thread. Clear changes:
 Downscaled Get Involved image candidates prepared in repo:
 - public/images/get-involved/ralph-suzanne-nursery.jpg (1600×1066, ~579KB)
 - public/images/get-involved/ralph-cath-planting.jpg (1800×1349, ~780KB)
+
+**2026-05-20T04:39:00Z**
+
+Implemented Get Involved page refresh: volunteer-focused page structure, Liz's supplied ACNC/vision/Volunteer/Other Ways copy, email CTAs, Ralph/Suzanne hero + volunteer image, and Ralph/Cath supporting image. Build passes with npm run build.
+
+**2026-05-20T04:39:50Z**
+
+Final layout uses Ralph/Suzanne as the hero image and Ralph/Cath as the supporting image in the closing section (avoids repeating the same volunteer image). Re-ran npm run build successfully.
