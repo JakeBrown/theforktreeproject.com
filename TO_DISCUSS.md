@@ -10,7 +10,7 @@ Source: Liz's 14 May 2026 email thread, subject "progress". Cleaned up on 20 May
 
 ## Feedback to seek after ticket work lands
 
-These are now tracked as tickets. Default approach: implement the sensible option first, then ask Liz to review in situ.
+These are now tracked as tickets, with notes to implement the sensible default first and then ask Liz to review in situ:
 
 - `the-gpst` — About/Home image updates.
 - `the-3x2r` — Restoration hero, Tim image, and before/after presentation.
