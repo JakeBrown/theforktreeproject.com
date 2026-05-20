@@ -54,29 +54,39 @@ const wider = [
   </section>
 
   <!-- Our Vision -->
-  <section class="home-section home-section--plain">
-    <div class="home-intro home-intro--center">
-      <p class="home-intro__lead">Our Vision</p>
-      <ul class="home-list home-list--plain home-list--center">
-        <li>A fully restored, thriving biodiversity hotspot on our 54&#8209;hectare Forktree site</li>
-        <li>Improved and enriched biodiversity across the region, including on private land</li>
-        <li>An engaged and empowered younger generation of environmental stewards</li>
-        <li>Enhanced community wellbeing through purposeful connection with nature</li>
-      </ul>
+  <section class="home-section home-section--plain home-section--visual">
+    <div class="home-split">
+      <div class="home-split__text">
+        <p class="home-intro__lead">Our Vision</p>
+        <ul class="home-list home-list--plain">
+          <li>A fully restored, thriving biodiversity hotspot on our 54&#8209;hectare Forktree site</li>
+          <li>Improved and enriched biodiversity across the region, including on private land</li>
+          <li>An engaged and empowered younger generation of environmental stewards</li>
+          <li>Enhanced community wellbeing through purposeful connection with nature</li>
+        </ul>
+      </div>
+      <figure class="home-split__image">
+        <img src="/images/about/vision-sole-tree.jpg" alt="A lone tree on the Forktree hillside beneath a wide blue sky" loading="lazy" />
+      </figure>
     </div>
   </section>
 
   <!-- Our Goals -->
-  <section class="home-section home-section--olive">
-    <div class="home-intro home-intro--center">
-      <p class="home-intro__lead home-intro__lead--light">Our Goals</p>
-      <p class="home-intro__body home-intro__body--light">We work towards this vision through:</p>
-      <ul class="home-list home-list--olive home-list--center">
-        <li><a href="/restoration"><strong>Ecological restoration of the Forktree site</strong></a> &mdash; transforming a cleared and degraded 54&#8209;hectare former pastoral property into a thriving example of what&rsquo;s possible</li>
-        <li><a href="/nursery"><strong>Our native plant nursery and rare seed orchard</strong></a>, supporting region&#8209;wide restoration</li>
-        <li><a href="/education1"><strong>Experiential education programs</strong></a> for school groups and tertiary students</li>
-        <li><a href="/team-days"><strong>Community engagement through Team Days and volunteering opportunities</strong></a></li>
-      </ul>
+  <section class="home-section home-section--olive home-section--visual">
+    <div class="home-split home-split--reverse">
+      <div class="home-split__text">
+        <p class="home-intro__lead home-intro__lead--light">Our Goals</p>
+        <p class="home-intro__body home-intro__body--light">We work towards this vision through:</p>
+        <ul class="home-list home-list--olive">
+          <li><a href="/restoration"><strong>Ecological restoration of the Forktree site</strong></a> &mdash; transforming a cleared and degraded 54&#8209;hectare former pastoral property into a thriving example of what&rsquo;s possible</li>
+          <li><a href="/nursery"><strong>Our native plant nursery and rare seed orchard</strong></a>, supporting region&#8209;wide restoration</li>
+          <li><a href="/education1"><strong>Experiential education programs</strong></a> for school groups and tertiary students</li>
+          <li><a href="/team-days"><strong>Community engagement through Team Days and volunteering opportunities</strong></a></li>
+        </ul>
+      </div>
+      <figure class="home-split__image">
+        <img src="/images/about/goals-orchard-drone.jpg" alt="Aerial view of the Forktree shed, nursery and rare seed orchard" loading="lazy" />
+      </figure>
     </div>
   </section>
 
@@ -166,7 +176,7 @@ const wider = [
   }
 
   .index-section--banner .index-section__bg {
-    background-image: url('/images/education/edu-hero-aerial.jpg');
+    background-image: url('/images/about/home-hero-sea.jpg');
   }
 
   .index-section--banner::before {
@@ -266,6 +276,56 @@ const wider = [
 
   .home-intro__body a:hover {
     opacity: 0.7;
+  }
+
+  /* Visual split sections ---------------------------------------------- */
+  .home-section--visual {
+    overflow: hidden;
+  }
+
+  .home-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+    align-items: stretch;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 560px;
+  }
+
+  .home-split--reverse {
+    grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1fr);
+  }
+
+  .home-split--reverse .home-split__text {
+    order: 2;
+  }
+
+  .home-split--reverse .home-split__image {
+    order: 1;
+  }
+
+  .home-split__text {
+    padding: 100px 60px;
+    align-self: center;
+  }
+
+  .home-split__text .home-intro__body {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .home-split__image {
+    margin: 0;
+    min-height: 480px;
+    line-height: 0;
+  }
+
+  .home-split__image img {
+    width: 100%;
+    height: 100%;
+    min-height: 480px;
+    object-fit: cover;
+    display: block;
   }
 
   /* Lists --------------------------------------------------------------- */
@@ -503,6 +563,26 @@ const wider = [
   }
 
   @media (max-width: 900px) {
+    .home-split,
+    .home-split--reverse {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .home-split--reverse .home-split__text,
+    .home-split--reverse .home-split__image {
+      order: initial;
+    }
+
+    .home-split__text {
+      padding: 70px 30px;
+    }
+
+    .home-split__image,
+    .home-split__image img {
+      min-height: 320px;
+    }
+
     .home-bios {
       grid-template-columns: 1fr;
       gap: 3rem;

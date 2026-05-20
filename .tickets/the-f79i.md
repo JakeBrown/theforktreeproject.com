@@ -1,6 +1,6 @@
 ---
 id: the-f79i
-status: open
+status: in_progress
 deps: []
 links: []
 created: 2026-05-20T04:18:11Z
@@ -19,3 +19,11 @@ From Liz's 14 May 'progress' email thread. Clear changes:
 - Use the updated AI-edited Ralph/Suzanne photo Liz replaced in Dropbox as the preferred Ralph/Suzanne image.
 - Consider Ralph/Cath image as an additional image if layout supports it; otherwise use the AI-edited Ralph/Suzanne image as the default and ask Liz to review.
 
+
+## Notes
+
+**2026-05-20T04:36:52Z**
+
+Downscaled Get Involved image candidates prepared in repo:
+- public/images/get-involved/ralph-suzanne-nursery.jpg (1600×1066, ~579KB)
+- public/images/get-involved/ralph-cath-planting.jpg (1800×1349, ~780KB)

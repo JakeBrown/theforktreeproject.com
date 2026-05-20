@@ -36,3 +36,10 @@ Important: source files are large originals (e.g. 8k-wide / 20–30MB). Downscal
 **2026-05-20T04:26:16Z**
 
 TO_DISCUSS triage 2026-05-20: default path is to implement Liz's suggested About/Home image updates and ask her to review them in situ, rather than blocking on a meeting decision.
+
+**2026-05-20T04:35:39Z**
+
+Downscaled candidate assets prepared in repo:
+- public/images/about/vision-sole-tree.jpg (2000×1333, ~620KB) from _MAO0256.jpg
+- public/images/about/home-hero-sea.jpg (2400×1350, ~1.1MB) from Forktree_Shot_24_2025_Jul.jpg
+- public/images/about/goals-orchard-drone.jpg (2200×1237, ~1.1MB) from Forktree_Shot_19_2025_Jul (edited) (edited).jpg

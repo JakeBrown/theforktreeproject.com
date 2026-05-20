@@ -20,3 +20,13 @@ From Liz's 14 May 'progress' email thread. Clear changes where possible:
 
 Use sensible defaults for layout/image choices where possible, then ask Liz to review in situ. Only missing source imagery should remain a direct TO_DISCUSS ask.
 
+
+## Notes
+
+**2026-05-20T04:35:39Z**
+
+Downscaled restoration image candidates prepared in repo:
+- public/images/restoration/restoration-hero-tree.jpg (2400×1800, ~1.9MB)
+- public/images/restoration/tim-consultation.jpg (1600×1145, ~306KB)
+- public/images/restoration/restoration-before.jpg (1600×1200, ~588KB)
+- public/images/restoration/restoration-after.jpg (1600×1199, ~519KB)
