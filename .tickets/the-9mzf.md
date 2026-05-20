@@ -8,7 +8,7 @@ type: chore
 priority: 1
 assignee: Jake Brown
 ---
-# Migrate issue tracking from Beads to ticket
+# Migrate issue tracking to ticket
 
-Import existing Beads issues into .tickets, remove tracked .beads state, and document that this repo now uses wedow/ticket (tk).
+Import existing legacy issues into .tickets, remove old local tracker state, and document that this repo now uses wedow/ticket (tk).
 

@@ -32,7 +32,6 @@ pnpm-debug.log*
 .vscode/
 .claude/worktrees/
 
-# Legacy Beads/Dolt state (issue tracking now uses .tickets/ via tk)
-.beads/
+# Local legacy issue-tracker state
 .dolt/
 *.db

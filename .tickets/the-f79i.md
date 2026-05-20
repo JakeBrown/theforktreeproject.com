@@ -7,11 +7,10 @@ created: 2026-05-20T04:18:11Z
 type: task
 priority: 2
 assignee: Jake Brown
-external-ref: beads:theforktreeproject.com-w1u
 ---
 # Get Involved: update copy and volunteer imagery
 
-Migrated from Beads issue theforktreeproject.com-w1u.
+Legacy issue reference: theforktreeproject.com-w1u.
 
 From Liz's 14 May 'progress' email thread. Clear changes:
 - Make Get Involved more volunteer-focused and consistent with other pages.

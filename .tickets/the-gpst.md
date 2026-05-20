@@ -7,11 +7,10 @@ created: 2026-05-20T04:18:11Z
 type: task
 priority: 2
 assignee: Jake Brown
-external-ref: beads:theforktreeproject.com-61o
 ---
 # About/Home: apply Liz's image updates
 
-Migrated from Beads issue theforktreeproject.com-61o.
+Legacy issue reference: theforktreeproject.com-61o.
 
 From Liz's 14 May 'progress' email thread. Clear changes:
 - About page Vision section: use one of the natural About Dropbox shots, likely sole tree on hillside against sky.

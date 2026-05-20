@@ -17,9 +17,9 @@ Liz: "They won't mind!! And I'll ask them anyway, but I think we should just do 
 
 Locations to update:
 - src/pages/testimonials.astro line 17: full quote contains "...A perfect choice for students from Reception through to Year 12."
-- src/pages/education1.astro line 93: short form "A perfect choice for students from Reception through to Year 12." — but if bd theforktreeproject.com-XXX (Annesley swap) lands first, the Blackwood short quote is gone from /education1 entirely. Sequence matters.
+- src/pages/education1.astro line 93: short form "A perfect choice for students from Reception through to Year 12." — but if the Annesley swap lands first, the Blackwood short quote is gone from /education1 entirely. Sequence matters.
 
-If Annesley swap (the other bead) ships first → only update /testimonials.
+If Annesley swap ships first → only update /testimonials.
 If this ships first → update both, then Annesley swap removes the edu1 line.
 
 
