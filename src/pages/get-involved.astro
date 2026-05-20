@@ -1,105 +1,308 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import ScrollIndicator from '../components/ScrollIndicator.astro';
 ---
 
-<PageLayout title="Get Involved — The Forktree Project" description="Find out how to support The Forktree Project through volunteering, in-kind support or tax deductible donation.">
+<PageLayout title="Get Involved — The Forktree Project" description="Volunteer with The Forktree Project or support our work restoring biodiversity on the Fleurieu Peninsula.">
 
-  <!-- Hero -->
-  <section class="join-hero" style="background-color: #2a3a2a;">
-    <div class="join-hero__content">
-      <h1>Get Involved</h1>
-      <div class="join-hero__text">
-        <p>The Forktree Project is a charity registered with the Australian Charities and Not for Profits Commission (ACNC).</p>
-        <p>To find out more about how to support the Project, whether via volunteering, in-kind support or tax deductible donation, or to enquire about The Forktree Project Education Program, please get in touch.</p>
+  <!-- Hero / Intro -->
+  <section class="gi-section gi-section--hero" style="background-image: url('/images/get-involved/ralph-suzanne-nursery.jpg'); background-color: #2a3a2a;">
+    <div class="gi-section__content gi-section__content--center">
+      <div class="gi-text gi-text--wide">
+        <h1>Get Involved</h1>
+        <div class="gi-body gi-body--hero">
+          <p>Help restore habitat, bring native species back to the Fleurieu Peninsula, and build a community committed to caring for the environment.</p>
+        </div>
+        <div class="gi-cta gi-cta--hero">
+          <a href="mailto:hello@theforktreeproject.com?subject=Forktree%20Volunteer%20Enquiry" class="btn--cta btn--cta-lg">Email us for more information</a>
+        </div>
       </div>
-      <p class="join-hero__cta-label">Email us for more information</p>
-      <a href="mailto:hello@theforktreeproject.com?subject=Forktree%20Website%20Enquiry" class="join-hero__cta">
-        hello@theforktreeproject.com
-      </a>
+    </div>
+    <ScrollIndicator />
+  </section>
+
+  <!-- Charity / Vision -->
+  <section class="gi-section gi-section--plain gi-section--intro">
+    <p class="gi-kicker">Registered Charity</p>
+    <div class="gi-intro">
+      <p class="gi-intro__lead">The Forktree Project is a registered charity with the Australian Charities and Not-for-profits Commission (ACNC), working to restore biodiversity and bring native species back to the Fleurieu Peninsula.</p>
+      <p class="gi-intro__body">Our vision is about people as much as planet: restoring the land goes hand-in-hand with building a community of people who are committed to caring for the environment.</p>
+    </div>
+  </section>
+
+  <!-- Volunteer With Us -->
+  <section class="gi-section gi-section--olive">
+    <p class="gi-kicker gi-kicker--light">Volunteer With Us</p>
+    <div class="gi-intro">
+      <p class="gi-intro__lead gi-intro__lead--light">Volunteers play a vital role in our work.</p>
+      <p class="gi-intro__body gi-intro__body--light">Activities range from nursery work and planting to a wide variety of creative infrastructure projects across the property.</p>
+      <p class="gi-intro__body gi-intro__body--light">Whatever your skills or experience, there&rsquo;s a meaningful way to contribute.</p>
+    </div>
+  </section>
+
+  <!-- Other Ways to Support -->
+  <section class="gi-section gi-section--plain gi-section--with-photo gi-section--with-photo-reverse">
+    <div class="gi-split">
+      <div class="gi-split__text">
+        <p class="gi-kicker">Other Ways to Support</p>
+        <div class="gi-intro gi-intro--split">
+          <p class="gi-intro__lead">There are many ways to support The Forktree Project beyond on-site volunteering.</p>
+          <p class="gi-intro__body">You can contribute through in-kind assistance, or by sharing your skills and talents to help strengthen our work.</p>
+          <p class="gi-intro__body">We&rsquo;d love to hear from you.</p>
+          <div class="gi-cta">
+            <a href="mailto:hello@theforktreeproject.com?subject=Forktree%20Website%20Enquiry" class="btn--cta btn--cta-lg btn--cta-dark">Email us for more information</a>
+          </div>
+        </div>
+      </div>
+      <div class="gi-split__photo">
+        <img src="/images/get-involved/ralph-cath-planting.jpg" alt="Ralph and Cath volunteering during a planting day at The Forktree Project" loading="lazy" />
+      </div>
     </div>
   </section>
 
 </PageLayout>
 
 <style>
-  .join-hero {
+  .gi-section {
     position: relative;
-    min-height: 70vh;
+    min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
     color: var(--color-text-light);
     overflow: hidden;
   }
 
-  .join-hero::before {
+  .gi-section::before {
     content: '';
     position: absolute;
-    /* expand past edges so the blur doesn't show a soft halo */
-    inset: -30px;
-    background-image: url('/images/join-us/join-hero.jpg');
-    background-size: cover;
-    background-position: center;
-    filter: blur(6px) brightness(0.4);
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 45%, rgba(0, 0, 0, 0.42) 0%, transparent 100%),
+      rgba(0, 0, 0, 0.34);
     z-index: 1;
   }
 
-  .join-hero__content {
+  .gi-section--plain {
+    background: #fafaf9;
+    color: #1a1a1a;
+    min-height: auto;
+    padding: 0;
+  }
+
+  .gi-section--plain::before,
+  .gi-section--olive::before {
+    display: none;
+  }
+
+  .gi-section--olive {
+    background: #1f2a1f;
+    color: rgba(255, 255, 255, 0.85);
+    min-height: auto;
+    padding: 0;
+  }
+
+  .gi-section__content {
     position: relative;
     z-index: 2;
+    width: 100%;
+    padding: 140px 60px 100px;
+  }
+
+  .gi-section__content--center {
+    display: flex;
+    justify-content: center;
     text-align: center;
-    max-width: 700px;
-    padding: 180px 30px 100px;
   }
 
-  .join-hero h1 {
+  .gi-text {
+    max-width: 780px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  }
+
+  .gi-text h1 {
     font-family: var(--font-heading);
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(2.4rem, 6vw, 4.6rem);
     font-weight: 700;
-    margin-bottom: var(--space-md);
+    line-height: 1.05;
+    margin: 0 0 1.5rem;
   }
 
-  .join-hero__text p {
+  .gi-body p {
     font-family: var(--font-body);
-    font-size: 0.95rem;
-    line-height: 1.7;
-    opacity: 0.9;
-    margin-bottom: 1rem;
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 720px;
+    color: rgba(255, 255, 255, 0.92);
   }
 
-  .join-hero__cta-label {
+  .gi-kicker {
     font-family: var(--font-heading);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 2px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 0.75rem;
+    text-align: center;
+    color: var(--color-text);
+    margin: 0;
+    padding: 80px 60px 0;
   }
 
-  .join-hero__cta {
-    display: inline-block;
-    margin-top: var(--space-lg);
-    padding: 1rem 2.5rem;
+  .gi-kicker--light {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .gi-intro {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 60px 80px;
+  }
+
+  .gi-intro--split {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .gi-intro__lead {
     font-family: var(--font-heading);
-    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-size: clamp(1.6rem, 2.5vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.35;
+    color: #1a1a1a;
+    margin: 0 0 1.25rem;
+  }
+
+  .gi-intro__lead--light {
+    color: #fff;
+  }
+
+  .gi-intro__body {
+    font-family: var(--font-body);
+    font-size: clamp(0.98rem, 1.3vw, 1.1rem);
+    line-height: 1.7;
+    color: #444;
+    margin: 0 0 1rem;
+  }
+
+  .gi-intro__body:last-child {
+    margin-bottom: 0;
+  }
+
+  .gi-intro__body--light {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .gi-split {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 80px 60px;
+  }
+
+  .gi-section--with-photo-reverse .gi-split {
+    flex-direction: row-reverse;
+  }
+
+  .gi-split__text,
+  .gi-split__photo {
+    flex: 1 1 50%;
+    min-width: 0;
+  }
+
+  .gi-section--with-photo .gi-kicker {
+    margin: 0;
+    padding: 0 0 0.75rem;
+    text-align: left;
+  }
+
+  .gi-split__photo {
+    line-height: 0;
+  }
+
+  .gi-split__photo img {
+    width: 100%;
+    height: auto;
+    max-height: 560px;
+    object-fit: cover;
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  .gi-cta {
+    margin-top: 2rem;
+  }
+
+  .gi-cta--hero {
+    margin-top: 2.5rem;
+  }
+
+  .btn--cta {
+    display: inline-block;
+    padding: 1rem 2.25rem;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
     font-weight: 600;
-    letter-spacing: 1px;
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    border-radius: 4px;
+    letter-spacing: 0.18em;
+    line-height: 1.35;
+    text-transform: uppercase;
     text-decoration: none;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.72);
+    border-radius: 4px;
     transition: all 0.3s ease;
   }
 
-  .join-hero__cta:hover {
+  .btn--cta:hover {
     background: rgba(255, 255, 255, 0.15);
     border-color: white;
   }
 
-  @media (max-width: 768px) {
-    .join-hero {
-      background-attachment: scroll;
+  .btn--cta-lg {
+    padding: 1.05rem 2.4rem;
+  }
+
+  .btn--cta-dark {
+    color: #1a1a1a;
+    border-color: #1a1a1a;
+  }
+
+  .btn--cta-dark:hover {
+    background: #1a1a1a;
+    color: #fff;
+  }
+
+  @media (max-width: 900px) {
+    .gi-split,
+    .gi-section--with-photo-reverse .gi-split {
+      flex-direction: column;
+      padding: 60px 30px;
+      gap: 2rem;
+    }
+
+    .gi-section__content {
+      padding: 130px 30px 90px;
+    }
+
+    .gi-intro {
+      padding: 35px 30px 60px;
+    }
+
+    .gi-kicker {
+      padding: 60px 30px 0;
+    }
+
+    .gi-split__photo img {
+      max-height: none;
     }
   }
 </style>
