@@ -21,9 +21,7 @@ Current state: Jake intentionally departed from this layout.
 
 So the "no photo-bg except hero" is a deliberate design choice that conflicts with Liz's drone-shot-as-bg request.
 
-Action: confirm with Liz before changing. Either:
-(a) keep current text-only Remote Ed + plain Get Started (current), or
-(b) revert to drone-shot bg between Remote Ed and Get Started with portal link overlay.
+Default: keep current text-only Remote Ed + plain Get Started for now, ask Liz to review it in situ, and only revert to the drone-shot background with portal-link overlay if she still prefers that treatment.
 
 Liz hasn't seen the post-987f3c8 layout yet (her latest priorities email doesn't mention it). May be a non-issue once she views the live page.
 

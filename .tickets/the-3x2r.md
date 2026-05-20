@@ -18,5 +18,5 @@ From Liz's 14 May 'progress' email thread. Clear changes where possible:
 - Add one of the Tim photos in the restoration services/overview consultation section so Tim is better represented.
 - Use available before/after restoration photos if a clean layout is obvious.
 
-Ambiguous layout/image-choice questions should be tracked in TO_DISCUSS.md rather than guessed.
+Use sensible defaults for layout/image choices where possible, then ask Liz to review in situ. Only missing source imagery should remain a direct TO_DISCUSS ask.
 

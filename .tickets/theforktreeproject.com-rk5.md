@@ -20,6 +20,6 @@ Iteration trail:
 - f86bf67: rename CTA to "Go to Portal"
 - 1e7caf8: add subtext "for remote and visiting students"
 
-Jake's chosen subtext is more specific (audience) vs Liz's (purpose). Probably fine — confirm with Liz at next sync; if she's happy with current, close this bead. If not, swap the subtext.
+Jake's chosen subtext is more specific (audience) vs Liz's (purpose). Default: keep the current wording, ask Liz to review it in situ, and only swap the subtext if she objects.
 
 

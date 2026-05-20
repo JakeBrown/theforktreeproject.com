@@ -17,9 +17,10 @@ Rebuild /team when Liz delivers wider-crew bios + headshots:
 - Oliver Wilson (Environmental Officer) — bio + headshot TBC
 - Maddie Maguire (Marketing Officer) — bio + headshot TBC
 
-Also confirm with Liz:
-- Tim's title — her docx had "Founder and CEO???" — currently rendering as "Founder and CEO" with a TODO comment in src/pages/index.astro
-- Headshots for Tim + Liz (currently using TJ/EB initials circles on the About page)
+Also seek Liz's feedback after review:
+- Whether Elizabeth's long role title should be shortened
+- Tim's title — her docx had "Founder and CEO???" — currently rendering as "Founder and CEO"
+- Headshots for Tim + Liz
 
 When rebuilt, also:
 - Re-add a "meet the rest of the team" link from the About page founders section
