@@ -54,7 +54,7 @@ const wider = [
   </section>
 
   <!-- Our Vision -->
-  <section class="home-section home-section--plain home-section--visual">
+  <section class="home-section home-section--plain home-section--visual home-section--vision">
     <div class="home-split">
       <div class="home-split__text">
         <p class="home-intro__lead">Our Vision</p>
@@ -344,6 +344,20 @@ const wider = [
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
   }
 
+  .home-section--vision .home-split {
+    min-height: 480px;
+  }
+
+  .home-section--vision .home-split__text {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .home-section--vision .home-split__image--padded {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
   /* Lists --------------------------------------------------------------- */
   .home-list {
     list-style: none;
@@ -615,6 +629,16 @@ const wider = [
     .home-split__image--padded {
       min-height: 0;
       padding: 0 30px 60px;
+    }
+
+    .home-section--vision .home-split__text {
+      padding-top: 56px;
+      padding-bottom: 48px;
+    }
+
+    .home-section--vision .home-split__image--padded {
+      padding-top: 0;
+      padding-bottom: 48px;
     }
 
     .home-split__image--padded img {
