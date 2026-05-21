@@ -1,6 +1,6 @@
 ---
 id: the-gpst
-status: open
+status: closed
 deps: []
 links: []
 created: 2026-05-20T04:18:11Z
@@ -42,3 +42,7 @@ Downscaled candidate assets prepared in repo:
 - public/images/about/vision-sole-tree.jpg (2000×1333, ~620KB) from _MAO0256.jpg
 - public/images/about/home-hero-sea.jpg (2400×1350, ~1.1MB) from Forktree_Shot_24_2025_Jul.jpg
 - public/images/about/goals-orchard-drone.jpg (2200×1237, ~1.1MB) from Forktree_Shot_19_2025_Jul (edited) (edited).jpg
+
+**2026-05-21T04:22:13Z**
+
+Closing after verification: Home hero now uses /images/about/home-hero-sea.jpg, Vision uses /images/about/vision-sole-tree.jpg, and Goals uses /images/about/goals-orchard-drone.jpg as implemented in commit 1ceafe6.
