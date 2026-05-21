@@ -1,6 +1,6 @@
 ---
 id: the-3x2r
-status: open
+status: closed
 deps: []
 links: []
 created: 2026-05-20T04:18:11Z

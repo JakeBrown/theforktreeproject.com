@@ -6,7 +6,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 <PageLayout title="Restoration — The Forktree Project" description="Ecological restoration at The Forktree Project: returning a 54-hectare former pastoral property on South Australia's Fleurieu Peninsula to full ecological health.">
 
   <!-- Hero -->
-  <section class="rest-section rest-section--hero" style="background-image: url('/images/education/edu-hero-aerial.jpg'); background-color: #2a3a2a;">
+  <section class="rest-section rest-section--hero" style="background-image: url('/images/restoration/restoration-hero-tree.jpg'); background-color: #2a3a2a;">
     <div class="rest-section__content rest-section__content--center">
       <div class="rest-text rest-text--wide">
         <h1>Ecological Restoration at The Forktree Project</h1>
@@ -24,6 +24,16 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
       <p class="rest-intro__lead rest-intro__lead--light">Beginnings</p>
       <p class="rest-intro__body rest-intro__body--light">In 2019, The Forktree Project began restoring an extensively cleared and degraded former pastoral property on South Australia&rsquo;s Fleurieu Peninsula, with the goal of returning it to full ecological health.</p>
       <p class="rest-intro__body rest-intro__body--light">Since then, more than 30,000 native trees, shrubs, groundcovers and grasses have been planted, with an impressive 90% success rate &mdash; and this is only the beginning.</p>
+      <div class="rest-before-after" aria-label="Before and after aerial photographs of The Forktree Project">
+        <figure class="rest-before-after__item">
+          <img src="/images/restoration/restoration-aerial-feb.jpg" alt="Aerial view of The Forktree Project in February 2025, with dry summer hills and young plantings" loading="lazy" />
+          <figcaption>February 2025</figcaption>
+        </figure>
+        <figure class="rest-before-after__item">
+          <img src="/images/restoration/restoration-aerial-jul.jpg" alt="Aerial view of The Forktree Project in July 2025, showing green winter growth across the restored landscape" loading="lazy" />
+          <figcaption>July 2025</figcaption>
+        </figure>
+      </div>
       <p class="rest-intro__body rest-intro__body--light rest-intro__body--aside">To read more about the story of The Forktree Project, visit our <a href="/blog">Journal</a>.</p>
     </div>
   </section>
@@ -57,6 +67,10 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
   <section class="rest-section rest-section--plain rest-section--cta-block">
     <div class="rest-intro rest-intro--center">
       <h2 class="rest-intro__title">Restoration Consultation Services</h2>
+
+      <figure class="rest-consultation-image">
+        <img src="/images/restoration/tim-consultation.jpg" alt="Tim Jarvis speaking with visitors during a Forktree restoration consultation" loading="lazy" />
+      </figure>
 
       <h3 class="rest-intro__sub">Sharing What We&rsquo;ve Learned</h3>
       <p class="rest-intro__body">Our ongoing work restoring the Forktree site has given us deep, practical insight into what responsible and effective habitat restoration requires &mdash; from planning and species selection to long-term ecological resilience.</p>
@@ -283,6 +297,49 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
     opacity: 0.7;
   }
 
+  .rest-before-after {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 2.5rem 0 1.5rem;
+    max-width: 1100px;
+  }
+
+  .rest-before-after__item,
+  .rest-consultation-image {
+    margin: 0;
+  }
+
+  .rest-before-after__item {
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .rest-before-after__item img,
+  .rest-consultation-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .rest-before-after__item figcaption {
+    padding: 0.75rem 0.9rem;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.76);
+  }
+
+  .rest-consultation-image {
+    max-width: 760px;
+    margin: 0 auto 3rem;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+
   .rest-list {
     list-style: none;
     padding: 0;
@@ -480,7 +537,13 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
     .rest-journal {
       padding: 30px 30px 50px;
     }
+
+    .rest-before-after {
+      grid-template-columns: 1fr;
+    }
+
+    .rest-consultation-image {
+      margin-bottom: 2rem;
+    }
   }
 </style>
-</content>
-</invoke>
