@@ -3,9 +3,10 @@ import MobileNav from './MobileNav.tsx';
 
 interface Props {
   variant?: 'light' | 'dark';
+  topGlass?: boolean;
 }
 
-const { variant = 'light' } = Astro.props;
+const { variant = 'light', topGlass = false } = Astro.props;
 
 const navItems = [
   { label: 'Restoration', href: '/restoration' },
@@ -19,7 +20,7 @@ const navItems = [
 ];
 
 const currentPath = Astro.url.pathname;
-const headerClass = `header header--${variant}`;
+const headerClass = `header header--${variant}${topGlass ? ' header--top-glass' : ''}`;
 ---
 
 <header class={headerClass}>
@@ -63,6 +64,12 @@ const headerClass = `header header--${variant}`;
   .header.scrolled {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+  }
+
+  .header--top-glass:not(.scrolled) {
+    background-color: rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .header--light.scrolled {

@@ -8,14 +8,15 @@ interface Props {
   description?: string;
   ogImage?: string;
   headerVariant?: 'light' | 'dark';
+  headerTopGlass?: boolean;
   norobots?: boolean;
 }
 
-const { title, description, ogImage, headerVariant = 'light', norobots = false } = Astro.props;
+const { title, description, ogImage, headerVariant = 'light', headerTopGlass = false, norobots = false } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} ogImage={ogImage} norobots={norobots}>
-  <Header variant={headerVariant} />
+  <Header variant={headerVariant} topGlass={headerTopGlass} />
   <main>
     <slot />
   </main>
