@@ -84,8 +84,8 @@ const wider = [
           <li><a href="/team-days"><strong>Community engagement through Team Days and volunteering opportunities</strong></a></li>
         </ul>
       </div>
-      <figure class="home-split__image">
-        <img src="/images/about/goals-orchard-drone.jpg" alt="Aerial view of the Forktree shed, nursery and rare seed orchard" loading="lazy" />
+      <figure class="home-split__image home-split__image--padded">
+        <img src="/images/about/home-goals-img-9312.jpg" alt="Native vegetation growing across the Forktree hillside" loading="lazy" />
       </figure>
     </div>
   </section>
@@ -326,6 +326,22 @@ const wider = [
     min-height: 480px;
     object-fit: cover;
     display: block;
+  }
+
+  .home-split__image--padded {
+    min-height: auto;
+    padding: 80px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .home-split__image--padded img {
+    height: auto;
+    min-height: 0;
+    max-height: 560px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
   }
 
   /* Lists --------------------------------------------------------------- */
@@ -581,6 +597,16 @@ const wider = [
     .home-split__image,
     .home-split__image img {
       min-height: 320px;
+    }
+
+    .home-split__image--padded {
+      min-height: 0;
+      padding: 0 30px 60px;
+    }
+
+    .home-split__image--padded img {
+      min-height: 0;
+      max-height: 400px;
     }
 
     .home-bios {
