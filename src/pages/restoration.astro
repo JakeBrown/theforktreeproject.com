@@ -19,33 +19,41 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
   </section>
 
   <!-- Beginnings -->
-  <section class="rest-section rest-section--olive rest-section--left">
-    <div class="rest-intro">
-      <p class="rest-intro__lead rest-intro__lead--light">Beginnings</p>
-      <p class="rest-intro__body rest-intro__body--light">In 2019, The Forktree Project began restoring an extensively cleared and degraded former pastoral property on South Australia&rsquo;s Fleurieu Peninsula, with the goal of returning it to full ecological health.</p>
-      <p class="rest-intro__body rest-intro__body--light">Since then, more than 30,000 native trees, shrubs, groundcovers and grasses have been planted, with an impressive 90% success rate &mdash; and this is only the beginning.</p>
-      <figure class="rest-section-image">
+  <section class="rest-section rest-section--olive rest-section--left rest-section--with-photo">
+    <div class="rest-split">
+      <div class="rest-split__text">
+        <div class="rest-intro">
+          <p class="rest-intro__lead rest-intro__lead--light">Beginnings</p>
+          <p class="rest-intro__body rest-intro__body--light">In 2019, The Forktree Project began restoring an extensively cleared and degraded former pastoral property on South Australia&rsquo;s Fleurieu Peninsula, with the goal of returning it to full ecological health.</p>
+          <p class="rest-intro__body rest-intro__body--light">Since then, more than 30,000 native trees, shrubs, groundcovers and grasses have been planted, with an impressive 90% success rate &mdash; and this is only the beginning.</p>
+          <p class="rest-intro__body rest-intro__body--light rest-intro__body--aside">To read more about the story of The Forktree Project, visit our <a href="/blog">Journal</a>.</p>
+        </div>
+      </div>
+      <div class="rest-split__photo">
         <img src="/images/restoration/restoration-aerial-feb.jpg" alt="Aerial view of The Forktree Project with dry summer hills and young plantings" loading="lazy" />
-      </figure>
-      <p class="rest-intro__body rest-intro__body--light rest-intro__body--aside">To read more about the story of The Forktree Project, visit our <a href="/blog">Journal</a>.</p>
+      </div>
     </div>
   </section>
 
   <!-- Planning for Success -->
-  <section class="rest-section rest-section--plain rest-section--right">
-    <div class="rest-intro">
-      <p class="rest-intro__lead">Planning for Success</p>
-      <p class="rest-intro__body">Restoration of the 54&#8209;hectare site is guided by a carefully researched planting plan developed by the Forktree team. This plan draws on:</p>
-      <ul class="rest-list rest-list--plain">
-        <li>Knowledge of local endemic species and their ecological relationships</li>
-        <li>Evidence from remnant trees showing what once thrived on the property</li>
-        <li>Assessment of topography and soil health to match species to place</li>
-        <li>Climate modelling to ensure long-term resilience under a changing climate</li>
-        <li>Best-practice planting methods to establish thriving vegetation associations</li>
-      </ul>
-      <figure class="rest-section-image rest-section-image--plain">
+  <section class="rest-section rest-section--plain rest-section--right rest-section--with-photo">
+    <div class="rest-split">
+      <div class="rest-split__text">
+        <div class="rest-intro">
+          <p class="rest-intro__lead">Planning for Success</p>
+          <p class="rest-intro__body">Restoration of the 54&#8209;hectare site is guided by a carefully researched planting plan developed by the Forktree team. This plan draws on:</p>
+          <ul class="rest-list rest-list--plain">
+            <li>Knowledge of local endemic species and their ecological relationships</li>
+            <li>Evidence from remnant trees showing what once thrived on the property</li>
+            <li>Assessment of topography and soil health to match species to place</li>
+            <li>Climate modelling to ensure long-term resilience under a changing climate</li>
+            <li>Best-practice planting methods to establish thriving vegetation associations</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rest-split__photo">
         <img src="/images/restoration/restoration-aerial-jul.jpg" alt="Aerial view of The Forktree Project showing green winter growth across the restored landscape" loading="lazy" />
-      </figure>
+      </div>
     </div>
   </section>
 
@@ -293,25 +301,50 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
     opacity: 0.7;
   }
 
-  .rest-section-image,
+  .rest-split {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 80px 60px;
+  }
+
+  .rest-split__text {
+    flex: 1 1 50%;
+    min-width: 0;
+  }
+
+  .rest-split__photo {
+    flex: 1 1 50%;
+    line-height: 0;
+  }
+
+  .rest-split__photo img {
+    width: 100%;
+    height: auto;
+    max-height: 560px;
+    object-fit: cover;
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  .rest-section--right.rest-section--with-photo .rest-split {
+    flex-direction: row-reverse;
+  }
+
+  .rest-section--with-photo .rest-intro {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
   .rest-consultation-image {
     margin: 0;
   }
 
-  .rest-section-image {
-    max-width: 820px;
-    margin-top: 2.5rem;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    background: rgba(255, 255, 255, 0.06);
-  }
-
-  .rest-section-image--plain {
-    border-color: rgba(0, 0, 0, 0.1);
-    background: white;
-  }
-
-  .rest-section-image img,
   .rest-consultation-image img {
     display: block;
     width: 100%;
@@ -523,8 +556,18 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
       padding: 30px 30px 50px;
     }
 
-    .rest-section-image {
-      margin-top: 2rem;
+    .rest-split {
+      flex-direction: column;
+      padding: 60px 30px;
+      gap: 2rem;
+    }
+
+    .rest-section--right.rest-section--with-photo .rest-split {
+      flex-direction: column;
+    }
+
+    .rest-split__photo img {
+      max-height: 400px;
     }
 
     .rest-consultation-image {
