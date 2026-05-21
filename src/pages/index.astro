@@ -81,7 +81,7 @@ const wider = [
           <li><a href="/restoration"><strong>Ecological restoration of the Forktree site</strong></a> &mdash; transforming a cleared and degraded 54&#8209;hectare former pastoral property into a thriving example of what&rsquo;s possible</li>
           <li><a href="/nursery"><strong>Our native plant nursery and rare seed orchard</strong></a>, supporting region&#8209;wide restoration</li>
           <li><a href="/education1"><strong>Experiential education programs</strong></a> for school groups and tertiary students</li>
-          <li><a href="/team-days"><strong>Community engagement through Team Days and volunteering opportunities</strong></a></li>
+          <li>Community engagement through <a href="/team-days"><strong>Team Days</strong></a> and <a href="/get-involved"><strong>volunteering opportunities</strong></a></li>
         </ul>
       </div>
       <figure class="home-split__image home-split__image--padded">
@@ -406,6 +406,19 @@ const wider = [
     color: #fff;
     text-decoration: underline;
     text-underline-offset: 3px;
+  }
+
+  .home-list--olive li a::after {
+    content: '';
+    display: inline-block;
+    width: 0.78em;
+    height: 0.78em;
+    margin-left: 0.35em;
+    vertical-align: -0.08em;
+    background: currentColor;
+    opacity: 0.72;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.07 0l3.54-3.54a5 5 0 0 0-7.07-7.07L11.5 4.43'/%3E%3Cpath d='M14 11a5 5 0 0 0-7.07 0L3.39 14.54a5 5 0 0 0 7.07 7.07l2.04-2.04'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.07 0l3.54-3.54a5 5 0 0 0-7.07-7.07L11.5 4.43'/%3E%3Cpath d='M14 11a5 5 0 0 0-7.07 0L3.39 14.54a5 5 0 0 0 7.07 7.07l2.04-2.04'/%3E%3C/svg%3E") center / contain no-repeat;
   }
 
   /* Team / founder bios ------------------------------------------------- */
