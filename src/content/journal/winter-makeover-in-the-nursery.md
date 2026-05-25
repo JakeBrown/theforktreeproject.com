@@ -9,7 +9,7 @@ As the weather cools, it’s time for a winter makeover in the nursery. This wee
 
 Different seasons call for different care. In summer, our youngest seedlings need protection from the full force of the South Australian sun. But as days and nights grow colder, they rely on warmth and higher humidity to keep growing strong.
 
-A huge thank you to our team and volunteers who helped make the seasonal switch — swapping shade netting for plastic sheeting, pulling it tight and securing it in place. A real team effort, and one that keeps our most vulnerable seedlings thriving through winter.
+A huge thankyou to our team and volunteers who helped make the seasonal switch — swapping shade netting for plastic sheeting, pulling it tight and securing it in place. A real team effort, and one that keeps our most vulnerable seedlings thriving through winter.
 
 ![](/images/journal/winter-makeover-in-the-nursery.jpg)
 
