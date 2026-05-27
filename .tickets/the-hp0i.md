@@ -1,6 +1,6 @@
 ---
 id: the-hp0i
-status: open
+status: closed
 deps: []
 links: []
 created: 2026-05-27T03:04:39Z

@@ -1,6 +1,6 @@
 ---
 id: the-m3q6
-status: open
+status: closed
 deps: [the-hp0i]
 links: []
 created: 2026-05-27T03:04:45Z
