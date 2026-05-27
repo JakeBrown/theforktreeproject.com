@@ -125,14 +125,15 @@ import PageLayout from '../layouts/PageLayout.astro';
   }
 
   .donate-page__inner {
-    max-width: var(--content-width);
+    width: 100%;
     margin: 0 auto;
-    padding: var(--space-xl) var(--space-md);
+    padding: var(--space-xl) 0;
   }
 
   .donate-intro {
     max-width: 820px;
     margin: 0 auto var(--space-lg);
+    padding: 0 var(--space-md);
     text-align: center;
   }
 
@@ -146,11 +147,13 @@ import PageLayout from '../layouts/PageLayout.astro';
 
   .donate-grid,
   .donate-connected {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-md);
-    align-items: stretch;
-    margin-top: var(--space-lg);
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1400px;
+    width: 100%;
+    margin: var(--space-lg) auto 0;
+    padding: 80px 60px;
   }
 
   .donate-card,
@@ -161,6 +164,8 @@ import PageLayout from '../layouts/PageLayout.astro';
 
   .donate-card--text,
   .donate-connected__text {
+    flex: 1 1 50%;
+    min-width: 0;
     padding: clamp(2rem, 5vw, 4rem);
   }
 
@@ -169,23 +174,27 @@ import PageLayout from '../layouts/PageLayout.astro';
     color: var(--color-text-light);
   }
 
-  .donate-card--graphic {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: clamp(2rem, 5vw, 4rem);
-    background: #45ad78;
+  .donate-card--graphic,
+  .donate-connected__image {
+    flex: 1 1 50%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+    line-height: 0;
   }
 
   .donate-card--graphic img,
   .donate-connected__image img {
     width: 100%;
-    display: block;
-  }
-
-  .donate-card--graphic img {
-    max-width: 560px;
     height: auto;
+    max-height: 560px;
+    object-fit: cover;
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
   }
 
   .donate-card h2,
@@ -248,18 +257,6 @@ import PageLayout from '../layouts/PageLayout.astro';
     align-items: center;
   }
 
-  .donate-connected__image {
-    margin: 0;
-    border-radius: 28px;
-    overflow: hidden;
-  }
-
-  .donate-connected__image img {
-    height: 100%;
-    min-height: 520px;
-    object-fit: cover;
-  }
-
   .donate-connected__text {
     background: white;
     color: var(--color-text);
@@ -270,14 +267,16 @@ import PageLayout from '../layouts/PageLayout.astro';
   }
 
   @media (max-width: 900px) {
-    .donate-hero,
-    .donate-grid,
-    .donate-connected {
+    .donate-hero {
       grid-template-columns: 1fr;
+      min-height: auto;
     }
 
-    .donate-hero {
-      min-height: auto;
+    .donate-grid,
+    .donate-connected {
+      flex-direction: column;
+      padding: 60px 30px;
+      gap: 2rem;
     }
 
     .donate-hero__text {
@@ -296,24 +295,28 @@ import PageLayout from '../layouts/PageLayout.astro';
       order: 1;
     }
 
+    .donate-card--graphic img,
     .donate-connected__image img {
-      min-height: 360px;
+      max-height: 400px;
     }
   }
 
   @media (max-width: 640px) {
     .donate-page__inner {
-      padding: var(--space-lg) var(--space-sm);
+      padding: var(--space-lg) 0;
+    }
+
+    .donate-grid,
+    .donate-connected {
+      padding: 48px 20px;
     }
 
     .donate-card,
-    .donate-connected__text,
-    .donate-connected__image {
+    .donate-connected__text {
       border-radius: 18px;
     }
 
     .donate-card--text,
-    .donate-card--graphic,
     .donate-connected__text {
       padding: var(--space-md);
     }
