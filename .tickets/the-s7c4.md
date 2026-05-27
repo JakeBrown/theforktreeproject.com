@@ -12,3 +12,9 @@ assignee: Jake Brown
 
 Improve the Upcoming Events section on the Get Involved page with a slicker dark card treatment and calendar-style date badge.
 
+
+## Notes
+
+**2026-05-27T03:40:12Z**
+
+Follow-up polish: added subtle patterned events-section background and binder-hole details to the calendar badges.
