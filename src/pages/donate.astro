@@ -2,34 +2,53 @@
 import PageLayout from '../layouts/PageLayout.astro';
 ---
 
-<PageLayout title="Donate to Forktree — The Forktree Project" description="Help us to re-establish habitat on a degraded property in South Australia's Fleurieu Peninsula." headerVariant="dark">
+<PageLayout title="Donate to Forktree — The Forktree Project" description="Help restore habitat on a degraded 54-hectare former pastoral property on South Australia’s Fleurieu Peninsula." headerVariant="dark">
 
   <section class="donate-page">
-    <div class="donate-page__inner">
-      <h1>Help us in our work to re-establish habitat.</h1>
+    <div class="donate-hero">
+      <div class="donate-hero__text">
+        <p class="donate-kicker">Donate</p>
+        <h1>Help Restore Habitat</h1>
+        <p>Help us restore a degraded 54-hectare former pastoral property on South Australia&rsquo;s Fleurieu Peninsula back to nature.</p>
+      </div>
+      <figure class="donate-hero__image">
+        <img src="/images/donate/donate-sunset.jpg" alt="Sunset over the Forktree Project landscape" loading="eager" />
+      </figure>
+    </div>
 
-      <div class="donate-logos">
-        <img src="/images/donate/donate-hero.jpg" alt="The Forktree Project and Australian Geographic Society" loading="lazy" />
+    <div class="donate-page__inner">
+      <div class="donate-intro">
+        <p>By planting tens of thousands of native trees, shrubs and grasses, together we can bring back habitat for native animals, birds and insects, while also sequestering significant amounts of carbon.</p>
       </div>
 
-      <div class="donate-text">
-        <p>Help us to return a degraded 54-hectare former pastoral property in South Australia&rsquo;s Fleurieu Peninsula back to nature by re-establishing tens of thousands of native trees, shrubs and grasses, which will in turn bring back native animals, insects and birds as well as sequester tens of thousands of tonnes of carbon.</p>
-
-        <p>The Forktree Project is proud to be supported by the <a href="https://www.australiangeographic.com.au/category/society/" target="_blank" rel="noopener noreferrer">Australian Geographic Society</a>, which gives donors to the Society the ability to choose The Forktree Project as their preferred cause for their funds.</p>
-
-        <p><strong>To donate to Forktree, access The Forktree Project fundraising page on the Society&rsquo;s website via the button below and make your donation there.</strong></p>
-
-        <div class="donate-cta">
-          <a href="https://www.australiangeographic.com.au/society/fundraising/2021/08/australian-geographic-supports-forktree-project/" target="_blank" rel="noopener noreferrer" class="btn--donate">Donate Now</a>
+      <div class="donate-grid">
+        <div class="donate-card donate-card--text">
+          <p class="donate-kicker">Donate</p>
+          <h2>Australian Geographic Society</h2>
+          <p>The Forktree Project is proud to be supported by the <a href="https://www.australiangeographic.com.au/category/society/" target="_blank" rel="noopener noreferrer">Australian Geographic Society</a>, which gives donors to the Society the ability to choose The Forktree Project as their preferred cause for their funds.</p>
+          <p>To donate to Forktree, access The Forktree Project fundraising page on the Society&rsquo;s website via the button below.</p>
+          <div class="donate-cta">
+            <a href="https://www.australiangeographic.com.au/society/fundraising/2021/08/australian-geographic-supports-forktree-project/" target="_blank" rel="noopener noreferrer" class="btn--donate">Donate Now</a>
+          </div>
+          <p>All funds donated via the Society&rsquo;s Forktree Project fundraising page are provided directly to The Forktree Project to support our restoration work.</p>
+          <p><strong>All donations to the Australian Geographic Society-Forktree Project fund are tax deductible.</strong></p>
         </div>
 
-        <p>The Society will give the funds you donate via its Forktree Project fundraising page to us here at Forktree.</p>
+        <div class="donate-card donate-card--graphic">
+          <img src="/images/donate/donate-hero.jpg" alt="The Forktree Project and Australian Geographic Society" loading="lazy" />
+        </div>
+      </div>
 
-        <p><strong>All donations to the Australian Geographic Society-Forktree Project fund are tax deductible.</strong></p>
-
-        <p>Updates on the progress of our re-wilding work with can be found via <a href="/blog">our blog</a> or in the <a href="https://www.australiangeographic.com.au/category/society/ag-society-news/" target="_blank" rel="noopener noreferrer">Australian Geographic Society newsletter</a>.</p>
-
-        <p>Your support is greatly appreciated and will help us make a difference.</p>
+      <div class="donate-connected">
+        <figure class="donate-connected__image">
+          <img src="/images/donate/donate-olearia.jpg" alt="Native Olearia flowers at The Forktree Project" loading="lazy" />
+        </figure>
+        <div class="donate-connected__text">
+          <p class="donate-kicker">Stay Connected</p>
+          <h2>Follow our progress</h2>
+          <p>You can follow updates on our rewilding progress through our <a href="/blog">blog</a> and <a href="https://www.instagram.com/forktreeproject/" target="_blank" rel="noopener noreferrer">Instagram</a>, or via the <a href="https://www.australiangeographic.com.au/category/society/ag-society-news/" target="_blank" rel="noopener noreferrer">Australian Geographic Society newsletter</a>.</p>
+          <p>Your support is deeply appreciated and plays a vital role in helping us rebuild a thriving, biodiverse landscape.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -39,58 +58,170 @@ import PageLayout from '../layouts/PageLayout.astro';
 <style>
   .donate-page {
     padding-top: var(--header-height);
+    background: #fafaf9;
+  }
+
+  .donate-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    min-height: calc(100vh - var(--header-height));
+    background: #1f2a1f;
+    color: var(--color-text-light);
+  }
+
+  .donate-hero__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(3rem, 8vw, 7rem);
+  }
+
+  .donate-kicker {
+    margin: 0 0 var(--space-sm);
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  .donate-hero .donate-kicker,
+  .donate-card--text .donate-kicker {
+    color: #b9d0a9;
+  }
+
+  .donate-hero h1,
+  .donate-card h2,
+  .donate-connected h2 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.08;
+    margin: 0 0 var(--space-md);
+  }
+
+  .donate-hero h1 {
+    font-size: clamp(3rem, 8vw, 6.5rem);
+  }
+
+  .donate-hero p:not(.donate-kicker) {
+    max-width: 620px;
+    font-size: clamp(1.2rem, 2vw, 1.65rem);
+    line-height: 1.45;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .donate-hero__image {
+    min-height: 100%;
+    margin: 0;
+  }
+
+  .donate-hero__image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
   }
 
   .donate-page__inner {
     max-width: var(--content-width);
     margin: 0 auto;
-    padding: var(--space-lg) var(--space-md) var(--space-xl);
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .donate-intro {
+    max-width: 820px;
+    margin: 0 auto var(--space-lg);
     text-align: center;
   }
 
-  .donate-page h1 {
+  .donate-intro p {
     font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: var(--space-lg);
+    font-size: clamp(1.45rem, 3vw, 2.3rem);
+    line-height: 1.35;
+    margin: 0;
+    color: var(--color-text);
   }
 
-  .donate-logos {
-    margin: 0 auto var(--space-lg);
-    max-width: 500px;
+  .donate-grid,
+  .donate-connected {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+    align-items: stretch;
+    margin-top: var(--space-lg);
   }
 
-  .donate-logos img {
+  .donate-card,
+  .donate-connected__text {
+    border-radius: 28px;
+    overflow: hidden;
+  }
+
+  .donate-card--text,
+  .donate-connected__text {
+    padding: clamp(2rem, 5vw, 4rem);
+  }
+
+  .donate-card--text {
+    background: #1f2a1f;
+    color: var(--color-text-light);
+  }
+
+  .donate-card--graphic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(2rem, 5vw, 4rem);
+    background: #45ad78;
+  }
+
+  .donate-card--graphic img,
+  .donate-connected__image img {
     width: 100%;
+    display: block;
+  }
+
+  .donate-card--graphic img {
+    max-width: 560px;
     height: auto;
   }
 
-  .donate-text {
-    text-align: left;
-    max-width: 600px;
-    margin: 0 auto;
+  .donate-card h2,
+  .donate-connected h2 {
+    font-size: clamp(2rem, 4vw, 3.4rem);
   }
 
-  .donate-text p {
+  .donate-card p,
+  .donate-connected p {
     font-family: var(--font-body);
     font-size: 1rem;
     line-height: 1.8;
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-sm);
+    margin: 0 0 var(--space-sm);
   }
 
-  .donate-text a:not(.btn--donate) {
-    color: var(--color-text);
+  .donate-card--text p {
+    color: rgba(255, 255, 255, 0.84);
+  }
+
+  .donate-card--text strong {
+    color: white;
+  }
+
+  .donate-card a:not(.btn--donate),
+  .donate-connected a {
+    color: inherit;
     text-decoration: underline;
+    text-underline-offset: 0.18em;
   }
 
-  .donate-text a:not(.btn--donate):hover {
-    opacity: 0.7;
+  .donate-card a:not(.btn--donate):hover,
+  .donate-connected a:hover {
+    opacity: 0.75;
   }
 
   .donate-cta {
-    text-align: center;
     margin: var(--space-md) 0;
   }
 
@@ -98,18 +229,99 @@ import PageLayout from '../layouts/PageLayout.astro';
     display: inline-block;
     font-family: var(--font-heading);
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 1.2px;
     text-transform: uppercase;
-    color: var(--color-text);
-    border: 2px solid var(--color-text);
-    padding: 25px 46px;
+    color: white;
+    border: 2px solid white;
+    padding: 20px 38px;
     text-decoration: none;
     transition: all var(--transition-normal);
   }
 
   .btn--donate:hover {
-    background-color: var(--color-text);
-    color: white;
+    background-color: white;
+    color: #1f2a1f;
+  }
+
+  .donate-connected {
+    align-items: center;
+  }
+
+  .donate-connected__image {
+    margin: 0;
+    border-radius: 28px;
+    overflow: hidden;
+  }
+
+  .donate-connected__image img {
+    height: 100%;
+    min-height: 520px;
+    object-fit: cover;
+  }
+
+  .donate-connected__text {
+    background: white;
+    color: var(--color-text);
+  }
+
+  .donate-connected__text p {
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 900px) {
+    .donate-hero,
+    .donate-grid,
+    .donate-connected {
+      grid-template-columns: 1fr;
+    }
+
+    .donate-hero {
+      min-height: auto;
+    }
+
+    .donate-hero__text {
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .donate-hero__image {
+      min-height: 55vh;
+    }
+
+    .donate-connected__image {
+      order: 2;
+    }
+
+    .donate-connected__text {
+      order: 1;
+    }
+
+    .donate-connected__image img {
+      min-height: 360px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .donate-page__inner {
+      padding: var(--space-lg) var(--space-sm);
+    }
+
+    .donate-card,
+    .donate-connected__text,
+    .donate-connected__image {
+      border-radius: 18px;
+    }
+
+    .donate-card--text,
+    .donate-card--graphic,
+    .donate-connected__text {
+      padding: var(--space-md);
+    }
+
+    .btn--donate {
+      width: 100%;
+      text-align: center;
+      padding: 18px 24px;
+    }
   }
 </style>
