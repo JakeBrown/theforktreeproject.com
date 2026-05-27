@@ -17,36 +17,46 @@ import { upcomingEvents } from '../data/events';
         <div class="gi-cta gi-cta--hero">
           <a href="mailto:hello@theforktreeproject.com?subject=Forktree%20Volunteer%20Enquiry" class="btn--cta btn--cta-lg">Email us for more information</a>
         </div>
+        <details class="gi-event-badge">
+          <summary>
+            <span>Upcoming events</span>
+            <strong>{upcomingEvents.length}</strong>
+          </summary>
+          <div class="gi-event-badge__panel">
+            <p>{upcomingEvents.length} planting days are now open for registration.</p>
+            <a href="/events">View events &rarr;</a>
+          </div>
+        </details>
       </div>
     </div>
     <ScrollIndicator />
   </section>
 
   <!-- Charity / Vision -->
-  <section class="gi-section gi-section--plain gi-section--intro">
-    <p class="gi-kicker">Registered Charity</p>
+  <section class="gi-section gi-section--olive gi-section--intro">
+    <p class="gi-kicker gi-kicker--light">Registered Charity</p>
     <div class="gi-intro">
-      <p class="gi-intro__lead">The Forktree Project is a registered charity with the Australian Charities and Not-for-profits Commission (ACNC), working to restore biodiversity and bring native species back to the Fleurieu Peninsula.</p>
-      <p class="gi-intro__body">Our vision is about people as much as planet: restoring the land goes hand-in-hand with building a community of people who are committed to caring for the environment.</p>
+      <p class="gi-intro__lead gi-intro__lead--light">The Forktree Project is a registered charity with the Australian Charities and Not-for-profits Commission (ACNC), working to restore biodiversity and bring native species back to the Fleurieu Peninsula.</p>
+      <p class="gi-intro__body gi-intro__body--light">Our vision is about people as much as planet: restoring the land goes hand-in-hand with building a community of people who are committed to caring for the environment.</p>
     </div>
   </section>
 
   <!-- Volunteer With Us -->
-  <section class="gi-section gi-section--olive">
-    <p class="gi-kicker gi-kicker--light">Volunteer With Us</p>
+  <section class="gi-section gi-section--plain">
+    <p class="gi-kicker">Volunteer With Us</p>
     <div class="gi-intro">
-      <p class="gi-intro__lead gi-intro__lead--light">Volunteers play a vital role in our work.</p>
-      <p class="gi-intro__body gi-intro__body--light">Activities range from nursery work and planting to a wide variety of creative infrastructure projects across the property.</p>
-      <p class="gi-intro__body gi-intro__body--light">Whatever your skills or experience, there&rsquo;s a meaningful way to contribute.</p>
+      <p class="gi-intro__lead">Volunteers play a vital role in our work.</p>
+      <p class="gi-intro__body">Activities range from nursery work and planting to a wide variety of creative infrastructure projects across the property.</p>
+      <p class="gi-intro__body">Whatever your skills or experience, there&rsquo;s a meaningful way to contribute.</p>
     </div>
   </section>
 
   <!-- Upcoming Events -->
-  <section class="gi-section gi-section--plain gi-section--events">
-    <p class="gi-kicker">Upcoming Events</p>
+  <section class="gi-section gi-section--olive gi-section--events">
+    <p class="gi-kicker gi-kicker--light">Upcoming Events</p>
     <div class="gi-intro gi-intro--events">
-      <p class="gi-intro__lead">Join us for a planting day.</p>
-      <p class="gi-intro__body">Our upcoming community events are a practical way to help restore habitat, meet the Forktree team, and spend a meaningful day in the landscape.</p>
+      <p class="gi-intro__lead gi-intro__lead--light">Join us for a planting day.</p>
+      <p class="gi-intro__body gi-intro__body--light">Our upcoming community events are a practical way to help restore habitat, meet the Forktree team, and spend a meaningful day in the landscape.</p>
 
       <div class="gi-event-list" aria-label="Upcoming Forktree events">
         {upcomingEvents.map((event) => (
@@ -60,7 +70,7 @@ import { upcomingEvents } from '../data/events';
       </div>
 
       <div class="gi-cta">
-        <a href="/events" class="btn--cta btn--cta-lg btn--cta-dark">See all upcoming events</a>
+        <a href="/events" class="btn--cta btn--cta-lg">See all upcoming events</a>
       </div>
     </div>
   </section>
@@ -164,6 +174,81 @@ import { upcomingEvents } from '../data/events';
     margin: 0 auto;
     max-width: 720px;
     color: rgba(255, 255, 255, 0.92);
+  }
+
+  .gi-event-badge {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-family: var(--font-heading);
+    text-shadow: none;
+  }
+
+  .gi-event-badge summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 0.85rem 0.65rem 1rem;
+    background: #b84032;
+    color: #fff;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
+    transition: transform var(--transition-fast), background var(--transition-fast);
+  }
+
+  .gi-event-badge summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .gi-event-badge summary:hover {
+    background: #cf4a3a;
+    transform: translateY(-1px);
+  }
+
+  .gi-event-badge span {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .gi-event-badge strong {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.65rem;
+    height: 1.65rem;
+    padding: 0 0.35rem;
+    background: #fff;
+    color: #b84032;
+    border-radius: 999px;
+    font-size: 0.88rem;
+    line-height: 1;
+  }
+
+  .gi-event-badge__panel {
+    width: min(300px, calc(100vw - 60px));
+    margin: 0.75rem auto 0;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.96);
+    color: #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.24);
+  }
+
+  .gi-event-badge__panel p {
+    margin: 0 0 0.75rem;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .gi-event-badge__panel a {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 5px;
   }
 
   .gi-kicker {
