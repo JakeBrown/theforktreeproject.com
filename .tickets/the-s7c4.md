@@ -22,3 +22,7 @@ Follow-up polish: added subtle patterned events-section background and binder-ho
 **2026-05-27T03:42:59Z**
 
 User feedback: reduce empty left column in event cards; keep calendar badge but let body copy span full card width.
+
+**2026-05-27T03:49:25Z**
+
+User feedback: calendar badge binder-hole dots overlap weekday label; remove overlapping decorative dots.
