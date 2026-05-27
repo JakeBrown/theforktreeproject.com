@@ -327,10 +327,11 @@ const formatEventDate = (date: string) => {
   .gi-event-card {
     position: relative;
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1rem;
+    grid-template-columns: 78px minmax(0, 1fr);
+    column-gap: 1.25rem;
+    row-gap: 0;
     min-height: 100%;
-    padding: 1rem;
+    padding: 1.2rem;
     overflow: hidden;
     background:
       linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035)),
@@ -359,6 +360,8 @@ const formatEventDate = (date: string) => {
   .gi-event-card__date-badge {
     position: relative;
     z-index: 1;
+    grid-column: 1;
+    grid-row: 1 / span 2;
     width: 78px;
     align-self: start;
     overflow: hidden;
@@ -432,14 +435,13 @@ const formatEventDate = (date: string) => {
   }
 
   .gi-event-card__content {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    min-width: 0;
-    flex-direction: column;
+    display: contents;
   }
 
   .gi-event-card__eyebrow {
+    position: relative;
+    z-index: 1;
+    grid-column: 2;
     margin: 0 0 0.65rem;
     color: rgba(255, 255, 255, 0.5);
     font-family: var(--font-heading);
@@ -450,14 +452,22 @@ const formatEventDate = (date: string) => {
   }
 
   .gi-event-card h3 {
+    position: relative;
+    z-index: 1;
+    grid-column: 2;
     font-family: var(--font-heading);
     font-size: clamp(1.12rem, 1.7vw, 1.38rem);
     line-height: 1.2;
-    margin: 0 0 0.75rem;
+    margin: 0 0 1.05rem;
     color: #fff;
   }
 
   .gi-event-card__description {
+    position: relative;
+    z-index: 1;
+    grid-column: 1 / -1;
+    padding-top: 1.05rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.92rem;
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.72);
@@ -465,7 +475,10 @@ const formatEventDate = (date: string) => {
   }
 
   .gi-event-card__meta {
-    margin: auto 0 1rem;
+    position: relative;
+    z-index: 1;
+    grid-column: 1 / -1;
+    margin: 0 0 1rem;
     padding-top: 0.25rem;
     font-size: 0.86rem;
     line-height: 1.45;
@@ -473,10 +486,14 @@ const formatEventDate = (date: string) => {
   }
 
   .gi-event-card__link {
+    position: relative;
+    z-index: 1;
+    grid-column: 1 / -1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     align-self: flex-start;
+    justify-self: start;
     min-height: 2.5rem;
     padding: 0.78rem 1rem;
     background: #b84032;
