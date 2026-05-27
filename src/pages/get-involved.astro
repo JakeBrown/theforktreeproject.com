@@ -17,16 +17,10 @@ import { upcomingEvents } from '../data/events';
         <div class="gi-cta gi-cta--hero">
           <a href="mailto:hello@theforktreeproject.com?subject=Forktree%20Volunteer%20Enquiry" class="btn--cta btn--cta-lg">Email us for more information</a>
         </div>
-        <details class="gi-event-badge">
-          <summary>
-            <span>Upcoming events</span>
-            <strong>{upcomingEvents.length}</strong>
-          </summary>
-          <div class="gi-event-badge__panel">
-            <p>{upcomingEvents.length} planting days are now open for registration.</p>
-            <a href="/events">View events &rarr;</a>
-          </div>
-        </details>
+        <a href="#upcoming-events" class="gi-event-badge" aria-label="Scroll to upcoming events">
+          <span>Upcoming events</span>
+          <strong>{upcomingEvents.length}</strong>
+        </a>
       </div>
     </div>
     <ScrollIndicator />
@@ -52,7 +46,7 @@ import { upcomingEvents } from '../data/events';
   </section>
 
   <!-- Upcoming Events -->
-  <section class="gi-section gi-section--olive gi-section--events">
+  <section id="upcoming-events" class="gi-section gi-section--olive gi-section--events">
     <p class="gi-kicker gi-kicker--light">Upcoming Events</p>
     <div class="gi-intro gi-intro--events">
       <p class="gi-intro__lead gi-intro__lead--light">Join us for a planting day.</p>
@@ -174,30 +168,21 @@ import { upcomingEvents } from '../data/events';
   }
 
   .gi-event-badge {
-    display: inline-block;
-    margin-top: 1.25rem;
-    font-family: var(--font-heading);
-    text-shadow: none;
-  }
-
-  .gi-event-badge summary {
     display: inline-flex;
     align-items: center;
     gap: 0.65rem;
+    margin-top: 1.25rem;
     padding: 0.65rem 0.85rem 0.65rem 1rem;
+    font-family: var(--font-heading);
     background: #b84032;
     color: #fff;
     border-radius: 999px;
-    cursor: pointer;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
+    text-shadow: none;
     transition: transform var(--transition-fast), background var(--transition-fast);
   }
 
-  .gi-event-badge summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .gi-event-badge summary:hover {
+  .gi-event-badge:hover {
     background: #cf4a3a;
     transform: translateY(-1px);
   }
@@ -221,31 +206,6 @@ import { upcomingEvents } from '../data/events';
     border-radius: 999px;
     font-size: 0.88rem;
     line-height: 1;
-  }
-
-  .gi-event-badge__panel {
-    width: min(300px, calc(100vw - 60px));
-    margin: 0.75rem auto 0;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.96);
-    color: #1a1a1a;
-    border-radius: 8px;
-    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.24);
-  }
-
-  .gi-event-badge__panel p {
-    margin: 0 0 0.75rem;
-    font-size: 0.92rem;
-    line-height: 1.5;
-  }
-
-  .gi-event-badge__panel a {
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    text-decoration: underline;
-    text-underline-offset: 5px;
   }
 
   .gi-kicker {
