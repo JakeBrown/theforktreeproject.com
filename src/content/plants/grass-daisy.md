@@ -1,20 +1,20 @@
 ---
 title: "Grass Daisy"
 scientificName: "Brachyscome graminea"
-tagline: "A bright little daisy for damp corners and habitat gardens"
+tagline: "A vulnerable wetland workhorse"
 month: "2026-05"
 image: "/images/plants/grass-daisy-hero.jpg"
 imageAlt: "A Grass Daisy flower with pale petals and a yellow centre growing among green nursery plants"
 ---
 
-Grass Daisy, or *Brachyscome graminea*, is a cheerful native perennial with slender grass-like leaves and delicate daisy flowers with golden centres. It may be small, but when planted in groups it can bring soft colour, texture and plenty of life to damp garden edges, creeklines and restoration plantings.
+When the native Grass Daisy or *Brachyscome graminea* is flowering it is unmistakably a daisy, bringing you straight back to the school oval making daisy chains in the sun. When it’s not flowering, though, you could squint and think it was a wild patch of grass, which explains both the common and botanical names (*graminea* means grass, in case you don’t speak Latin).
 
-This species naturally favours moist grasslands, open woodland and seasonally wet areas. Its low, spreading habit helps protect the soil surface, while the flowers provide food for native insects and add a welcome splash of colour through the warmer months.
+The Grass Daisy is a wetland or riparian plant that can tolerate periods of complete inundation. It quickly scrambles around a swampy area with stolons or runners, forming a verdant groundcover. The network of roots holds soil together, preventing erosion.
 
-The name *graminea* points to its grass-like foliage — one of the features that makes this plant so useful. It can weave through other ground-layer species without overwhelming them, creating the kind of diverse, layered habitat we are working to restore at Forktree.
+In spring and summertime, white flowers attract bees, butterflies and beetles. The nectar-filled centres make wonderful pollination pit stops. As with all daisies — or everything in the Asteraceae family — what appears to be one flower is actually a composite of hundreds of flowers in a disc, giving the pollinators way more for their money.
 
-In the nursery, Grass Daisy is part of the broader mix of local native species we grow for biodiversity plantings across the property and the wider Fleurieu region. Ground-layer plants like this are important: they help fill the spaces between shrubs and trees, support pollinators and make restoration sites more resilient.
+Of course, this isn’t the exact flower you’d have been plucking and threading on the oval’s edge (please don’t!). Chances are you haven’t seen it in real life — yet! Its conservation status is Vulnerable through most of South Australia, including here on the Fleurieu, with populations around Finniss River and Meadows Creek. Along with being restricted to wet areas, it is at risk of being outcompeted by weeds. This is one of those plants that could do with a helping hand, so that’s exactly what we’re doing here at Forktree.
 
-For home gardeners, Grass Daisy is a lovely choice for a damp spot, habitat garden or naturalistic planting. Plant it where it has a little moisture, give it room to spread gently, and enjoy the sight of tiny daisies doing big ecological work.
+We have a romping patch of Grass Daisy in our Rare Seed Orchard which we use to collect material and propagate tubestock each year in our nursery. The Grass Daisy grows from seed, cuttings and plugs. This year we have grown over 300 plants for private and public biodiversity projects, including at Myponga Reservoir and swamplands in the Fleurieu.
 
-This plant is one of many species we propagate at The Forktree Project Nursery. If you'd like to volunteer, please get in touch at [hello@theforktreeproject.com](mailto:hello@theforktreeproject.com).
+Want to play a part in restoring biodiversity on the Fleurieu Peninsula? Come and volunteer at The Forktree Project Nursery and help us grow vulnerable South Australian plants for future restoration projects. Please send us an email at [hello@theforktreeproject.com](mailto:hello@theforktreeproject.com) to find out more.

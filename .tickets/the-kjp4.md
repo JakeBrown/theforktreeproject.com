@@ -18,3 +18,7 @@ Add Maddie's May Plant of the Month (Grass Daisy / Brachyscome graminea) to the 
 **2026-05-28T03:53:03Z**
 
 Implemented May Plant of the Month as Grass Daisy (Brachyscome graminea). Downloaded and converted the attached HEIC photo to public/images/plants/grass-daisy-hero.jpg. The SharePoint doc link in the email required Microsoft authentication, so the plant profile copy was drafted from the species/title and attached image rather than extracted from the inaccessible document. Build passes.
+
+**2026-05-28T04:03:24Z**
+
+Replaced drafted Grass Daisy body with Maddie's PDF copy from /Users/jakebrown/Downloads/Grass Daisy Brachyscome graminea blog.pdf, keeping only light spelling/grammar/Markdown formatting corrections. Build passes after clearing Astro cache.
