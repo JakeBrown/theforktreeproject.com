@@ -1,6 +1,6 @@
 ---
 id: the-yt6g
-status: open
+status: closed
 deps: []
 links: []
 created: 2026-05-28T03:50:23Z
@@ -22,3 +22,7 @@ Created from Liz's 2026-05-27 email. Not started in this pass; awaiting supporte
 **2026-05-28T05:06:01Z**
 
 User confirmed Hotels for Trees and BCB logo files are now in the supporters folder; Flinders University logo still needs sourcing.
+
+**2026-05-28T05:10:32Z**
+
+Implemented: added Hotels For Trees SVG from hotelsfortrees.com, sourced Flinders University logo from flinders.edu.au brand page asset, and replaced BCB text placeholder with Body Corporate Brokers SVG from bcb.com.au. Build passed.
