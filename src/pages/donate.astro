@@ -37,7 +37,7 @@ import PageLayout from '../layouts/PageLayout.astro';
         </div>
 
         <figure class="donate-split__image donate-split__image--graphic">
-          <img src="/images/donate/donate-hero.jpg" alt="The Forktree Project and Australian Geographic Society" loading="lazy" />
+          <img src="/images/donate/donate-hero-transparent.png" alt="The Forktree Project and Australian Geographic Society" loading="lazy" />
         </figure>
       </div>
     </section>
@@ -247,7 +247,9 @@ import PageLayout from '../layouts/PageLayout.astro';
 
   .donate-split__image--graphic img {
     object-fit: contain;
-    background: #45ad78;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   .donate-cta {
