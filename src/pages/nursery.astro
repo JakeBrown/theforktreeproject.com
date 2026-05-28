@@ -90,7 +90,7 @@ const formatMonth = (ym: string) => {
 
   <!-- Plant of the Month -->
   {currentPlant && (
-    <section class="nur-section nur-section--potm" style={`background-image: url('${currentPlant.data.image}');`}>
+    <section class="nur-section nur-section--potm" style={`background-image: url('${currentPlant.data.image}'); background-position: ${currentPlant.data.imagePosition ?? 'center'};`}>
       <div class="nur-section__content nur-section__content--center">
         <div class="nur-text nur-text--wide nur-potm">
           <p class="nur-potm__kicker">Plant of the Month &middot; {formatMonth(currentPlant.data.month)}</p>

@@ -5,6 +5,7 @@ tagline: "A vulnerable wetland workhorse"
 month: "2026-05"
 image: "/images/plants/grass-daisy-hero.jpg"
 imageAlt: "A Grass Daisy flower with pale petals and a yellow centre growing among green nursery plants"
+imagePosition: "center 30%"
 ---
 
 When the native Grass Daisy or *Brachyscome graminea* is flowering it is unmistakably a daisy, bringing you straight back to the school oval making daisy chains in the sun. When it’s not flowering, though, you could squint and think it was a wild patch of grass, which explains both the common and botanical names (*graminea* means grass, in case you don’t speak Latin).

@@ -22,7 +22,7 @@ const formatMonth = (ym: string) => {
       <div class="potm-archive__grid">
         {plants.map((plant) => (
           <a href={`/nursery/plants/${plant.id}`} class="potm-card">
-            <div class="potm-card__image" style={`background-image: url('${plant.data.image}');`}></div>
+            <div class="potm-card__image" style={`background-image: url('${plant.data.image}'); background-position: ${plant.data.imagePosition ?? 'center'};`}></div>
             <div class="potm-card__body">
               <p class="potm-card__month">{formatMonth(plant.data.month)}</p>
               <h2 class="potm-card__title">{plant.data.title}</h2>

@@ -21,6 +21,7 @@ const plants = defineCollection({
     month: z.string(),
     image: z.string(),
     imageAlt: z.string().optional(),
+    imagePosition: z.string().optional(),
   }),
 });
 

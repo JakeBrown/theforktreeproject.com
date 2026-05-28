@@ -25,7 +25,7 @@ const formatMonth = (ym: string) => {
 
   <article class="potm-post">
 
-    <section class="potm-post__hero" style={`background-image: url('${plant.data.image}');`}>
+    <section class="potm-post__hero" style={`background-image: url('${plant.data.image}'); background-position: ${plant.data.imagePosition ?? 'center'};`}>
       <div class="potm-post__hero-inner">
         <p class="potm-post__kicker">Plant of the Month &middot; {formatMonth(plant.data.month)}</p>
         <h1 class="potm-post__title">{plant.data.title}</h1>
