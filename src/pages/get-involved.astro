@@ -47,12 +47,19 @@ const formatEventDate = (date: string) => {
   </section>
 
   <!-- Volunteer With Us -->
-  <section class="gi-section gi-section--plain">
-    <p class="gi-kicker">Volunteer With Us</p>
-    <div class="gi-intro">
-      <p class="gi-intro__lead">Volunteers play a vital role in our work.</p>
-      <p class="gi-intro__body">Activities range from nursery work and planting to a wide variety of creative infrastructure projects across the property.</p>
-      <p class="gi-intro__body">Whatever your skills or experience, there&rsquo;s a meaningful way to contribute.</p>
+  <section class="gi-section gi-section--plain gi-section--with-photo">
+    <div class="gi-split">
+      <div class="gi-split__text">
+        <p class="gi-kicker">Volunteer With Us</p>
+        <div class="gi-intro gi-intro--split">
+          <p class="gi-intro__lead">Volunteers play a vital role in our work.</p>
+          <p class="gi-intro__body">Activities range from nursery work and planting to a wide variety of creative infrastructure projects across the property.</p>
+          <p class="gi-intro__body">Whatever your skills or experience, there&rsquo;s a meaningful way to contribute.</p>
+        </div>
+      </div>
+      <div class="gi-split__photo">
+        <img src="/images/get-involved/ralph-cath-planting.jpg" alt="Ralph and Cath volunteering during a planting day at The Forktree Project" loading="lazy" />
+      </div>
     </div>
   </section>
 
@@ -91,21 +98,15 @@ const formatEventDate = (date: string) => {
   </section>
 
   <!-- Other Ways to Support -->
-  <section class="gi-section gi-section--plain gi-section--with-photo gi-section--with-photo-reverse">
-    <div class="gi-split">
-      <div class="gi-split__text">
-        <p class="gi-kicker">Other Ways to Support</p>
-        <div class="gi-intro gi-intro--split">
-          <p class="gi-intro__lead">There are many ways to support The Forktree Project beyond on-site volunteering.</p>
-          <p class="gi-intro__body">You can contribute through in-kind assistance, or by sharing your skills and talents to help strengthen our work.</p>
-          <p class="gi-intro__body">We&rsquo;d love to hear from you.</p>
-          <div class="gi-cta">
-            <a href="mailto:hello@theforktreeproject.com?subject=Forktree%20Website%20Enquiry" class="btn--cta btn--cta-lg btn--cta-dark">Email us for more information</a>
-          </div>
+  <section class="gi-section gi-section--plain gi-section--cta">
+    <div class="gi-cta-panel">
+      <p class="gi-kicker">Other Ways to Support</p>
+      <div class="gi-intro">
+        <p class="gi-intro__lead">Have another way to help?</p>
+        <p class="gi-intro__body">You can contribute through in-kind assistance, or by sharing your skills and talents to help strengthen our work. We&rsquo;d love to hear from you.</p>
+        <div class="gi-cta gi-cta--featured">
+          <a href="mailto:hello@theforktreeproject.com?subject=Forktree%20Website%20Enquiry" class="btn--cta btn--cta-lg btn--cta-featured">Email us for more information</a>
         </div>
-      </div>
-      <div class="gi-split__photo">
-        <img src="/images/get-involved/ralph-cath-planting.jpg" alt="Ralph and Cath volunteering during a planting day at The Forktree Project" loading="lazy" />
       </div>
     </div>
   </section>
@@ -178,6 +179,21 @@ const formatEventDate = (date: string) => {
   .gi-section--events > * {
     position: relative;
     z-index: 1;
+  }
+
+  .gi-section--cta {
+    padding: 90px 60px;
+    text-align: center;
+  }
+
+  .gi-cta-panel {
+    width: min(100%, 900px);
+    margin: 0 auto;
+    padding: clamp(2.5rem, 5vw, 4.5rem);
+    background: #fff;
+    border: 1px solid rgba(31, 42, 31, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 24px 70px rgba(31, 42, 31, 0.08);
   }
 
   .gi-section__content {
@@ -520,6 +536,20 @@ const formatEventDate = (date: string) => {
     text-align: left;
   }
 
+  .gi-section--cta .gi-kicker {
+    padding: 0;
+  }
+
+  .gi-section--cta .gi-intro {
+    padding: 32px 0 0;
+  }
+
+  .gi-section--cta .gi-intro__body {
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .gi-split__photo {
     line-height: 0;
   }
@@ -577,6 +607,20 @@ const formatEventDate = (date: string) => {
     color: #fff;
   }
 
+  .btn--cta-featured {
+    background: #b84032;
+    border-color: #b84032;
+    color: #fff;
+    box-shadow: 0 14px 34px rgba(184, 64, 50, 0.24);
+  }
+
+  .btn--cta-featured:hover {
+    background: #cf4a3a;
+    border-color: #cf4a3a;
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
   @media (max-width: 900px) {
     .gi-split,
     .gi-section--with-photo-reverse .gi-split {
@@ -599,6 +643,14 @@ const formatEventDate = (date: string) => {
 
     .gi-split__photo img {
       max-height: none;
+    }
+
+    .gi-section--cta {
+      padding: 60px 30px;
+    }
+
+    .gi-cta-panel {
+      padding: 2.25rem 1.5rem;
     }
 
     .gi-event-list {

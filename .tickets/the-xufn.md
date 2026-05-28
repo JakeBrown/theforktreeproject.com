@@ -1,6 +1,6 @@
 ---
 id: the-xufn
-status: in_progress
+status: closed
 deps: []
 links: []
 created: 2026-05-28T04:59:51Z
