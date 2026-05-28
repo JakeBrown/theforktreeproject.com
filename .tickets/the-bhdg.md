@@ -18,3 +18,7 @@ Liz requested Fleet and Terra Artemis appear first among principal sponsors, esp
 **2026-05-28T03:50:59Z**
 
 Created from Liz's 2026-05-27 email. Terra Artemis logo is not available yet; preserve requested ordering once asset is supplied.
+
+**2026-05-28T05:06:01Z**
+
+User reiterated Fleet and Terra Artemis should appear first amongst principal sponsors for mobile ordering; Terra Artemis logo still pending.

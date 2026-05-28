@@ -18,3 +18,7 @@ Liz requested additions to the Supporters page: add Hotels for Trees, Flinders U
 **2026-05-28T03:50:59Z**
 
 Created from Liz's 2026-05-27 email. Not started in this pass; awaiting supporter source assets/location details for Hotels for Trees and BCB plus sourced Flinders logo.
+
+**2026-05-28T05:06:01Z**
+
+User confirmed Hotels for Trees and BCB logo files are now in the supporters folder; Flinders University logo still needs sourcing.
