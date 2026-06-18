@@ -29,6 +29,12 @@ const allHref = getJournalPageHref(basePath, 1);
   <div id="tag-filter-heading" class="tag-filter__heading">Explore by topic</div>
   <div class="tag-filter__intro">Browse the Forktree journal by theme, activity, and event.</div>
 
+  <form class="tag-filter__search" action="/search" method="get" role="search">
+    <label class="sr-only" for="journal-topic-search">Search the journal</label>
+    <input id="journal-topic-search" name="q" type="search" placeholder="Search the journal" />
+    <button type="submit">Search</button>
+  </form>
+
   <nav class="tag-filter__desktop" aria-label="Filter posts by topic">
     <a
       href={allHref}
@@ -93,6 +99,39 @@ const allHref = getJournalPageHref(basePath, 1);
     margin: 0 auto var(--space-sm);
   }
 
+  .tag-filter__search {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    margin: 0 auto var(--space-md);
+    max-width: 520px;
+  }
+
+  .tag-filter__search input {
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    font: inherit;
+    min-width: 0;
+    padding: 0.75rem 1rem;
+  }
+
+  .tag-filter__search button {
+    background-color: var(--color-primary);
+    border-radius: 999px;
+    color: var(--color-text-light);
+    font-family: var(--font-heading);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.75rem 1rem;
+    text-transform: uppercase;
+    transition: background-color var(--transition-fast), opacity var(--transition-fast);
+  }
+
+  .tag-filter__search button:hover {
+    background-color: var(--color-primary-dark);
+  }
+
   .tag-filter__desktop,
   .tag-filter__mobile-chips {
     display: flex;
@@ -136,6 +175,11 @@ const allHref = getJournalPageHref(basePath, 1);
   @media (max-width: 640px) {
     .tag-filter__desktop {
       display: none;
+    }
+
+    .tag-filter__search {
+      grid-template-columns: 1fr;
+      max-width: none;
     }
 
     .tag-filter__mobile {
