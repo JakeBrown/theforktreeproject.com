@@ -1,6 +1,6 @@
 ---
 id: the-7wf8
-status: open
+status: closed
 deps: []
 links: [the-ugxp]
 created: 2026-06-18T04:40:48Z
@@ -18,3 +18,7 @@ Before semantic search can run in production, create the Vectorize index named f
 **2026-06-18T04:47:46Z**
 
 After updating Wrangler to 4.101.0, reran vectorize create command. It still fails due to invalid Cloudflare auth token: code 10000 / 9109. Need refreshed Wrangler auth before provisioning.
+
+**2026-06-18T04:49:41Z**
+
+Wrangler auth is working now. Created Vectorize index forktree-journal with 768 dimensions/cosine metric using Wrangler 4.101.0. Optional JOURNAL_SEARCH_KV binding remains available as a follow-up if we want index status/version storage.
