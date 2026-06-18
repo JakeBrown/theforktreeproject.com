@@ -61,12 +61,55 @@ const initialQuery = Astro.url.searchParams.get('q') || '';
     .map((tag) => `<span class="search-result__tag">${escapeHtml(tagLabels[tag] || tag)}</span>`)
     .join('');
 
-  const renderResults = (results) => {
+  const escapeRegExp = (value) => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  const getHighlightTerms = (query) => {
+    const trimmed = String(query || '').replace(/\s+/g, ' ').trim();
+    const terms = new Set();
+
+    if (trimmed.length > 1) terms.add(trimmed.toLowerCase());
+    trimmed
+      .toLowerCase()
+      .split(/\s+/)
+      .filter((term) => term.length > 1)
+      .forEach((term) => terms.add(term));
+
+    return Array.from(terms).sort((a, b) => b.length - a.length);
+  };
+
+  const highlightKeywordSnippet = (value, query) => {
+    const snippet = String(value || '');
+    const terms = getHighlightTerms(query);
+    if (!snippet || terms.length === 0) return escapeHtml(snippet);
+
+    const pattern = new RegExp(`(${terms.map(escapeRegExp).join('|')})`, 'gi');
+    return snippet
+      .split(pattern)
+      .map((part) => {
+        const isMatch = terms.includes(part.toLowerCase());
+        return isMatch
+          ? `<mark class="search-result__highlight">${escapeHtml(part)}</mark>`
+          : escapeHtml(part);
+      })
+      .join('');
+  };
+
+  const renderSnippet = (result, query) => {
+    const snippet = result.snippet || result.excerpt || '';
+    return result.matchType === 'keyword'
+      ? highlightKeywordSnippet(snippet, query)
+      : escapeHtml(snippet);
+  };
+
+  const renderMatchBadge = (matchType) => {
+    const label = matchType === 'semantic' ? 'Semantic match' : 'Keyword match';
+    const modifier = matchType === 'semantic' ? 'semantic' : 'keyword';
+    return `<span class="search-result__match search-result__match--${modifier}">${label}</span>`;
+  };
+
+  const renderResults = (results, query) => {
     resultsEl.innerHTML = results.map((result) => {
       const hasImage = Boolean(result.image);
-      const semanticBadge = result.matchType === 'semantic'
-        ? '<span class="search-result__match">Semantic match</span>'
-        : '';
       return `
         <article class="search-result">
           <a href="${escapeHtml(result.href)}" class="search-result__link${hasImage ? '' : ' search-result__link--no-image'}">
@@ -77,9 +120,9 @@ const initialQuery = Astro.url.searchParams.get('q') || '';
               <h2>${escapeHtml(result.title)}</h2>
               <div class="search-result__meta">
                 ${result.date ? `<time datetime="${escapeHtml(result.date)}">${escapeHtml(formatDate(result.date))}</time>` : ''}
-                ${semanticBadge}
+                ${renderMatchBadge(result.matchType)}
               </div>
-              <p class="search-result__snippet">${escapeHtml(result.snippet || result.excerpt || '')}</p>
+              <p class="search-result__snippet">${renderSnippet(result, query)}</p>
               ${result.tags?.length ? `<div class="search-result__tags">${renderTags(result.tags)}</div>` : ''}
             </div>
           </a>
@@ -111,11 +154,16 @@ const initialQuery = Astro.url.searchParams.get('q') || '';
       const data = await response.json();
       const count = data.results?.length || 0;
 
+      const matchTypes = new Set((data.results || []).map((result) => result.matchType));
+      const resultKind = matchTypes.size === 1
+        ? `${matchTypes.has('semantic') ? 'semantic' : 'keyword'} `
+        : '';
+
       status.textContent = count
-        ? `${count} result${count === 1 ? '' : 's'} for “${data.query}”`
+        ? `${count} ${resultKind}result${count === 1 ? '' : 's'} for “${data.query}”`
         : `No results found for “${data.query}”.`;
 
-      renderResults(data.results || []);
+      renderResults(data.results || [], data.query || trimmed);
     } catch (error) {
       status.textContent = 'Search is unavailable right now. Please try again soon.';
       resultsEl.innerHTML = '';
@@ -299,14 +347,30 @@ const initialQuery = Astro.url.searchParams.get('q') || '';
 
   .search-result__match {
     align-items: center;
-    background: rgba(58, 125, 50, 0.1);
-    border: 1px solid rgba(58, 125, 50, 0.2);
     border-radius: 999px;
-    color: var(--color-primary);
     font-size: 0.58rem;
     font-weight: 700;
     line-height: 1;
     padding: 0.28rem 0.48rem;
+  }
+
+  .search-result__match--semantic {
+    background: rgba(58, 125, 50, 0.1);
+    border: 1px solid rgba(58, 125, 50, 0.2);
+    color: var(--color-primary);
+  }
+
+  .search-result__match--keyword {
+    background: rgba(181, 122, 23, 0.13);
+    border: 1px solid rgba(181, 122, 23, 0.28);
+    color: #8a5a0a;
+  }
+
+  .search-result__highlight {
+    background: rgba(246, 195, 67, 0.42);
+    border-radius: 0.2em;
+    color: inherit;
+    padding: 0 0.12em;
   }
 
   .search-result__snippet {
