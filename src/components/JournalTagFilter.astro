@@ -24,17 +24,14 @@ const allHref = getJournalPageHref(basePath, 1);
 const panelId = `journal-topic-panel-${basePath.replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '') || 'blog'}`;
 ---
 
-<section class="tag-filter" aria-labelledby="tag-filter-heading" data-tag-filter>
-  <div id="tag-filter-heading" class="tag-filter__heading">Explore by topic</div>
-  <div class="tag-filter__intro">Browse the Forktree journal by theme, activity, and event.</div>
+<section class="tag-filter" aria-label="Journal search and topic filters" data-tag-filter>
+  <div class="tag-filter__controls">
+    <form class="tag-filter__search" action="/search" method="get" role="search">
+      <label class="sr-only" for="journal-topic-search">Search the journal</label>
+      <input id="journal-topic-search" name="q" type="search" placeholder="Search journal" />
+      <button type="submit">Search</button>
+    </form>
 
-  <form class="tag-filter__search" action="/search" method="get" role="search">
-    <label class="sr-only" for="journal-topic-search">Search the journal</label>
-    <input id="journal-topic-search" name="q" type="search" placeholder="Search the journal" />
-    <button type="submit">Search</button>
-  </form>
-
-  <div class="tag-filter__actions">
     <button
       class="tag-filter__toggle"
       type="button"
@@ -47,24 +44,29 @@ const panelId = `journal-topic-panel-${basePath.replace(/[^a-z0-9]+/gi, '-').rep
     </button>
   </div>
 
-  <nav id={panelId} class="tag-filter__topics" aria-label="Filter posts by topic" hidden data-topic-panel>
-    <a
-      href={allHref}
-      class:list={['tag-filter__chip', { 'is-active': !activeTag }]}
-      aria-current={!activeTag ? 'page' : undefined}
-    >
-      All <span class="tag-filter__count">{totalCount}</span>
-    </a>
-    {visibleTags.map((tag) => (
+  <div id={panelId} class="tag-filter__topics" aria-hidden="true" inert data-topic-panel>
+    <div class="tag-filter__heading">Explore by topic</div>
+    <div class="tag-filter__intro">Browse the Forktree journal by theme, activity, and event.</div>
+
+    <nav class="tag-filter__chips" aria-label="Filter posts by topic">
       <a
-        href={getJournalTagHref(tag.slug, basePath)}
-        class:list={['tag-filter__chip', { 'is-active': activeTag === tag.slug }]}
-        aria-current={activeTag === tag.slug ? 'page' : undefined}
+        href={allHref}
+        class:list={['tag-filter__chip', { 'is-active': !activeTag }]}
+        aria-current={!activeTag ? 'page' : undefined}
       >
-        {tag.label} <span class="tag-filter__count">{tagCounts[tag.slug]}</span>
+        All <span class="tag-filter__count">{totalCount}</span>
       </a>
-    ))}
-  </nav>
+      {visibleTags.map((tag) => (
+        <a
+          href={getJournalTagHref(tag.slug, basePath)}
+          class:list={['tag-filter__chip', { 'is-active': activeTag === tag.slug }]}
+          aria-current={activeTag === tag.slug ? 'page' : undefined}
+        >
+          {tag.label} <span class="tag-filter__count">{tagCounts[tag.slug]}</span>
+        </a>
+      ))}
+    </nav>
+  </div>
 </section>
 
 <script>
@@ -79,8 +81,10 @@ const panelId = `journal-topic-panel-${basePath.replace(/[^a-z0-9]+/gi, '-').rep
     const openLabel = toggle.dataset.openLabel || 'Hide topics';
 
     const setOpen = (isOpen: boolean) => {
+      filter.classList.toggle('is-topics-open', isOpen);
       toggle.setAttribute('aria-expanded', String(isOpen));
-      panel.hidden = !isOpen;
+      panel.setAttribute('aria-hidden', String(!isOpen));
+      panel.toggleAttribute('inert', !isOpen);
       if (label) label.textContent = isOpen ? openLabel : closedLabel;
     };
 
@@ -96,42 +100,34 @@ const panelId = `journal-topic-panel-${basePath.replace(/[^a-z0-9]+/gi, '-').rep
     margin-top: var(--space-md);
   }
 
-  .tag-filter__heading {
-    color: var(--color-text);
-    font-family: var(--font-heading);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    margin-bottom: 0.4rem;
-    text-transform: uppercase;
-  }
-
-  .tag-filter__intro {
-    color: var(--color-text-secondary);
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin: 0 auto var(--space-sm);
+  .tag-filter__controls {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
   }
 
   .tag-filter__search {
-    display: grid;
-    gap: 0.5rem;
-    grid-template-columns: minmax(0, 1fr) auto;
-    margin: 0 auto var(--space-sm);
-    max-width: 320px;
-    transition: max-width var(--transition-base);
+    display: flex;
+    gap: 0.45rem;
+    margin: 0;
+    max-width: 100%;
+    width: 205px;
+    transition: width 360ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .tag-filter__search:focus-within {
-    max-width: 560px;
+    width: 480px;
   }
 
   .tag-filter__search input {
     border: 1px solid var(--color-border);
     border-radius: 999px;
+    flex: 1 1 auto;
     font: inherit;
     min-width: 0;
-    padding: 0.75rem 1rem;
+    padding: 0.65rem 0.9rem;
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   }
 
@@ -145,37 +141,31 @@ const panelId = `journal-topic-panel-${basePath.replace(/[^a-z0-9]+/gi, '-').rep
     background-color: var(--color-primary);
     border-radius: 999px;
     color: var(--color-text-light);
+    flex: 0 0 0;
     font-family: var(--font-heading);
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    max-width: 0;
     opacity: 0;
     overflow: hidden;
-    padding: 0.75rem 0;
+    padding: 0.65rem 0;
     pointer-events: none;
     text-transform: uppercase;
-    transition: background-color var(--transition-fast), max-width var(--transition-base), opacity var(--transition-fast), padding var(--transition-base), visibility var(--transition-fast);
+    transition: background-color var(--transition-fast), flex-basis 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, padding 320ms cubic-bezier(0.22, 1, 0.36, 1), visibility var(--transition-fast);
     visibility: hidden;
     white-space: nowrap;
   }
 
   .tag-filter__search:focus-within button {
-    max-width: 120px;
+    flex-basis: 92px;
     opacity: 1;
-    padding: 0.75rem 1rem;
+    padding: 0.65rem 0.9rem;
     pointer-events: auto;
     visibility: visible;
   }
 
   .tag-filter__search button:hover {
     background-color: var(--color-primary-dark);
-  }
-
-  .tag-filter__actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 0.75rem;
   }
 
   .tag-filter__toggle {
@@ -185,12 +175,12 @@ const panelId = `journal-topic-panel-${basePath.replace(/[^a-z0-9]+/gi, '-').rep
     color: var(--color-text-secondary);
     display: inline-flex;
     font-family: var(--font-heading);
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     font-weight: 700;
     gap: 0.45rem;
     letter-spacing: 0.1em;
     line-height: 1;
-    padding: 0.65rem 0.9rem;
+    padding: 0.65rem 0.85rem;
     text-transform: uppercase;
     transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
   }
@@ -221,15 +211,46 @@ const panelId = `journal-topic-panel-${basePath.replace(/[^a-z0-9]+/gi, '-').rep
   }
 
   .tag-filter__topics {
+    margin-top: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    text-align: center;
+    transform: translateY(-0.35rem);
+    transition: max-height 380ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease, transform 320ms cubic-bezier(0.22, 1, 0.36, 1), margin-top 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .tag-filter.is-topics-open .tag-filter__topics {
+    margin-top: var(--space-sm);
+    max-height: 720px;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .tag-filter__heading {
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+  }
+
+  .tag-filter__intro {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0 auto var(--space-sm);
+  }
+
+  .tag-filter__chips {
     display: flex;
     flex-wrap: wrap;
     gap: 0.55rem;
     justify-content: center;
-    margin-top: var(--space-sm);
-  }
-
-  .tag-filter__topics[hidden] {
-    display: none;
   }
 
   .tag-filter__chip {
@@ -261,15 +282,20 @@ const panelId = `journal-topic-panel-${basePath.replace(/[^a-z0-9]+/gi, '-').rep
   }
 
   @media (max-width: 640px) {
+    .tag-filter__controls {
+      gap: 0.5rem;
+    }
+
     .tag-filter__search {
-      max-width: 260px;
+      max-width: 100%;
+      width: 190px;
     }
 
     .tag-filter__search:focus-within {
-      max-width: none;
+      width: 340px;
     }
 
-    .tag-filter__topics {
+    .tag-filter__chips {
       justify-content: flex-start;
     }
   }
