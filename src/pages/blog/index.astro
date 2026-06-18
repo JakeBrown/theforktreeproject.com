@@ -57,10 +57,10 @@ const pageDescription = activeTagLabel
     <div class="container">
       <h1 class="journal-results-heading">{activeTagLabel || 'Latest journal posts'}</h1>
       {activeTagLabel && (
-        <p class="journal-results-summary">
-          Showing <strong>{filteredPosts.length}</strong> posts.
-          <a href="/blog">Clear filter</a>
-        </p>
+        <div class="journal-results-meta">
+          <span class="journal-results-count">Showing <strong>{filteredPosts.length}</strong> posts</span>
+          <a href="/blog" class="journal-results-clear">Clear filter</a>
+        </div>
       )}
 
       {posts.length > 0 ? (
@@ -156,22 +156,43 @@ const pageDescription = activeTagLabel
     text-align: center;
   }
 
-  .journal-results-summary {
-    color: var(--color-text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.5;
+  .journal-results-meta {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
     margin: 0 0 var(--space-lg);
-    text-align: center;
   }
 
-  .journal-results-summary a {
+  .journal-results-count {
+    color: var(--color-text-secondary);
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .journal-results-clear {
+    align-items: center;
+    border: 1px solid var(--color-primary);
+    border-radius: 999px;
     color: var(--color-primary);
-    margin-left: 0.35rem;
-    text-decoration: underline;
+    display: inline-flex;
+    font-family: var(--font-heading);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    padding: 0.55rem 0.85rem;
+    text-transform: uppercase;
+    transition: background-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast);
   }
 
-  .journal-results-summary a:hover {
-    opacity: 0.65;
+  .journal-results-clear:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
   }
 
   .posts-grid {
