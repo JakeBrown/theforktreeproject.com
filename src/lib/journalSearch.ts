@@ -53,6 +53,7 @@ export type JournalSearchResult = {
   image?: string;
   snippet: string;
   score: number;
+  matchType: 'keyword' | 'semantic';
 };
 
 export type JournalSearchResponse = {
@@ -90,6 +91,37 @@ function createSnippet(text: string, maxLength = 260): string {
 
 function postFallbackSnippet(post: JournalSearchPost): string {
   return createSnippet(post.excerpt || post.text);
+}
+
+function splitSentences(text: string): string[] {
+  return text
+    .split(/\n+/)
+    .flatMap((paragraph) => paragraph
+      .replace(/\s+/g, ' ')
+      .trim()
+      .match(/[^.!?]+[.!?]+(?:\s|$)|[^.!?]+$/g) || [])
+    .map((sentence) => sentence.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+}
+
+function createKeywordSnippet(post: JournalSearchPost, query: string, terms: string[]): string {
+  const phrase = query.toLowerCase();
+  const sentences = splitSentences(post.text);
+  const scoredSentences = sentences
+    .map((sentence, index) => {
+      const lowerSentence = sentence.toLowerCase();
+      const termHits = terms.filter((term) => lowerSentence.includes(term)).length;
+      const phraseHit = phrase.length > 1 && lowerSentence.includes(phrase) ? 1 : 0;
+      return {
+        sentence,
+        index,
+        score: phraseHit * 10 + termHits,
+      };
+    })
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score || a.index - b.index);
+
+  return scoredSentences[0] ? createSnippet(scoredSentences[0].sentence) : postFallbackSnippet(post);
 }
 
 function chunkPost(post: JournalSearchPost): JournalChunk[] {
@@ -167,7 +199,7 @@ function keywordSearch(query: string, limit = RESULT_LIMIT): JournalSearchResult
     return { post, score };
   })
     .filter(({ score }) => score > 0)
-    .sort((a, b) => b.score - a.score || new Date(b.post.date).getTime() - new Date(a.post.date).getTime())
+    .sort((a, b) => new Date(b.post.date).getTime() - new Date(a.post.date).getTime() || b.score - a.score)
     .slice(0, limit)
     .map(({ post, score }) => ({
       slug: post.slug,
@@ -177,8 +209,9 @@ function keywordSearch(query: string, limit = RESULT_LIMIT): JournalSearchResult
       tags: post.tags,
       excerpt: post.excerpt,
       image: post.image,
-      snippet: postFallbackSnippet(post),
+      snippet: createKeywordSnippet(post, normaliseQuery(query), terms),
       score,
+      matchType: 'keyword' as const,
     }));
 }
 
@@ -344,11 +377,12 @@ export async function searchJournal(env: JournalSearchEnv, query: string): Promi
         image: post?.image || (typeof metadata.image === 'string' ? metadata.image : undefined),
         snippet: typeof metadata.text === 'string' ? createSnippet(metadata.text) : post ? postFallbackSnippet(post) : '',
         score: match.score,
+        matchType: 'semantic',
       });
     }
 
     const results = Array.from(grouped.values())
-      .sort((a, b) => b.score - a.score || new Date(b.date).getTime() - new Date(a.date).getTime())
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime() || b.score - a.score)
       .slice(0, RESULT_LIMIT);
 
     if (results.length === 0) {

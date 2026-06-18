@@ -64,6 +64,9 @@ const initialQuery = Astro.url.searchParams.get('q') || '';
   const renderResults = (results) => {
     resultsEl.innerHTML = results.map((result) => {
       const hasImage = Boolean(result.image);
+      const semanticBadge = result.matchType === 'semantic'
+        ? '<span class="search-result__match">Semantic match</span>'
+        : '';
       return `
         <article class="search-result">
           <a href="${escapeHtml(result.href)}" class="search-result__link${hasImage ? '' : ' search-result__link--no-image'}">
@@ -72,7 +75,10 @@ const initialQuery = Astro.url.searchParams.get('q') || '';
               : '<div class="search-result__placeholder" aria-hidden="true">Journal</div>'}
             <div class="search-result__body">
               <h2>${escapeHtml(result.title)}</h2>
-              ${result.date ? `<time datetime="${escapeHtml(result.date)}">${escapeHtml(formatDate(result.date))}</time>` : ''}
+              <div class="search-result__meta">
+                ${result.date ? `<time datetime="${escapeHtml(result.date)}">${escapeHtml(formatDate(result.date))}</time>` : ''}
+                ${semanticBadge}
+              </div>
               <p class="search-result__snippet">${escapeHtml(result.snippet || result.excerpt || '')}</p>
               ${result.tags?.length ? `<div class="search-result__tags">${renderTags(result.tags)}</div>` : ''}
             </div>
@@ -272,15 +278,35 @@ const initialQuery = Astro.url.searchParams.get('q') || '';
     transition: color var(--transition-fast);
   }
 
-  .search-result__body time {
+  .search-result__meta {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .search-result__body time,
+  .search-result__match {
     color: var(--color-text-secondary);
-    display: block;
+    display: inline-flex;
     font-family: var(--font-heading);
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.08em;
-    margin-bottom: 0.55rem;
     text-transform: uppercase;
+  }
+
+  .search-result__match {
+    align-items: center;
+    background: rgba(58, 125, 50, 0.1);
+    border: 1px solid rgba(58, 125, 50, 0.2);
+    border-radius: 999px;
+    color: var(--color-primary);
+    font-size: 0.58rem;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.28rem 0.48rem;
   }
 
   .search-result__snippet {
