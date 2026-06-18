@@ -20,7 +20,11 @@ export default defineConfig({
       authToken: SENTRY_AUTH_TOKEN,
     }),
   ],
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    workerEntryPoint: {
+      path: './src/worker.ts',
+    },
+  }),
   output: 'server',
   trailingSlash: 'never',
 });

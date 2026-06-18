@@ -38,6 +38,20 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+## Journal semantic search
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The journal search uses Cloudflare Workers AI embeddings plus Vectorize. A daily cron (`17 3 * * *`) reindexes bundled journal markdown into the `forktree-journal` Vectorize index.
+
+One-time Cloudflare setup required before the binding can deploy successfully:
+
+```sh
+npx wrangler vectorize create forktree-journal --dimensions=768 --metric=cosine
+```
+
+Optional but recommended: add a KV binding named `JOURNAL_SEARCH_KV` in Cloudflare to store the indexed content version and last cron result. Without it, the cron will still upsert the current journal version daily.
+
+Runtime bindings used by search:
+
+- `AI` — Workers AI binding
+- `JOURNAL_VECTORIZE` — Vectorize index binding
+- `JOURNAL_SEARCH_KV` — optional KV binding for index state

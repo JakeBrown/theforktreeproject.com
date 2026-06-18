@@ -17,5 +17,15 @@ binding = "ASSETS"
 binding = "ANALYTICS"
 dataset = "forktree_pageviews"
 
+[ai]
+binding = "AI"
+
+[[vectorize]]
+binding = "JOURNAL_VECTORIZE"
+index_name = "forktree-journal"
+
+[triggers]
+crons = ["17 3 * * *"]
+
 [observability]
 enabled = true
