@@ -1,6 +1,7 @@
 ---
 title: "Thank you!"
 date: "2021-04-27"
+tags: ["school-visits", "team-days", "volunteering", "weed-control", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/teamwork.jpg"
 excerpt: "Last Thursday has to rank as one of our best volunteering days to date, with an amazing effort from a fantastic group of people. First and foremost, it was a pleasure to welcome back to The Forktree P..."
 ---

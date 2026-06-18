@@ -1,6 +1,7 @@
 ---
 title: "BUILDING BLOCKS"
 date: "2019-04-28"
+tags: ["water-management", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/building-blocks.jpg"
 excerpt: "Taking a breather from cleaning bricks left on the property by the former owner. Every brick we clean is one less that ends up in landfill. The half bricks and rubble we’re crushing to make aggregate..."
 ---

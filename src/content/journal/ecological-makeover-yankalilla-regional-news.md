@@ -1,6 +1,7 @@
 ---
 title: "\"Ecological Makeover\" - Yankalilla regional news"
 date: "2024-01-12"
+tags: ["rewilding", "sustainable-infrastructure"]
 image: "/images/journal/ecological-makeover-yankalilla-regional-news.jpg"
 excerpt: "Thank you to Fiona Vogel for this great article on The Forktree Project, first published in the Yankalilla Regional News January/February 2024 Issue. __www.yrn.com.au"
 ---

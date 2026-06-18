@@ -1,6 +1,7 @@
 ---
 title: "WIRED"
 date: "2020-07-30"
+tags: ["recycling-reuse"]
 image: "/images/journal/wired.jpg"
 excerpt: "The clean up at The Forktree Project continues. Over the months we have been amassing old, rusted barbed wire, collected from around the property. It will all be recycled, but first we need to make th..."
 ---

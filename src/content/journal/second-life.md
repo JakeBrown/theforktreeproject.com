@@ -1,6 +1,7 @@
 ---
 title: "SECOND LIFE"
 date: "2019-05-22"
+tags: ["recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/second-life.jpg"
 excerpt: "It’s a daunting task, but bit by bit we are making inroads into the vast amount of rubble on site. Whole bricks, once cleaned are neatly piled for storage and reuse further down the track. Broken bric..."
 ---

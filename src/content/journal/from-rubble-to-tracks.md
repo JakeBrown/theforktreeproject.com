@@ -1,6 +1,7 @@
 ---
 title: "From rubble to tracks"
 date: "2021-06-07"
+tags: ["school-visits", "education-programs", "recycling-reuse", "sustainable-infrastructure", "tree-planting"]
 image: "/images/journal/from-rubble-to-tracks.jpg"
 excerpt: "What a great effort by a band of students and staff from Prince Alfred College this last weekend! With good cheer and unflagging energy, a huge dent was made in the rubble pile; reusable whole bricks..."
 ---

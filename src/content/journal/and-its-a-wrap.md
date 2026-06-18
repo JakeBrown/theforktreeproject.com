@@ -1,6 +1,7 @@
 ---
 title: "AND IT'S A WRAP..."
 date: "2019-09-02"
+tags: ["tree-planting"]
 image: "/images/journal/and-its-a-wrap.jpg"
 excerpt: "What a good feeling to get the last saplings of 2019 in the ground! That’s 3,700 trees and shrubs that weren’t here a few months ago. Of course, the challenge now is to do our best to make sure that t..."
 ---

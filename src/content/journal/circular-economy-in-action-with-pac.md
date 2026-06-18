@@ -1,6 +1,7 @@
 ---
 title: "great work by p.a.c."
 date: "2021-10-22"
+tags: ["school-visits", "education-programs", "birds", "wildlife", "recycling-reuse", "tree-planting"]
 image: "/images/journal/circular-economy-in-action-with-pac.jpg"
 excerpt: "It was a pleasure on Sunday to welcome Year 10 and 11 economics and geography students from Prince Alfred College to The Forktree Project in what was the college’s second day of service learning on si..."
 ---

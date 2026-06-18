@@ -1,6 +1,7 @@
 ---
 title: "student feedback"
 date: "2023-02-02"
+tags: ["school-visits", "education-programs", "wildlife", "seed-nursery", "weed-control", "recycling-reuse"]
 image: "/images/journal/student-feedback.jpg"
 excerpt: "As a new school year gets underway, it’s been interesting to assess how education at The Forktree Project grew last year. 2022 saw our sustainability education and service learning program for schools..."
 ---

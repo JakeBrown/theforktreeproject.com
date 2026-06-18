@@ -1,6 +1,7 @@
 ---
 title: "Pipe Dream"
 date: "2022-04-20"
+tags: ["rare-seed-orchard", "sustainable-infrastructure", "partnerships", "tree-planting"]
 image: "/images/journal/pipe-dream.jpeg"
 excerpt: "Wonderful to have the support of Andrew Fairney and Seeding Natives for our work in setting up the Forktree rare seed orchard, through their generous donation of one and a half kilometres of dripper l..."
 ---

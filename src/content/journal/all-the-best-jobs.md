@@ -1,6 +1,7 @@
 ---
 title: "WAR OF THE WEEDS"
 date: "2019-06-26"
+tags: ["weed-control", "recycling-reuse", "sustainable-infrastructure", "tree-planting"]
 image: "/images/journal/all-the-best-jobs.jpg"
 excerpt: "if only it were just tree planting… Putting a sapling in the ground is the best bit, but like with all projects a huge percentage of time at Forktree is spent on preparation. Today that means weeding…..."
 ---

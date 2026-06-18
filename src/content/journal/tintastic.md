@@ -1,6 +1,7 @@
 ---
 title: "Tintastic"
 date: "2025-04-18"
+tags: ["recycling-reuse", "sustainable-infrastructure"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/tintastic.jpg"
 excerpt: "Very exciting to see the outside of the Forktree Project Environment Centre taking shape!"

@@ -1,6 +1,7 @@
 ---
 title: "Forktree's 40th Lepidoptera species"
 date: "2022-05-24"
+tags: ["butterflies-moths", "birds", "wildlife", "rewilding"]
 image: "/images/journal/forktrees-40th-lepidoptera-species.jpg"
 excerpt: "Many thanks to bird and lepidoptera expert Malcolm Worthing for his latest observations of biodiversity at Forktree: “While conducting the Margined Browntail Moth caterpillar (_Euproctis marginalis_)..."
 ---

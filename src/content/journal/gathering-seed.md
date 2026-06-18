@@ -1,6 +1,7 @@
 ---
 title: "gathering seed"
 date: "2020-11-24"
+tags: ["wildlife", "seed-nursery", "tree-planting", "native-plants", "rewilding"]
 image: "/images/journal/gathering-seed.jpg"
 excerpt: "Today the Forktree seed nursery came a step closer with the harvesting of seed from native trees and bushes on the nearby property of fellow tree planter Paul Green. Forty years of steady revegetation..."
 ---

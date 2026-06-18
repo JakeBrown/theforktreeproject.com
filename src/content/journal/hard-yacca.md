@@ -1,6 +1,7 @@
 ---
 title: "Hard Yacca"
 date: "2021-11-15"
+tags: ["volunteering", "water-management", "weed-control", "tree-planting", "native-plants"]
 image: "/images/journal/hard-yacca.jpg"
 excerpt: "After 2 days of hard work with a crew of volunteers and an excavator at each end, we have transplanted fifteen 200-year-old _Xanthorrhoea semiplanas_ (a.k.a. tufted grass trees or yaccas) which we dis..."
 ---

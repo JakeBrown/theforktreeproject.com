@@ -1,6 +1,7 @@
 ---
 title: "AT THE STARTING BLOCK..."
 date: "2019-07-07"
+tags: ["partnerships", "planting-season", "tree-planting", "native-plants"]
 image: "/images/journal/at-the-starting-block.jpg"
 excerpt: "The first 1,800 saplings are ready to go! Many thanks to Trees for Life in Adelaide for sourcing these for us and sharing their knowlege and expertise on native species. All South Australian natives t..."
 ---

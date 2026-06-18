@@ -1,6 +1,7 @@
 ---
 title: "national tree day at The forktree project"
 date: "2021-08-01"
+tags: ["national-tree-day", "community-events", "volunteering", "wildlife", "rare-seed-orchard", "sustainable-infrastructure"]
 image: "/images/journal/national-tree-day-at-the-forktree-project.jpeg"
 excerpt: "What a great National Tree Day we had at Forktree yesterday with planting volunteers from Uniting Communities! Re-establishing a biodiverse native habitat involves planting not just trees but also mid..."
 ---

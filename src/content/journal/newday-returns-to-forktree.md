@@ -1,6 +1,7 @@
 ---
 title: "Newday Returns to Forktree"
 date: "2024-07-25"
+tags: ["team-days", "partnerships", "rewilding"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/newday-returns-to-forktree.jpg"
 excerpt: "It was a pleasure to host Newday Leadership again at the Forktree Project yesterday for the second session of their Newday Inspired Leadership 2024 program."

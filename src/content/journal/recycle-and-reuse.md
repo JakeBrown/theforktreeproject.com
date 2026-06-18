@@ -1,6 +1,7 @@
 ---
 title: "RECYCLE AND REUSE"
 date: "2020-05-01"
+tags: ["recycling-reuse"]
 image: "/images/journal/recycle-and-reuse.jpg"
 excerpt: "Big thanks to Corey Jackson, NRM Coastal Conservation Officer for the Southern Fleurieu Peninsula, for donating 1,000 pre-loved corflutes to the cause. Recycle and reuse is what it’s all about at Fork..."
 ---

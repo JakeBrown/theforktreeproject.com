@@ -1,6 +1,7 @@
 ---
 title: "national recycling week @ the forktree project #2"
 date: "2023-11-14"
+tags: ["community-events", "school-visits", "volunteering", "seed-nursery", "recycling-reuse"]
 image: "/images/journal/national-recycling-week-the-forktree-project-2.jpg"
 excerpt: "More pallet repurposing at The Forktree Project - this time turning old pallets into potting tables for the nursery. Thank you to volunteers Ralph and Jake for their creative carpentry skills which th..."
 ---

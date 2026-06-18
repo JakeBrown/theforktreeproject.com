@@ -1,6 +1,7 @@
 ---
 title: "Native Grass Generation Game"
 date: "2024-01-16"
+tags: ["rare-seed-orchard", "seed-nursery", "tree-planting", "native-plants", "rewilding"]
 image: "/images/journal/native-grass-generation-game.jpg"
 excerpt: "Only a few months in and it’s amazing to see how much seed has been produced so soon after planting these _Rytidosperma tenuis_ native grasses in one of our Rare Seed Orchard production beds. And it’s..."
 ---

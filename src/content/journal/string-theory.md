@@ -1,6 +1,7 @@
 ---
 title: "string theory"
 date: "2021-07-27"
+tags: ["wildlife", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/string-theory.jpg"
 excerpt: "Plastic lids, bread tags, cut-up credit cards, plastic freight strapping and baler twine can all be pushed into a milk bottle and go in the yellow bin for recycling. There’s lots of polypropylene bale..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Forktree's First Threatened Bird Species"
 date: "2021-12-22"
+tags: ["team-days", "butterflies-moths", "birds", "wildlife", "seed-nursery", "partnerships"]
 image: "/images/journal/forktrees-first-threatened-bird-species.jpg"
 excerpt: "Below is another update from ornithologist and lepidoperist Malcolm Worthing as he completes his survey of Forktree: “Several new species have been recorded at Forktree during this last spring as part..."
 ---

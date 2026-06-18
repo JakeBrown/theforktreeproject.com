@@ -1,6 +1,7 @@
 ---
 title: "Manna from Heaven"
 date: "2024-08-02"
+tags: ["wildlife", "tree-planting", "native-plants", "rewilding"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/manna-from-heaven.jpg"
 excerpt: "Another marvelling-at-nature moment: walking to the far end of the project to set out stakes for our next planned planting session and rediscovering these magnificent, statuesque manna gums."

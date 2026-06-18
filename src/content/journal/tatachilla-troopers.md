@@ -1,6 +1,7 @@
 ---
 title: "Tatachilla task force"
 date: "2020-09-27"
+tags: ["school-visits", "education-programs", "volunteering", "weed-control", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/tatachilla-troopers.jpg"
 excerpt: "Last Tuesday saw an amazing volunteering effort by Year 9 students from Tatachilla Lutheran College at The Forktree Project. Equipped with gloves, safety goggles and a healthy dose of good cheer, the..."
 ---

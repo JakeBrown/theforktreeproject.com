@@ -1,6 +1,7 @@
 ---
 title: "HELPING HANDS"
 date: "2020-06-23"
+tags: ["volunteering", "tree-planting"]
 image: "/images/journal/helping-hands.jpeg"
 excerpt: "Great to welcome finance broker Alex Robins of Toucan Finance (www.toucanfinance.com) to Forktree today. With the assistance of Alex’s business acumen and her appreciation of the vision of the project..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Seed orchard set up"
 date: "2021-08-14"
+tags: ["school-visits", "rare-seed-orchard", "recycling-reuse", "sustainable-infrastructure", "planting-season", "tree-planting"]
 image: "/images/journal/prepping-the-next-phase.jpg"
 excerpt: "Planting season for this year may be drawing to a close but there are plenty of other tasks to be done at The Forktree Project. The next one is a big one: the establishment of a rare seed orchard for..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "CELEBRATING WORLD ENVIRONMENT DAY AT FORKTREE"
 date: "2021-06-06"
+tags: ["world-environment-day", "community-events", "wildlife", "tree-planting", "native-plants", "rewilding"]
 image: "/images/journal/celebrating-world-environment-day-at-forktree.jpg"
 excerpt: "What better way to celebrate World Environment Day than with our first sighting of an echidna meandering on the hillside amongst the saplings! This beautiful, shy creature was spotted wandering amongs..."
 ---

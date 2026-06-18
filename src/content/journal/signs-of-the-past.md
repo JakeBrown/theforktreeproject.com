@@ -1,6 +1,7 @@
 ---
 title: "Signs of the past"
 date: "2021-03-26"
+tags: ["volunteering", "native-plants", "rewilding"]
 image: "/images/journal/signs-of-the-past.jpg"
 excerpt: "We recently made the sad discovery of this burnt out trunk of an old xanthorrhoea (grass tree, or yacca) at Forktree. Clearing these majestic old plants sadly used to be commonplace, a practice made w..."
 ---

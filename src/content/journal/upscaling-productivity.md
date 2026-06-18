@@ -1,6 +1,7 @@
 ---
 title: "Benchmark for success"
 date: "2022-02-04"
+tags: ["birds", "wildlife", "weed-control", "recycling-reuse", "sustainable-infrastructure", "rewilding"]
 image: "/images/journal/upscaling-productivity.jpg"
 excerpt: "Two more steps taken setting up the shed as a well-organised centre of operations: 1. the design and construction of a tool storage area; 2. the construction of a workbench made out of repurposed scra..."
 ---

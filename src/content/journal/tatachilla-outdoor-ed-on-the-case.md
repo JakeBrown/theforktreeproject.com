@@ -1,6 +1,7 @@
 ---
 title: "Tatachilla Outdoor Ed on the case"
 date: "2021-06-25"
+tags: ["school-visits", "education-programs", "volunteering", "rare-seed-orchard", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/tatachilla-outdoor-ed-on-the-case.jpg"
 excerpt: "This month has seen the second phase of Tatachilla Lutheran College’s involvement in The Forktree Project, with an in-school workshop with Yr 10 Outdoor Education students followed by an afternoon of..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Weather wall"
 date: "2023-02-09"
+tags: ["rare-seed-orchard", "seed-nursery", "water-management", "recycling-reuse", "sustainable-infrastructure", "native-plants"]
 image: "/images/journal/weather-wall.jpg"
 excerpt: "Phase 3 of the preparation of the irrigated seed production beds in the Rare Seed Orchard: the installation of effective and affordable wind protection in the form of semi-rigid plastic sheeting aroun..."
 ---

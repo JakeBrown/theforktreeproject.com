@@ -1,6 +1,7 @@
 ---
 title: "ripe"
 date: "2020-09-02"
+tags: ["seed-nursery", "sustainable-infrastructure", "tree-planting", "native-plants"]
 image: "/images/journal/ripe.jpg"
 excerpt: "Planting is almost over for 2020 (only about 50 saplings still go) and we are already starting to think ahead to 2021. By the end of October we hope to have our seed nursery infrastructure in place, r..."
 ---

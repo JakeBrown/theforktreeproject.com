@@ -1,6 +1,7 @@
 ---
 title: "From Rubble Pile to Kitchen Pride"
 date: "2025-10-24"
+tags: ["volunteering", "recycling-reuse", "sustainable-infrastructure", "partnerships", "climate-action"]
 image: "/images/journal/from-rubble-pile-to-kitchen-pride.jpg"
 excerpt: "Anyone who knows The Forktree Project knows we’re big believers in the circular economy — finding creative ways to repurpose what already exists."
 ---

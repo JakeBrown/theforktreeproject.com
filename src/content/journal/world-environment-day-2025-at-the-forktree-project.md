@@ -1,6 +1,7 @@
 ---
 title: "World Environment Day 2025 at The Forktree Project"
 date: "2025-06-05"
+tags: ["world-environment-day", "community-events", "volunteering", "wildlife", "seed-nursery", "tree-planting"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/world-environment-day-2025-at-the-forktree-project.jpg"
 excerpt: "It's 5th June: World Environment Day. A day that focuses on the importance of us all doing our bit to protect nature."

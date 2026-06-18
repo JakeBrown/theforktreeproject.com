@@ -1,6 +1,7 @@
 ---
 title: "Engineers Without Borders at Forktree"
 date: "2024-11-21"
+tags: ["team-days", "volunteering", "wildlife", "rare-seed-orchard", "sustainable-infrastructure", "partnerships"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/engineers-without-borders-at-forktree.jpg"
 excerpt: "A huge thank you to the volunteers from the South Australian chapter of Engineers Without Borders who did an amazing job at The Forktree Project on Sunday."

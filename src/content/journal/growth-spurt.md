@@ -1,6 +1,7 @@
 ---
 title: "Growth Spurt"
 date: "2024-06-19"
+tags: ["birds", "wildlife", "weed-control", "tree-planting", "native-plants", "climate-action"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/growth-spurt.jpg"
 excerpt: "While setting out stakes for next week's planting, we took a moment to marvel at the amazing growth of our first year's plantings."

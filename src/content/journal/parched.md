@@ -1,6 +1,7 @@
 ---
 title: "PARCHED..."
 date: "2020-01-10"
+tags: ["water-management", "tree-planting"]
 image: "/images/journal/parched.jpg"
 excerpt: "It’s a truth universally acknowledged that summer in South Australia is hot. Very hot. We are continuing to water all our saplings by hand, giving each of them a 10-litre soak which will give them a b..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "SOWING THE SEEDS OF CHANGE"
 date: "2019-12-01"
+tags: ["volunteering", "wildlife", "seed-nursery", "partnerships", "planting-season", "tree-planting"]
 image: "/images/journal/sowing-the-seeds-of-change.jpeg"
 excerpt: "There was a great sense of shared purpose today as a group of volunteers and friends gathered to prepare the tube stock for the 2020 Forktree planting season. Under the guidance of seasoned Trees for..."
 ---

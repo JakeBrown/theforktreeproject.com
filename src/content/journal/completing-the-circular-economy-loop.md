@@ -1,6 +1,7 @@
 ---
 title: "the circular economy loop"
 date: "2023-12-06"
+tags: ["volunteering", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/completing-the-circular-economy-loop.jpg"
 excerpt: "Another first at The Forktree Project as we complete the circular economy loop for the first time: a batch of the bricks salvaged from the building waste inherited on site and painstakingly cleaned ov..."
 ---

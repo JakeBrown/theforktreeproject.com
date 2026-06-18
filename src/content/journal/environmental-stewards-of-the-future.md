@@ -1,6 +1,7 @@
 ---
 title: "schools national tree day"
 date: "2021-07-30"
+tags: ["national-tree-day", "community-events", "school-visits", "climate-action", "rewilding"]
 image: "/images/journal/environmental-stewards-of-the-future.jpg"
 excerpt: "Today is Schools National Tree Day in Australia - a great day on which to say thank you to all the students and teachers who have helped so far at The Forktree Project. Research tells us that getting..."
 ---

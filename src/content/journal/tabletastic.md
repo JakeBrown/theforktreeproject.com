@@ -1,6 +1,7 @@
 ---
 title: "Tabletastic"
 date: "2021-09-18"
+tags: ["seed-nursery", "water-management", "recycling-reuse", "sustainable-infrastructure", "partnerships"]
 image: "/images/journal/tabletastic.jpg"
 excerpt: "What an amazingly productive few days at the Forktree Project! As if by magic, the pile of donated, pre-used pallets has been transformed into 50 potting tables for the nursery, with struts and legs f..."
 ---

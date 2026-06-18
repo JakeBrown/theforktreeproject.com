@@ -1,51 +1,91 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import JournalTagFilter from '../../components/JournalTagFilter.astro';
 import { getCollection } from 'astro:content';
+import { getJournalPageHref, getJournalTagLabel, isJournalTagSlug } from '../../data/journalTags';
 
-// Oldest first — the page reads top-to-bottom as a timeline of the project.
-const allPosts = (await getCollection('journal')).sort(
-  (a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime()
-);
+const allPosts = await getCollection('journal');
+const tagCounts = allPosts.reduce<Record<string, number>>((counts, post) => {
+  for (const tag of post.data.tags) {
+    counts[tag] = (counts[tag] ?? 0) + 1;
+  }
+  return counts;
+}, {});
 
-// Group by year
-const postsByYear = new Map<number, typeof allPosts>();
-for (const post of allPosts) {
+const url = new URL(Astro.request.url);
+const requestedTag = url.searchParams.get('tag');
+const activeTag = isJournalTagSlug(requestedTag) ? requestedTag : null;
+const activeTagLabel = activeTag ? getJournalTagLabel(activeTag) : null;
+const filteredPosts = activeTag
+  ? allPosts.filter((post) => post.data.tags.includes(activeTag))
+  : allPosts;
+
+const sortedPosts = filteredPosts.sort((a, b) => {
+  const aTime = new Date(a.data.date).getTime();
+  const bTime = new Date(b.data.date).getTime();
+  return activeTag ? bTime - aTime : aTime - bTime;
+});
+
+// Unfiltered archive reads top-to-bottom as a timeline. Filtered archives show newest matches first.
+const postsByYear = new Map<number, typeof sortedPosts>();
+for (const post of sortedPosts) {
   const year = new Date(post.data.date).getFullYear();
   if (!postsByYear.has(year)) postsByYear.set(year, []);
   postsByYear.get(year)!.push(post);
 }
-const years = Array.from(postsByYear.keys()).sort((a, b) => a - b);
+const years = Array.from(postsByYear.keys()).sort((a, b) => activeTag ? b - a : a - b);
+const pageTitle = activeTagLabel
+  ? `${activeTagLabel} Archive — The Forktree Project`
+  : 'Archive — The Forktree Project';
+const pageDescription = activeTagLabel
+  ? `All Forktree Project journal posts tagged ${activeTagLabel}.`
+  : 'The full Forktree Project story — every post since the beginning, in chronological order.';
 ---
 
-<PageLayout title="Archive — The Forktree Project" description="The full Forktree Project story — every post since the beginning, in chronological order." headerVariant="dark">
+<PageLayout title={pageTitle} description={pageDescription} headerVariant="dark">
 
   <section class="archive-header">
     <div class="container--narrow">
       <h1>The Forktree Story</h1>
-      <p>Every post since we began, in order. The first steps were taken when the property was purchased in April 2019. This is the full journal of how the project has unfolded since.</p>
-      <p class="archive-header__back"><a href="/blog">&larr; Back to latest posts</a></p>
+      <p>
+        {activeTagLabel
+          ? `All journal posts tagged ${activeTagLabel}, newest first.`
+          : 'Every post since we began, in order. The first steps were taken when the property was purchased in April 2019. This is the full journal of how the project has unfolded since.'}
+      </p>
+      <p class="archive-header__back"><a href={getJournalPageHref('/blog', 1, activeTag)}>&larr; Back to latest posts</a></p>
+      <JournalTagFilter
+        activeTag={activeTag}
+        basePath="/blog/archive"
+        filteredCount={filteredPosts.length}
+        tagCounts={tagCounts}
+        totalCount={allPosts.length}
+      />
     </div>
   </section>
 
   <section class="archive">
     <div class="container--narrow">
-      {years.map((year) => (
-        <div class="archive-year">
-          <h2 class="archive-year__heading">{year}</h2>
-          <ul class="archive-list">
-            {postsByYear.get(year)!.map((post) => (
-              <li class="archive-item">
-                <a href={`/blog/${post.id}`} class="archive-item__link">
-                  <time class="archive-item__date" datetime={new Date(post.data.date).toISOString()}>
-                    {new Date(post.data.date).toLocaleDateString('en-AU', { month: 'short', day: 'numeric' })}
-                  </time>
-                  <span class="archive-item__title">{post.data.title}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      {years.length > 0 ? (
+        years.map((year) => (
+          <div class="archive-year">
+            <h2 class="archive-year__heading">{year}</h2>
+            <ul class="archive-list">
+              {postsByYear.get(year)!.map((post) => (
+                <li class="archive-item">
+                  <a href={`/blog/${post.id}`} class="archive-item__link">
+                    <time class="archive-item__date" datetime={new Date(post.data.date).toISOString()}>
+                      {new Date(post.data.date).toLocaleDateString('en-AU', { month: 'short', day: 'numeric' })}
+                    </time>
+                    <span class="archive-item__title">{post.data.title}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      ) : (
+        <p class="archive-empty">No archive posts found.</p>
+      )}
     </div>
   </section>
 
@@ -155,6 +195,11 @@ const years = Array.from(postsByYear.keys()).sort((a, b) => a - b);
     font-size: 1.05rem;
     line-height: 1.4;
     color: var(--color-text);
+  }
+
+  .archive-empty {
+    color: var(--color-text-secondary);
+    text-align: center;
   }
 
   @media (max-width: 640px) {

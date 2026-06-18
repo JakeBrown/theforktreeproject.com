@@ -1,6 +1,7 @@
 ---
 title: "Nature Play SA at The Forktree Project"
 date: "2024-02-15"
+tags: ["school-visits", "education-programs", "partnerships", "tree-planting", "climate-action"]
 image: "/images/journal/nature-play-sa-at-the-forktree-project.jpg"
 excerpt: "Term 1 got off to an exciting and inspiring start at The Forktree Project with a day of collaboration and mutual teaching and learning on site between the Forktree Project team and Nature Play SA. We..."
 ---

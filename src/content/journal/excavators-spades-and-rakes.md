@@ -1,6 +1,7 @@
 ---
 title: "excavators,spades and rakes"
 date: "2021-04-25"
+tags: ["volunteering", "rare-seed-orchard", "seed-nursery", "water-management", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/excavators-spades-and-rakes.jpg"
 excerpt: "A momentous day on Friday - the seed nursery pad is level! No small task: rubbly dirt was moved from the rubble dump area to the seed nursery and was used as infill material on top of the 60 cubic met..."
 ---

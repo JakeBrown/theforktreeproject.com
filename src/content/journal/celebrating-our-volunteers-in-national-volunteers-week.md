@@ -1,6 +1,7 @@
 ---
 title: "Celebrating Our Volunteers in National Volunteers Week"
 date: "2024-05-26"
+tags: ["community-events", "school-visits", "team-days", "volunteering", "seed-nursery", "recycling-reuse"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/celebrating-our-volunteers-in-national-volunteers-week.jpg"
 excerpt: "As we approach the end of National Volunteers Week, here's a HUGE thank you to all the volunteers who have helped at The Forktree Project over the last few years."

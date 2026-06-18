@@ -1,6 +1,7 @@
 ---
 title: "Seeds of Hope"
 date: "2024-05-22"
+tags: ["community-events", "wildlife", "rewilding"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/seeds-of-hope.jpg"
 excerpt: "22nd May: today is International Day for Biological Diversity. This year's theme: Be Part of the Plan."

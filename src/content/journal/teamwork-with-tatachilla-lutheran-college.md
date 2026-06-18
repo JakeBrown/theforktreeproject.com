@@ -1,6 +1,7 @@
 ---
 title: "Teamwork with Tatachilla Lutheran College"
 date: "2020-08-26"
+tags: ["school-visits", "education-programs", "volunteering"]
 image: "/images/journal/teamwork-with-tatachilla-lutheran-college.jpeg"
 excerpt: "A huge thank you to Tatachilla Lutheran College in McLaren Vale for their enthusiastic support of The Forktree Project. Yesterday this relationship got off to a great start with a talk to Year 9 stude..."
 ---

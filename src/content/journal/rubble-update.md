@@ -1,6 +1,7 @@
 ---
 title: "Rubble update"
 date: "2021-10-13"
+tags: ["recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/rubble-update.jpg"
 excerpt: "3,000 tonnes and two and a half years later, our 350m long x 20m wide x 1m deep on-site rubble pile is almost sorted. Put another way: * 25-30,000 bricks and pavers cleaned or awaiting cleaning; * 10..."
 ---

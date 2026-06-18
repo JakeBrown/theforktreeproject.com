@@ -1,6 +1,7 @@
 ---
 title: "Hotels for Trees at The Forktree Project"
 date: "2025-07-18"
+tags: ["team-days", "volunteering", "partnerships", "tree-planting", "climate-action"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/hotels-for-trees-at-the-forktree-project.jpg"
 excerpt: "We were excited and proud to celebrate this week an innovative new partnership between The Forktree Project and environmental not-for-profit Hotels For Trees and the beautiful Mount Lofty House."

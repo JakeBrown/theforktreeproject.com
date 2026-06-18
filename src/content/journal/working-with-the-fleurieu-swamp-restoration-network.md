@@ -1,6 +1,7 @@
 ---
 title: "Working with The Fleurieu Swamp Restoration Network"
 date: "2025-05-27"
+tags: ["community-events", "education-programs", "seed-nursery", "partnerships", "planting-season", "tree-planting"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/working-with-the-fleurieu-swamp-restoration-network.jpg"
 excerpt: "What a glorious day it was on Saturday when we hosted the landowners of the Fleurieu Swamp Restoration Network at The Forktree Project for their end-of-autumn field day."

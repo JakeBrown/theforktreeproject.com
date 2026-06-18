@@ -1,6 +1,7 @@
 ---
 title: "Thin Crust"
 date: "2024-04-23"
+tags: ["recycling-reuse", "sustainable-infrastructure", "tree-planting"]
 image: "/images/journal/thin-crust.jpg"
 excerpt: "Of all the uses we have found for bricks salvaged from the on-site rubble pile, this is arguably one of the most exciting: building a pizza oven. Broken bricks and rubble to create a secure foundation..."
 ---

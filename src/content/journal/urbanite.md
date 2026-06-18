@@ -1,6 +1,7 @@
 ---
 title: "URBANITE"
 date: "2021-08-18"
+tags: ["rare-seed-orchard", "weed-control", "recycling-reuse", "sustainable-infrastructure", "tree-planting", "native-plants"]
 image: "/images/journal/urbanite.jpg"
 excerpt: "Things are happening in the seed orchard at a lightning pace! Tasks 1 and 2 were the fencing and planting a windbreak. Now Task 3 is underway - and what an exciting one it is… While some plants in the..."
 ---

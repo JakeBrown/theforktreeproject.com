@@ -1,6 +1,7 @@
 ---
 title: "Laying the foundations"
 date: "2020-10-24"
+tags: ["school-visits", "volunteering", "seed-nursery", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/laying-the-foundations.jpg"
 excerpt: "The preparation is always the hardest part. That is certainly the case when it comes to getting our seed nursery up and running. Bit by bit the retaining walls needed to create a level surface are bei..."
 ---

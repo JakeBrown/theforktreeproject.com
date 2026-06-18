@@ -1,6 +1,7 @@
 ---
 title: "Power planting with Conservation Volunteers Australia"
 date: "2021-07-02"
+tags: ["volunteering", "birds", "wildlife", "weed-control", "partnerships", "tree-planting"]
 image: "/images/journal/power-planting-with-conservation-volunteers-australia.jpg"
 excerpt: "What an amazing weekend of planting with Conservation Volunteers Australia (CVA) this last weekend! A remarkable 2,000 natives - a mix of sheoaks, eucalypts, shrubs and native grasses - were planted o..."
 ---

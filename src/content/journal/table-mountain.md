@@ -1,6 +1,7 @@
 ---
 title: "Table mountain"
 date: "2021-08-09"
+tags: ["volunteering", "seed-nursery", "recycling-reuse", "sustainable-infrastructure", "partnerships", "tree-planting"]
 image: "/images/journal/table-mountain.jpg"
 excerpt: "Above: Donated pallets waiting to be converted into potting tables. Below: Tables produced so far. The newly donated pallets will significantly increase the capacity of the seed nursery."
 ---

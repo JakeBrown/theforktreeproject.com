@@ -1,6 +1,7 @@
 ---
 title: "NEST BUILDING"
 date: "2020-07-15"
+tags: ["birds", "wildlife", "sustainable-infrastructure", "native-plants", "rewilding"]
 image: "/images/journal/nest-building.jpg"
 excerpt: "Today the first nesting box was installed in one of the few mature pink gums on the property. Made from hollow logs so as to emulate as closely as possible the natural hollows favoured by rosellas, ye..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Annesley Junior School returns to Forktree"
 date: "2021-05-14"
+tags: ["school-visits", "education-programs", "wildlife", "rare-seed-orchard", "seed-nursery", "weed-control"]
 image: "/images/journal/annesley-junior-school-returns-to-forktree.jpg"
 excerpt: "We were delighted to welcome Annesley Junior School back to Forktree last week. The Year 6/7 students weeded two areas in preparation for the planting of native grasses propagated in the Forktree seed..."
 ---

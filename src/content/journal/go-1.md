@@ -1,6 +1,7 @@
 ---
 title: "GO!"
 date: "2020-04-20"
+tags: ["water-management", "planting-season", "tree-planting", "native-plants"]
 image: "/images/journal/go-1.jpg"
 excerpt: "What an exciting feeling to get the first saplings of 2020 into the ground. First cabs off the rank/saplings out of their tubes: a mix of _Eucalyptus fasciculosa_ (pink gums) and _Acacia pycnanthus_ (..."
 ---

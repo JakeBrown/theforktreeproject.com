@@ -1,6 +1,7 @@
 ---
 title: "LAYING THE FOUNDATIONS OF FORKTREE"
 date: "2019-05-31"
+tags: ["water-management", "recycling-reuse", "sustainable-infrastructure", "tree-planting", "rewilding"]
 image: "/images/journal/laying-the-foundations-of-forktree.jpg"
 excerpt: "Forktree may be about revegetation, but there are certain things which need to be done first, which form the foundations on which this project will be built. One of these is the completion of the enor..."
 ---

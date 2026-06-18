@@ -1,6 +1,7 @@
 ---
 title: "Deloitte Taskforce"
 date: "2024-10-18"
+tags: ["team-days", "volunteering", "wildlife", "seed-nursery", "weed-control", "sustainable-infrastructure"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/deloitte-taskforce.jpg"
 excerpt: "A huge thank you to the wonderful team of volunteers from Deloitte Adelaide who visited The Forktree Project this Wednesday for a day of corporate volunteering."

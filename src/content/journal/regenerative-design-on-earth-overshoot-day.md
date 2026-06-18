@@ -1,6 +1,7 @@
 ---
 title: "Regenerative Design on Earth Overshoot Day"
 date: "2025-07-24"
+tags: ["community-events", "team-days", "recycling-reuse", "sustainable-infrastructure", "climate-action", "rewilding"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/regenerative-design-on-earth-overshoot-day.jpg"
 excerpt: "24th July - Earth Overshoot Day 2025... the point in the year at which humanity has used up all the resources that the planet can regenerate in the calendar year."

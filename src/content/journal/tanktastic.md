@@ -1,6 +1,7 @@
 ---
 title: "TANKTASTIC"
 date: "2019-06-06"
+tags: ["water-management", "sustainable-infrastructure", "tree-planting"]
 image: "/images/journal/tanktastic.jpg"
 excerpt: "_Q: How much water will be needed to keep 4,000+ saplings alive throughout the summer each year?_ _A: A lot._ Hence the need for these monsters - two 160,000-litre tanks. And the need to build a secur..."
 ---

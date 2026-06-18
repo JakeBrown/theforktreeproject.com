@@ -1,6 +1,7 @@
 ---
 title: "Hakea moth"
 date: "2021-04-17"
+tags: ["butterflies-moths", "wildlife", "tree-planting", "native-plants", "rewilding"]
 image: "/images/journal/hakea-moth.jpg"
 excerpt: "Last year’s Hakea plantings are now home to some hakea moth caterpillars (Oenochroma vinaria). This is exciting as moths not only form an important part of a healthy ecosystem but have also found thei..."
 ---

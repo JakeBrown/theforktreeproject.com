@@ -1,6 +1,7 @@
 ---
 title: "Nature Play SA and Hallett Cove South at Forktree"
 date: "2024-08-07"
+tags: ["school-visits", "education-programs", "butterflies-moths", "birds", "wildlife", "water-management"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/nature-play-sa-and-hallett-cove-south-at-forktree.jpg"
 excerpt: "A great day at The Forktree Project last week with Hallett Cove South Primary School and Abe and Cam from Nature Play SA."

@@ -1,6 +1,7 @@
 ---
 title: "STAKE REMAKE -  BRINGING PLANTING AND RECYCLING TOGETHER"
 date: "2020-05-03"
+tags: ["team-days", "recycling-reuse", "partnerships", "tree-planting"]
 image: "/images/journal/stake-remake-bringing-planting-and-recycling-together.jpg"
 excerpt: "Here’s a wonderful recycling story: our new batch of tree guard stakes for this season’s saplings are made from recycled plastic. Made of recycled soft plastic by South Australian firm Integrated Recy..."
 ---

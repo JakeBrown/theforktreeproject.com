@@ -1,6 +1,7 @@
 ---
 title: "CHANGE MAKERS: CELEBRATING OUR VOLUNTEERS"
 date: "2023-05-19"
+tags: ["community-events", "school-visits", "team-days", "volunteering", "seed-nursery", "recycling-reuse"]
 image: "/images/journal/change-makers-celebrating-our-volunteers.jpg"
 excerpt: "This week is National Volunteer Week, and what better opportunity to acknowledge all the people who have volunteered at The Forktree Project over the last four years! A wide range of volunteers have h..."
 ---

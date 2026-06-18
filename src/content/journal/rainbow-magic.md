@@ -1,6 +1,7 @@
 ---
 title: "RAINBOW MAGIC"
 date: "2020-06-06"
+tags: ["rewilding"]
 image: "/images/journal/rainbow-magic.jpg"
 excerpt: "After a hard day on the property, this rainbow was a welcome gift. At the risk of waxing a bit too lyrical, it seems almost like a blessing being bestowed on Forktree - the product of rain and sunligh..."
 ---

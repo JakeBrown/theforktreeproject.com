@@ -1,6 +1,7 @@
 ---
 title: "Operation Flinders @ The Forktree Project"
 date: "2023-10-08"
+tags: ["school-visits", "volunteering", "seed-nursery", "sustainable-infrastructure"]
 image: "/images/journal/operation-flinders-the-forktree-project.jpg"
 excerpt: "What an honour to have welcomed Operation Flinders and the 20 impressive young people on their Next Step Program to The Forktree Project last week for a day of volunteering (including nursery work, mu..."
 ---

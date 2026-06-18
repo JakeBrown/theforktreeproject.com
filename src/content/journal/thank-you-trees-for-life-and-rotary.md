@@ -1,6 +1,7 @@
 ---
 title: "Thank you, Trees for Life and Rotary!"
 date: "2020-08-17"
+tags: ["volunteering", "partnerships", "tree-planting"]
 image: "/images/journal/thank-you-trees-for-life-and-rotary.jpg"
 excerpt: "What a difference a day makes! Or two consecutive Sundays, to be precise. Yesterday was the second of two visits to The Forktree Project by planting volunteers from Trees for Life and Rotary Club Adel..."
 ---

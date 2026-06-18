@@ -1,6 +1,7 @@
 ---
 title: "ROO CHALLENGES"
 date: "2020-05-07"
+tags: ["wildlife", "sustainable-infrastructure", "tree-planting", "native-plants"]
 image: "/images/journal/roo-challenges.jpg"
 excerpt: "Six species planted in the new planting area beyond the existing roo fence: melaleucas, golden wattles, prickly moses and kangaroo thorns all established successfully; blue gums and pink gums a bit of..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Party Trick"
 date: "2021-01-07"
+tags: ["water-management", "native-plants"]
 image: "/images/journal/party-trick.jpg"
 excerpt: "Wattles and gums (Acacias and Eucalypts) are both central to our reforestation work. Wattles are also crucial as they are ‘early colonisers’ or the first to appear in a landscape after a fire. Because..."
 ---

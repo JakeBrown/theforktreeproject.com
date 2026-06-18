@@ -1,6 +1,7 @@
 ---
 title: "Another Rare species recorded at Forktree"
 date: "2021-10-08"
+tags: ["butterflies-moths", "birds", "wildlife", "sustainable-infrastructure", "rewilding"]
 image: "/images/journal/another-rare-species-recorded-at-forktree.jpg"
 excerpt: "Today the second half of the Bird and Lepidoptera (butterflies and moths) 2021 survey conducted by ecologist Malcolm Worthing commenced, and we are really excited that yet another rare butterfly speci..."
 ---

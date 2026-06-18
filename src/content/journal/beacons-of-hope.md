@@ -1,6 +1,7 @@
 ---
 title: "BEACONS OF HOPE"
 date: "2019-08-25"
+tags: ["birds", "wildlife", "tree-planting", "rewilding"]
 image: "/images/journal/beacons-of-hope.jpg"
 excerpt: "The end of another day of planting. It’s a great feeling to look down the gully and see the late afternoon sun illuminating the corflutes like candles to the future. Shielded by these corflutes are a..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Green shoots of recovery"
 date: "2021-02-15"
+tags: ["wildlife", "seed-nursery", "native-plants", "rewilding"]
 image: "/images/journal/green-shoots-of-recovery.jpg"
 excerpt: "Moving kangaroo grasses from the seed tray they started off in into individual forestry tubes. A process known as pricking out. Many thanks to John Brame for the seed from his property. By June we sho..."
 ---

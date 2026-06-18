@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import JournalTagList from '../../components/JournalTagList.astro';
 import PageLayout from '../../layouts/PageLayout.astro';
 
 export const prerender = true;
@@ -37,6 +38,7 @@ const formattedDate = `${monthNames[postDate.getUTCMonth()]} ${postDate.getUTCDa
             {formattedDate}
           </time>
         )}
+        <JournalTagList tags={post.data.tags} className="blog-post__tags" />
       </header>
 
       <div class="blog-post__content">
@@ -162,6 +164,11 @@ const formattedDate = `${monthNames[postDate.getUTCMonth()]} ${postDate.getUTCDa
     letter-spacing: 0.5px;
     text-transform: uppercase;
     color: var(--color-text-secondary);
+  }
+
+  .blog-post__header :global(.blog-post__tags) {
+    justify-content: center;
+    margin-top: var(--space-sm);
   }
 
   .blog-post__content {

@@ -1,6 +1,7 @@
 ---
 title: "The Power of Team Days at The Forktree Project"
 date: "2024-12-12"
+tags: ["education-programs", "team-days", "volunteering", "seed-nursery", "recycling-reuse", "sustainable-infrastructure"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/the-power-of-team-days-at-the-forktree-project.jpg"
 excerpt: "One of today's education buzzwords is 'Lifelong Learning'. At The Forktree Project we are big believers in this concept."

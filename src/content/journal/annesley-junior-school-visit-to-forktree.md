@@ -1,6 +1,7 @@
 ---
 title: "ANNESLEY JUNIOR SCHOOL VISIT TO FORKTREE"
 date: "2020-08-12"
+tags: ["school-visits", "recycling-reuse", "tree-planting", "climate-action"]
 image: "/images/journal/annesley-junior-school-visit-to-forktree.jpg"
 excerpt: "Hope for the future: young hands planting young trees with care. We were delighted to welcome Yr 6/7 students from Annesley Junior School to T..."
 ---

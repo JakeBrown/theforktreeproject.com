@@ -1,6 +1,7 @@
 ---
 title: "Welcome, Bush Heritage!"
 date: "2024-10-31"
+tags: ["team-days", "volunteering", "seed-nursery", "partnerships", "rewilding"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/welcome-bush-heritage.jpg"
 excerpt: "Another super-rewarding day at The Forktree Project recently with a visit from Bush Heritage's People, Safety, and Culture Team, gathered from across Australia."

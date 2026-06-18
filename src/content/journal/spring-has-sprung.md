@@ -1,6 +1,7 @@
 ---
 title: "Spring has sprung..."
 date: "2020-09-01"
+tags: ["seed-nursery", "sustainable-infrastructure", "tree-planting", "native-plants", "rewilding"]
 image: "/images/journal/spring-has-sprung.jpg"
 excerpt: "… and the sap is rising. Literally. Very exciting to see buds appearing on our fruit trees, which looked so unpromising, little more than bare twigs, when they were planted a month ago. *Wake up time:..."
 ---

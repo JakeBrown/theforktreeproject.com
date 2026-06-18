@@ -1,6 +1,7 @@
 ---
 title: "SYSTEMS Thinking at The forktree project"
 date: "2023-07-09"
+tags: ["team-days", "water-management", "weed-control", "partnerships", "tree-planting", "native-plants"]
 image: "/images/journal/systems-thinking-at-the-forktree-project.jpg"
 excerpt: "Another fantastic team day at The Forktree Project, this time with Systems Engineers Shoal Group. The Shoal@Forktree corporate day was a rewarding blend of habitat restoration and participation in a s..."
 ---

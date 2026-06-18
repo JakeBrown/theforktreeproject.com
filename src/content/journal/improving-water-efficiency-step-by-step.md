@@ -1,6 +1,7 @@
 ---
 title: "Improving water efficiency step by step"
 date: "2022-04-27"
+tags: ["seed-nursery", "water-management", "sustainable-infrastructure", "partnerships"]
 image: "/images/journal/improving-water-efficiency-step-by-step.jpg"
 excerpt: "We’re excited to be taking the next step in developing water efficiency at Forktree with these soil moisture probes and tank level meters which have now been installed and connected to the LoRaWAN by..."
 ---

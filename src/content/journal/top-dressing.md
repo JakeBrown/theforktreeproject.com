@@ -1,6 +1,7 @@
 ---
 title: "top dressing"
 date: "2021-09-16"
+tags: ["seed-nursery", "recycling-reuse", "sustainable-infrastructure", "planting-season", "tree-planting", "native-plants"]
 image: "/images/journal/top-dressing.jpg"
 excerpt: "Next steps in the Forktree nursery: applying the finishing touches to the nursery pad with 40 tonnes of dolomite sand. This provides a flat surface atop the 150 tonnes of crushed rubble salvaged on si..."
 ---

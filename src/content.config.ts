@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { journalTagSlugs } from './data/journalTags';
 
 const journal = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/journal' }),
@@ -7,6 +8,7 @@ const journal = defineCollection({
     title: z.string(),
     date: z.string(),
     author: z.string().optional().default('Elizabeth Jarvis'),
+    tags: z.array(z.enum(journalTagSlugs)).optional().default([]),
     image: z.string().optional(),
     excerpt: z.string().optional(),
   }),

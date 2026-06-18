@@ -1,0 +1,181 @@
+---
+import {
+  getJournalPageHref,
+  getJournalTagHref,
+  getJournalTagLabel,
+  journalTags,
+} from '../data/journalTags';
+
+interface Props {
+  activeTag?: string | null;
+  basePath?: string;
+  filteredCount?: number;
+  tagCounts?: Record<string, number>;
+  totalCount?: number;
+}
+
+const {
+  activeTag = null,
+  basePath = '/blog',
+  filteredCount = 0,
+  tagCounts = {},
+  totalCount = 0,
+} = Astro.props;
+
+const activeLabel = activeTag ? getJournalTagLabel(activeTag) : null;
+const visibleTags = journalTags.filter((tag) => (tagCounts[tag.slug] ?? 0) > 0);
+const allHref = getJournalPageHref(basePath, 1);
+---
+
+<section class="tag-filter" aria-labelledby="tag-filter-heading">
+  <div id="tag-filter-heading" class="tag-filter__heading">Explore by topic</div>
+  <div class="tag-filter__status">
+    {activeTag && activeLabel ? (
+      <>
+        Showing <strong>{filteredCount}</strong> {activeLabel} posts.
+        <a href={allHref}>Clear filter</a>
+      </>
+    ) : (
+      <>Browse the Forktree journal by theme, activity, and event.</>
+    )}
+  </div>
+
+  <nav class="tag-filter__desktop" aria-label="Filter posts by topic">
+    <a
+      href={allHref}
+      class:list={['tag-filter__chip', { 'is-active': !activeTag }]}
+      aria-current={!activeTag ? 'page' : undefined}
+    >
+      All <span class="tag-filter__count">{totalCount}</span>
+    </a>
+    {visibleTags.map((tag) => (
+      <a
+        href={getJournalTagHref(tag.slug, basePath)}
+        class:list={['tag-filter__chip', { 'is-active': activeTag === tag.slug }]}
+        aria-current={activeTag === tag.slug ? 'page' : undefined}
+      >
+        {tag.label} <span class="tag-filter__count">{tagCounts[tag.slug]}</span>
+      </a>
+    ))}
+  </nav>
+
+  <details class="tag-filter__mobile" open={Boolean(activeTag)}>
+    <summary>{activeLabel ? `Topic: ${activeLabel}` : 'Browse topics'}</summary>
+    <div class="tag-filter__mobile-chips">
+      <a
+        href={allHref}
+        class:list={['tag-filter__chip', { 'is-active': !activeTag }]}
+        aria-current={!activeTag ? 'page' : undefined}
+      >
+        All <span class="tag-filter__count">{totalCount}</span>
+      </a>
+      {visibleTags.map((tag) => (
+        <a
+          href={getJournalTagHref(tag.slug, basePath)}
+          class:list={['tag-filter__chip', { 'is-active': activeTag === tag.slug }]}
+          aria-current={activeTag === tag.slug ? 'page' : undefined}
+        >
+          {tag.label} <span class="tag-filter__count">{tagCounts[tag.slug]}</span>
+        </a>
+      ))}
+    </div>
+  </details>
+</section>
+
+<style>
+  .tag-filter {
+    margin-top: var(--space-md);
+  }
+
+  .tag-filter__heading {
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+  }
+
+  .tag-filter__status {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0 auto var(--space-sm);
+  }
+
+  .tag-filter__status a {
+    color: var(--color-primary);
+    margin-left: 0.35rem;
+    text-decoration: underline;
+  }
+
+  .tag-filter__desktop,
+  .tag-filter__mobile-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    justify-content: center;
+  }
+
+  .tag-filter__chip {
+    align-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text-secondary);
+    display: inline-flex;
+    font-family: var(--font-heading);
+    font-size: 0.68rem;
+    font-weight: 600;
+    gap: 0.35rem;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    padding: 0.55rem 0.8rem;
+    text-transform: uppercase;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .tag-filter__chip:hover,
+  .tag-filter__chip.is-active {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-text-light);
+  }
+
+  .tag-filter__count {
+    opacity: 0.72;
+  }
+
+  .tag-filter__mobile {
+    display: none;
+  }
+
+  @media (max-width: 640px) {
+    .tag-filter__desktop {
+      display: none;
+    }
+
+    .tag-filter__mobile {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      display: block;
+      margin-top: var(--space-sm);
+      text-align: left;
+    }
+
+    .tag-filter__mobile summary {
+      cursor: pointer;
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 0.9rem 1rem;
+      text-transform: uppercase;
+    }
+
+    .tag-filter__mobile-chips {
+      justify-content: flex-start;
+      padding: 0 1rem 1rem;
+    }
+  }
+</style>

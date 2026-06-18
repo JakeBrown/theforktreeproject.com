@@ -1,6 +1,7 @@
 ---
 title: "Volunteer power"
 date: "2021-04-18"
+tags: ["volunteering", "weed-control", "planting-season", "tree-planting"]
 image: "/images/journal/volunteer-force.jpg"
 excerpt: "As the days begin to cool and we inch our way towards winter and the planting season, the Forktree volunteer days are picking up pace. The last two Sundays have seen a fantastic effort by merry bands..."
 ---

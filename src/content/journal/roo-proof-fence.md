@@ -1,6 +1,7 @@
 ---
 title: "ROO-PROOF FENCE"
 date: "2019-07-13"
+tags: ["wildlife", "sustainable-infrastructure", "tree-planting"]
 image: "/images/journal/roo-proof-fence.jpg"
 excerpt: "We have worked out our planting area for this year - approximately one third of the entire property. Now for the challenge of fencing off this section with high roo fencing to keep the very healthy lo..."
 ---

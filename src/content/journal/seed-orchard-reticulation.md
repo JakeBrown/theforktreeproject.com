@@ -1,6 +1,7 @@
 ---
 title: "Seed orchard reticulation"
 date: "2022-10-05"
+tags: ["rare-seed-orchard", "water-management", "sustainable-infrastructure"]
 image: "/images/journal/seed-orchard-reticulation.jpg"
 excerpt: "To make an omlette you have to break a few eggs... Certainly, setting up the seed orchard reticulation seems that way, as trenches are ripped into the soil for the pipes to run along. Short-term mess..."
 ---

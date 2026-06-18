@@ -1,6 +1,7 @@
 ---
 title: "And then there was none..."
 date: "2021-11-08"
+tags: ["community-events", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/and-then-there-was-none.jpg"
 excerpt: "30 months, 3,000 tonnes of sorted rubble and 30,000 bricks later, we’ve reached the end of the road. The challenge we set ourselves was to make sure none of the building waste inherited when The Forkt..."
 ---

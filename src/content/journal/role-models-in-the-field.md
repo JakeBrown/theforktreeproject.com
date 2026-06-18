@@ -1,6 +1,7 @@
 ---
 title: "Role Models in the Field"
 date: "2025-12-05"
+tags: ["school-visits", "education-programs", "volunteering"]
 image: "/images/journal/role-models-in-the-field.jpg"
 excerpt: "As we wrap up the school term and say farewell to our final student group for the year, it feels like the right moment to acknowledge two people who play significant roles in making our education program what it is."
 ---

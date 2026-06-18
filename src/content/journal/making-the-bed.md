@@ -1,6 +1,7 @@
 ---
 title: "Making the bed"
 date: "2023-10-01"
+tags: ["volunteering", "rare-seed-orchard", "seed-nursery", "water-management", "partnerships", "tree-planting"]
 image: "/images/journal/making-the-bed.jpg"
 excerpt: "Another couple of beds of native grasses planted up in the Forktree rare seed orchard, with a view to seed being harvested for propagation and planting both here at Forktree and elsewhere. Over the la..."
 ---

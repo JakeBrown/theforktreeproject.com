@@ -1,6 +1,7 @@
 ---
 title: "GET SET..."
 date: "2020-04-13"
+tags: ["volunteering", "weed-control", "planting-season", "tree-planting"]
 image: "/images/journal/get-set.jpg"
 excerpt: "Preparing the first section of 2020 Forktree Project planting: 1. clear the area of out-of-control phalaris (non-native, tough-as-boots fodder grass). This requires a mattock, muscle and gusto. And th..."
 ---

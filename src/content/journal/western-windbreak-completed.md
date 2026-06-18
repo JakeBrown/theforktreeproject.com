@@ -1,6 +1,7 @@
 ---
 title: "WESTERN WINDBREAK COMPLETED"
 date: "2019-08-13"
+tags: ["tree-planting", "rewilding"]
 image: "/images/journal/western-windbreak-completed.jpg"
 excerpt: "So that’s the western windbreak done and now we can move onto planting within the first gully. We are up to 1,800 trees now. Now that the windbreaks are done, there will be no more straight lines - fr..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "WHAT'S IN A NAME?"
 date: "2020-06-24"
+tags: ["rewilding"]
 image: "/images/journal/whats-in-a-name.jpg"
 excerpt: "Finding the right name for something can be tricky, but with the Forktree Project it was straightforward. The name was initially chosen because the property is bordered at one end by Forktree Road, a..."
 ---

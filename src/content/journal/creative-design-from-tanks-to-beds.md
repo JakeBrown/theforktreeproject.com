@@ -1,6 +1,7 @@
 ---
 title: "creative design - from tanks to beds"
 date: "2022-09-23"
+tags: ["rare-seed-orchard", "water-management", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/creative-design-from-tanks-to-beds.jpg"
 excerpt: "Our rare seed orchard continues to take shape. In keeping with our recycling and repurposing principles, we are giving old, damaged rainwater tanks a new life as beds for wetland plant species. Step 1..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Blaze of Glory"
 date: "2024-06-28"
+tags: ["school-visits", "education-programs", "wildlife", "weed-control", "recycling-reuse", "tree-planting"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/blaze-of-glory.jpg"
 excerpt: "After a massive four days of planting with Year 9 students from both Westminster School and Woodcroft College, nature's gift to us was this spectacular sunset."

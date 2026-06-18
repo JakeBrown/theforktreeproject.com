@@ -1,6 +1,7 @@
 ---
 title: "innovate to create"
 date: "2023-06-07"
+tags: ["butterflies-moths", "wildlife", "seed-nursery", "recycling-reuse", "tree-planting"]
 image: "/images/journal/innovate-to-create.jpg"
 excerpt: "They say that necessity is the mother of invention. That is certainly the case in the Forktree nursery. When a challenge arises, a solution needs to be found, often creatively and, more often with not..."
 ---

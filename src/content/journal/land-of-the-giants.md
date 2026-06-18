@@ -1,6 +1,7 @@
 ---
 title: "Land of the giants"
 date: "2021-07-15"
+tags: ["tree-planting", "native-plants"]
 image: "/images/journal/land-of-the-giants.jpg"
 excerpt: "It has been an exciting week at The Forktree Project! Firstly, we decided it was time to take a walk over to the far side of the property to check on some of our first plantings from two winters ago...."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "UNDERSTOREY FOUNDATIONS"
 date: "2021-03-25"
+tags: ["seed-nursery", "planting-season", "tree-planting", "native-plants"]
 image: "/images/journal/understorey-foundations.jpg"
 excerpt: "Two planting seasons in and many of our plants are looking very healthy - no longer saplings but small trees. And meanwhile our new generation of eucalypts, sheoaks and other native trees are maturing..."
 ---

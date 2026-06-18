@@ -1,6 +1,7 @@
 ---
 title: "Camping canvas"
 date: "2023-05-09"
+tags: ["school-visits", "education-programs", "sustainable-infrastructure", "tree-planting", "native-plants", "climate-action"]
 image: "/images/journal/camping-canvas.jpg"
 excerpt: "This month we are a step closer to being able to welcome groups to spend longer at The Forktree Project, due to the preparation of camping areas. A couple of months ago suitable camping spots were cho..."
 ---

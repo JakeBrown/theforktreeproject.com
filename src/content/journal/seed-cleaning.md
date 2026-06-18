@@ -1,6 +1,7 @@
 ---
 title: "Seed cleaning"
 date: "2023-11-26"
+tags: ["school-visits", "seed-nursery", "tree-planting", "native-plants"]
 image: "/images/journal/seed-cleaning.jpg"
 excerpt: "Seed cleaning time at The Forktree Project - one of the many preparatory tasks as we get ready for propagating season in the nursery. On the table today are _Acacia melanoxylon_ (Blackwood) seeds. Lik..."
 ---

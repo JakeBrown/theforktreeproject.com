@@ -1,6 +1,7 @@
 ---
 title: "Green economics with Scotch College"
 date: "2021-10-30"
+tags: ["school-visits", "education-programs", "seed-nursery", "recycling-reuse", "tree-planting", "climate-action"]
 image: "/images/journal/sustainability-systems-approach-with-scotch-college.jpg"
 excerpt: "It has been a busy time at Forktree! Last week saw Year 6 students from Scotch College take part in a variety of important tasks at Forktree to complement their Term 4 focus on “**Our Economic World”...."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Let planting season commence!"
 date: "2023-05-10"
+tags: ["volunteering", "seed-nursery", "water-management", "sustainable-infrastructure", "planting-season", "tree-planting"]
 image: "/images/journal/let-planting-season-commence.jpg"
 excerpt: "The beginning of planting season is always an exciting time. After careful propagating and nurturing of thousands of saplings in the nursery throughout spring and summer, it is hugely rewarding to get..."
 ---

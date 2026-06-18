@@ -1,6 +1,7 @@
 ---
 title: "Term 2 wrap up"
 date: "2023-07-03"
+tags: ["school-visits", "wildlife", "seed-nursery", "recycling-reuse", "planting-season", "tree-planting"]
 image: "/images/journal/term-2-wrap-up.jpg"
 excerpt: "As we approach the July holidays, it’s an opportune moment to reflect on what was achieved with school groups at the Forktree Project throughout Term 2. The short answer is… A LOT! Over the course of..."
 ---

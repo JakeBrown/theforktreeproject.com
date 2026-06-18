@@ -1,6 +1,7 @@
 ---
 title: "national recycling week @ the forktree project #"
 date: "2023-11-16"
+tags: ["community-events", "rare-seed-orchard", "seed-nursery", "water-management", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/national-recycling-week-the-forktree-project-.jpg"
 excerpt: "A key part of the Forktree Project circular economy story is a determination to turn a negative into a positive, in thie case creating valuable infrastructure out of what appears to be waste: 1. using..."
 ---

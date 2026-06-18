@@ -1,6 +1,7 @@
 ---
 title: "Smashing climate action"
 date: "2021-10-16"
+tags: ["school-visits", "team-days", "volunteering", "wildlife", "weed-control", "recycling-reuse"]
 image: "/images/journal/smashing-climate-action.jpg"
 excerpt: "A big thank you to Ethan Nguyen and his team of volunteers from Lincoln College Adelaide who did sterling work at Forktree today. Working with gusto and enthusiasm, the students salvaged, cleaned and..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "high-rise hollows"
 date: "2024-03-12"
+tags: ["birds", "wildlife", "sustainable-infrastructure", "partnerships", "tree-planting", "native-plants"]
 image: "/images/journal/high-rise-hollows.jpg"
 excerpt: "However quickly you get the saplings in the ground, it’s a long time till they are mature enough to provide nesting hollows. So in the meantime it’s good to give nature a head start by putting up nest..."
 ---

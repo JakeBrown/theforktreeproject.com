@@ -1,6 +1,7 @@
 ---
 title: "It's got to go..."
 date: "2021-03-28"
+tags: ["volunteering", "seed-nursery", "water-management", "weed-control", "planting-season", "tree-planting"]
 image: "/images/journal/its-got-to-go.jpg"
 excerpt: "A theme is emerging - grasses. We have been busy propagating a range of native grasses in preparation for this year’s planting season, but there is another job to be done - elimination of the competit..."
 ---

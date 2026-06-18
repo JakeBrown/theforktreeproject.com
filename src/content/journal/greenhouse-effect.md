@@ -1,6 +1,7 @@
 ---
 title: "Greenhouse effect"
 date: "2021-02-13"
+tags: ["wildlife", "seed-nursery", "recycling-reuse", "sustainable-infrastructure", "tree-planting", "native-plants"]
 image: "/images/journal/greenhouse-effect.jpg"
 excerpt: "Kangaroo grass (Themeda triandra) needs temperatures of 40-45°C to break its dormancy and germinate but temperatures this summer haven’t been high enough so we’re putting these old windows to good use..."
 ---

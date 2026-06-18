@@ -1,6 +1,7 @@
 ---
 title: "TAKING A STAND WITH TREE GUARDS"
 date: "2019-07-27"
+tags: ["volunteering", "tree-planting"]
 image: "/images/journal/taking-a-stand-with-tree-guards.jpg"
 excerpt: "With the help of numerous volunteers, we’re making fine progress along the southern boundary of the Forktree Project. Given the elevated position of the property, these saplings are being planted in a..."
 ---

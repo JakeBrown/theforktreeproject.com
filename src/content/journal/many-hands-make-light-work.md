@@ -1,6 +1,7 @@
 ---
 title: "MANY HANDS MAKE LIGHT WORK"
 date: "2019-08-10"
+tags: ["volunteering", "planting-season", "tree-planting"]
 image: "/images/journal/many-hands-make-light-work.jpg"
 excerpt: "The Forktree Project couldn’t happen without a lot of hard graft, and the generosity of volunteers. We are in the thick of planting season now, and we are hugely grateful to the volunteers, friends ol..."
 ---

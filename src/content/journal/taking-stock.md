@@ -1,6 +1,7 @@
 ---
 title: "TAKING STOCK"
 date: "2019-04-17"
+tags: ["volunteering", "wildlife", "water-management", "recycling-reuse", "renewable-energy", "sustainable-infrastructure"]
 image: "/images/journal/taking-stock.jpg"
 excerpt: "So this is a BIG project. It’s a journey, and the road ahead is long. The first step on the journey needs to a be a stock take, an assessment of what we have in front of us so that we can work out wha..."
 ---

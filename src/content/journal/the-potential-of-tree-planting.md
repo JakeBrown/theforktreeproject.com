@@ -1,6 +1,7 @@
 ---
 title: "THE POTENTIAL OF TREE PLANTING"
 date: "2019-12-02"
+tags: ["tree-planting", "climate-action"]
 image: "/images/journal/the-potential-of-tree-planting.jpg"
 excerpt: "Human-induced climate change often has us wishing for a single cure. Perhaps we have Marvel to blame for our need for a hero in this story, but the reality is that it takes all of us and all of our id..."
 ---

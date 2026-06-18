@@ -1,6 +1,7 @@
 ---
 title: "maths for real life"
 date: "2022-02-15"
+tags: ["seed-nursery", "water-management", "tree-planting"]
 image: "/images/journal/maths-for-real-life.jpg"
 excerpt: "**Next challenge on our water management journey** : find a way to check that the seedlings in the nursery are receiving the right amount of water. **Best equipment for the job** : soil moisture probe..."
 ---

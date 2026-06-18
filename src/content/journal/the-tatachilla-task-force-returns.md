@@ -1,6 +1,7 @@
 ---
 title: "THE TATACHILLA TASK FORCE RETURNS"
 date: "2021-09-24"
+tags: ["school-visits", "education-programs", "team-days", "volunteering", "rare-seed-orchard", "seed-nursery"]
 image: "/images/journal/the-tatachilla-task-force-returns.jpg"
 excerpt: "For the second year running Year 9 students from Tatachilla Lutheran College have come to The Forktree Project as part of their Year 9 camp week, and what a contribution they made! Over the course of..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Precious Jewels"
 date: "2024-10-17"
+tags: ["butterflies-moths", "birds", "wildlife"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/precious-jewels.jpg"
 excerpt: "It's always a thrill when an unexpected jewel turns up, like this stunning Lettered Peacock Spider which ecologist Malcolm Worthing spotted at The Forktree Project this week."

@@ -1,6 +1,7 @@
 ---
 title: "Technology for nature"
 date: "2022-02-07"
+tags: ["wildlife", "rare-seed-orchard", "seed-nursery", "water-management", "partnerships", "climate-action"]
 image: "/images/journal/technology-for-nature.jpg"
 excerpt: "Clearly we are all about celebrating and protecting the natural world through restoring habitat, encouraging biodiversity and sequestering carbon. But we also recognise that there are times modern tec..."
 ---

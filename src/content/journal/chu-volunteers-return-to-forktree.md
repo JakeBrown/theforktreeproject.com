@@ -1,6 +1,7 @@
 ---
 title: "CHU VOLUNTEERS RETURN TO FORKTREE"
 date: "2020-06-03"
+tags: ["team-days", "volunteering", "sustainable-infrastructure", "partnerships", "tree-planting", "rewilding"]
 image: "/images/journal/chu-volunteers-return-to-forktree.jpg"
 excerpt: "We were delighted today to welcome volunteers from CHU’s South Australian office for their second visit to Forktree. The team assisted with both tree planting and fencing, applying themselves to both..."
 ---

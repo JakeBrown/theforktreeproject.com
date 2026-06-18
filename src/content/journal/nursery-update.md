@@ -1,6 +1,7 @@
 ---
 title: "Nursery update"
 date: "2022-01-24"
+tags: ["school-visits", "seed-nursery", "water-management", "recycling-reuse", "sustainable-infrastructure", "planting-season"]
 image: "/images/journal/nursery-update.jpg"
 excerpt: "It has been an incredibly busy few months in the Forktree nursery! A year ago we began propagating our own seedlings in preparation for the 2021 planting season. We were delighted that we grew about 3..."
 ---

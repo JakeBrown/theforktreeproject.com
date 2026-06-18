@@ -1,6 +1,7 @@
 ---
 title: "PURGE ON PLASTICS"
 date: "2020-03-30"
+tags: ["recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/purge-on-plastics.jpg"
 excerpt: "“On average, Australians use **130 kg of plastic** per person each year. Only **12% of that's recycled**.” [WWF] **The rest ends up in landfills, as litter on roadsides and in parks, and floating in o..."
 ---

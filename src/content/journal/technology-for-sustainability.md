@@ -1,6 +1,7 @@
 ---
 title: "Technology for Sustainability"
 date: "2021-10-06"
+tags: ["water-management", "sustainable-infrastructure", "partnerships", "native-plants", "climate-action"]
 image: "/images/journal/technology-for-sustainability.jpg"
 excerpt: "A big thanks to SA Water and Fleet Space for installing a LoRaWAN gateway at Forktree as part of SA Water’s ongoing support of our work. The LoRaWAN (Long Range Wireless Access Network) will allow our..."
 ---

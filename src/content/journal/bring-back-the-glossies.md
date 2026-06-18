@@ -1,6 +1,7 @@
 ---
 title: "BRING BACK THE GLOSSIES!"
 date: "2021-06-01"
+tags: ["volunteering", "birds", "wildlife", "partnerships", "planting-season", "tree-planting"]
 image: "/images/journal/bring-back-the-glossies.jpg"
 excerpt: "Planting season will soon be upon us, and we are starting this year with a BANG! The Forktree Project has teamed up with Conservation Volunteers Australia to be part of a campaign to encourage endange..."
 ---

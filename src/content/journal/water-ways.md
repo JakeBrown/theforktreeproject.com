@@ -1,6 +1,7 @@
 ---
 title: "WATER WAYS"
 date: "2020-02-28"
+tags: ["water-management", "renewable-energy", "sustainable-infrastructure", "tree-planting"]
 image: "/images/journal/water-ways.jpg"
 excerpt: "_“How will you keep the saplings alive throughout the summer?”_ This is the question that has been asked over and over again. The answer is with careful, step-by-step planning: 1. Dig and line a water..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Pizza base"
 date: "2023-04-18"
+tags: ["recycling-reuse", "sustainable-infrastructure", "tree-planting"]
 image: "/images/journal/pizza-base.jpeg"
 excerpt: "Thick crust or thin crust? We are very excited that the base of our long-awaited pizza oven has been laid. Once the position was chosen, a 1.8x1.8m square hole was dug and filled with crushed rubble f..."
 ---

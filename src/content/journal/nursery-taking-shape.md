@@ -1,6 +1,7 @@
 ---
 title: "NURSERY TAKING SHAPE"
 date: "2020-07-23"
+tags: ["volunteering", "seed-nursery", "tree-planting"]
 image: "/images/journal/nursery-taking-shape.jpg"
 excerpt: "A great day’s work in the nursery: nine fruit trees in the ground - apples, pears, nectarines and peaches. Citrus trees (lemon, lime and mandarin) will be planted in a month or two’s time when the gro..."
 ---

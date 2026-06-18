@@ -1,6 +1,7 @@
 ---
 title: "Caterpillar Foster care"
 date: "2022-05-17"
+tags: ["butterflies-moths", "birds", "wildlife", "water-management", "native-plants", "rewilding"]
 image: "/images/journal/caterpillar-return.jpg"
 excerpt: "The Forktree Project has given rise to many unexpected and often inspiring stories. A recent favourite is this tale of caterpillar foster care, courtesy of Malcolm Worthing, bird and lepidoptera exper..."
 ---

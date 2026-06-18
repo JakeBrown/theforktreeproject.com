@@ -1,6 +1,7 @@
 ---
 title: "Energy boost from zen and salesforce"
 date: "2022-08-27"
+tags: ["team-days", "volunteering", "water-management", "weed-control", "renewable-energy", "sustainable-infrastructure"]
 image: "/images/journal/zen-energy-boost.jpg"
 excerpt: "What an amazing day we had yesterday at The Forktree Project with the team from Zen Energy and Salesforce! It has been a case study in what can be achieved when a group of willing individuals pull tog..."
 ---

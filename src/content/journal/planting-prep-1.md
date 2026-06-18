@@ -1,6 +1,7 @@
 ---
 title: "PLANTING PREP"
 date: "2024-06-05"
+tags: ["school-visits", "water-management", "planting-season", "tree-planting", "climate-action", "rewilding"]
 image: "/images/journal/planting-prep-1.jpg"
 excerpt: "It is already the beginning of June, and we are getting ready for our first big week of planting, with 200 Year 7 students from Adelaide Botanic High School due to visit. This time last year (and the..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Stage 2 Geography and Outdoor Ed camp at Forktree"
 date: "2024-02-27"
+tags: ["school-visits", "education-programs", "wildlife", "rare-seed-orchard", "seed-nursery", "weed-control"]
 image: "/images/journal/stage-2-geography-and-outdoor-ed-camp-at-forktree.jpg"
 excerpt: "It was a pleasure to welcome Forktree regulars Blackwood High School back to site again this term for an two-day Stage 2 Geography and Outdoor Ed camp rich with hands-on experiential learning. Student..."
 ---

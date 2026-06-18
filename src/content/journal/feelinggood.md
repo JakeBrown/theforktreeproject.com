@@ -1,6 +1,7 @@
 ---
 title: "FEELING GOOD"
 date: "2020-08-13"
+tags: ["school-visits", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/feelinggood.jpg"
 excerpt: "Great to get a bit of positive feedback - here’s what our young planters and rubble clearers from Annesley Junior School had to say about their day at The Forktree Project: * ‘I was intrigued about ho..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Potential"
 date: "2024-04-27"
+tags: ["seed-nursery", "tree-planting", "native-plants", "rewilding"]
 image: "/images/journal/potential.jpg"
 excerpt: "How beautiful is this Melaleuca lanceolata (tea tree) seed? And how amazing to consider the promise it holds: each tiny seed (the dust-like particles in the photo) has the potential to grow into a mag..."
 ---

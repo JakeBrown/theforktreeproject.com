@@ -1,6 +1,7 @@
 ---
 title: "FORKTREE FRIDAYS"
 date: "2020-03-19"
+tags: ["school-visits", "volunteering", "recycling-reuse", "sustainable-infrastructure", "tree-planting"]
 image: "/images/journal/forktree-fridays.jpg"
 excerpt: "Ambitious projects like Forktree are given a massive boost by volunteers. Volunteers at Forktree have embraced planting, rubble clearance and wall building with gusto and good cheer. It’s particularly..."
 ---

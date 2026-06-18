@@ -1,6 +1,7 @@
 ---
 title: "Kicking Goals with KESAB"
 date: "2024-11-29"
+tags: ["education-programs", "team-days", "volunteering", "wildlife", "rare-seed-orchard", "seed-nursery"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/kicking-goals-with-kesab.jpg"
 excerpt: "What a great day at The Forktree Project last week with the team from KESAB (Keep South Australia Beautiful)."

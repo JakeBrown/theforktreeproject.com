@@ -1,6 +1,7 @@
 ---
 title: "Seed bed up and running"
 date: "2023-03-16"
+tags: ["volunteering", "rare-seed-orchard", "water-management", "weed-control", "sustainable-infrastructure", "partnerships"]
 image: "/images/journal/rare-seed-orchard-update.jpg"
 excerpt: "Another leap forward in the Rare Seed Orchard at the Forktree Project. A big team effort today saw the first of our irrigated seed production beds planted with native saplings provided by ecological r..."
 ---

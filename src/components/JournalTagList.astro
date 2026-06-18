@@ -1,0 +1,60 @@
+---
+import { getJournalTagHref, getJournalTagLabel, isJournalTagSlug } from '../data/journalTags';
+
+interface Props {
+  tags?: string[];
+  basePath?: string;
+  className?: string;
+  linkable?: boolean;
+}
+
+const { tags = [], basePath = '/blog', className = '', linkable = true } = Astro.props;
+const visibleTags = tags.filter(isJournalTagSlug);
+---
+
+{visibleTags.length > 0 && (
+  <ul class:list={['journal-tag-list', className]} aria-label="Post topics">
+    {visibleTags.map((tag) => (
+      <li>
+        {linkable ? (
+          <a href={getJournalTagHref(tag, basePath)} class="journal-tag-list__chip">
+            {getJournalTagLabel(tag)}
+          </a>
+        ) : (
+          <span class="journal-tag-list__chip">{getJournalTagLabel(tag)}</span>
+        )}
+      </li>
+    ))}
+  </ul>
+)}
+
+<style>
+  .journal-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.85rem 0 0;
+    padding: 0;
+  }
+
+  .journal-tag-list__chip {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text-secondary);
+    font-family: var(--font-heading);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    padding: 0.35rem 0.55rem;
+    text-transform: uppercase;
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  a.journal-tag-list__chip:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+</style>

@@ -1,6 +1,7 @@
 ---
 title: "Beginnings"
 date: "2019-04-05"
+tags: ["rewilding", "recycling-reuse"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/beginnings.jpg"
 excerpt: "The Forktree Project came into existence almost by accident. It began with a tentative desire for a modest rural block on which to stretch, be at one with nature and have the time and space to think."

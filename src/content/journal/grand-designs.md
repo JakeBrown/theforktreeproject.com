@@ -1,6 +1,7 @@
 ---
 title: "GRAND DESIGNS"
 date: "2020-04-27"
+tags: ["birds", "wildlife", "sustainable-infrastructure", "tree-planting", "rewilding"]
 image: "/images/journal/grand-designs.jpg"
 excerpt: "One of our aims at the Forktree Project is to create habitat for native animals and birds. We are fortunate to see a number of Adelaide rosellas, crimson rosellas and galahs on the property already, w..."
 ---

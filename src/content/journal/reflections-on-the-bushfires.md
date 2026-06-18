@@ -1,6 +1,7 @@
 ---
 title: "REFLECTIONS ON THE BUSHFIRES"
 date: "2020-01-05"
+tags: ["wildlife", "climate-action"]
 image: "/images/journal/reflections-on-the-bushfires.jpg"
 excerpt: "The sea view at Forktree was obscured today by smoke from the disastrous fires on Kangaroo Island. Getting our first 3,700 trees through this summer is nothing compared to what has been lost on Kangar..."
 ---

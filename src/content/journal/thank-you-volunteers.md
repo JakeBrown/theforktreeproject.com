@@ -1,6 +1,7 @@
 ---
 title: "Thank You, Volunteers!"
 date: "2024-12-06"
+tags: ["community-events", "volunteering", "seed-nursery", "weed-control", "sustainable-infrastructure", "tree-planting"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/thank-you-volunteers.jpg"
 excerpt: "On International Volunteers Day we would like to extend a HUGE thank you to all our wonderful volunteers who make such a massive contribution to the work of The Forktree Project."

@@ -1,6 +1,7 @@
 ---
 title: "Friends of Forktree Planting Day 2025"
 date: "2025-07-28"
+tags: ["national-tree-day", "community-events", "volunteering", "water-management", "sustainable-infrastructure", "tree-planting"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/friends-of-forktree-planting-day-2025.jpg"
 excerpt: "Thank you to all the volunteers who helped out at our Friends of Forktree Planting Day on Saturday 26th July to mark National Tree Day 2025."

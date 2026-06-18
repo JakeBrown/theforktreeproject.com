@@ -1,6 +1,7 @@
 ---
 title: "CLEAN UP AUSTRALIA DAY!"
 date: "2021-03-14"
+tags: ["community-events", "water-management", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/clean-up-australia-day.jpg"
 excerpt: "Sunday 7th March - CLEAN UP AUSTRALIA DAY - resonated with us at The Forktree Project. Anyone who visited when the project began two years ago will know who much cleaning up there was to do; anyone wh..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "repelling invaders"
 date: "2020-10-21"
+tags: ["weed-control", "tree-planting", "native-plants"]
 image: "/images/journal/repelling-invaders.jpg"
 excerpt: "The plentiful spring rain that we have had recently has been wonderful for the saplings, but it has also been great for the weeds, including thistles, mustard seed, dog hound, cape weed, wire weed, to..."
 ---

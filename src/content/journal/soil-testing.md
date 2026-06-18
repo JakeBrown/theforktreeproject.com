@@ -1,6 +1,7 @@
 ---
 title: "SOIL TESTING"
 date: "2020-07-16"
+tags: ["seed-nursery"]
 image: "/images/journal/soil-testing.jpg"
 excerpt: "Phase 2 of getting the nursery up and running: testing the pH of the soil inside the netted area to determine its health and to see how well things will grow in there. Result: pH 6.5 - in other words,..."
 ---

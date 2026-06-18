@@ -1,6 +1,7 @@
 ---
 title: "report card!"
 date: "2024-01-23"
+tags: ["school-visits", "education-programs", "wildlife", "sustainable-infrastructure", "partnerships", "tree-planting"]
 image: "/images/journal/back-to-school.jpeg"
 excerpt: "Next week schools go back, and at The Forktree Project we are excited to get started on our Education Program 2024. We are looking forward to welcoming old friends from the multiple schools who visit..."
 ---

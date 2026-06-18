@@ -1,6 +1,7 @@
 ---
 title: "Forktree Project Open Day October 2024"
 date: "2024-10-13"
+tags: ["community-events"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/forktree-project-open-day-october-2024.jpg"
 excerpt: "Great to share the story of The Forktree Project at our Open Day this morning as part of the Nature Festival 2024."

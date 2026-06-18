@@ -1,6 +1,7 @@
 ---
 title: "remarkable resilience"
 date: "2023-03-19"
+tags: ["community-events", "planting-season", "tree-planting", "rewilding"]
 image: "/images/journal/remarkable-resilience.jpg"
 excerpt: "20th March is World Rewilding Day! It seems appropriate to recognise this date with photos taken only a few days ago at The Forktree Project of a forgotten sapling, accidently left unplanted sometime..."
 ---

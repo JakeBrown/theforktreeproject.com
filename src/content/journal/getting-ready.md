@@ -1,6 +1,7 @@
 ---
 title: "Stake out"
 date: "2021-06-22"
+tags: ["volunteering", "birds", "wildlife", "water-management", "partnerships", "planting-season"]
 image: "/images/journal/getting-ready.jpg"
 excerpt: "Work is under way to prepare for The Big Plant planned for this coming weekend (26th and 27th June), when we will be getting sheoaks and a range of complementary understorey and midstorey plants into..."
 ---

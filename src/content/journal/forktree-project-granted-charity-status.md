@@ -1,6 +1,7 @@
 ---
 title: "FORKTREE PROJECT GRANTED CHARITY STATUS"
 date: "2020-09-24"
+tags: ["partnerships", "tree-planting", "native-plants", "rewilding"]
 image: "/images/journal/forktree-project-granted-charity-status.jpg"
 excerpt: "We’re excited to announce that The Forktree Project has been granted full charity status by the ACNC (Australian Charities and Not-for-Profit Commission). A great vote of confidence in our environment..."
 ---

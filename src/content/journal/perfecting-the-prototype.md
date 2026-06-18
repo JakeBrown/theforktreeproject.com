@@ -1,6 +1,7 @@
 ---
 title: "PERFECTING THE PROTOTYPE"
 date: "2020-06-28"
+tags: ["school-visits", "volunteering", "wildlife", "sustainable-infrastructure", "tree-planting", "native-plants"]
 image: "/images/journal/perfecting-the-prototype.jpg"
 excerpt: "Despite the newly installed, gold-standard fencing, the quest continues at Forktree for the best way to protect each and every vulnerable young eucalypt from any over-zealous, hungry (or greedy) kanga..."
 ---

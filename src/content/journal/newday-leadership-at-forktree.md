@@ -1,6 +1,7 @@
 ---
 title: "NEWDAY LEADERSHIP AT FORKTREE"
 date: "2023-07-07"
+tags: ["education-programs", "team-days", "wildlife", "sustainable-infrastructure", "partnerships", "climate-action"]
 image: "/images/journal/newday-leadership-at-forktree.jpg"
 excerpt: "What a fantastic day of stimulating content at The Forktree Project yesterday with leaders from the Adelaide Hills, Fleurieu and Kangaroo Island. The Forktree Project was delighted to host Session 2 o..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Ancient wisdom, modern action"
 date: "2021-12-16"
+tags: ["school-visits", "education-programs", "seed-nursery", "weed-control", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/ancient-wisdom-modern-action.jpg"
 excerpt: "The end of the school year has seen the most amazing effort at Forktree by students from a number of schools. Over the course of the week, 166 students from four different schools got stuck in to a ra..."
 ---

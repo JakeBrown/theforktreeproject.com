@@ -1,6 +1,9 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import JournalTagFilter from '../../components/JournalTagFilter.astro';
+import JournalTagList from '../../components/JournalTagList.astro';
 import { getCollection } from 'astro:content';
+import { getJournalPageHref, getJournalTagLabel, isJournalTagSlug } from '../../data/journalTags';
 
 const POSTS_PER_PAGE = 12;
 
@@ -8,19 +11,46 @@ const allPosts = (await getCollection('journal')).sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
 
+const tagCounts = allPosts.reduce<Record<string, number>>((counts, post) => {
+  for (const tag of post.data.tags) {
+    counts[tag] = (counts[tag] ?? 0) + 1;
+  }
+  return counts;
+}, {});
+
 const url = new URL(Astro.request.url);
-const currentPage = Math.max(1, parseInt(url.searchParams.get('page') || '1'));
-const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+const requestedTag = url.searchParams.get('tag');
+const activeTag = isJournalTagSlug(requestedTag) ? requestedTag : null;
+const activeTagLabel = activeTag ? getJournalTagLabel(activeTag) : null;
+const filteredPosts = activeTag
+  ? allPosts.filter((post) => post.data.tags.includes(activeTag))
+  : allPosts;
+
+const requestedPage = parseInt(url.searchParams.get('page') || '1');
+const totalPages = Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE));
+const currentPage = Math.min(Math.max(1, Number.isNaN(requestedPage) ? 1 : requestedPage), totalPages);
 const start = (currentPage - 1) * POSTS_PER_PAGE;
-const posts = allPosts.slice(start, start + POSTS_PER_PAGE);
+const posts = filteredPosts.slice(start, start + POSTS_PER_PAGE);
+const pageTitle = activeTagLabel
+  ? `${activeTagLabel} Posts — The Forktree Project`
+  : 'Blog — The Forktree Project';
+const pageDescription = activeTagLabel
+  ? `Forktree Project journal posts about ${activeTagLabel.toLowerCase()}.`
+  : 'The Forktree Project story - follow our rewilding journey.';
 ---
 
-<PageLayout title="Blog — The Forktree Project" description="The Forktree Project story - follow our rewilding journey." headerVariant="dark">
+<PageLayout title={pageTitle} description={pageDescription} headerVariant="dark">
 
   <section class="journal-header">
     <div class="container--narrow">
       <h2><strong>THE FORKTREE STORY</strong></h2>
       <p>The Forktree Project is a journey, the first steps of which were taken when the property was purchased in April 2019. The blog posts below tell the story of how this journey is unfolding. To read the story from the beginning, <a href="/blog/beginnings" class="journal-link">click here</a>, or browse the <a href="/blog/archive" class="journal-link">full archive</a>.</p>
+      <JournalTagFilter
+        activeTag={activeTag}
+        filteredCount={filteredPosts.length}
+        tagCounts={tagCounts}
+        totalCount={allPosts.length}
+      />
     </div>
   </section>
 
@@ -29,45 +59,52 @@ const posts = allPosts.slice(start, start + POSTS_PER_PAGE);
       {posts.length > 0 ? (
         <div class="posts-grid">
           {posts.map((post) => (
-            <a href={`/blog/${post.id}`} class="post-card">
-              <div class="post-card__image">
-                {post.data.image ? (
-                  <img src={post.data.image} alt={post.data.title} loading="lazy" />
-                ) : (
-                  <div class="post-card__placeholder"></div>
-                )}
-              </div>
-              <div class="post-card__content">
-                <h3 class="post-card__title">{post.data.title}</h3>
-                <div class="post-card__meta">
-                  {post.data.date && (
-                    <time datetime={new Date(post.data.date).toISOString()}>
-                      {new Date(post.data.date).toLocaleDateString('en-AU', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </time>
+            <article class="post-card">
+              <a href={`/blog/${post.id}`} class="post-card__link">
+                <div class="post-card__image">
+                  {post.data.image ? (
+                    <img src={post.data.image} alt={post.data.title} loading="lazy" />
+                  ) : (
+                    <div class="post-card__placeholder"></div>
                   )}
                 </div>
-              </div>
-            </a>
+                <div class="post-card__content">
+                  <h3 class="post-card__title">{post.data.title}</h3>
+                  <div class="post-card__meta">
+                    {post.data.date && (
+                      <time datetime={new Date(post.data.date).toISOString()}>
+                        {new Date(post.data.date).toLocaleDateString('en-AU', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                        })}
+                      </time>
+                    )}
+                  </div>
+                </div>
+              </a>
+              <JournalTagList tags={post.data.tags} />
+            </article>
           ))}
         </div>
       ) : (
-        <p class="journal-empty">Blog posts coming soon. Check back for updates on our rewilding journey.</p>
+        <p class="journal-empty">
+          {activeTagLabel
+            ? `No posts found for ${activeTagLabel}.`
+            : 'Blog posts coming soon. Check back for updates on our rewilding journey.'}
+        </p>
       )}
 
       {totalPages > 1 && (
         <nav class="pagination" aria-label="Blog pagination">
           {currentPage > 1 && (
-            <a href={currentPage === 2 ? '/blog' : `/blog?page=${currentPage - 1}`} class="pagination__link">
+            <a href={getJournalPageHref('/blog', currentPage - 1, activeTag)} class="pagination__link">
               Newer
             </a>
           )}
-          <a href="/blog/archive" class="pagination__link">View full archive</a>
+          <a href={getJournalPageHref('/blog/archive', 1, activeTag)} class="pagination__link">View full archive</a>
           {currentPage < totalPages && (
-            <a href={`/blog?page=${currentPage + 1}`} class="pagination__link">
+            <a href={getJournalPageHref('/blog', currentPage + 1, activeTag)} class="pagination__link">
               Older
             </a>
           )}
@@ -116,13 +153,17 @@ const posts = allPosts.slice(start, start + POSTS_PER_PAGE);
   }
 
   .post-card {
+    color: inherit;
+  }
+
+  .post-card__link {
     display: block;
     text-decoration: none;
     color: inherit;
     transition: opacity var(--transition-normal);
   }
 
-  .post-card:hover {
+  .post-card__link:hover {
     opacity: 0.8;
   }
 

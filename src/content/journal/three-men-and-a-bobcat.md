@@ -1,6 +1,7 @@
 ---
 title: "Three men and a bobcat"
 date: "2021-08-11"
+tags: ["school-visits", "volunteering", "rare-seed-orchard", "recycling-reuse", "sustainable-infrastructure", "tree-planting"]
 image: "/images/journal/three-men-and-a-bobcat.jpg"
 excerpt: "At the risk of sounding obsessed with rubble and bricks, here’s another post about progress in the rubble pile. This will be of particular interest to anyone who has got stuck into sorting reusable br..."
 ---

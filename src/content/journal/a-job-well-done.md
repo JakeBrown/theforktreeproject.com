@@ -1,6 +1,7 @@
 ---
 title: "A job well done"
 date: "2021-04-28"
+tags: ["seed-nursery", "water-management", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/a-job-well-done.jpg"
 excerpt: "Yesterday saw another remarkable day’s work at The Forktree Project. The task this time: building steps for access to the seed nursery pad, all constructed out of old recycled timber salvaged on site...."
 ---

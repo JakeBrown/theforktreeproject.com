@@ -1,6 +1,7 @@
 ---
 title: "ZEN Energy Power Boost at Forktree"
 date: "2024-07-31"
+tags: ["team-days", "volunteering", "renewable-energy", "partnerships", "tree-planting", "rewilding"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/zen-energy-power-boost-at-forktree.jpg"
 excerpt: "A huge thank you to the cheerful and positive group of volunteers from ZEN Energy, MAC Trade Services and Salesforce who planted several hundred blue gum community trees and shrubs."

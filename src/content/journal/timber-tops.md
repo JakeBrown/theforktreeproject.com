@@ -1,6 +1,7 @@
 ---
 title: "Timber tops"
 date: "2023-05-18"
+tags: ["recycling-reuse", "rewilding"]
 image: "/images/journal/timber-tops.jpg"
 excerpt: "It seems counter-intuitive to cut trees down on a rewilding project, but in the pre-existing stand of radiata pines on the edge of the property, a number of very tall dead trees needed to be felled -..."
 ---

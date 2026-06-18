@@ -1,6 +1,7 @@
 ---
 title: "Green facilities"
 date: "2020-12-03"
+tags: ["school-visits", "education-programs", "volunteering", "seed-nursery", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/green-facilities.jpg"
 excerpt: "It has been a busy time recently at Forktree, with all manner of infrastructure development. You know all about the seed nursery; now time to update you on the something less glamorous but no less imp..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "school planting season round up"
 date: "2022-09-09"
+tags: ["school-visits", "rare-seed-orchard", "seed-nursery", "weed-control", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/term-3-school-planting-round-up.jpg"
 excerpt: "Another great planting season has come to a close, with some fantastic input from students from Year 5 to Year 9 from a range of schools. In total, 797 students from 9 different schools visited over 1..."
 ---

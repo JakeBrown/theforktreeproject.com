@@ -1,6 +1,7 @@
 ---
 title: "Growing an Inclusive Space"
 date: "2024-07-10"
+tags: ["education-programs", "rare-seed-orchard", "seed-nursery", "partnerships", "native-plants"]
 image: "/images/journal/growing-an-inclusive-space.jpg"
 excerpt: "We are delighted to share that The Forktree Project has been awarded a grant from the Office for Autism to support the planning and creation of a Native Sensory Garden within our Rare Seed Orchard."
 ---

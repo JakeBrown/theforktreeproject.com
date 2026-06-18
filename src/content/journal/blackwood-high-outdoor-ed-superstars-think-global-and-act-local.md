@@ -1,6 +1,7 @@
 ---
 title: "Blackwood High Outdoor Ed Superstars"
 date: "2022-04-01"
+tags: ["school-visits", "education-programs", "seed-nursery", "water-management", "weed-control", "recycling-reuse"]
 image: "/images/journal/blackwood-high-outdoor-ed-superstars-think-global-and-act-local.jpg"
 excerpt: "We were delighted to welcome an amazing crew of young environmentalists from Blackwood High School to The Forktree Project this week. Year 12 Blackwood High Outdoor Education students made a huge cont..."
 ---

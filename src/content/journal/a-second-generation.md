@@ -1,6 +1,7 @@
 ---
 title: "A Second Generation"
 date: "2021-12-24"
+tags: ["butterflies-moths", "birds", "wildlife", "seed-nursery", "tree-planting", "native-plants"]
 image: "/images/journal/a-second-generation.jpg"
 excerpt: "Another update from Malcolm Worthing’s Bird and Lepidoptera survey of The Forktree Project: “The second recorded generation of Hakea moth (_Oenochroma vinaria_) caterpillars have begun to emerge at Fo..."
 ---

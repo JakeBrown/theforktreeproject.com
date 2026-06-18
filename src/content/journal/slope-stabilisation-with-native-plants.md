@@ -1,6 +1,7 @@
 ---
 title: "Slope stabilisation with native plants"
 date: "2021-05-27"
+tags: ["seed-nursery", "recycling-reuse", "tree-planting", "native-plants"]
 image: "/images/journal/slope-stabilisation-with-native-plants.jpg"
 excerpt: "Today saw Forktree stalwarts Ralph and Jake harvesting Plains Sedge (_Carex bichenoviana_) from Paul Green’s Myponga property for planting at The Forktree Project. Paul recommended the Carex as an ide..."
 ---

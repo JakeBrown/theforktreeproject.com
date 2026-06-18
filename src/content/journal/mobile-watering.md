@@ -1,6 +1,7 @@
 ---
 title: "MOBILE WATERING"
 date: "2020-03-05"
+tags: ["water-management", "sustainable-infrastructure", "tree-planting"]
 image: "/images/journal/mobile-watering.jpg"
 excerpt: "_“And what about the saplings you can’t reach with hoses from the standpipes?”_ That’s where four wheels and a trailer come in. We have created a water truck by strapping a 1000-litre water bowser ont..."
 ---

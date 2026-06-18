@@ -1,6 +1,7 @@
 ---
 title: "\"WHY CARING FOR THE PLANET IS GOOD FOR YOUR MENTAL HEALTH\""
 date: "2021-07-29"
+tags: ["volunteering", "sustainable-infrastructure"]
 image: "/images/journal/why-caring-for-the-planet-is-good-for-your-mental-health.jpg"
 excerpt: "“It’s clear there’s an important link between our health and the environment,” says Tim in an article published this week by AIA Vitality. “Physical benefits of time in nature are readily accepted… bu..."
 ---

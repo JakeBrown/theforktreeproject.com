@@ -1,6 +1,7 @@
 ---
 title: "sowing seed"
 date: "2020-11-29"
+tags: ["seed-nursery", "water-management", "sustainable-infrastructure"]
 image: "/images/journal/sowing-seed.jpg"
 excerpt: "Today was a momentous day which saw the propagation process begin for the first of our native seed, some harvested from less than a kilometre away and some harvested at Forktree itself. Under the expe..."
 ---

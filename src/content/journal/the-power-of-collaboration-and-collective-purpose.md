@@ -1,6 +1,7 @@
 ---
 title: "The power of collaboration and collective purpose"
 date: "2023-07-18"
+tags: ["school-visits", "education-programs", "volunteering", "wildlife", "seed-nursery", "recycling-reuse"]
 image: "/images/journal/the-power-of-collaboration-and-collective-purpose.jpg"
 excerpt: "As we look forward to another term and to welcoming more school students to The Forktree Project, it’s timely to reflect on what the students gain from their experience on site. It’s a given that stud..."
 ---

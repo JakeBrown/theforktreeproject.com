@@ -1,6 +1,7 @@
 ---
 title: "Rare Chequered Copper Butterfly at Forktree"
 date: "2021-05-25"
+tags: ["butterflies-moths", "birds", "wildlife", "tree-planting", "rewilding"]
 image: "/images/journal/rare-chequered-copper-butterfly-at-forktree.jpg"
 excerpt: "One of our main aims at The Forktree Project is to protect and enhance the biodiversity of the site and the wider area. With this in mind, we have commissioned a Bird and Lepidoptera (butterflies and..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "The Forktree Project on SBS News"
 date: "2024-01-19"
+tags: ["rewilding", "climate-action"]
 image: "/images/journal/the-forktree-project-on-sbs-news.png"
 excerpt: "A great piece on SBS news on SA’s Tim Jarvis and Tiahni Adamson and their environmental work - and a fantastic spotlight on the vision of The Forktree Project. Congratulations to both Tim and Tiahni o..."
 ---

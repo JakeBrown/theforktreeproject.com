@@ -1,6 +1,7 @@
 ---
 title: "Welcoming The Clontarf Foundation to Forktree"
 date: "2024-11-09"
+tags: ["school-visits", "wildlife", "rare-seed-orchard", "seed-nursery", "sustainable-infrastructure", "partnerships"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/welcoming-the-clontarf-foundation-to-forktree.jpg"
 excerpt: "What a fantastic day we had at The Forktree Project on Thursday when we welcomed Aboriginal students from the Clontarf Academy at Woodville High School."

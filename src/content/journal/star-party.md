@@ -1,6 +1,7 @@
 ---
 title: "star party"
 date: "2024-04-10"
+tags: ["community-events", "rewilding"]
 image: "/images/journal/star-party.jpg"
 excerpt: "What a great evening at The Forktree Project last weekend as we hosted the Carrickalinga Dark Sky Party, organised by the Carrickalinga Ratepayers Association to celebrate their bid for Carrickalinga..."
 ---

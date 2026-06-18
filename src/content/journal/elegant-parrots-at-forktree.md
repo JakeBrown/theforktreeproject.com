@@ -1,6 +1,7 @@
 ---
 title: "elegant parrots at forktree"
 date: "2021-06-25"
+tags: ["butterflies-moths", "birds", "wildlife", "sustainable-infrastructure", "tree-planting", "native-plants"]
 image: "/images/journal/elegant-parrots-at-forktree.jpg"
 excerpt: "An exciting update from the Bird & Lepidoptera 2021 Survey being conducted at Forktree by Malcolm Worthing: “Last month, a flock of 9 Elegant Parrots (_Neophema elegans_) was recorded feeding at the b..."
 ---

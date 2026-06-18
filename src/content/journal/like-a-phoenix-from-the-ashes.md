@@ -1,6 +1,7 @@
 ---
 title: "Like a phoenix from the ashes"
 date: "2022-12-01"
+tags: ["wildlife", "weed-control", "tree-planting", "native-plants", "rewilding"]
 image: "/images/journal/like-a-phoenix-from-the-ashes.jpg"
 excerpt: "Just over 12 months ago the Great Yacca Rescue Mission took place, whereby fourteen 200-year-old yaccas (_Xanthorrhea semiplana_) which had been dug up as part of a local road-widening project were sa..."
 ---

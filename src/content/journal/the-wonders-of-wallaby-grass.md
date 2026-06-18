@@ -1,6 +1,7 @@
 ---
 title: "The wonders of wallaby grass"
 date: "2023-11-29"
+tags: ["school-visits", "volunteering", "wildlife", "rare-seed-orchard", "sustainable-infrastructure", "tree-planting"]
 image: "/images/journal/the-wonders-of-wallaby-grass.jpg"
 excerpt: "‘Tis the season… for native grass seed harvesting at The Forktree Project. Much excitement here as we collect seed from an area of _rytidosperma_ (wallaby grass) planted in 2022 by numerous volunteers..."
 ---

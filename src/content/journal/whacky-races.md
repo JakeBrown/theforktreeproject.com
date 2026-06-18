@@ -1,6 +1,7 @@
 ---
 title: "CREATING A CANVAS"
 date: "2020-07-08"
+tags: ["seed-nursery", "weed-control", "sustainable-infrastructure", "tree-planting", "climate-action", "rewilding"]
 image: "/images/journal/whacky-races.jpg"
 excerpt: "One of the goals of the Forktree Project is to turn a tattered and overgrown netted area into a functioning seed nursery to grow saplings for local bushfire-affected areas. The first step involved the..."
 ---

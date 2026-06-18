@@ -1,6 +1,7 @@
 ---
 title: "FIRST SAPLINGS IN POSITION"
 date: "2019-07-11"
+tags: ["wildlife", "recycling-reuse", "sustainable-infrastructure", "planting-season", "tree-planting"]
 image: "/images/journal/first-saplings-in-position.jpg"
 excerpt: "12 down, 3988 to go - our first saplings have been planted alongside the shed. It’s heavy going planting these saplings due to the compacted construction waste laid down here by the previous owner. Ge..."
 ---

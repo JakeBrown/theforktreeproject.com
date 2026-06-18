@@ -1,6 +1,7 @@
 ---
 title: "Crows Kick Goals for Biodiversity"
 date: "2024-08-09"
+tags: ["team-days", "volunteering", "wildlife", "weed-control", "partnerships", "tree-planting"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/crows-kick-goals-for-biodiversity.jpg"
 excerpt: "How good are elite sportsmen at environmental volunteering? Amazing, if the Adelaide Crows are anything to go by!"

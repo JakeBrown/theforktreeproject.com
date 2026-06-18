@@ -1,6 +1,7 @@
 ---
 title: "It's a Newday...."
 date: "2021-07-08"
+tags: ["team-days", "volunteering", "partnerships", "tree-planting", "native-plants", "rewilding"]
 image: "/images/journal/its-a-newday.jpg"
 excerpt: "What a fabulous day this last Sunday was! In glorious weather, a large band of willing volunteers from last Thursday’s Newday Leadership Conference in Adelaide set to, planting native grasses, shrubs..."
 ---

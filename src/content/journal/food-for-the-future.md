@@ -1,6 +1,7 @@
 ---
 title: "FOOD FOR THE FUTURE"
 date: "2020-07-07"
+tags: ["wildlife", "tree-planting", "native-plants", "rewilding"]
 image: "/images/journal/food-for-the-future.jpg"
 excerpt: "Recent news that koalas in New South Wales will be extinct by 2050 unless drastic action is taken to arrest habitat loss makes depressing reading. Luckily, prospects for koalas in South Australia aren..."
 ---

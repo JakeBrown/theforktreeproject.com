@@ -1,6 +1,7 @@
 ---
 title: "Breaking down barriers"
 date: "2022-09-28"
+tags: ["volunteering", "sustainable-infrastructure", "rewilding"]
 image: "/images/journal/breaking-down-barriers.jpg"
 excerpt: "In a project such as Forktree, a stock-take of tasks achieved is a great motivator every now and then. Today’s stock-take is of fences and barbed wire. Over the last 3 years we have removed hundreds o..."
 ---

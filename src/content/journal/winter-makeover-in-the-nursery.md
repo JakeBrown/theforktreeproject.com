@@ -1,6 +1,7 @@
 ---
 title: "Winter Makeover in the Nursery"
 date: "2026-03-20"
+tags: ["volunteering", "seed-nursery", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/winter-makeover-in-the-nursery.jpg"
 excerpt: "As the weather cools, it’s time for a winter makeover in the nursery. This week, our team transformed the shade house into a cosy greenhouse — an essential shift as we move into the colder months."
 ---

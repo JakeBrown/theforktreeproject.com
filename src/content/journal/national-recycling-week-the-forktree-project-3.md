@@ -1,6 +1,7 @@
 ---
 title: "national recycling week @ the forktree project #3"
 date: "2023-11-15"
+tags: ["community-events", "volunteering", "recycling-reuse", "sustainable-infrastructure"]
 image: "/images/journal/national-recycling-week-the-forktree-project-3.jpg"
 excerpt: "We can’t get to the end of National Recycling Week without mentioning bricks… A big part of the Forktree Project story is the repurposing of the 3000+ tonnes of building waste inherited on site at the..."
 ---

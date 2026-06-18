@@ -1,6 +1,7 @@
 ---
 title: "FENCING BEGINS"
 date: "2019-06-27"
+tags: ["wildlife", "sustainable-infrastructure", "tree-planting"]
 image: "/images/journal/first-steps.jpg"
 excerpt: "The high ground of the property is very exposed. A vegetation strip will be planted to act as a windbreak along the eastern boundary. Fencing has started along this section to protect the saplings fro..."
 ---

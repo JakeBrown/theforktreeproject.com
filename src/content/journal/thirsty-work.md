@@ -1,6 +1,7 @@
 ---
 title: "THIRSTY WORK"
 date: "2020-01-15"
+tags: ["water-management", "tree-planting"]
 image: "/images/journal/thirsty-work.jpg"
 excerpt: "Watering 3,700 saplings is no mean feat, particularly those of them that aren’t planted in neat rows (the majority). To make sure we don’t miss any out, we have implemented a system of red clothes peg..."
 ---

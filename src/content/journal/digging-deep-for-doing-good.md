@@ -1,6 +1,7 @@
 ---
 title: "digging deep"
 date: "2023-09-11"
+tags: ["partnerships", "climate-action", "rewilding"]
 image: "/images/journal/digging-deep-for-doing-good.jpg"
 excerpt: "A big thank you to FarmLab for their expertise and guidance baselining the soil organic carbon levels at The Forktree Project. We have taken soil samples from across the Forktree Project site to deter..."
 ---

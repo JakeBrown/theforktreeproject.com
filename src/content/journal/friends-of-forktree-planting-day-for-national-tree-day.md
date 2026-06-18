@@ -1,6 +1,7 @@
 ---
 title: "FRIENDS of forktree planting day for national tree day"
 date: "2023-07-28"
+tags: ["national-tree-day", "community-events", "volunteering", "seed-nursery", "tree-planting", "native-plants"]
 image: "/images/journal/friends-of-forktree-planting-day-for-national-tree-day.jpg"
 excerpt: "What an amazing day we had today at our Friends of Forktree Planting Day to mark National Tree Day! A team of nearly 50 volunteers made light work of planting native trees, shrubs and grasses on hills..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Seeding Frenzy"
 date: "2024-05-03"
+tags: ["wildlife", "water-management", "sustainable-infrastructure", "partnerships", "tree-planting", "native-plants"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/seeding-frenzy.jpg"
 excerpt: "It's an exciting time at The Forktree Project as we watch and wait to see the results of recent direct seeding of native grasses on two hectares of former paddock."

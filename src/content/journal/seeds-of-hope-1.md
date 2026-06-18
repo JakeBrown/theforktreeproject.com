@@ -1,6 +1,7 @@
 ---
 title: "Seeds of Hope"
 date: "2024-11-18"
+tags: ["community-events", "wildlife", "rare-seed-orchard", "seed-nursery", "sustainable-infrastructure", "tree-planting"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/seeds-of-hope-1.jpg"
 excerpt: "So exciting to be reaping our first bumper harvest of Rytidosperma tenuis, a rare species of wallaby grass, from one of our production beds in the Forktree Rare Seed Orchard!"

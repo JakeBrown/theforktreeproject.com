@@ -1,6 +1,7 @@
 ---
 title: "THE GREAT REVEAL"
 date: "2020-05-10"
+tags: ["tree-planting"]
 image: "/images/journal/the-great-reveal.jpg"
 excerpt: "A momentous occasion today - the removal of the first of the tree guards from last year’s planting! Some of the saplings have grown so well that they are well and truly bursting out of their tree guar..."
 ---

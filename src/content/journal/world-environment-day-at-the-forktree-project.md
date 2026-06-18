@@ -1,6 +1,7 @@
 ---
 title: "World Environment Day at The Forktree Project"
 date: "2024-06-05"
+tags: ["world-environment-day", "community-events", "birds", "wildlife", "tree-planting", "native-plants"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/world-environment-day-at-the-forktree-project.jpg"
 excerpt: "The slogan for World Environment Day 2024 is: 'Our land. Our future. We are #GenerationRestoration.'"

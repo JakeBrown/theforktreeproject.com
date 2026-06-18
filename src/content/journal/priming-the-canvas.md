@@ -1,6 +1,7 @@
 ---
 title: "Priming the canvas"
 date: "2022-03-27"
+tags: ["volunteering", "rare-seed-orchard", "weed-control", "recycling-reuse", "sustainable-infrastructure", "tree-planting"]
 image: "/images/journal/priming-the-canvas.jpg"
 excerpt: "Things tend to happen fast at Forktree, and developments in the seed orchard over the last few weeks have been no exception. What was until recently a scrubby, pretty unsightly patch dotted with compo..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "IT'S A LONG WAY TO THE TOP OF THE HILL..."
 date: "2020-06-25"
+tags: ["volunteering", "butterflies-moths", "wildlife", "sustainable-infrastructure", "tree-planting"]
 image: "/images/journal/its-a-long-way-to-the-top-of-the-hill.jpg"
 excerpt: "That fence line stretches a long way. But the job is now done - finally. A big hand to Tim and key Forktree team member Simon Thomas for completing the mammoth task of installing 1.8m-high fencing aro..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Woodwork from waste"
 date: "2020-11-02"
+tags: ["volunteering", "seed-nursery", "recycling-reuse", "sustainable-infrastructure", "native-plants"]
 image: "/images/journal/calling-all-volunteers.jpg"
 excerpt: "Step by step we are making progress towards setting up the Forktree Project seed nursery with a view to growing our own native seedlings from seed harvested from the handful of mature trees on the pro..."
 ---

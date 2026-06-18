@@ -1,6 +1,7 @@
 ---
 title: "collaboration with prince's trust australia"
 date: "2020-12-21"
+tags: ["education-programs", "partnerships", "climate-action"]
 image: "/images/journal/collaboration-with-princes-trust-australia.jpeg"
 excerpt: "We are excited to announce a collaboration between The Forktree Project and Prince’s Trust Australia. With its commitment to the development of young people and helping communities create a sustainabl..."
 ---

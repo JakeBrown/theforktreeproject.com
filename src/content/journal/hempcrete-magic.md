@@ -1,6 +1,7 @@
 ---
 title: "Hempcrete Magic"
 date: "2025-02-26"
+tags: ["recycling-reuse", "sustainable-infrastructure", "climate-action", "rewilding"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/hempcrete-magic.jpg"
 excerpt: "We are VERY, VERY PROUD of our first hempcrete wall at The Forktree Project!"

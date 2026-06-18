@@ -1,6 +1,7 @@
 ---
 title: "Lesser Wanderer"
 date: "2022-05-02"
+tags: ["butterflies-moths", "birds", "wildlife", "sustainable-infrastructure", "partnerships", "rewilding"]
 image: "/images/journal/lesser-wanderer.jpg"
 excerpt: "Another fabulous update from Malcolm on biodiversity at Forktree: “Last week during the Forktree Remnant Vegetation Survey the surveyor was able to get this photograph showing the familiar Wanderer (_..."
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Hi-tech solutions for water management"
 date: "2021-11-12"
+tags: ["rare-seed-orchard", "seed-nursery", "water-management", "partnerships", "climate-action"]
 image: "/images/journal/hi-tech-solutions-for-water-management.jpg"
 excerpt: "Stage 2 of the implementation of modern technology to ensure efficiency of water management at The Forktree Project: the installation of a flow meter by SA Water. This will allow us to optimise water..."
 ---

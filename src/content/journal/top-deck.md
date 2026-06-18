@@ -1,6 +1,7 @@
 ---
 title: "Top deck"
 date: "2023-09-25"
+tags: ["seed-nursery", "recycling-reuse", "sustainable-infrastructure", "tree-planting", "climate-action"]
 image: "/images/journal/top-deck.jpg"
 excerpt: "Next step on the Forktree Project’s circular economy journey: building the deck of what will be the Forktree Project Sustainability Centre out of wood gathered from the building waste salvaged on site..."
 ---

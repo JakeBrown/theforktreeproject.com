@@ -1,6 +1,7 @@
 ---
 title: "LONE RANGER"
 date: "2020-06-18"
+tags: ["tree-planting", "native-plants", "rewilding"]
 image: "/images/journal/exit-strategy.jpg"
 excerpt: "When the site of the Forktree Project was purchased in 2019, an audit of the existing trees was undertaken. On the entire 54 hectare property there were a mere 22 pink gums, a short windbreak of a doz..."
 ---

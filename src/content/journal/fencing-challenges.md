@@ -1,6 +1,7 @@
 ---
 title: "FENCING CHALLENGES"
 date: "2020-06-16"
+tags: ["wildlife", "sustainable-infrastructure", "tree-planting", "rewilding"]
 image: "/images/journal/fencing-challenges.jpg"
 excerpt: "Top priority over the last three weeks has been extending the fencing around the whole property. Last year we fenced one third of the property; this year we are fencing the rest. It is a massive under..."
 ---

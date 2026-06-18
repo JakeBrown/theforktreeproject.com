@@ -1,6 +1,7 @@
 ---
 title: "Wrapping up Planting Season 2"
 date: "2020-09-13"
+tags: ["seed-nursery", "water-management", "planting-season", "tree-planting"]
 image: "/images/journal/wrapping-up-planting-season-2.jpg"
 excerpt: "Another landmark day today with the final saplings of 2020 being planted. This brings the total number of natives trees and shrubs planted on the property since the beginning of the project to 6,400...."
 ---

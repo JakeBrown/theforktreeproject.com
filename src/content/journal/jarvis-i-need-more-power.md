@@ -1,6 +1,7 @@
 ---
 title: "\"J.A.R.V.I.S., I need more power....\""
 date: "2022-06-27"
+tags: ["team-days", "water-management", "renewable-energy", "sustainable-infrastructure", "partnerships"]
 image: "/images/journal/jarvis-i-need-more-power.jpeg"
 excerpt: "Next steps on our sustainable infrastructure journey: over the last two weeks we have added a third 160kL rainwater tank and, thanks to ZEN Energy’s incredible support, a solar and battery array for a..."
 ---

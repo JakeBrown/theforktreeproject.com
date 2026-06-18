@@ -1,6 +1,7 @@
 ---
 title: "Every cloud..."
 date: "2022-11-15"
+tags: ["team-days", "volunteering", "wildlife", "rare-seed-orchard", "seed-nursery", "weed-control"]
 image: "/images/journal/every-cloud.jpg"
 excerpt: "If there is one certainty in today’s uncertain world, it’s that climate change throws up unexpected situations and new patterns. Thus we found ourselves last weekend taking advantage of the unseasonal..."
 ---

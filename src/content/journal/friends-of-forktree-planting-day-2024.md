@@ -1,6 +1,7 @@
 ---
 title: "Friends of Forktree Planting Day 2024"
 date: "2024-07-28"
+tags: ["national-tree-day", "community-events", "volunteering", "tree-planting", "rewilding"]
 author: "Elizabeth Jarvis"
 image: "/images/journal/friends-of-forktree-planting-day-2024.jpg"
 excerpt: "We are still on a high after such a wonderful day on Saturday at our Friends of Forktree Planting Day to mark National Tree Day!"

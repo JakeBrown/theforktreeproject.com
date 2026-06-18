@@ -1,6 +1,7 @@
 ---
 title: "WASTE NOT, WANT NOT"
 date: "2020-03-10"
+tags: ["water-management", "recycling-reuse", "sustainable-infrastructure", "tree-planting"]
 image: "/images/journal/waste-not-want-not.jpg"
 excerpt: "Taking on Forktree has not just been about planting trees but also about cleaning up land that had previously been used as a dumping ground. With the alarming statistic that 40% of Australia’s landfil..."
 ---
