@@ -47,7 +47,6 @@ const pageDescription = activeTagLabel
       <p>The Forktree Project is a journey, the first steps of which were taken when the property was purchased in April 2019. The blog posts below tell the story of how this journey is unfolding. To read the story from the beginning, <a href="/blog/beginnings" class="journal-link">click here</a>, or browse the <a href="/blog/archive" class="journal-link">full archive</a>.</p>
       <JournalTagFilter
         activeTag={activeTag}
-        filteredCount={filteredPosts.length}
         tagCounts={tagCounts}
         totalCount={allPosts.length}
       />
@@ -56,6 +55,14 @@ const pageDescription = activeTagLabel
 
   <section class="journal-grid">
     <div class="container">
+      <h1 class="journal-results-heading">{activeTagLabel || 'Latest journal posts'}</h1>
+      {activeTagLabel && (
+        <p class="journal-results-summary">
+          Showing <strong>{filteredPosts.length}</strong> posts.
+          <a href="/blog">Clear filter</a>
+        </p>
+      )}
+
       {posts.length > 0 ? (
         <div class="posts-grid">
           {posts.map((post) => (
@@ -138,6 +145,33 @@ const pageDescription = activeTagLabel
 
   .journal-grid {
     padding: 0 0 var(--space-xl);
+  }
+
+  .journal-results-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 var(--space-sm);
+    text-align: center;
+  }
+
+  .journal-results-summary {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0 0 var(--space-lg);
+    text-align: center;
+  }
+
+  .journal-results-summary a {
+    color: var(--color-primary);
+    margin-left: 0.35rem;
+    text-decoration: underline;
+  }
+
+  .journal-results-summary a:hover {
+    opacity: 0.65;
   }
 
   .posts-grid {

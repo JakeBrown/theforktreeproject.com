@@ -9,7 +9,6 @@ import {
 interface Props {
   activeTag?: string | null;
   basePath?: string;
-  filteredCount?: number;
   tagCounts?: Record<string, number>;
   totalCount?: number;
 }
@@ -17,7 +16,6 @@ interface Props {
 const {
   activeTag = null,
   basePath = '/blog',
-  filteredCount = 0,
   tagCounts = {},
   totalCount = 0,
 } = Astro.props;
@@ -29,16 +27,7 @@ const allHref = getJournalPageHref(basePath, 1);
 
 <section class="tag-filter" aria-labelledby="tag-filter-heading">
   <div id="tag-filter-heading" class="tag-filter__heading">Explore by topic</div>
-  <div class="tag-filter__status">
-    {activeTag && activeLabel ? (
-      <>
-        Showing <strong>{filteredCount}</strong> {activeLabel} posts.
-        <a href={allHref}>Clear filter</a>
-      </>
-    ) : (
-      <>Browse the Forktree journal by theme, activity, and event.</>
-    )}
-  </div>
+  <div class="tag-filter__intro">Browse the Forktree journal by theme, activity, and event.</div>
 
   <nav class="tag-filter__desktop" aria-label="Filter posts by topic">
     <a
@@ -97,17 +86,11 @@ const allHref = getJournalPageHref(basePath, 1);
     text-transform: uppercase;
   }
 
-  .tag-filter__status {
+  .tag-filter__intro {
     color: var(--color-text-secondary);
     font-size: 0.9rem;
     line-height: 1.5;
     margin: 0 auto var(--space-sm);
-  }
-
-  .tag-filter__status a {
-    color: var(--color-primary);
-    margin-left: 0.35rem;
-    text-decoration: underline;
   }
 
   .tag-filter__desktop,
