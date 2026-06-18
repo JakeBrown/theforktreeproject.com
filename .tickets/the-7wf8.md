@@ -12,3 +12,9 @@ assignee: Jake Brown
 
 Before semantic search can run in production, create the Vectorize index named forktree-journal with 768 dimensions/cosine metric and add the optional JOURNAL_SEARCH_KV binding for index status. Local Wrangler auth is currently invalid, so this could not be verified from the CLI. Command: npx wrangler vectorize create forktree-journal --dimensions=768 --metric=cosine
 
+
+## Notes
+
+**2026-06-18T04:47:46Z**
+
+After updating Wrangler to 4.101.0, reran vectorize create command. It still fails due to invalid Cloudflare auth token: code 10000 / 9109. Need refreshed Wrangler auth before provisioning.
