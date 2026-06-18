@@ -10,8 +10,9 @@ const initialQuery = Astro.url.searchParams.get('q') || '';
   <section class="search-page">
     <div class="container--narrow">
       <header class="search-page__header">
+        <a class="search-page__back" href="/blog">← Back to journal</a>
         <h1>Search the Forktree Story</h1>
-        <p>Search journal posts by idea, activity, species, partner, or place. Semantic results are shown when the journal index is available.</p>
+        <p>Search journal posts by idea, activity, species, partner, or place.</p>
       </header>
 
       <form class="search-form" id="journal-search-form" role="search">
@@ -103,10 +104,9 @@ const initialQuery = Astro.url.searchParams.get('q') || '';
       if (!response.ok) throw new Error('Search failed');
       const data = await response.json();
       const count = data.results?.length || 0;
-      const mode = data.mode === 'semantic' ? 'semantic' : 'keyword';
 
       status.textContent = count
-        ? `${count} ${mode} result${count === 1 ? '' : 's'} for “${data.query}”${data.message ? ` — ${data.message}` : ''}`
+        ? `${count} result${count === 1 ? '' : 's'} for “${data.query}”`
         : `No results found for “${data.query}”.`;
 
       renderResults(data.results || []);
@@ -136,6 +136,22 @@ const initialQuery = Astro.url.searchParams.get('q') || '';
   .search-page__header {
     margin-bottom: var(--space-md);
     text-align: center;
+  }
+
+  .search-page__back {
+    color: var(--color-primary);
+    display: inline-flex;
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-sm);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .search-page__back:hover {
+    color: var(--color-primary-dark);
   }
 
   .search-page__header h1 {
