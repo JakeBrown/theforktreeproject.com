@@ -2,6 +2,12 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import ScrollIndicator from '../components/ScrollIndicator.astro';
 import { upcomingEvents } from '../data/events';
+import { getImage } from 'astro:assets';
+import heroImage from '../assets/images/get-involved/img-4702-jake-edited.jpeg';
+
+export const prerender = true;
+
+const heroBg = await getImage({ src: heroImage, width: 2400, format: 'webp' });
 
 const formatEventDate = (date: string) => {
   const [weekday = '', day = '', month = '', year = ''] = date.replace(',', '').split(' ');
@@ -18,7 +24,7 @@ const formatEventDate = (date: string) => {
 <PageLayout title="Get Involved — The Forktree Project" description="Volunteer with The Forktree Project or support our work restoring biodiversity on the Fleurieu Peninsula.">
 
   <!-- Hero / Intro -->
-  <section class="gi-section gi-section--hero" style="background-image: url('/images/get-involved/ralph-suzanne-nursery.jpg'); background-color: #2a3a2a;">
+  <section class="gi-section gi-section--hero" style={`background-image: url('${heroBg.src}'); background-color: #2a3a2a;`}>
     <div class="gi-section__content gi-section__content--center">
       <div class="gi-text gi-text--wide">
         <h1>Get Involved</h1>

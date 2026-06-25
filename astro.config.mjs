@@ -21,6 +21,7 @@ export default defineConfig({
     }),
   ],
   adapter: cloudflare({
+    imageService: 'compile',
     workerEntryPoint: {
       path: './src/worker.ts',
     },
