@@ -1,12 +1,21 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import ScrollIndicator from '../components/ScrollIndicator.astro';
+import { Image, getImage } from 'astro:assets';
+import restorationHeroImage from '../assets/images/restoration/restoration-hero-tree.jpg';
+import nearValleyMay2026Image from '../assets/images/restoration/near-valley-may-2026-aligned.jpg';
+import nearValley2019Image from '../assets/images/restoration/near-valley-2019.jpg';
+import timConsultationImage from '../assets/images/restoration/tim-consultation.jpg';
+
+export const prerender = true;
+
+const heroBg = await getImage({ src: restorationHeroImage, width: 2400, format: 'webp' });
 ---
 
 <PageLayout title="Restoration — The Forktree Project" description="Ecological restoration at The Forktree Project: returning a 54-hectare former pastoral property on South Australia's Fleurieu Peninsula to full ecological health." headerTopGlass={true}>
 
   <!-- Hero -->
-  <section class="rest-section rest-section--hero" style="background-image: url('/images/restoration/restoration-hero-tree.jpg'); background-color: #2a3a2a;">
+  <section class="rest-section rest-section--hero" style={`background-image: url('${heroBg.src}'); background-color: #2a3a2a;`}>
     <div class="rest-section__content rest-section__content--center">
       <div class="rest-text rest-text--wide">
         <h1>Ecological restoration</h1>
@@ -31,9 +40,9 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
       </div>
       <figure class="rest-split__photo rest-compare" data-before-after style="--position: 50%;">
         <div class="rest-compare__stage">
-          <img class="rest-compare__image" src="/images/restoration/near-valley-may-2026-aligned.jpg" alt="Near valley at The Forktree Project showing restored native vegetation in May 2026" loading="lazy" />
+          <Image class="rest-compare__image" src={nearValleyMay2026Image} alt="Near valley at The Forktree Project showing restored native vegetation in May 2026" width={1200} format="webp" loading="lazy" />
           <div class="rest-compare__before" aria-hidden="true">
-            <img class="rest-compare__image" src="/images/restoration/near-valley-2019.jpg" alt="" loading="lazy" />
+            <Image class="rest-compare__image" src={nearValley2019Image} alt="" width={1200} format="webp" loading="lazy" />
           </div>
           <span class="rest-compare__label rest-compare__label--before">March 2020</span>
           <span class="rest-compare__label rest-compare__label--after">May 2026</span>
@@ -76,7 +85,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
       <h2 class="rest-intro__title">Restoration Consultation Services</h2>
 
       <figure class="rest-consultation-image">
-        <img src="/images/restoration/tim-consultation.jpg" alt="Tim Jarvis speaking with visitors during a Forktree restoration consultation" loading="lazy" />
+        <Image src={timConsultationImage} alt="Tim Jarvis speaking with visitors during a Forktree restoration consultation" width={1400} format="webp" loading="lazy" />
       </figure>
 
       <h3 class="rest-intro__sub">Sharing What We&rsquo;ve Learned</h3>

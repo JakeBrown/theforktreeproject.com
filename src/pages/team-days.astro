@@ -1,12 +1,20 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import ScrollIndicator from '../components/ScrollIndicator.astro';
+import { Image, getImage } from 'astro:assets';
+import teamDaysHeroImage from '../assets/images/team-days/0r9a8970-hires-8192-x-5464.jpg';
+import teamDaysGroupImage from '../assets/images/team-days/img_4504.jpg';
+import teamDaysActivityImage from '../assets/images/team-days/img_4291.jpg';
+
+export const prerender = true;
+
+const heroBg = await getImage({ src: teamDaysHeroImage, width: 2400, format: 'webp' });
 ---
 
 <PageLayout title="Team Days — The Forktree Project" description="Bring your team to The Forktree Project for a hands-on day of habitat restoration, learning and team building in a stunning natural setting.">
 
   <!-- Hero / Intro -->
-  <section class="td-section td-section--hero" style="background-image: url('/images/team-days/0r9a8970-hires-8192-x-5464.jpg'); background-color: #2a3a2a;">
+  <section class="td-section td-section--hero" style={`background-image: url('${heroBg.src}'); background-color: #2a3a2a;`}>
     <div class="td-section__content td-section__content--center">
       <div class="td-text td-text--wide">
         <h1>Team Days at The Forktree Project</h1>
@@ -45,10 +53,10 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
       </ul>
       <div class="td-photos">
         <div class="td-photo">
-          <img src="/images/team-days/img_4504.jpg" alt="Team group photo at The Forktree Project" loading="lazy" />
+          <Image src={teamDaysGroupImage} alt="Team group photo at The Forktree Project" width={900} format="webp" loading="lazy" />
         </div>
         <div class="td-photo">
-          <img src="/images/team-days/img_4291.jpg" alt="Team group activity at The Forktree Project" loading="lazy" />
+          <Image src={teamDaysActivityImage} alt="Team group activity at The Forktree Project" width={900} format="webp" loading="lazy" />
         </div>
       </div>
     </div>

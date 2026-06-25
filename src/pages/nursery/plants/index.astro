@@ -1,9 +1,20 @@
 ---
 import PageLayout from '../../../layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
+import { getPlantImage } from '../../../data/plantImages';
+
+export const prerender = true;
 
 const allPlants = await getCollection('plants');
 const plants = allPlants.sort((a, b) => b.data.month.localeCompare(a.data.month));
+const plantCards = await Promise.all(
+  plants.map(async (plant) => {
+    const image = getPlantImage(plant.data.image);
+    const optimizedImage = image ? await getImage({ src: image, width: 700, format: 'webp' }) : undefined;
+    return { plant, imageSrc: optimizedImage?.src ?? plant.data.image };
+  })
+);
 
 const formatMonth = (ym: string) => {
   const [year, month] = ym.split('-').map(Number);
@@ -20,9 +31,9 @@ const formatMonth = (ym: string) => {
       <p class="potm-archive__intro">Each month we feature a native species from the Forktree Project Nursery.</p>
 
       <div class="potm-archive__grid">
-        {plants.map((plant) => (
+        {plantCards.map(({ plant, imageSrc }) => (
           <a href={`/nursery/plants/${plant.id}`} class="potm-card">
-            <div class="potm-card__image" style={`background-image: url('${plant.data.image}'); background-position: ${plant.data.imagePosition ?? 'center'};`}></div>
+            <div class="potm-card__image" style={`background-image: url('${imageSrc}'); background-position: ${plant.data.imagePosition ?? 'center'};`}></div>
             <div class="potm-card__body">
               <p class="potm-card__month">{formatMonth(plant.data.month)}</p>
               <h2 class="potm-card__title">{plant.data.title}</h2>

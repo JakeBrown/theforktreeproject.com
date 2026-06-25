@@ -1,5 +1,10 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import { Image } from 'astro:assets';
+import donateSunset from '../assets/images/donate/donate-sunset.jpg';
+import donateOlearia from '../assets/images/donate/donate-olearia.jpg';
+
+export const prerender = true;
 ---
 
 <PageLayout title="Donate to Forktree — The Forktree Project" description="Help restore habitat on a degraded 54-hectare former pastoral property on South Australia’s Fleurieu Peninsula." headerVariant="dark">
@@ -12,7 +17,7 @@ import PageLayout from '../layouts/PageLayout.astro';
         <p>Help us restore a degraded 54-hectare former pastoral property on South Australia&rsquo;s Fleurieu Peninsula back to nature.</p>
       </div>
       <figure class="donate-hero__image">
-        <img src="/images/donate/donate-sunset.jpg" alt="Sunset over the Forktree Project landscape" loading="eager" />
+        <Image src={donateSunset} alt="Sunset over the Forktree Project landscape" width={1400} format="webp" loading="eager" fetchpriority="high" />
       </figure>
     </section>
 
@@ -51,7 +56,7 @@ import PageLayout from '../layouts/PageLayout.astro';
           <p>Your support is deeply appreciated and plays a vital role in helping us rebuild a thriving, biodiverse landscape.</p>
         </div>
         <figure class="donate-split__image">
-          <img src="/images/donate/donate-olearia.jpg" alt="Native Olearia flowers at The Forktree Project" loading="lazy" />
+          <Image src={donateOlearia} alt="Native Olearia flowers at The Forktree Project" width={1100} format="webp" loading="lazy" />
         </figure>
       </div>
     </section>

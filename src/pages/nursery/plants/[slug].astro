@@ -1,6 +1,9 @@
 ---
 import PageLayout from '../../../layouts/PageLayout.astro';
 import { getCollection, render } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
+import fleurAvatarPhoto from '../../../assets/images/team/fleur-avatar.jpg';
+import { getPlantImage } from '../../../data/plantImages';
 
 export const prerender = true;
 
@@ -14,6 +17,10 @@ export async function getStaticPaths() {
 
 const { plant } = Astro.props;
 const { Content } = await render(plant);
+const plantHeroImage = getPlantImage(plant.data.image);
+const plantHeroBg = plantHeroImage
+  ? await getImage({ src: plantHeroImage, width: 2400, format: 'webp' })
+  : undefined;
 
 const formatMonth = (ym: string) => {
   const [year, month] = ym.split('-').map(Number);
@@ -25,7 +32,7 @@ const formatMonth = (ym: string) => {
 
   <article class="potm-post">
 
-    <section class="potm-post__hero" style={`background-image: url('${plant.data.image}'); background-position: ${plant.data.imagePosition ?? 'center'};`}>
+    <section class="potm-post__hero" style={`background-image: url('${plantHeroBg?.src ?? plant.data.image}'); background-position: ${plant.data.imagePosition ?? 'center'};`}>
       <div class="potm-post__hero-inner">
         <p class="potm-post__kicker">Plant of the Month &middot; {formatMonth(plant.data.month)}</p>
         <h1 class="potm-post__title">{plant.data.title}</h1>
@@ -37,7 +44,7 @@ const formatMonth = (ym: string) => {
     <section class="potm-post__body">
       <div class="potm-post__body-inner">
         <div class="potm-post__byline">
-          <img class="potm-post__avatar" src="/images/team/fleur-avatar.jpg" alt="Fleur Brown-Beeby" loading="lazy" />
+          <Image class="potm-post__avatar" src={fleurAvatarPhoto} alt="Fleur Brown-Beeby" width={96} format="webp" loading="lazy" />
           <div class="potm-post__byline-text">
             <span class="potm-post__byline-kicker">Words by</span>
             <span class="potm-post__byline-name">Fleur Brown-Beeby</span>

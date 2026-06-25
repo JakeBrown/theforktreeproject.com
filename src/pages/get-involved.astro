@@ -2,8 +2,9 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import ScrollIndicator from '../components/ScrollIndicator.astro';
 import { upcomingEvents } from '../data/events';
-import { getImage } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import heroImage from '../assets/images/get-involved/img-4702-jake-edited.jpeg';
+import ralphCathPlantingImage from '../assets/images/get-involved/ralph-cath-planting.jpg';
 
 export const prerender = true;
 
@@ -64,7 +65,7 @@ const formatEventDate = (date: string) => {
         </div>
       </div>
       <div class="gi-split__photo">
-        <img src="/images/get-involved/ralph-cath-planting.jpg" alt="Ralph and Cath volunteering during a planting day at The Forktree Project" loading="lazy" />
+        <Image src={ralphCathPlantingImage} alt="Ralph and Cath volunteering during a planting day at The Forktree Project" width={1200} format="webp" loading="lazy" />
       </div>
     </div>
   </section>

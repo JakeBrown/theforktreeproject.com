@@ -1,11 +1,25 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import { getImage } from 'astro:assets';
+import goalsBannerImage from '../assets/images/goals/goals-banner.jpg';
+import goal1Image from '../assets/images/goals/goal-1.jpg';
+import goal2Image from '../assets/images/goals/goal-2.jpg';
+import goal3Image from '../assets/images/goals/goal-3.jpg';
+import goal4Image from '../assets/images/goals/goal-4.jpg';
+
+export const prerender = true;
+
+const goalsBannerBg = await getImage({ src: goalsBannerImage, width: 2400, format: 'webp' });
+const goal1Bg = await getImage({ src: goal1Image, width: 2400, format: 'webp' });
+const goal2Bg = await getImage({ src: goal2Image, width: 2400, format: 'webp' });
+const goal3Bg = await getImage({ src: goal3Image, width: 2400, format: 'webp' });
+const goal4Bg = await getImage({ src: goal4Image, width: 2400, format: 'webp' });
 ---
 
 <PageLayout title="Goals — The Forktree Project" description="The Forktree Project is a habitat restoration and environmental charity involved in returning a degraded farm back to nature.">
 
   <!-- Banner -->
-  <section class="goal-section goal-section--banner" style="background-image: url('/images/goals/goals-banner.jpg'); background-color: #2a3a2a;">
+  <section class="goal-section goal-section--banner" style={`background-image: url('${goalsBannerBg.src}'); background-color: #2a3a2a;`}>
     <div class="goal-section__content goal-section__content--center">
       <div class="goal-text goal-text--wide">
         <h2>The Forktree Project is a habitat restoration and environmental charity involved in returning a degraded farm back to nature.</h2>
@@ -20,7 +34,7 @@ import PageLayout from '../layouts/PageLayout.astro';
   </section>
 
   <!-- Goal 1 -->
-  <section class="goal-section" style="background-image: url('/images/goals/goal-1.jpg'); background-color: #1a2a1a;">
+  <section class="goal-section" style={`background-image: url('${goal1Bg.src}'); background-color: #1a2a1a;`}>
     <div class="goal-section__content goal-section__content--center">
       <div class="goal-text goal-text--wide">
         <span class="goal-number">1</span>
@@ -30,7 +44,7 @@ import PageLayout from '../layouts/PageLayout.astro';
   </section>
 
   <!-- Goal 2 -->
-  <section class="goal-section" style="background-image: url('/images/goals/goal-2.jpg'); background-color: #2a3a2a;">
+  <section class="goal-section" style={`background-image: url('${goal2Bg.src}'); background-color: #2a3a2a;`}>
     <div class="goal-section__content goal-section__content--left">
       <div class="goal-text">
         <span class="goal-number">2</span>
@@ -40,7 +54,7 @@ import PageLayout from '../layouts/PageLayout.astro';
   </section>
 
   <!-- Goal 3 -->
-  <section class="goal-section" style="background-image: url('/images/goals/goal-3.jpg'); background-color: #1a2a1a;">
+  <section class="goal-section" style={`background-image: url('${goal3Bg.src}'); background-color: #1a2a1a;`}>
     <div class="goal-section__content goal-section__content--center">
       <div class="goal-text">
         <span class="goal-number">3</span>
@@ -50,7 +64,7 @@ import PageLayout from '../layouts/PageLayout.astro';
   </section>
 
   <!-- Goal 4 -->
-  <section class="goal-section" style="background-image: url('/images/goals/goal-4.jpg'); background-color: #2a3a2a;">
+  <section class="goal-section" style={`background-image: url('${goal4Bg.src}'); background-color: #2a3a2a;`}>
     <div class="goal-section__content goal-section__content--right">
       <div class="goal-text">
         <span class="goal-number">4</span>

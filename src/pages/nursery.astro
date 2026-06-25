@@ -2,10 +2,23 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import ScrollIndicator from '../components/ScrollIndicator.astro';
 import { getCollection } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
+import nurseryHeroImage from '../assets/images/nursery/img_4350.jpg';
+import nurseryPottingImage from '../assets/images/nursery/img_4220.jpg';
+import nurserySeedlingsImage from '../assets/images/nursery/img_4232.jpg';
+import { getPlantImage } from '../data/plantImages';
+
+export const prerender = true;
+
+const nurseryHeroBg = await getImage({ src: nurseryHeroImage, width: 2400, format: 'webp' });
 
 const allPlants = await getCollection('plants');
 const plants = allPlants.sort((a, b) => b.data.month.localeCompare(a.data.month));
 const currentPlant = plants[0];
+const currentPlantImage = currentPlant ? getPlantImage(currentPlant.data.image) : undefined;
+const currentPlantBg = currentPlantImage
+  ? await getImage({ src: currentPlantImage, width: 2400, format: 'webp' })
+  : undefined;
 
 const formatMonth = (ym: string) => {
   const [year, month] = ym.split('-').map(Number);
@@ -16,7 +29,7 @@ const formatMonth = (ym: string) => {
 <PageLayout title="Nursery — The Forktree Project" description="The Forktree Project's on-site native plant nursery propagates locally provenanced species for habitat restoration across the Hills and Fleurieu region.">
 
   <!-- Hero / Intro -->
-  <section class="nur-section nur-section--hero" style="background-image: url('/images/nursery/img_4350.jpg'); background-color: #1a2a1a;">
+  <section class="nur-section nur-section--hero" style={`background-image: url('${nurseryHeroBg.src}'); background-color: #1a2a1a;`}>
     <div class="nur-section__content nur-section__content--center">
       <div class="nur-text nur-text--wide">
         <h1>The Forktree Project Nursery</h1>
@@ -46,7 +59,7 @@ const formatMonth = (ym: string) => {
         </div>
       </div>
       <div class="nur-split__photo">
-        <img src="/images/nursery/img_4220.jpg" alt="Nursery team potting seedlings at The Forktree Project" loading="lazy" />
+        <Image src={nurseryPottingImage} alt="Nursery team potting seedlings at The Forktree Project" width={1200} format="webp" loading="lazy" />
       </div>
     </div>
   </section>
@@ -83,14 +96,14 @@ const formatMonth = (ym: string) => {
         </div>
       </div>
       <div class="nur-split__photo">
-        <img src="/images/nursery/img_4232.jpg" alt="Benches of seedlings at The Forktree Project Nursery" loading="lazy" />
+        <Image src={nurserySeedlingsImage} alt="Benches of seedlings at The Forktree Project Nursery" width={1200} format="webp" loading="lazy" />
       </div>
     </div>
   </section>
 
   <!-- Plant of the Month -->
   {currentPlant && (
-    <section class="nur-section nur-section--potm" style={`background-image: url('${currentPlant.data.image}'); background-position: ${currentPlant.data.imagePosition ?? 'center'};`}>
+    <section class="nur-section nur-section--potm" style={`background-image: url('${currentPlantBg?.src ?? currentPlant.data.image}'); background-position: ${currentPlant.data.imagePosition ?? 'center'};`}>
       <div class="nur-section__content nur-section__content--center">
         <div class="nur-text nur-text--wide nur-potm">
           <p class="nur-potm__kicker">Plant of the Month &middot; {formatMonth(currentPlant.data.month)}</p>

@@ -1,5 +1,10 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import { Image } from 'astro:assets';
+import scheduleHeroImage from '../../assets/images/team-days/img_4457.jpg';
+import teamPlantingImage from '../../assets/images/team-days/img_4504.jpg';
+
+export const prerender = true;
 ---
 
 <PageLayout title="Team Day Schedule — The Forktree Project" description="A sample schedule for a team day at The Forktree Project — hands-on habitat restoration, learning, and connection in a stunning natural setting." headerVariant="dark">
@@ -14,7 +19,7 @@ import PageLayout from '../../layouts/PageLayout.astro';
       </header>
 
       <div class="sched__hero">
-        <img src="/images/team-days/img_4457.jpg" alt="Teams working together at The Forktree Project" loading="eager" />
+        <Image src={scheduleHeroImage} alt="Teams working together at The Forktree Project" width={1400} format="webp" loading="eager" fetchpriority="high" />
       </div>
 
       <ol class="sched__timeline">
@@ -82,7 +87,7 @@ import PageLayout from '../../layouts/PageLayout.astro';
       </section>
 
       <div class="sched__photo">
-        <img src="/images/team-days/img_4504.jpg" alt="Team planting trees at The Forktree Project" loading="lazy" />
+        <Image src={teamPlantingImage} alt="Team planting trees at The Forktree Project" width={1200} format="webp" loading="lazy" />
       </div>
 
       <footer class="sched__footer">

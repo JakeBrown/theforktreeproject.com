@@ -3,30 +3,44 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ScrollIndicator from '../components/ScrollIndicator.astro';
+import { Image, getImage } from 'astro:assets';
+import homeHeroSea from '../assets/images/about/home-hero-sea.jpg';
+import visionSoleTree from '../assets/images/about/vision-sole-tree.jpg';
+import homeGoalsImage from '../assets/images/about/home-goals-img-9312.jpg';
+import timJarvisPhoto from '../assets/images/team/tim-jarvis.jpg';
+import elizabethBlumerPhoto from '../assets/images/team/elizabeth-blumer.jpg';
+import fleurAvatarPhoto from '../assets/images/team/fleur-avatar.jpg';
+import jamesOwenPhoto from '../assets/images/team/james-owen.jpg';
+import oliverWilsonPhoto from '../assets/images/team/oliver-wilson.jpg';
+import maddieMaguirePhoto from '../assets/images/team/maddie-maguire.jpg';
+
+export const prerender = true;
+
+const bannerBg = await getImage({ src: homeHeroSea, width: 2400, format: 'webp' });
 
 // TODO(Liz): confirm final headshot selections.
 const founders = [
   {
     name: 'Tim Jarvis AM',
     role: 'Founder & CEO',
-    photo: '/images/team/tim-jarvis.jpg',
+    photo: timJarvisPhoto,
     initials: 'TJ',
     bio: `Tim Jarvis AM is an environmental scientist, author, filmmaker and adventurer with Master’s degrees in environmental science and environmental law. He is committed to practical solutions to climate change and biodiversity loss. Tim was appointed a Member of the Order of Australia (AM) in 2010 for services to the environment, exploration and community, named Australian Geographic’s Conservationist of the Year in 2016, and recognised as South Australia’s Australian of the Year in 2024. A believer in deeds over words, he sees the Forktree Project as a powerful example of what purposeful action can achieve.`,
   },
   {
     name: 'Elizabeth Blumer',
     role: 'Co-founder & Head of Education and Community Outreach',
-    photo: '/images/team/elizabeth-blumer.jpg',
+    photo: elizabethBlumerPhoto,
     initials: 'EB',
     bio: `Elizabeth Blumer is a qualified, registered teacher with more than 15 years’ experience in middle and high school education, alongside governance experience in educational wellbeing. She holds postgraduate qualifications in Education Wellbeing and Positive Mental Health. Elizabeth brings together her pedagogical and editorial experience to lead the development of the Forktree Project Education Program. She is energised by the project’s educational and wellbeing potential — and is, of course, an enthusiastic tree-planter.`,
   },
 ];
 
 const wider = [
-  { name: 'Fleur Brown-Beeby', role: 'Nursery Manager', photo: '/images/team/fleur-avatar.jpg', initials: 'FB' },
-  { name: 'James Owen', role: 'Nursery Project Officer', photo: '/images/team/james-owen.jpg', initials: 'JO' },
-  { name: 'Oliver Wilson', role: 'Environmental Officer', photo: '/images/team/oliver-wilson.jpg', initials: 'OW' },
-  { name: 'Maddie Maguire', role: 'Marketing Officer', photo: '/images/team/maddie-maguire.jpg', initials: 'MM' },
+  { name: 'Fleur Brown-Beeby', role: 'Nursery Manager', photo: fleurAvatarPhoto, initials: 'FB' },
+  { name: 'James Owen', role: 'Nursery Project Officer', photo: jamesOwenPhoto, initials: 'JO' },
+  { name: 'Oliver Wilson', role: 'Environmental Officer', photo: oliverWilsonPhoto, initials: 'OW' },
+  { name: 'Maddie Maguire', role: 'Marketing Officer', photo: maddieMaguirePhoto, initials: 'MM' },
 ];
 ---
 
@@ -35,7 +49,7 @@ const wider = [
 
   <!-- Banner Section -->
   <section id="banner" class="index-section index-section--banner">
-    <div class="index-section__bg" data-parallax></div>
+    <div class="index-section__bg" style={`background-image: url('${bannerBg.src}');`} data-parallax></div>
     <div class="index-section__content index-section__content--center">
       <div class="banner-text">
         <h1>Re-wilding.</h1>
@@ -66,7 +80,7 @@ const wider = [
         </ul>
       </div>
       <figure class="home-split__image home-split__image--padded">
-        <img src="/images/about/vision-sole-tree.jpg" alt="A lone tree on the Forktree hillside beneath a wide blue sky" loading="lazy" />
+        <Image src={visionSoleTree} alt="A lone tree on the Forktree hillside beneath a wide blue sky" width={1100} format="webp" loading="lazy" />
       </figure>
     </div>
   </section>
@@ -85,7 +99,7 @@ const wider = [
         </ul>
       </div>
       <figure class="home-split__image home-split__image--padded">
-        <img src="/images/about/home-goals-img-9312.jpg" alt="Native vegetation growing across the Forktree hillside" loading="lazy" />
+        <Image src={homeGoalsImage} alt="Native vegetation growing across the Forktree hillside" width={1100} format="webp" loading="lazy" />
       </figure>
     </div>
   </section>
@@ -101,7 +115,7 @@ const wider = [
           <article class="home-bio">
             <div class="home-bio__photo">
               {person.photo ? (
-                <img src={person.photo} alt={person.name} loading="lazy" />
+                <Image src={person.photo} alt={person.name} width={900} format="webp" loading="lazy" />
               ) : (
                 <div class="home-avatar" aria-label={person.name}>
                   <span>{person.initials}</span>
@@ -122,7 +136,7 @@ const wider = [
           <div class="home-crew__card">
             <div class="home-crew__photo">
               {person.photo ? (
-                <img src={person.photo} alt={person.name} loading="lazy" />
+                <Image src={person.photo} alt={person.name} width={500} format="webp" loading="lazy" />
               ) : (
                 <div class="home-avatar home-avatar--sm" aria-label={person.name}>
                   <span>{person.initials}</span>
@@ -173,10 +187,6 @@ const wider = [
   .index-section--banner {
     min-height: 100vh;
     background-color: #2a3a2a;
-  }
-
-  .index-section--banner .index-section__bg {
-    background-image: url('/images/about/home-hero-sea.jpg');
   }
 
   .index-section--banner::before {
