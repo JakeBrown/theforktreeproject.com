@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate:journal-thumbnails": "node scripts/generate-journal-thumbnails.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@astrojs/cloudflare": "^12.6.12",
+    "sharp": "^0.34.5",
     "wrangler": "^4.101.0"
   }
 }

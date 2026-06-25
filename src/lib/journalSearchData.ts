@@ -1,3 +1,5 @@
+import { getJournalThumbnailSrc } from '../data/journalThumbnails';
+
 const rawJournalPosts = import.meta.glob('../content/journal/*.md', {
   eager: true,
   import: 'default',
@@ -100,7 +102,7 @@ function parsePost(path: string, raw: string): JournalSearchPost | null {
   const title = typeof data.title === 'string' ? data.title : slug;
   const date = typeof data.date === 'string' ? data.date : '';
   const tags = Array.isArray(data.tags) ? data.tags : [];
-  const image = typeof data.image === 'string' ? data.image : undefined;
+  const image = typeof data.image === 'string' ? getJournalThumbnailSrc(data.image) : undefined;
   const excerpt = typeof data.excerpt === 'string' ? data.excerpt : undefined;
   const bodyText = markdownToPlainText(body);
   const text = [title, excerpt, bodyText].filter(Boolean).join('\n\n');
