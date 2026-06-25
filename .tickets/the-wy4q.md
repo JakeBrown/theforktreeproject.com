@@ -1,6 +1,6 @@
 ---
 id: the-wy4q
-status: open
+status: closed
 deps: []
 links: []
 created: 2026-05-27T03:30:01Z
