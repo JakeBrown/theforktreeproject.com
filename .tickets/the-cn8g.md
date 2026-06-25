@@ -1,6 +1,6 @@
 ---
 id: the-cn8g
-status: open
+status: closed
 deps: []
 links: []
 created: 2026-06-25T00:45:50Z
