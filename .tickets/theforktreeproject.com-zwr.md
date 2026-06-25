@@ -1,6 +1,6 @@
 ---
 id: theforktreeproject.com-zwr
-status: open
+status: closed
 deps: []
 links: []
 created: 2026-05-08T03:48:50Z

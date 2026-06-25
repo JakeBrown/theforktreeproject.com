@@ -1,6 +1,6 @@
 ---
 id: theforktreeproject.com-rk5
-status: open
+status: closed
 deps: []
 links: []
 created: 2026-05-08T03:15:09Z
