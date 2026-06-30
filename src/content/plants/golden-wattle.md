@@ -1,10 +1,10 @@
 ---
 title: "Golden Wattle"
 scientificName: "Acacia pycnantha"
-tagline: "The weeknight dinner of revegetation"
+tagline: "The Weeknight Dinner of Revegetation"
 month: "2026-06"
 image: "/images/plants/golden-wattle-hero.jpg"
-imageAlt: "Golden Wattle seedlings with early leaves in nursery tubes"
+imageAlt: "Golden Wattle seedlings in tubes with early leaves"
 imagePosition: "center 55%"
 ---
 
@@ -14,13 +14,13 @@ imagePosition: "center 55%"
 
 Read on to find out how this could possibly be, along with my 7 favourite things about our trusty old Golden Wattle.
 
-## Golden Wattle stems: masters of disguise
+## Golden Wattle stems: Masters of Disguise
 
 One of the coolest things about wattles is their leaves — if we want to call them that. Most species only grow ‘true’ leaves for about ten seconds (well a few months) until the stems take over and basically act as leaves in disguise. The big advantage is they’re way more drought tolerant than real leaves, which is a huge boon for survival in South Australia. Their fake leaves are called phyllodes.
 
-![Golden Wattle phyllodes catching the sunlight](/images/plants/golden-wattle-phyllodes.jpg)
+![Golden Wattle foliage](/images/plants/golden-wattle-phyllodes.jpg)
 
-## All-round revegetation legends
+## All-round Revegetation Legends
 
 The Golden Wattle is common in South Australia and such a standby in revegetation projects. If you want to see it flowering in late winter to early spring, literally just don’t close your eyes. It acts as a coloniser species, being quick growing but relatively short lived, helping an area to establish and outcompeting weeds before more specialist plants grow. It’s not a ‘prestige’ kind of plant, maybe a bit run of the mill, but that’s exactly why it’s like the weeknight dinner of revegetation: easy, versatile, and there to fill the gap.
 
@@ -28,7 +28,7 @@ The Golden Wattle is common in South Australia and such a standby in revegetatio
 
 Ever wondered if the tree is bleeding? Well, sort of. *Acacia pycnantha* can have large globules of golden sap that look like blown glass. These are generally sealing up wounds or gaps in the outer wood. This has traditionally been used as resin and gum.
 
-![Golden Wattle sap that looks like blown glass](/images/plants/golden-wattle-sap.jpg)
+![Golden Wattle sap like blown glass](/images/plants/golden-wattle-sap.jpg)
 
 ## Fire as an ecological trigger
 
