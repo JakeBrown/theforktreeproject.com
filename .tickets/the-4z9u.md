@@ -12,3 +12,9 @@ assignee: Jake Brown
 
 Fleur asked by SMS to make the latest Plant of the Month post subheadings stand out by bolding and numbering them. Update the Golden Wattle plant post headings and verify the site still builds.
 
+
+## Notes
+
+**2026-07-06T23:47:31Z**
+
+Client portal ticket created for this formatting work: #eyk5q (Improve Plant of the Month formatting).

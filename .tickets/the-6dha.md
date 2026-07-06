@@ -12,3 +12,9 @@ assignee: Jake Brown
 
 Remove inline bolding from Golden Wattle Plant of the Month headings and make Plant of the Month rendered subheadings heavier via page styling instead.
 
+
+## Notes
+
+**2026-07-06T23:47:31Z**
+
+Client portal ticket created for this formatting work: #eyk5q (Improve Plant of the Month formatting).
