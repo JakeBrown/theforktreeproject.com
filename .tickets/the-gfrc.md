@@ -18,3 +18,7 @@ Create a /media page, linked from the site footer only, launching with a short i
 **2026-07-27T11:04:18Z**
 
 Implemented /media with responsive YouTube embed, short introduction, article links, and a footer-only Media link. Verified desktop and mobile rendering with no browser errors; production build passes.
+
+**2026-07-27T11:22:53Z**
+
+Windy Bit client ticket: #c3vwv
