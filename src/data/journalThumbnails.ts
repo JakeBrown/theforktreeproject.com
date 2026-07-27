@@ -728,6 +728,12 @@ export const journalThumbnails = {
     "width": 800,
     "height": 800
   },
+  "/images/journal/partnering-with-planet-wild-for-a-wilder-planet.jpg": {
+    "src": "/images/journal/thumbnails/partnering-with-planet-wild-for-a-wilder-planet-940b1e25-800.webp",
+    "srcset": "/images/journal/thumbnails/partnering-with-planet-wild-for-a-wilder-planet-940b1e25-800.webp 800w",
+    "width": 800,
+    "height": 800
+  },
   "/images/journal/party-trick.jpg": {
     "src": "/images/journal/thumbnails/party-trick-b3c724be-800.webp",
     "srcset": "/images/journal/thumbnails/party-trick-b3c724be-800.webp 800w",

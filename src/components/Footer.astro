@@ -63,6 +63,10 @@
       The Forktree Project acknowledges the Traditional Custodians of Country throughout Australia and recognises their continuing connection to the land. We pay our respects to Aboriginal and Torres Strait Islander Elders, past, present and emerging.
     </p>
   </div>
+
+  <nav class="footer__utility" aria-label="Footer navigation">
+    <a href="/media">Media</a>
+  </nav>
 </footer>
 
 <style>
@@ -199,6 +203,28 @@
     font-size: 0.85rem;
     line-height: 1.65;
     color: rgba(255, 255, 255, 0.65);
+  }
+
+  .footer__utility {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-md);
+  }
+
+  .footer__utility a {
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: opacity var(--transition-fast);
+  }
+
+  .footer__utility a:hover {
+    opacity: 0.6;
   }
 
   @media (max-width: 900px) {
