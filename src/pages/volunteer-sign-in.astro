@@ -1,0 +1,84 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import VolunteerSignInForm from '../components/VolunteerSignInForm';
+---
+
+<PageLayout
+  title="Volunteer Sign In — The Forktree Project"
+  description="Sign in for your volunteer day at The Forktree Project."
+  headerVariant="dark"
+  norobots={true}
+>
+  <section class="volunteer-sign-in">
+    <div class="volunteer-sign-in__intro">
+      <p class="volunteer-sign-in__kicker">Welcome to Forktree</p>
+      <h1>Volunteer sign in</h1>
+      <p>Enter your details before starting your volunteer day.</p>
+    </div>
+
+    <div class="volunteer-sign-in__card">
+      <VolunteerSignInForm client:load />
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .volunteer-sign-in {
+    min-height: 100vh;
+    padding: calc(var(--header-height) + 4rem) var(--space-md) var(--space-xl);
+    background:
+      radial-gradient(circle at 15% 15%, rgba(90, 158, 82, 0.12), transparent 34rem),
+      #fafaf9;
+  }
+
+  .volunteer-sign-in__intro,
+  .volunteer-sign-in__card {
+    width: min(100%, 620px);
+    margin-inline: auto;
+  }
+
+  .volunteer-sign-in__intro {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .volunteer-sign-in__kicker {
+    margin: 0 0 0.65rem;
+    color: #3a7d32;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .volunteer-sign-in h1 {
+    margin-bottom: 0.8rem;
+    color: #1f2a1f;
+    font-size: clamp(2.35rem, 8vw, 4.25rem);
+    line-height: 1.08;
+  }
+
+  .volunteer-sign-in__intro > p:last-child {
+    margin: 0;
+    color: #555d52;
+    font-size: 1rem;
+  }
+
+  .volunteer-sign-in__card {
+    padding: clamp(1.4rem, 5vw, 2.5rem);
+    border: 1px solid #dde1da;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 18px 55px rgba(31, 42, 31, 0.09);
+  }
+
+  @media (max-width: 768px) {
+    .volunteer-sign-in {
+      padding: calc(var(--header-height) + 2rem) 1rem var(--space-lg);
+    }
+
+    .volunteer-sign-in__intro {
+      margin-bottom: 1.5rem;
+    }
+  }
+</style>

@@ -20,6 +20,11 @@ dataset = "forktree_pageviews"
 [ai]
 binding = "AI"
 
+# Wrangler provisions this D1 database automatically on dev/deploy.
+[[d1_databases]]
+binding = "VOLUNTEER_SIGN_INS"
+migrations_dir = "migrations"
+
 [[vectorize]]
 binding = "JOURNAL_VECTORIZE"
 index_name = "forktree-journal"
