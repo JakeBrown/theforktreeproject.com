@@ -1,0 +1,380 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const prerender = false;
+
+interface VolunteerSignIn {
+  id: number;
+  full_name: string;
+  email: string;
+  phone: string;
+  volunteer_date: string;
+  communications_consent: number;
+  signed_in_at: string;
+}
+
+interface D1Result<T> {
+  results: T[];
+}
+
+interface D1Statement {
+  all<T>(): Promise<D1Result<T>>;
+}
+
+interface D1Database {
+  prepare(query: string): D1Statement;
+}
+
+const formatVolunteerDate = (date: string) =>
+  new Intl.DateTimeFormat('en-AU', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${date}T00:00:00Z`));
+
+const formatSignInTime = (date: string) =>
+  new Intl.DateTimeFormat('en-AU', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    timeZone: 'Australia/Adelaide',
+    timeZoneName: 'short',
+  }).format(new Date(date));
+
+let signIns: VolunteerSignIn[] = [];
+let loadError = false;
+const database = (Astro.locals as any).runtime?.env?.VOLUNTEER_SIGN_INS as D1Database | undefined;
+
+if (!database) {
+  loadError = true;
+} else {
+  try {
+    const result = await database
+      .prepare(
+        `SELECT id, full_name, email, phone, volunteer_date, communications_consent, signed_in_at
+         FROM volunteer_sign_ins
+         ORDER BY signed_in_at DESC, id DESC`
+      )
+      .all<VolunteerSignIn>();
+    signIns = result.results;
+  } catch (error) {
+    loadError = true;
+    console.error('Unable to load volunteer sign-ins', error);
+  }
+}
+---
+
+<BaseLayout
+  title="Volunteer Sign-ins — Forktree Admin"
+  description="Review volunteer sign-ins for The Forktree Project."
+  norobots={true}
+>
+  <main class="admin-shell">
+    <header class="admin-header">
+      <a class="admin-brand" href="/admin" aria-label="Forktree admin home">
+        <img src="/images/logo.png" alt="" width="72" height="72" />
+        <span>Forktree Admin</span>
+      </a>
+    </header>
+
+    <section class="admin-content" aria-labelledby="page-title">
+      <div class="admin-heading">
+        <div>
+          <p class="admin-kicker">Volunteer records</p>
+          <h1 id="page-title">Sign-ins</h1>
+          <p class="admin-summary">
+            {loadError ? 'Volunteer sign-ins are unavailable.' : `${signIns.length} ${signIns.length === 1 ? 'record' : 'records'}`}
+          </p>
+        </div>
+      </div>
+
+      {loadError ? (
+        <div class="admin-state" role="alert">
+          <h2>Sign-ins could not be loaded</h2>
+          <p>Please refresh the page. If the problem continues, try again later.</p>
+        </div>
+      ) : signIns.length === 0 ? (
+        <div class="admin-state">
+          <h2>No volunteer sign-ins yet</h2>
+          <p>New sign-ins will appear here.</p>
+        </div>
+      ) : (
+        <div class="records-table-wrap">
+          <table class="records-table">
+            <caption class="sr-only">Volunteer sign-in records, newest first</caption>
+            <thead>
+              <tr>
+                <th scope="col">Volunteer</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Volunteer date</th>
+                <th scope="col">Signed in</th>
+                <th scope="col">Updates</th>
+              </tr>
+            </thead>
+            <tbody>
+              {signIns.map((signIn) => (
+                <tr>
+                  <td data-label="Volunteer"><strong>{signIn.full_name}</strong></td>
+                  <td data-label="Contact" class="record-contact">
+                    <a href={`mailto:${signIn.email}`}>{signIn.email}</a>
+                    <a href={`tel:${signIn.phone}`}>{signIn.phone}</a>
+                  </td>
+                  <td data-label="Volunteer date">
+                    <time datetime={signIn.volunteer_date}>{formatVolunteerDate(signIn.volunteer_date)}</time>
+                  </td>
+                  <td data-label="Signed in">
+                    <time datetime={signIn.signed_in_at}>{formatSignInTime(signIn.signed_in_at)}</time>
+                  </td>
+                  <td data-label="Updates">
+                    <span class:list={['consent-badge', { 'consent-badge--yes': signIn.communications_consent === 1 }]}>
+                      {signIn.communications_consent === 1 ? 'Yes' : 'No'}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .admin-shell {
+    min-height: 100vh;
+    background: #f5f6f3;
+    color: #1f2a1f;
+  }
+
+  .admin-header {
+    display: flex;
+    align-items: center;
+    min-height: 76px;
+    padding: 0.75rem clamp(1rem, 4vw, 3rem);
+    border-bottom: 1px solid #dfe3dc;
+    background: #fff;
+  }
+
+  .admin-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .admin-brand img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+  }
+
+  .admin-content {
+    width: min(100%, 1400px);
+    margin-inline: auto;
+    padding: clamp(2.5rem, 6vw, 5rem) clamp(1rem, 4vw, 3rem) 5rem;
+  }
+
+  .admin-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .admin-kicker {
+    margin: 0 0 0.45rem;
+    color: #3a7d32;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .admin-heading h1 {
+    margin: 0;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.05;
+  }
+
+  .admin-summary {
+    margin: 0.75rem 0 0;
+    color: #60675d;
+    font-size: 0.95rem;
+  }
+
+  .records-table-wrap {
+    overflow: hidden;
+    border: 1px solid #dfe3dc;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 16px 45px rgba(31, 42, 31, 0.06);
+  }
+
+  .records-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .records-table th,
+  .records-table td {
+    padding: 1rem 1.15rem;
+    border-bottom: 1px solid #e7eae5;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .records-table th {
+    background: #f0f2ed;
+    color: #555d52;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .records-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .record-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    overflow-wrap: anywhere;
+  }
+
+  .record-contact a {
+    color: #2d6927;
+    text-decoration: underline;
+    text-decoration-color: rgba(45, 105, 39, 0.3);
+    text-underline-offset: 0.15em;
+  }
+
+  .record-contact a:hover {
+    text-decoration-color: currentColor;
+  }
+
+  .consent-badge {
+    display: inline-flex;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    background: #eceeea;
+    color: #5a6057;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  .consent-badge--yes {
+    background: #e3f1e0;
+    color: #2d6927;
+  }
+
+  .admin-state {
+    padding: clamp(2rem, 6vw, 4rem);
+    border: 1px solid #dfe3dc;
+    border-radius: 6px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 16px 45px rgba(31, 42, 31, 0.06);
+  }
+
+  .admin-state h2 {
+    margin-bottom: 0.6rem;
+    font-size: clamp(1.25rem, 3vw, 1.65rem);
+    font-weight: 600;
+  }
+
+  .admin-state p {
+    margin: 0;
+    color: #60675d;
+  }
+
+  @media (max-width: 800px) {
+    .records-table-wrap {
+      overflow: visible;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .records-table,
+    .records-table tbody {
+      display: block;
+    }
+
+    .records-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    .records-table tr {
+      display: block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 1rem;
+      border: 1px solid #dfe3dc;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(31, 42, 31, 0.05);
+    }
+
+    .records-table td,
+    .records-table tbody tr:last-child td {
+      display: grid;
+      grid-template-columns: minmax(7rem, 0.45fr) minmax(0, 1fr);
+      gap: 0.8rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #e7eae5;
+    }
+
+    .records-table td:last-child,
+    .records-table tbody tr:last-child td:last-child {
+      border-bottom: 0;
+    }
+
+    .records-table td::before {
+      content: attr(data-label);
+      color: #6a7167;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .record-contact {
+      display: grid;
+    }
+
+    .record-contact a {
+      grid-column: 2;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .admin-brand span {
+      font-size: 0.78rem;
+    }
+
+    .records-table td,
+    .records-table tbody tr:last-child td {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .record-contact a {
+      grid-column: 1;
+    }
+  }
+</style>
