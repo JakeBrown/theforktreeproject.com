@@ -2,21 +2,16 @@ export const ADELAIDE_TIME_ZONE = 'Australia/Adelaide';
 
 export interface VolunteerSignInInput {
   fullName: string;
-  email: string;
   phone: string;
   volunteerDate: string;
-  communicationsConsent: boolean;
   website?: string;
 }
 
 export interface ValidatedVolunteerSignIn {
   fullName: string;
-  email: string;
-  emailNormalized: string;
   phone: string;
   phoneNormalized: string;
   volunteerDate: string;
-  communicationsConsent: boolean;
 }
 
 export type VolunteerSignInValidationResult =
@@ -50,7 +45,6 @@ export function validateVolunteerSignIn(
   today = getAdelaideDate()
 ): VolunteerSignInValidationResult {
   const fullName = typeof input.fullName === 'string' ? input.fullName.trim().replace(/\s+/g, ' ') : '';
-  const email = typeof input.email === 'string' ? input.email.trim() : '';
   const phone = typeof input.phone === 'string' ? input.phone.trim().replace(/\s+/g, ' ') : '';
   const volunteerDate = typeof input.volunteerDate === 'string' ? input.volunteerDate : '';
   const phoneNormalized = normalizePhone(phone);
@@ -58,10 +52,6 @@ export function validateVolunteerSignIn(
 
   if (fullName.length < 2 || fullName.length > 120) {
     errors.fullName = 'Enter your full name.';
-  }
-
-  if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    errors.email = 'Enter a valid email address.';
   }
 
   if (phoneNormalized.length < 8 || phoneNormalized.length > 15) {
@@ -72,11 +62,6 @@ export function validateVolunteerSignIn(
     errors.volunteerDate = 'Volunteer sign-in is only available for today.';
   }
 
-  const communicationsConsent = input.communicationsConsent ?? false;
-  if (typeof communicationsConsent !== 'boolean') {
-    errors.communicationsConsent = 'Invalid communications preference.';
-  }
-
   if (Object.keys(errors).length > 0) {
     return { success: false, errors };
   }
@@ -85,12 +70,9 @@ export function validateVolunteerSignIn(
     success: true,
     data: {
       fullName,
-      email,
-      emailNormalized: email.toLowerCase(),
       phone,
       phoneNormalized,
       volunteerDate,
-      communicationsConsent: communicationsConsent as boolean,
     },
   };
 }

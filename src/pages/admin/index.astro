@@ -6,10 +6,8 @@ export const prerender = false;
 interface VolunteerSignIn {
   id: number;
   full_name: string;
-  email: string;
   phone: string;
   volunteer_date: string;
-  communications_consent: number;
   signed_in_at: string;
 }
 
@@ -54,7 +52,7 @@ if (!database) {
   try {
     const result = await database
       .prepare(
-        `SELECT id, full_name, email, phone, volunteer_date, communications_consent, signed_in_at
+        `SELECT id, full_name, phone, volunteer_date, signed_in_at
          FROM volunteer_sign_ins
          ORDER BY signed_in_at DESC, id DESC`
       )
@@ -108,18 +106,16 @@ if (!database) {
             <thead>
               <tr>
                 <th scope="col">Volunteer</th>
-                <th scope="col">Contact</th>
+                <th scope="col">Phone</th>
                 <th scope="col">Volunteer date</th>
                 <th scope="col">Signed in</th>
-                <th scope="col">Updates</th>
               </tr>
             </thead>
             <tbody>
               {signIns.map((signIn) => (
                 <tr>
                   <td data-label="Volunteer"><strong>{signIn.full_name}</strong></td>
-                  <td data-label="Contact" class="record-contact">
-                    <a href={`mailto:${signIn.email}`}>{signIn.email}</a>
+                  <td data-label="Phone" class="record-contact">
                     <a href={`tel:${signIn.phone}`}>{signIn.phone}</a>
                   </td>
                   <td data-label="Volunteer date">
@@ -127,11 +123,6 @@ if (!database) {
                   </td>
                   <td data-label="Signed in">
                     <time datetime={signIn.signed_in_at}>{formatSignInTime(signIn.signed_in_at)}</time>
-                  </td>
-                  <td data-label="Updates">
-                    <span class:list={['consent-badge', { 'consent-badge--yes': signIn.communications_consent === 1 }]}>
-                      {signIn.communications_consent === 1 ? 'Yes' : 'No'}
-                    </span>
                   </td>
                 </tr>
               ))}
@@ -261,21 +252,6 @@ if (!database) {
 
   .record-contact a:hover {
     text-decoration-color: currentColor;
-  }
-
-  .consent-badge {
-    display: inline-flex;
-    padding: 0.25rem 0.55rem;
-    border-radius: 999px;
-    background: #eceeea;
-    color: #5a6057;
-    font-size: 0.72rem;
-    font-weight: 600;
-  }
-
-  .consent-badge--yes {
-    background: #e3f1e0;
-    color: #2d6927;
   }
 
   .admin-state {

@@ -78,10 +78,8 @@ function ensureSchema(database: D1Database): Promise<void> {
             signed_in_at TEXT NOT NULL
           )`
         ),
-        database.prepare(
-          `CREATE UNIQUE INDEX IF NOT EXISTS volunteer_sign_ins_date_email
-           ON volunteer_sign_ins (volunteer_date, email_normalized)`
-        ),
+        // Email is no longer collected. Remove the legacy index so multiple blank values can be stored.
+        database.prepare('DROP INDEX IF EXISTS volunteer_sign_ins_date_email'),
         database.prepare(
           `CREATE UNIQUE INDEX IF NOT EXISTS volunteer_sign_ins_date_phone
            ON volunteer_sign_ins (volunteer_date, phone_normalized)`
@@ -219,10 +217,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
         `SELECT id
          FROM volunteer_sign_ins
          WHERE volunteer_date = ?1
-           AND (email_normalized = ?2 OR phone_normalized = ?3)
+           AND phone_normalized = ?2
          LIMIT 1`
       )
-      .bind(entry.volunteerDate, entry.emailNormalized, entry.phoneNormalized)
+      .bind(entry.volunteerDate, entry.phoneNormalized)
       .first<{ id: number }>();
 
     if (duplicate) {
@@ -242,14 +240,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
           signed_in_at
         ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)`
       )
+      // Preserve the legacy columns for existing databases without collecting those details.
       .bind(
         entry.fullName,
-        entry.email,
-        entry.emailNormalized,
+        '',
+        '',
         entry.phone,
         entry.phoneNormalized,
         entry.volunteerDate,
-        entry.communicationsConsent ? 1 : 0,
+        0,
         new Date().toISOString()
       )
       .run();
