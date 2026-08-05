@@ -1,0 +1,251 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Volunteer Sign-in QR Code — The Forktree Project"
+  description="Print a QR code for The Forktree Project volunteer sign-in page."
+  headerVariant="dark"
+  norobots={true}
+>
+  <section class="qr-page">
+    <article class="qr-poster" aria-labelledby="qr-poster-title">
+      <img
+        class="qr-poster__logo"
+        src="/images/logo.png"
+        alt="The Forktree Project"
+        width="130"
+        height="200"
+      />
+      <p class="qr-poster__kicker">Welcome to Forktree</p>
+      <h1 id="qr-poster-title">Volunteer sign in</h1>
+      <p class="qr-poster__instruction">
+        Scan the QR code with your phone camera to sign in before starting your volunteer day.
+      </p>
+      <img
+        class="qr-poster__code"
+        src="/images/volunteer-sign-in-qr.svg"
+        alt="QR code for the Forktree volunteer sign-in page"
+        width="512"
+        height="512"
+      />
+      <p class="qr-poster__url">
+        https://www.theforktreeproject.com<wbr />/volunteer-sign-in
+      </p>
+    </article>
+
+    <div class="qr-page__actions" aria-label="QR poster actions">
+      <button type="button" data-print-qr>Print QR poster</button>
+      <a href="/volunteer-sign-in">Back to sign-in form</a>
+    </div>
+  </section>
+</PageLayout>
+
+<script>
+  document.querySelector<HTMLButtonElement>('[data-print-qr]')?.addEventListener('click', () => {
+    window.print();
+  });
+</script>
+
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 12mm;
+  }
+
+  .qr-page {
+    min-height: 100vh;
+    padding: calc(var(--header-height) + 4rem) var(--space-md) var(--space-xl);
+    background:
+      radial-gradient(circle at 15% 15%, rgba(90, 158, 82, 0.12), transparent 34rem),
+      #fafaf9;
+  }
+
+  .qr-poster {
+    display: flex;
+    width: min(100%, 680px);
+    margin-inline: auto;
+    padding: clamp(2rem, 7vw, 4rem);
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #d8ded5;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 18px 55px rgba(31, 42, 31, 0.09);
+    text-align: center;
+  }
+
+  .qr-poster__logo {
+    width: 82px;
+    height: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  .qr-poster__kicker {
+    margin: 0 0 0.55rem;
+    color: #3a7d32;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .qr-poster h1 {
+    margin: 0 0 0.8rem;
+    color: #1f2a1f;
+    font-size: clamp(2.35rem, 8vw, 4.25rem);
+    line-height: 1.08;
+  }
+
+  .qr-poster__instruction {
+    max-width: 34rem;
+    margin: 0 0 1.75rem;
+    color: #555d52;
+    font-size: 1rem;
+  }
+
+  .qr-poster__code {
+    width: min(360px, 100%);
+    height: auto;
+  }
+
+  .qr-poster__url {
+    margin: 1.25rem 0 0;
+    color: #3d463b;
+    font-size: 0.78rem;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+  }
+
+  .qr-page__actions {
+    display: flex;
+    width: min(100%, 680px);
+    margin: 1.5rem auto 0;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+  }
+
+  .qr-page__actions button,
+  .qr-page__actions a {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #1f2a1f;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    padding: 0.75rem 1.2rem;
+    text-transform: uppercase;
+    transition: background 150ms ease, color 150ms ease;
+  }
+
+  .qr-page__actions button {
+    background: #1f2a1f;
+    color: #fff;
+  }
+
+  .qr-page__actions a {
+    background: transparent;
+    color: #1f2a1f;
+  }
+
+  .qr-page__actions button:hover,
+  .qr-page__actions button:focus-visible,
+  .qr-page__actions a:hover,
+  .qr-page__actions a:focus-visible {
+    border-color: #3a7d32;
+    background: #3a7d32;
+    color: #fff;
+  }
+
+  .qr-page__actions button:focus-visible,
+  .qr-page__actions a:focus-visible {
+    outline: 3px solid rgba(58, 125, 50, 0.25);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 600px) {
+    .qr-page {
+      padding: calc(var(--header-height) + 2rem) 1rem var(--space-lg);
+    }
+
+    .qr-page__actions {
+      flex-direction: column;
+    }
+
+    .qr-page__actions button,
+    .qr-page__actions a {
+      width: 100%;
+    }
+  }
+
+  @media print {
+    :global(html),
+    :global(body) {
+      background: #fff !important;
+    }
+
+    :global(.header),
+    :global(.footer),
+    :global(astro-dev-toolbar),
+    .qr-page__actions {
+      display: none !important;
+    }
+
+    .qr-page {
+      min-height: 0;
+      padding: 0;
+      background: #fff !important;
+    }
+
+    .qr-poster {
+      width: 100%;
+      height: 270mm;
+      margin: 0;
+      padding: 12mm;
+      justify-content: center;
+      border: 1.5pt solid #3a7d32;
+      border-radius: 0;
+      box-shadow: none;
+      break-inside: avoid;
+      color-adjust: exact;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .qr-poster__logo {
+      width: 26mm;
+      margin-bottom: 7mm;
+    }
+
+    .qr-poster__kicker {
+      margin-bottom: 2mm;
+      font-size: 9pt;
+      letter-spacing: 0.18em;
+    }
+
+    .qr-poster h1 {
+      margin-bottom: 3mm;
+      font-size: 32pt;
+    }
+
+    .qr-poster__instruction {
+      max-width: 145mm;
+      margin-bottom: 8mm;
+      font-size: 12pt;
+      line-height: 1.5;
+    }
+
+    .qr-poster__code {
+      width: 105mm;
+      height: 105mm;
+    }
+
+    .qr-poster__url {
+      margin-top: 6mm;
+      font-size: 9.5pt;
+    }
+  }
+</style>

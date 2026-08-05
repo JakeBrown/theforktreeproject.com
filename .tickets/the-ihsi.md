@@ -2,7 +2,7 @@
 id: the-ihsi
 status: closed
 deps: []
-links: []
+links: [the-t1t9]
 created: 2026-08-05T02:16:34Z
 type: feature
 priority: 1

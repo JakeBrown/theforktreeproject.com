@@ -20,21 +20,10 @@ import VolunteerSignInForm from '../components/VolunteerSignInForm';
       <VolunteerSignInForm client:load />
     </div>
 
-    <div class="volunteer-sign-in__qr" aria-labelledby="volunteer-sign-in-qr-title">
-      <p class="volunteer-sign-in__qr-kicker">Quick access</p>
-      <h2 id="volunteer-sign-in-qr-title">Sign in on your phone</h2>
-      <p>Scan this QR code to open the volunteer sign-in page.</p>
-      <img
-        src="/images/volunteer-sign-in-qr.svg"
-        alt="QR code for the Forktree volunteer sign-in page"
-        width="260"
-        height="260"
-        loading="lazy"
-      />
-      <a href="/images/volunteer-sign-in-qr.svg" download="forktree-volunteer-sign-in-qr.svg">
-        Download QR code
-      </a>
-    </div>
+    <aside class="volunteer-sign-in__qr-link">
+      <p>Need a QR code for your volunteer sign-in point?</p>
+      <a href="/volunteer-sign-in/qr">Open the printable QR poster</a>
+    </aside>
   </section>
 </PageLayout>
 
@@ -49,7 +38,7 @@ import VolunteerSignInForm from '../components/VolunteerSignInForm';
 
   .volunteer-sign-in__intro,
   .volunteer-sign-in__card,
-  .volunteer-sign-in__qr {
+  .volunteer-sign-in__qr-link {
     width: min(100%, 620px);
     margin-inline: auto;
   }
@@ -89,58 +78,29 @@ import VolunteerSignInForm from '../components/VolunteerSignInForm';
     box-shadow: 0 18px 55px rgba(31, 42, 31, 0.09);
   }
 
-  .volunteer-sign-in__qr {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2rem;
-    padding: clamp(1.5rem, 5vw, 2.5rem);
-    border: 1px solid #dde1da;
-    border-radius: 4px;
-    background: #eef0eb;
+  .volunteer-sign-in__qr-link {
+    margin-top: 1.5rem;
     text-align: center;
   }
 
-  .volunteer-sign-in__qr-kicker {
-    margin: 0 0 0.5rem;
-    color: #3a7d32;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+  .volunteer-sign-in__qr-link p {
+    margin: 0 0 0.35rem;
+    color: #687065;
+    font-size: 0.88rem;
   }
 
-  .volunteer-sign-in__qr h2 {
-    margin: 0 0 0.65rem;
-    color: #1f2a1f;
-    font-size: clamp(1.5rem, 5vw, 2rem);
-  }
-
-  .volunteer-sign-in__qr > p:not(.volunteer-sign-in__qr-kicker) {
-    margin: 0 0 1.25rem;
-    color: #555d52;
-  }
-
-  .volunteer-sign-in__qr img {
-    width: min(260px, 100%);
-    height: auto;
-    padding: 0.5rem;
-    background: #fff;
-  }
-
-  .volunteer-sign-in__qr a {
-    margin-top: 1rem;
+  .volunteer-sign-in__qr-link a {
     color: #2d6927;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-decoration: underline;
     text-underline-offset: 0.2em;
     text-transform: uppercase;
   }
 
-  .volunteer-sign-in__qr a:hover,
-  .volunteer-sign-in__qr a:focus-visible {
+  .volunteer-sign-in__qr-link a:hover,
+  .volunteer-sign-in__qr-link a:focus-visible {
     color: #1f2a1f;
   }
 
