@@ -2,7 +2,7 @@
 id: the-t1t9
 status: closed
 deps: []
-links: [the-ihsi]
+links: [the-ihsi, the-6jf2]
 created: 2026-08-05T11:57:55Z
 type: task
 priority: 1
