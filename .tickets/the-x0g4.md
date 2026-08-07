@@ -18,3 +18,7 @@ Add a server-side Astro API endpoint that validates name, email, phone, and sele
 **2026-07-30T03:44:56Z**
 
 Implemented validated API with server-generated timestamp, Adelaide-today enforcement, Australian phone normalization, duplicate handling, streamed body limit, origin checks, honeypot, and rate limiting. Local API scenarios passed.
+
+**2026-08-07T02:19:00Z**
+
+Windy Bit client ticket: #ylg19 (https://windybit.au/clients/forktree-project/completed?ticket=ylg19).

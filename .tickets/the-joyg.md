@@ -22,3 +22,7 @@ Page will be linked from footer only, publicly accessible but noindex, designed 
 **2026-07-30T03:44:56Z**
 
 Implemented responsive noindex shared-device form and footer-only link. Required full name/email/phone, locked Adelaide date, optional communications consent, accessible states, personal-detail reset, and next-volunteer action. Mobile browser test and production build passed.
+
+**2026-08-07T02:19:00Z**
+
+Windy Bit client ticket: #ylg19 (https://windybit.au/clients/forktree-project/completed?ticket=ylg19).

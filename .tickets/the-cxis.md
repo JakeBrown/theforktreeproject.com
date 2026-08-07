@@ -18,3 +18,7 @@ Create an admin area for reviewing volunteer_sign_ins stored in the VOLUNTEER_SI
 **2026-07-31T02:56:35Z**
 
 Implemented /admin with responsive volunteer results, D1 loading, newest-first ordering, Basic Auth protection for all /admin paths, and no-store/noindex controls. Verified production build plus local Wrangler checks for missing/invalid/valid credentials, protected subpaths, page rendering, result ordering, and unaffected public routes.
+
+**2026-08-07T02:19:00Z**
+
+Windy Bit client ticket: #ylg19 (https://windybit.au/clients/forktree-project/completed?ticket=ylg19).

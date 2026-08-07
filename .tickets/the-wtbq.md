@@ -22,3 +22,7 @@ Interview decisions: all fields required; one full-name field; volunteer date re
 **2026-07-30T03:44:56Z**
 
 Implemented draft D1 binding, idempotent migration/runtime schema initialization, unique per-day email/phone indexes, retention fields, and D1-backed rate limiting. Fresh local migration and Wrangler dry run passed.
+
+**2026-08-07T02:19:00Z**
+
+Windy Bit client ticket: #ylg19 (https://windybit.au/clients/forktree-project/completed?ticket=ylg19).

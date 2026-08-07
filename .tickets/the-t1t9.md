@@ -22,3 +22,7 @@ Jake confirmed the QR should move to a separate screen page linked from the sign
 **2026-08-05T12:08:25Z**
 
 Implemented separate /volunteer-sign-in/qr poster page and linked it from the form page. Removed the embedded QR and download link. Added on-screen print/back actions plus portrait print CSS that hides site chrome and produces a branded one-page poster. Verified form/QR route separation, 390px responsive layout, one-page browser PDF output, QR decode from the rendered PDF to the exact production URL, clean browser console, focused review, git diff checks, and production build.
+
+**2026-08-07T02:19:00Z**
+
+Windy Bit client ticket: #ylg19 (https://windybit.au/clients/forktree-project/completed?ticket=ylg19).

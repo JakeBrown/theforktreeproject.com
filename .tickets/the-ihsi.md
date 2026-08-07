@@ -18,3 +18,7 @@ Update the existing /volunteer-sign-in page following Liz's 2 Aug feedback and J
 **2026-08-05T11:07:01Z**
 
 Implemented name-and-phone-only sign-in, automatic Adelaide attendance date/server timestamp, phone-only duplicate detection, legacy-schema compatibility, simplified admin display, and a downloadable local QR code. Verified client/API validation and success flows locally, two distinct blank-email records on the same day, normalized-phone duplicate rejection (409), QR decode to the exact production URL, 390px mobile layout, clean focused review, local D1 migration, git diff check, and production build.
+
+**2026-08-07T02:19:00Z**
+
+Windy Bit client ticket: #ylg19 (https://windybit.au/clients/forktree-project/completed?ticket=ylg19).
