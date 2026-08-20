@@ -1,0 +1,158 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import VolunteerRegistrationForm from '../components/VolunteerRegistrationForm';
+---
+
+<PageLayout
+  title="Volunteer Registration — The Forktree Project"
+  description="Register to volunteer with The Forktree Project on South Australia’s Fleurieu Peninsula."
+  headerVariant="dark"
+  norobots={true}
+>
+  <section class="volunteer-registration">
+    <div class="volunteer-registration__intro">
+      <p class="volunteer-registration__kicker">Volunteer with us</p>
+      <h1>Volunteer registration</h1>
+      <p class="volunteer-registration__lead">Thank you for your interest in volunteering with The Forktree Project.</p>
+      <p>Our volunteers play an important role in restoring biodiversity, caring for native habitat and supporting our community. Complete this form so we can help make your volunteer experience safe, enjoyable and suited to your interests.</p>
+      <aside class="volunteer-registration__sign-in">
+        <span>Already registered and volunteering today?</span>
+        <a href="/volunteer-sign-in">Open the daily volunteer sign-in</a>
+      </aside>
+    </div>
+
+    <div class="volunteer-registration__card">
+      <VolunteerRegistrationForm client:load />
+    </div>
+
+    <nav class="volunteer-registration__back" aria-label="Volunteer registration links">
+      <a href="/get-involved">← Back to Get Involved</a>
+      <a href="mailto:hello@theforktreeproject.com?subject=Volunteer%20registration%20question">Need help? Email us</a>
+    </nav>
+  </section>
+</PageLayout>
+
+<style>
+  .volunteer-registration {
+    min-height: 100vh;
+    padding: calc(var(--header-height) + 4rem) var(--space-md) var(--space-xl);
+    background:
+      radial-gradient(circle at 12% 8%, rgba(90, 158, 82, 0.13), transparent 32rem),
+      radial-gradient(circle at 92% 24%, rgba(184, 64, 50, 0.06), transparent 28rem),
+      #f6f7f4;
+  }
+
+  .volunteer-registration__intro,
+  .volunteer-registration__card,
+  .volunteer-registration__back {
+    width: min(100%, 900px);
+    margin-inline: auto;
+  }
+
+  .volunteer-registration__intro {
+    width: min(100%, 760px);
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .volunteer-registration__kicker {
+    margin: 0 0 0.65rem;
+    color: #3a7d32;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .volunteer-registration h1 {
+    margin: 0 0 1rem;
+    color: #1f2a1f;
+    font-size: clamp(2.5rem, 8vw, 4.6rem);
+    line-height: 1.05;
+  }
+
+  .volunteer-registration__intro > p:not(.volunteer-registration__kicker) {
+    margin: 0 auto;
+    color: #596056;
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+
+  .volunteer-registration__intro > p + p {
+    margin-top: 0.65rem;
+  }
+
+  .volunteer-registration__lead {
+    color: #30382e !important;
+    font-size: 1.12rem !important;
+    font-weight: 550;
+  }
+
+  .volunteer-registration__sign-in {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid #d7e3d3;
+    border-radius: 4px;
+    background: #edf4ea;
+    color: #445042;
+    font-size: 0.84rem;
+    text-align: left;
+  }
+
+  .volunteer-registration__sign-in a,
+  .volunteer-registration__back a {
+    color: #2d6927;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .volunteer-registration__sign-in a:hover,
+  .volunteer-registration__sign-in a:focus-visible,
+  .volunteer-registration__back a:hover,
+  .volunteer-registration__back a:focus-visible {
+    color: #1f2a1f;
+  }
+
+  .volunteer-registration__card {
+    padding: clamp(1.35rem, 5vw, 3.25rem);
+    border: 1px solid #dce1d9;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 22px 70px rgba(31, 42, 31, 0.09);
+  }
+
+  .volunteer-registration__back {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    font-size: 0.82rem;
+  }
+
+  @media (max-width: 700px) {
+    .volunteer-registration {
+      padding: calc(var(--header-height) + 2rem) 0.75rem var(--space-lg);
+    }
+
+    .volunteer-registration__intro {
+      margin-bottom: 1.75rem;
+      padding-inline: 0.25rem;
+    }
+
+    .volunteer-registration__sign-in,
+    .volunteer-registration__back {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .volunteer-registration__card {
+      padding: 1.25rem 1rem 1.75rem;
+      border-radius: 4px;
+    }
+  }
+</style>

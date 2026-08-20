@@ -62,6 +62,11 @@ const formatEventDate = (date: string) => {
           <p class="gi-intro__lead">Volunteers play a vital role in our work.</p>
           <p class="gi-intro__body">Activities range from nursery work and planting to a wide variety of creative infrastructure projects across the property.</p>
           <p class="gi-intro__body">Whatever your skills or experience, there&rsquo;s a meaningful way to contribute.</p>
+          <div class="gi-volunteer-actions">
+            <a href="/volunteer-registration" class="btn--cta btn--cta-lg btn--cta-volunteer-primary">Register as a volunteer</a>
+            <a href="/volunteer-sign-in" class="btn--cta btn--cta-lg btn--cta-dark">Sign in for today</a>
+          </div>
+          <p class="gi-volunteer-note">New volunteers register once. Returning volunteers use the daily sign-in when they arrive.</p>
         </div>
       </div>
       <div class="gi-split__photo">
@@ -579,6 +584,21 @@ const formatEventDate = (date: string) => {
     margin-top: 2.5rem;
   }
 
+  .gi-volunteer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .gi-volunteer-note {
+    max-width: 620px;
+    margin: 0.85rem 0 0;
+    color: #687065;
+    font-size: 0.8rem;
+    line-height: 1.55;
+  }
+
   .btn--cta {
     display: inline-block;
     padding: 1rem 2.25rem;
@@ -612,6 +632,17 @@ const formatEventDate = (date: string) => {
   .btn--cta-dark:hover {
     background: #1a1a1a;
     color: #fff;
+  }
+
+  .btn--cta-volunteer-primary {
+    background: #2d6927;
+    border-color: #2d6927;
+    color: #fff;
+  }
+
+  .btn--cta-volunteer-primary:hover {
+    background: #1f2a1f;
+    border-color: #1f2a1f;
   }
 
   .btn--cta-featured {
@@ -662,6 +693,15 @@ const formatEventDate = (date: string) => {
 
     .gi-event-list {
       grid-template-columns: 1fr;
+    }
+
+    .gi-volunteer-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .gi-volunteer-actions .btn--cta {
+      text-align: center;
     }
   }
 </style>
