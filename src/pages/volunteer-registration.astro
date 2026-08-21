@@ -15,10 +15,6 @@ import VolunteerRegistrationForm from '../components/VolunteerRegistrationForm';
       <h1>Volunteer registration</h1>
       <p class="volunteer-registration__lead">Thank you for your interest in volunteering with The Forktree Project.</p>
       <p>Our volunteers play an important role in restoring biodiversity, caring for native habitat and supporting our community. Complete this form so we can help make your volunteer experience safe, enjoyable and suited to your interests.</p>
-      <aside class="volunteer-registration__sign-in">
-        <span>Already registered and volunteering today?</span>
-        <a href="/volunteer-sign-in">Open the daily volunteer sign-in</a>
-      </aside>
     </div>
 
     <div class="volunteer-registration__card">
@@ -88,22 +84,6 @@ import VolunteerRegistrationForm from '../components/VolunteerRegistrationForm';
     font-weight: 550;
   }
 
-  .volunteer-registration__sign-in {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    padding: 0.9rem 1rem;
-    border: 1px solid #d7e3d3;
-    border-radius: 4px;
-    background: #edf4ea;
-    color: #445042;
-    font-size: 0.84rem;
-    text-align: left;
-  }
-
-  .volunteer-registration__sign-in a,
   .volunteer-registration__back a {
     color: #2d6927;
     font-weight: 600;
@@ -111,8 +91,6 @@ import VolunteerRegistrationForm from '../components/VolunteerRegistrationForm';
     text-underline-offset: 0.2em;
   }
 
-  .volunteer-registration__sign-in a:hover,
-  .volunteer-registration__sign-in a:focus-visible,
   .volunteer-registration__back a:hover,
   .volunteer-registration__back a:focus-visible {
     color: #1f2a1f;
@@ -144,7 +122,6 @@ import VolunteerRegistrationForm from '../components/VolunteerRegistrationForm';
       padding-inline: 0.25rem;
     }
 
-    .volunteer-registration__sign-in,
     .volunteer-registration__back {
       flex-direction: column;
       align-items: flex-start;

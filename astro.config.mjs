@@ -13,7 +13,9 @@ export default defineConfig({
   site: 'https://www.theforktreeproject.com',
   integrations: [
     react(),
-    sitemap(),
+    sitemap({
+      filter: (page) => !new URL(page).pathname.startsWith('/volunteer-sign-in'),
+    }),
     sentry({
       project: 'theforktreeprojectcom',
       org: 'jakebrown',
