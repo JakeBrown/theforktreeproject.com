@@ -1,0 +1,311 @@
+---
+import AdminRecordDialog from '../../components/AdminRecordDialog.astro';
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import {
+  LICENCES,
+  REFERRAL_SOURCES,
+  VOLUNTEER_INTERESTS,
+  VOLUNTEERING_FREQUENCIES,
+  WEEKDAYS,
+} from '../../lib/volunteerRegistration';
+import {
+  ADMIN_RESULT_LIMIT,
+  adelaideDateBounds,
+  displayValue,
+  escapeLike,
+  formatDate,
+  formatDateTime,
+  getAdminFilters,
+  humanize,
+  parseJsonList,
+  parseQualifications,
+  yesNo,
+  type D1Database,
+  type DetailGroup,
+} from '../../lib/admin';
+
+export const prerender = false;
+
+interface VolunteerRegistration {
+  id: number;
+  full_name: string;
+  preferred_name: string;
+  is_under_18: number;
+  date_of_birth: string;
+  address: string;
+  phone: string;
+  email: string;
+  referral_sources_json: string;
+  referral_other: string;
+  emergency_contact_name: string;
+  emergency_contact_relationship: string;
+  emergency_contact_phone: string;
+  interests_json: string;
+  interest_other: string;
+  skills_experience: string;
+  qualifications_json: string;
+  licences_json: string;
+  licence_other: string;
+  wwcc_status: string;
+  wwcc_number: string;
+  wwcc_expiry_date: string;
+  frequency: string;
+  preferred_days_json: string;
+  accessibility_support: string;
+  medical_information: string;
+  media_consent: string;
+  declaration_name: string;
+  agreement_accepted: number;
+  form_version: string;
+  registered_at: string;
+}
+
+const filters = getAdminFilters(Astro.url.searchParams);
+let registrations: VolunteerRegistration[] = [];
+let loadError = false;
+const database = (Astro.locals as any).runtime?.env?.VOLUNTEER_SIGN_INS as D1Database | undefined;
+
+if (!database) {
+  loadError = true;
+} else {
+  const conditions: string[] = [];
+  const bindings: string[] = [];
+
+  if (filters.name) {
+    conditions.push("full_name LIKE ? ESCAPE '\\' COLLATE NOCASE");
+    bindings.push(`%${escapeLike(filters.name)}%`);
+  }
+  if (filters.date) {
+    const [start, end] = adelaideDateBounds(filters.date);
+    conditions.push('registered_at >= ? AND registered_at < ?');
+    bindings.push(start, end);
+  }
+
+  const where = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
+
+  try {
+    let statement = database.prepare(
+      `SELECT
+        id, full_name, preferred_name, is_under_18, date_of_birth, address, phone, email,
+        referral_sources_json, referral_other, emergency_contact_name, emergency_contact_relationship,
+        emergency_contact_phone, interests_json, interest_other, skills_experience, qualifications_json,
+        licences_json, licence_other, wwcc_status, wwcc_number, wwcc_expiry_date, frequency,
+        preferred_days_json, accessibility_support, medical_information, media_consent, declaration_name,
+        agreement_accepted, form_version, registered_at
+       FROM volunteer_registrations
+       ${where}
+       ORDER BY registered_at DESC, id DESC
+       LIMIT ${ADMIN_RESULT_LIMIT}`
+    );
+    if (bindings.length > 0) statement = statement.bind(...bindings);
+    const result = await statement.all<VolunteerRegistration>();
+    registrations = result.results || [];
+  } catch {
+    loadError = true;
+    console.error('Unable to load volunteer registrations');
+  }
+}
+
+const referralLabels = new Map<string, string>(REFERRAL_SOURCES.map(({ value, label }) => [value, label]));
+const interestLabels = new Map<string, string>(VOLUNTEER_INTERESTS.map(({ value, label }) => [value, label]));
+const licenceLabels = new Map<string, string>(LICENCES.map(({ value, label }) => [value, label]));
+const weekdayLabels = new Map<string, string>(WEEKDAYS.map(({ value, label }) => [value, label]));
+const frequencyLabels = new Map<string, string>(VOLUNTEERING_FREQUENCIES.map(({ value, label }) => [value, label]));
+const recordLabel = `${registrations.length} ${registrations.length === 1 ? 'record' : 'records'}`;
+
+function selectionLabel(value: string, labels: ReadonlyMap<string, string>): string {
+  return value ? labels.get(value) || humanize(value) : 'Not provided';
+}
+
+function wwccLabel(value: string): string {
+  return ({ yes: 'Yes', no: 'No', applied: 'Applied for' } as Record<string, string>)[value] || 'Not answered';
+}
+
+function mediaConsentLabel(value: string): string {
+  return ({ consent: 'Consent given', decline: 'Consent declined' } as Record<string, string>)[value] || displayValue(value);
+}
+
+function detailsFor(registration: VolunteerRegistration): DetailGroup[] {
+  return [
+    {
+      heading: 'Registration details',
+      items: [
+        { label: 'Record ID', value: String(registration.id) },
+        { label: 'Registered', value: formatDateTime(registration.registered_at) },
+        { label: 'Form version', value: displayValue(registration.form_version) },
+      ],
+    },
+    {
+      heading: 'Personal details',
+      items: [
+        { label: 'Full name', value: displayValue(registration.full_name) },
+        { label: 'Preferred name', value: displayValue(registration.preferred_name) },
+        { label: 'Under 18', value: yesNo(registration.is_under_18) },
+        { label: 'Date of birth', value: formatDate(registration.date_of_birth) },
+        { label: 'Address', value: displayValue(registration.address) },
+        { label: 'Phone', value: displayValue(registration.phone) },
+        { label: 'Email', value: displayValue(registration.email) },
+      ],
+    },
+    {
+      heading: 'Referral',
+      items: [
+        { label: 'Referral sources', value: parseJsonList(registration.referral_sources_json, referralLabels) },
+        { label: 'Other referral source', value: displayValue(registration.referral_other) },
+      ],
+    },
+    {
+      heading: 'Emergency contact',
+      items: [
+        { label: 'Name', value: displayValue(registration.emergency_contact_name) },
+        { label: 'Relationship', value: displayValue(registration.emergency_contact_relationship) },
+        { label: 'Phone', value: displayValue(registration.emergency_contact_phone) },
+      ],
+    },
+    {
+      heading: 'Interests and experience',
+      items: [
+        { label: 'Volunteer interests', value: parseJsonList(registration.interests_json, interestLabels) },
+        { label: 'Other interest', value: displayValue(registration.interest_other) },
+        { label: 'Skills, qualifications and experience', value: displayValue(registration.skills_experience) },
+      ],
+    },
+    {
+      heading: 'Qualifications and licences',
+      items: [
+        { label: 'Qualifications', value: parseQualifications(registration.qualifications_json) },
+        { label: 'Licences', value: parseJsonList(registration.licences_json, licenceLabels) },
+        { label: 'Other licence', value: displayValue(registration.licence_other) },
+      ],
+    },
+    {
+      heading: 'Working With Children Check',
+      items: [
+        { label: 'Status', value: wwccLabel(registration.wwcc_status) },
+        { label: 'WWCC number', value: displayValue(registration.wwcc_number) },
+        { label: 'Expiry date', value: formatDate(registration.wwcc_expiry_date) },
+      ],
+    },
+    {
+      heading: 'Availability',
+      items: [
+        { label: 'Frequency', value: selectionLabel(registration.frequency, frequencyLabels) },
+        { label: 'Preferred days', value: parseJsonList(registration.preferred_days_json, weekdayLabels) },
+      ],
+    },
+    {
+      heading: 'Support, consent and declaration',
+      items: [
+        { label: 'Accessibility and support', value: displayValue(registration.accessibility_support) },
+        { label: 'Medical information', value: displayValue(registration.medical_information) },
+        { label: 'Photography and media', value: mediaConsentLabel(registration.media_consent) },
+        { label: 'Declaration name', value: displayValue(registration.declaration_name) },
+        { label: 'Agreement accepted', value: yesNo(registration.agreement_accepted) },
+      ],
+    },
+  ];
+}
+---
+
+<AdminLayout
+  title="Volunteer registrations"
+  description="Review volunteer registrations for The Forktree Project."
+  active="registrations"
+>
+  <header class="admin-page-heading">
+    <div>
+      <p class="admin-kicker">Volunteer records</p>
+      <h1>Registrations</h1>
+      <p class="admin-summary">
+        {loadError ? 'Registrations are unavailable.' : `${recordLabel}${registrations.length === ADMIN_RESULT_LIMIT ? ' shown' : ''}, newest first`}
+      </p>
+    </div>
+  </header>
+
+  <form class="admin-filters" method="get" action="/admin/registrations" role="search">
+    <div class="admin-field">
+      <label for="registration-name">Volunteer name</label>
+      <input id="registration-name" name="name" type="search" value={filters.name} maxlength="100" placeholder="Search full name" />
+    </div>
+    <div class="admin-field">
+      <label for="registration-date">Registration date</label>
+      <input id="registration-date" name="date" type="date" value={filters.date} />
+    </div>
+    <button class="admin-button" type="submit">Apply filters</button>
+    <a class="admin-link-button" href="/admin/registrations">Clear filters</a>
+  </form>
+
+  {loadError ? (
+    <section class="admin-state" role="alert">
+      <h2>Registrations could not be loaded</h2>
+      <p>Refresh the page or try again later.</p>
+    </section>
+  ) : registrations.length === 0 && filters.active ? (
+    <section class="admin-state">
+      <h2>No matching registrations</h2>
+      <p>Try a different name or registration date.</p>
+      <a class="admin-link-button" href="/admin/registrations">Clear filters</a>
+    </section>
+  ) : registrations.length === 0 ? (
+    <section class="admin-state">
+      <h2>No volunteer registrations yet</h2>
+      <p>New registrations will appear here.</p>
+    </section>
+  ) : (
+    <div class="records-table-wrap">
+      <table class="records-table">
+        <caption class="sr-only">Volunteer registration records, newest first</caption>
+        <thead>
+          <tr>
+            <th scope="col">Volunteer</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Frequency</th>
+            <th scope="col">Registered</th>
+            <th scope="col"><span class="sr-only">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {registrations.map((registration) => {
+            const dialogId = `registration-${registration.id}`;
+            return (
+              <tr
+                data-dialog-open={dialogId}
+                tabindex="0"
+                aria-haspopup="dialog"
+                aria-controls={dialogId}
+                aria-label={`View full details for ${displayValue(registration.full_name)}`}
+              >
+                <td data-label="Volunteer">
+                  <strong>{displayValue(registration.full_name)}</strong>
+                  {registration.preferred_name && <div class="admin-summary">Preferred: {registration.preferred_name}</div>}
+                </td>
+                <td data-label="Contact" class="record-contact">
+                  <div>{displayValue(registration.email)}</div>
+                  <div>{displayValue(registration.phone)}</div>
+                </td>
+                <td data-label="Frequency">{selectionLabel(registration.frequency, frequencyLabels)}</td>
+                <td data-label="Registered"><time datetime={registration.registered_at}>{formatDateTime(registration.registered_at)}</time></td>
+                <td data-label="Details" class="record-actions">
+                  <button
+                    class="record-view-button"
+                    type="button"
+                    data-dialog-open={dialogId}
+                    aria-haspopup="dialog"
+                    aria-controls={dialogId}
+                    aria-label={`View full details for ${displayValue(registration.full_name)}`}
+                  >View details</button>
+                  <AdminRecordDialog
+                    id={dialogId}
+                    title={displayValue(registration.full_name)}
+                    eyebrow="Volunteer registration"
+                    groups={detailsFor(registration)}
+                  />
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  )}
+</AdminLayout>

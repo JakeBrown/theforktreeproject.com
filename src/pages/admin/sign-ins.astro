@@ -1,0 +1,187 @@
+---
+import AdminRecordDialog from '../../components/AdminRecordDialog.astro';
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import {
+  ADMIN_RESULT_LIMIT,
+  displayValue,
+  escapeLike,
+  formatDate,
+  formatDateTime,
+  getAdminFilters,
+  yesNo,
+  type D1Database,
+  type DetailGroup,
+} from '../../lib/admin';
+
+export const prerender = false;
+
+interface VolunteerSignIn {
+  id: number;
+  full_name: string;
+  email: string;
+  phone: string;
+  volunteer_date: string;
+  communications_consent: number;
+  signed_in_at: string;
+}
+
+const filters = getAdminFilters(Astro.url.searchParams);
+let signIns: VolunteerSignIn[] = [];
+let loadError = false;
+const database = (Astro.locals as any).runtime?.env?.VOLUNTEER_SIGN_INS as D1Database | undefined;
+
+if (!database) {
+  loadError = true;
+} else {
+  const conditions: string[] = [];
+  const bindings: string[] = [];
+
+  if (filters.name) {
+    conditions.push("full_name LIKE ? ESCAPE '\\' COLLATE NOCASE");
+    bindings.push(`%${escapeLike(filters.name)}%`);
+  }
+  if (filters.date) {
+    conditions.push('volunteer_date = ?');
+    bindings.push(filters.date);
+  }
+
+  const where = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
+
+  try {
+    let statement = database.prepare(
+      `SELECT id, full_name, email, phone, volunteer_date, communications_consent, signed_in_at
+       FROM volunteer_sign_ins
+       ${where}
+       ORDER BY signed_in_at DESC, id DESC
+       LIMIT ${ADMIN_RESULT_LIMIT}`
+    );
+    if (bindings.length > 0) statement = statement.bind(...bindings);
+    const result = await statement.all<VolunteerSignIn>();
+    signIns = result.results || [];
+  } catch {
+    loadError = true;
+    console.error('Unable to load volunteer sign-ins');
+  }
+}
+
+const recordLabel = `${signIns.length} ${signIns.length === 1 ? 'record' : 'records'}`;
+
+function detailsFor(signIn: VolunteerSignIn): DetailGroup[] {
+  return [
+    {
+      heading: 'Sign-in details',
+      items: [
+        { label: 'Record ID', value: String(signIn.id) },
+        { label: 'Volunteer date', value: formatDate(signIn.volunteer_date) },
+        { label: 'Signed in', value: formatDateTime(signIn.signed_in_at) },
+      ],
+    },
+    {
+      heading: 'Volunteer',
+      items: [
+        { label: 'Full name', value: displayValue(signIn.full_name) },
+        { label: 'Phone', value: displayValue(signIn.phone) },
+        { label: 'Email (legacy records)', value: displayValue(signIn.email) },
+        { label: 'Communications consent (legacy records)', value: yesNo(signIn.communications_consent) },
+      ],
+    },
+  ];
+}
+---
+
+<AdminLayout
+  title="Volunteer sign-ins"
+  description="Review volunteer sign-ins for The Forktree Project."
+  active="sign-ins"
+>
+  <header class="admin-page-heading">
+    <div>
+      <p class="admin-kicker">Volunteer records</p>
+      <h1>Sign-ins</h1>
+      <p class="admin-summary">
+        {loadError ? 'Sign-ins are unavailable.' : `${recordLabel}${signIns.length === ADMIN_RESULT_LIMIT ? ' shown' : ''}, newest first`}
+      </p>
+    </div>
+  </header>
+
+  <form class="admin-filters" method="get" action="/admin/sign-ins" role="search">
+    <div class="admin-field">
+      <label for="sign-in-name">Volunteer name</label>
+      <input id="sign-in-name" name="name" type="search" value={filters.name} maxlength="100" placeholder="Search full name" />
+    </div>
+    <div class="admin-field">
+      <label for="sign-in-date">Volunteer date</label>
+      <input id="sign-in-date" name="date" type="date" value={filters.date} />
+    </div>
+    <button class="admin-button" type="submit">Apply filters</button>
+    <a class="admin-link-button" href="/admin/sign-ins">Clear filters</a>
+  </form>
+
+  {loadError ? (
+    <section class="admin-state" role="alert">
+      <h2>Sign-ins could not be loaded</h2>
+      <p>Refresh the page or try again later.</p>
+    </section>
+  ) : signIns.length === 0 && filters.active ? (
+    <section class="admin-state">
+      <h2>No matching sign-ins</h2>
+      <p>Try a different name or volunteer date.</p>
+      <a class="admin-link-button" href="/admin/sign-ins">Clear filters</a>
+    </section>
+  ) : signIns.length === 0 ? (
+    <section class="admin-state">
+      <h2>No volunteer sign-ins yet</h2>
+      <p>New sign-ins will appear here.</p>
+    </section>
+  ) : (
+    <div class="records-table-wrap">
+      <table class="records-table">
+        <caption class="sr-only">Volunteer sign-in records, newest first</caption>
+        <thead>
+          <tr>
+            <th scope="col">Volunteer</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Volunteer date</th>
+            <th scope="col">Signed in</th>
+            <th scope="col"><span class="sr-only">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {signIns.map((signIn) => {
+            const dialogId = `sign-in-${signIn.id}`;
+            return (
+              <tr
+                data-dialog-open={dialogId}
+                tabindex="0"
+                aria-haspopup="dialog"
+                aria-controls={dialogId}
+                aria-label={`View full details for ${displayValue(signIn.full_name)}`}
+              >
+                <td data-label="Volunteer"><strong>{displayValue(signIn.full_name)}</strong></td>
+                <td data-label="Phone" class="record-contact">{displayValue(signIn.phone)}</td>
+                <td data-label="Volunteer date"><time datetime={signIn.volunteer_date}>{formatDate(signIn.volunteer_date)}</time></td>
+                <td data-label="Signed in"><time datetime={signIn.signed_in_at}>{formatDateTime(signIn.signed_in_at)}</time></td>
+                <td data-label="Details" class="record-actions">
+                  <button
+                    class="record-view-button"
+                    type="button"
+                    data-dialog-open={dialogId}
+                    aria-haspopup="dialog"
+                    aria-controls={dialogId}
+                    aria-label={`View full details for ${displayValue(signIn.full_name)}`}
+                  >View details</button>
+                  <AdminRecordDialog
+                    id={dialogId}
+                    title={displayValue(signIn.full_name)}
+                    eyebrow="Volunteer sign-in"
+                    groups={detailsFor(signIn)}
+                  />
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  )}
+</AdminLayout>

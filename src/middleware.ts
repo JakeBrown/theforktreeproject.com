@@ -2,8 +2,8 @@ import { defineMiddleware } from 'astro:middleware';
 
 const ASSET_EXTENSIONS = /\.(js|css|png|jpg|jpeg|gif|svg|ico|webp|avif|woff2?|ttf|eot|map|json|xml|txt)$/i;
 const ADMIN_PATH = /^\/admin(?:\/|$)/;
-// Username: forktree-admin-7m4q. Store only the combined credential digest, not the plaintext password.
-const ADMIN_CREDENTIALS_SHA256 = '6dc841c504676bd6ad0788a388e9a3156b7a764ec30a17d0f05b95b8e0e4a558';
+// Username: forktree-admin-4e7ac0. Store only the combined credential digest, not the plaintext password.
+const ADMIN_CREDENTIALS_SHA256 = 'ce198f7695cfd32644f28e4f4f9a7aeb30b4e8182a2c623e812afc709aa9d722';
 
 function constantTimeEqual(left: string, right: string): boolean {
   if (left.length !== right.length) return false;
@@ -59,6 +59,8 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (isAdminRequest) {
     response.headers.set('cache-control', 'no-store');
     response.headers.set('x-robots-tag', 'noindex, nofollow');
+    // Admin URLs can contain volunteer names in filter parameters. Never send them to analytics.
+    return response;
   }
 
   // Only log actual page views, not assets or prerendered builds

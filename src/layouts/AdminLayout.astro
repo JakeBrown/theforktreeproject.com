@@ -1,0 +1,336 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  active: 'sign-ins' | 'registrations';
+}
+
+const { title, description, active } = Astro.props;
+---
+
+<BaseLayout title={`${title} — Forktree Admin`} description={description} norobots={true}>
+  <div class="admin-shell">
+    <header class="admin-header">
+      <div class="admin-header__inner">
+        <a class="admin-brand" href="/admin/sign-ins" aria-label="Forktree admin home">
+          <img src="/images/logo.png" alt="" width="54" height="54" />
+          <span>Forktree <strong>Admin</strong></span>
+        </a>
+        <nav class="admin-nav" aria-label="Admin navigation">
+          <a href="/admin/sign-ins" aria-current={active === 'sign-ins' ? 'page' : undefined}>Sign-ins</a>
+          <a href="/admin/registrations" aria-current={active === 'registrations' ? 'page' : undefined}>Registrations</a>
+        </nav>
+      </div>
+    </header>
+    <main class="admin-main">
+      <slot />
+    </main>
+  </div>
+</BaseLayout>
+
+<script>
+  const dialogTriggers = document.querySelectorAll<HTMLElement>('[data-dialog-open]');
+
+  const openDialog = (trigger: HTMLElement) => {
+    const dialogId = trigger.dataset.dialogOpen;
+    const dialog = dialogId ? document.getElementById(dialogId) : null;
+    if (dialog instanceof HTMLDialogElement && !dialog.open) dialog.showModal();
+  };
+
+  dialogTriggers.forEach((trigger) => {
+    trigger.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof Element) || target.closest('dialog')) return;
+      if (target !== trigger && target.closest('a, button, input, select, textarea')) return;
+      openDialog(trigger);
+    });
+    trigger.addEventListener('keydown', (event) => {
+      if (event.target !== trigger || (event.key !== 'Enter' && event.key !== ' ')) return;
+      event.preventDefault();
+      openDialog(trigger);
+    });
+  });
+
+  document.querySelectorAll<HTMLDialogElement>('dialog.admin-dialog').forEach((dialog) => {
+    dialog.querySelectorAll<HTMLButtonElement>('[data-dialog-close]').forEach((button) => {
+      button.addEventListener('click', () => dialog.close());
+    });
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  });
+</script>
+
+<style is:global>
+  .admin-shell {
+    min-height: 100vh;
+    background: #f5f7f3;
+    color: #1f2a1f;
+  }
+
+  .admin-header {
+    border-bottom: 1px solid #dce2d9;
+    background: rgba(255, 255, 255, 0.98);
+  }
+
+  .admin-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    width: min(100%, 1440px);
+    min-height: 78px;
+    margin-inline: auto;
+    padding: 0.7rem clamp(1rem, 4vw, 3rem);
+  }
+
+  .admin-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #284d24;
+    font-size: 0.83rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .admin-brand img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+
+  .admin-brand strong { font-weight: 700; }
+
+  .admin-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .admin-nav a {
+    padding: 0.65rem 0.9rem;
+    border-radius: 5px;
+    color: #566153;
+    font-size: 0.83rem;
+    font-weight: 600;
+  }
+
+  .admin-nav a:hover { background: #f0f4ed; color: #285f25; }
+  .admin-nav a[aria-current='page'] { background: #e7efe3; color: #285f25; }
+
+  .admin-main {
+    width: min(100%, 1440px);
+    margin-inline: auto;
+    padding: clamp(2rem, 5vw, 4.5rem) clamp(1rem, 4vw, 3rem) 5rem;
+  }
+
+  .admin-page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 2rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .admin-kicker {
+    margin: 0 0 0.4rem;
+    color: #3a7d32;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .admin-page-heading h1 {
+    margin: 0;
+    color: #1f2a1f;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.08;
+  }
+
+  .admin-summary {
+    margin: 0.65rem 0 0;
+    color: #657063;
+    font-size: 0.9rem;
+  }
+
+  .admin-filters {
+    display: grid;
+    grid-template-columns: minmax(13rem, 1.4fr) minmax(11rem, 0.8fr) auto auto;
+    align-items: end;
+    gap: 0.85rem;
+    margin-bottom: 1.25rem;
+    padding: 1rem;
+    border: 1px solid #dce2d9;
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .admin-field { display: grid; gap: 0.35rem; }
+  .admin-field label {
+    color: #4e5a4b;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .admin-field input {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid #bdc8ba;
+    border-radius: 5px;
+    background: #fff;
+    color: #1f2a1f;
+    font: inherit;
+    font-size: 0.9rem;
+  }
+
+  .admin-field input:focus,
+  .admin-button:focus-visible,
+  .admin-link-button:focus-visible,
+  .record-view-button:focus-visible,
+  .admin-dialog__close:focus-visible {
+    outline: 3px solid rgba(58, 125, 50, 0.25);
+    outline-offset: 2px;
+  }
+
+  .admin-button,
+  .admin-link-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+    border: 1px solid #2f6e2a;
+    border-radius: 5px;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .admin-button { background: #34752e; color: #fff; }
+  .admin-button:hover { background: #285f25; }
+  .admin-link-button { border-color: #c8d1c5; background: #fff; color: #3f4c3d; }
+  .admin-link-button:hover { border-color: #8fa08b; color: #285f25; }
+
+  .records-table-wrap {
+    overflow-x: auto;
+    border: 1px solid #dce2d9;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 14px 38px rgba(31, 42, 31, 0.05);
+  }
+
+  .records-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+  .records-table th,
+  .records-table td { padding: 0.95rem 1rem; border-bottom: 1px solid #e5e9e3; text-align: left; vertical-align: top; }
+  .records-table th {
+    background: #eef2eb;
+    color: #566153;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .records-table tbody tr:last-child td { border-bottom: 0; }
+  .records-table tbody tr[data-dialog-open] { cursor: pointer; }
+  .records-table tbody tr:hover { background: #fafcf9; }
+  .records-table tbody tr:focus-visible { outline: 3px solid rgba(58, 125, 50, 0.25); outline-offset: -3px; }
+  .records-table strong { font-weight: 600; }
+  .record-contact { overflow-wrap: anywhere; }
+  .record-contact a { color: #2d6927; text-decoration: underline; text-underline-offset: 0.14em; }
+  .record-actions { width: 1%; white-space: nowrap; text-align: right !important; }
+  .record-view-button { color: #2d6927; font-size: 0.8rem; font-weight: 700; text-decoration: underline; text-underline-offset: 0.18em; }
+
+  .admin-state {
+    padding: clamp(2rem, 6vw, 4rem);
+    border: 1px solid #dce2d9;
+    border-radius: 8px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 14px 38px rgba(31, 42, 31, 0.05);
+  }
+  .admin-state h2 { margin: 0 0 0.55rem; font-size: clamp(1.2rem, 3vw, 1.55rem); font-weight: 600; }
+  .admin-state p { margin: 0; color: #657063; }
+  .admin-state .admin-link-button { margin-top: 1.25rem; }
+
+  .admin-dialog {
+    width: min(92vw, 860px);
+    max-height: min(88vh, 900px);
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    border-radius: 10px;
+    background: #fff;
+    color: #1f2a1f;
+    box-shadow: 0 30px 90px rgba(15, 26, 14, 0.3);
+  }
+  .admin-dialog::backdrop { background: rgba(19, 30, 18, 0.62); }
+  .admin-dialog__panel { display: flex; max-height: min(88vh, 900px); flex-direction: column; }
+  .admin-dialog__header {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.35rem clamp(1.1rem, 4vw, 2rem);
+    border-bottom: 1px solid #dfe5dc;
+    background: #f3f6f1;
+  }
+  .admin-dialog__eyebrow { margin: 0 0 0.25rem; color: #3a7d32; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+  .admin-dialog__header h2 { margin: 0; font-size: clamp(1.3rem, 4vw, 1.8rem); font-weight: 600; }
+  .admin-dialog__close {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #cbd4c8;
+    border-radius: 50%;
+    background: #fff;
+    color: #40503e;
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+  .admin-dialog__close:hover { border-color: #82917f; color: #285f25; }
+  .admin-dialog__body { overflow-y: auto; padding: clamp(1.1rem, 4vw, 2rem); }
+  .admin-detail-group + .admin-detail-group { margin-top: 2rem; padding-top: 1.6rem; border-top: 1px solid #e3e8e1; }
+  .admin-detail-group h3 { margin: 0 0 1rem; color: #386333; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
+  .admin-detail-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem 2rem; margin: 0; }
+  .admin-detail-list div { min-width: 0; }
+  .admin-detail-list dt { margin-bottom: 0.2rem; color: #667164; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+  .admin-detail-list dd { margin: 0; overflow-wrap: anywhere; white-space: pre-wrap; font-size: 0.9rem; }
+  .admin-detail-list ul { margin: 0; padding-left: 1.15rem; list-style: disc; }
+  .admin-detail-list li + li { margin-top: 0.2rem; }
+
+  @media (max-width: 800px) {
+    .admin-header__inner { align-items: flex-start; flex-direction: column; gap: 0.4rem; padding-block: 0.7rem 0.9rem; }
+    .admin-nav { width: 100%; }
+    .admin-nav a { flex: 1; text-align: center; }
+    .admin-page-heading { align-items: start; flex-direction: column; gap: 0.5rem; }
+    .admin-filters { grid-template-columns: 1fr 1fr; }
+    .records-table-wrap { overflow: visible; border: 0; background: transparent; box-shadow: none; }
+    .records-table, .records-table tbody { display: block; }
+    .records-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .records-table tr { display: block; margin-bottom: 0.85rem; padding: 0.3rem 1rem; border: 1px solid #dce2d9; border-radius: 8px; background: #fff; box-shadow: 0 8px 24px rgba(31, 42, 31, 0.04); }
+    .records-table td,
+    .records-table tbody tr:last-child td { display: grid; grid-template-columns: minmax(7.5rem, 0.4fr) minmax(0, 1fr); gap: 0.75rem; padding: 0.72rem 0; border-bottom: 1px solid #e5e9e3; }
+    .records-table td::before { content: attr(data-label); color: #697466; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; }
+    .records-table td:last-child,
+    .records-table tbody tr:last-child td:last-child { border-bottom: 0; }
+    .record-actions { width: auto; text-align: left !important; }
+  }
+
+  @media (max-width: 520px) {
+    .admin-brand img { width: 42px; height: 42px; }
+    .admin-filters { grid-template-columns: 1fr; }
+    .records-table td,
+    .records-table tbody tr:last-child td { grid-template-columns: 1fr; gap: 0.2rem; }
+    .admin-detail-list { grid-template-columns: 1fr; }
+    .admin-dialog { width: 96vw; max-height: 92vh; }
+    .admin-dialog__panel { max-height: 92vh; }
+  }
+</style>

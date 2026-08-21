@@ -1,0 +1,46 @@
+---
+import type { DetailGroup } from '../lib/admin';
+
+interface Props {
+  id: string;
+  title: string;
+  eyebrow: string;
+  groups: DetailGroup[];
+}
+
+const { id, title, eyebrow, groups } = Astro.props;
+const titleId = `${id}-title`;
+---
+
+<dialog class="admin-dialog" id={id} aria-labelledby={titleId}>
+  <article class="admin-dialog__panel">
+    <header class="admin-dialog__header">
+      <div>
+        <p class="admin-dialog__eyebrow">{eyebrow}</p>
+        <h2 id={titleId}>{title}</h2>
+      </div>
+      <button class="admin-dialog__close" type="button" data-dialog-close aria-label="Close details">×</button>
+    </header>
+    <div class="admin-dialog__body">
+      {groups.map((group) => (
+        <section class="admin-detail-group">
+          <h3>{group.heading}</h3>
+          <dl class="admin-detail-list">
+            {group.items.map((item) => (
+              <div>
+                <dt>{item.label}</dt>
+                <dd>
+                  {Array.isArray(item.value) ? (
+                    item.value.length > 0 ? (
+                      <ul>{item.value.map((value) => <li>{value}</li>)}</ul>
+                    ) : 'Not provided'
+                  ) : item.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))}
+    </div>
+  </article>
+</dialog>
