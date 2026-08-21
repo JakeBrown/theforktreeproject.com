@@ -119,6 +119,16 @@ export function formatDateTime(value: string): string {
   }).format(date);
 }
 
+export function formatTime(value: string): string {
+  const date = new Date(value);
+  if (!value || Number.isNaN(date.getTime())) return displayValue(value);
+  return new Intl.DateTimeFormat('en-AU', {
+    hour: 'numeric',
+    minute: '2-digit',
+    timeZone: 'Australia/Adelaide',
+  }).format(date);
+}
+
 export function yesNo(value: number | boolean): string {
   return value === 1 || value === true ? 'Yes' : 'No';
 }

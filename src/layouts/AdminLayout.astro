@@ -42,8 +42,11 @@ const { title, description, active } = Astro.props;
   dialogTriggers.forEach((trigger) => {
     trigger.addEventListener('click', (event) => {
       const target = event.target;
-      if (!(target instanceof Element) || target.closest('dialog')) return;
-      if (target !== trigger && target.closest('a, button, input, select, textarea')) return;
+      if (!(target instanceof Element) || target.closest('[data-dialog-open]') !== trigger) return;
+      const interactiveTarget = target.closest('a, button, input, select, textarea');
+      if (interactiveTarget && interactiveTarget !== trigger) return;
+      const containingDialog = target.closest('dialog');
+      if (containingDialog && !containingDialog.contains(trigger)) return;
       openDialog(trigger);
     });
     trigger.addEventListener('keydown', (event) => {

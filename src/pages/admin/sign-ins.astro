@@ -7,11 +7,19 @@ import {
   escapeLike,
   formatDate,
   formatDateTime,
-  getAdminFilters,
+  formatTime,
   yesNo,
   type D1Database,
   type DetailGroup,
 } from '../../lib/admin';
+import {
+  calendarWeeks,
+  formatMonth,
+  getSignInAdminParams,
+  isDemoSignInName,
+  monthBounds,
+  shiftMonth,
+} from '../../lib/adminSignIns';
 
 export const prerender = false;
 
@@ -25,46 +33,88 @@ interface VolunteerSignIn {
   signed_in_at: string;
 }
 
-const filters = getAdminFilters(Astro.url.searchParams);
+interface SignInCount {
+  volunteer_date: string;
+  sign_in_count: number;
+}
+
+const params = getSignInAdminParams(Astro.url.searchParams);
+const monthLabel = formatMonth(params.month);
+const weeks = calendarWeeks(params.month);
+const [monthStart, nextMonthStart] = monthBounds(params.month);
+const previousMonth = params.month === '2000-01' ? null : shiftMonth(params.month, -1);
+const nextMonth = params.month === '2100-12' ? null : shiftMonth(params.month, 1);
 let signIns: VolunteerSignIn[] = [];
+let counts: SignInCount[] = [];
+let listIsLimited = false;
 let loadError = false;
 const database = (Astro.locals as any).runtime?.env?.VOLUNTEER_SIGN_INS as D1Database | undefined;
 
 if (!database) {
   loadError = true;
 } else {
-  const conditions: string[] = [];
-  const bindings: string[] = [];
-
-  if (filters.name) {
-    conditions.push("full_name LIKE ? ESCAPE '\\' COLLATE NOCASE");
-    bindings.push(`%${escapeLike(filters.name)}%`);
-  }
-  if (filters.date) {
-    conditions.push('volunteer_date = ?');
-    bindings.push(filters.date);
-  }
-
-  const where = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
-
   try {
-    let statement = database.prepare(
-      `SELECT id, full_name, email, phone, volunteer_date, communications_consent, signed_in_at
-       FROM volunteer_sign_ins
-       ${where}
-       ORDER BY signed_in_at DESC, id DESC
-       LIMIT ${ADMIN_RESULT_LIMIT}`
-    );
-    if (bindings.length > 0) statement = statement.bind(...bindings);
-    const result = await statement.all<VolunteerSignIn>();
-    signIns = result.results || [];
+    if (params.view === 'calendar') {
+      const [countResult, signInResult] = await Promise.all([
+        database
+          .prepare(
+            `SELECT volunteer_date, COUNT(*) AS sign_in_count
+             FROM volunteer_sign_ins
+             WHERE volunteer_date >= ? AND volunteer_date < ?
+             GROUP BY volunteer_date
+             ORDER BY volunteer_date ASC
+             LIMIT ?`
+          )
+          .bind(monthStart, nextMonthStart, 31)
+          .all<SignInCount>(),
+        database
+          .prepare(
+            `SELECT id, full_name, email, phone, volunteer_date, communications_consent, signed_in_at
+             FROM volunteer_sign_ins
+             WHERE volunteer_date >= ? AND volunteer_date < ?
+             ORDER BY signed_in_at DESC, id DESC
+             LIMIT ?`
+          )
+          .bind(monthStart, nextMonthStart, ADMIN_RESULT_LIMIT)
+          .all<VolunteerSignIn>(),
+      ]);
+      counts = countResult.results || [];
+      signIns = signInResult.results || [];
+    } else {
+      const where = params.name ? "WHERE full_name LIKE ? ESCAPE '\\' COLLATE NOCASE" : '';
+      let statement = database.prepare(
+        `SELECT id, full_name, email, phone, volunteer_date, communications_consent, signed_in_at
+         FROM volunteer_sign_ins
+         ${where}
+         ORDER BY signed_in_at DESC, id DESC
+         LIMIT ?`
+      );
+      statement = params.name
+        ? statement.bind(`%${escapeLike(params.name)}%`, ADMIN_RESULT_LIMIT + 1)
+        : statement.bind(ADMIN_RESULT_LIMIT + 1);
+      const result = await statement.all<VolunteerSignIn>();
+      const rows = result.results || [];
+      listIsLimited = rows.length > ADMIN_RESULT_LIMIT;
+      signIns = rows.slice(0, ADMIN_RESULT_LIMIT);
+    }
   } catch {
     loadError = true;
     console.error('Unable to load volunteer sign-ins');
   }
 }
 
-const recordLabel = `${signIns.length} ${signIns.length === 1 ? 'record' : 'records'}`;
+const countByDate = new Map(counts.map((row) => [row.volunteer_date, Number(row.sign_in_count)]));
+const recordsByDate = new Map<string, VolunteerSignIn[]>();
+for (const signIn of signIns) {
+  const records = recordsByDate.get(signIn.volunteer_date) || [];
+  records.push(signIn);
+  recordsByDate.set(signIn.volunteer_date, records);
+}
+const calendarTotal = counts.reduce((total, row) => total + Number(row.sign_in_count), 0);
+const calendarIsLimited = calendarTotal > signIns.length;
+const listLabel = listIsLimited
+  ? `Showing the newest ${ADMIN_RESULT_LIMIT}${params.name ? ' matching' : ''} records; more are available`
+  : `${signIns.length} ${signIns.length === 1 ? 'record' : 'records'}, newest first`;
 
 function detailsFor(signIn: VolunteerSignIn): DetailGroup[] {
   return [
@@ -94,39 +144,168 @@ function detailsFor(signIn: VolunteerSignIn): DetailGroup[] {
   description="Review volunteer sign-ins for The Forktree Project."
   active="sign-ins"
 >
-  <header class="admin-page-heading">
+  <header class="admin-page-heading sign-ins-heading">
     <div>
       <p class="admin-kicker">Volunteer records</p>
       <h1>Sign-ins</h1>
       <p class="admin-summary">
-        {loadError ? 'Sign-ins are unavailable.' : `${recordLabel}${signIns.length === ADMIN_RESULT_LIMIT ? ' shown' : ''}, newest first`}
+        {loadError ? 'Sign-ins are unavailable.' : params.view === 'calendar'
+          ? `${calendarTotal} ${calendarTotal === 1 ? 'sign-in' : 'sign-ins'} across ${counts.length} ${counts.length === 1 ? 'day' : 'days'} in ${monthLabel}`
+          : listLabel}
       </p>
     </div>
+    <nav class="view-switch" aria-label="Sign-in view">
+      <a href={`/admin/sign-ins?month=${params.month}`} aria-current={params.view === 'calendar' ? 'page' : undefined}>Calendar</a>
+      <a href="/admin/sign-ins?view=list" aria-current={params.view === 'list' ? 'page' : undefined}>List</a>
+    </nav>
   </header>
 
-  <form class="admin-filters" method="get" action="/admin/sign-ins" role="search">
-    <div class="admin-field">
-      <label for="sign-in-name">Volunteer name</label>
-      <input id="sign-in-name" name="name" type="search" value={filters.name} maxlength="100" placeholder="Search full name" />
-    </div>
-    <div class="admin-field">
-      <label for="sign-in-date">Volunteer date</label>
-      <input id="sign-in-date" name="date" type="date" value={filters.date} />
-    </div>
-    <button class="admin-button" type="submit">Apply filters</button>
-    <a class="admin-link-button" href="/admin/sign-ins">Clear filters</a>
-  </form>
+  {params.view === 'list' && (
+    <form class="admin-filters sign-in-search" method="get" action="/admin/sign-ins" role="search">
+      <input type="hidden" name="view" value="list" />
+      <div class="admin-field">
+        <label for="sign-in-name">Volunteer name</label>
+        <input id="sign-in-name" name="name" type="search" value={params.name} maxlength="100" placeholder="Search full name" />
+      </div>
+      <button class="admin-button" type="submit">Search</button>
+      {params.name && <a class="admin-link-button" href="/admin/sign-ins?view=list">Clear search</a>}
+    </form>
+  )}
 
   {loadError ? (
     <section class="admin-state" role="alert">
       <h2>Sign-ins could not be loaded</h2>
       <p>Refresh the page or try again later.</p>
     </section>
-  ) : signIns.length === 0 && filters.active ? (
+  ) : params.view === 'calendar' ? (
+    <section class="sign-in-calendar" aria-labelledby="calendar-month">
+      <header class="calendar-toolbar">
+        {previousMonth ? (
+          <a class="calendar-nav" href={`/admin/sign-ins?month=${previousMonth}`} aria-label={`View ${formatMonth(previousMonth)}`}>
+            <span aria-hidden="true">←</span><span>Previous</span>
+          </a>
+        ) : (
+          <span class="calendar-nav calendar-nav--disabled" aria-disabled="true"><span aria-hidden="true">←</span><span>Previous</span></span>
+        )}
+        <h2 id="calendar-month">{monthLabel}</h2>
+        {nextMonth ? (
+          <a class="calendar-nav" href={`/admin/sign-ins?month=${nextMonth}`} aria-label={`View ${formatMonth(nextMonth)}`}>
+            <span>Next</span><span aria-hidden="true">→</span>
+          </a>
+        ) : (
+          <span class="calendar-nav calendar-nav--disabled" aria-disabled="true"><span>Next</span><span aria-hidden="true">→</span></span>
+        )}
+      </header>
+
+      {calendarIsLimited && (
+        <p class="calendar-notice" role="status">
+          This month has more than {ADMIN_RESULT_LIMIT} sign-ins. Daily counts are complete, but only the newest {ADMIN_RESULT_LIMIT} details are available here.
+        </p>
+      )}
+
+      <div class="calendar-table-wrap">
+        <table class="calendar-table">
+          <caption class="sr-only">Volunteer sign-ins for {monthLabel}, Monday to Sunday</caption>
+          <thead>
+            <tr>
+              {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
+                <th scope="col"><abbr title={day}>{day.slice(0, 3)}</abbr></th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {weeks.map((week) => (
+              <tr>
+                {week.days.map((day) => {
+                  if (!day) return <td class="calendar-day calendar-day--outside" aria-hidden="true"></td>;
+                  const count = countByDate.get(day.date) || 0;
+                  const dayDialogId = `sign-in-day-${day.date}`;
+                  return (
+                    <td class:list={['calendar-day', { 'calendar-day--populated': count > 0 }]}>
+                      {count > 0 ? (
+                        <button
+                          type="button"
+                          class="calendar-day__button"
+                          data-dialog-open={dayDialogId}
+                          aria-haspopup="dialog"
+                          aria-controls={dayDialogId}
+                          aria-label={`${formatDate(day.date)}, ${count} ${count === 1 ? 'sign-in' : 'sign-ins'}`}
+                        >
+                          <time class="calendar-day__date" datetime={day.date}>{day.dayNumber}</time>
+                          <span class="calendar-day__count"><strong>{count}</strong> <span>{count === 1 ? 'sign-in' : 'sign-ins'}</span></span>
+                        </button>
+                      ) : (
+                        <time class="calendar-day__date" datetime={day.date}>{day.dayNumber}</time>
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {calendarTotal === 0 && (
+        <div class="calendar-empty">
+          <h3>No sign-ins this month</h3>
+          <p>Use Previous or Next to review another month.</p>
+        </div>
+      )}
+
+      {counts.map((countRow) => {
+        const dayRecords = recordsByDate.get(countRow.volunteer_date) || [];
+        const dayDialogId = `sign-in-day-${countRow.volunteer_date}`;
+        const dayTitleId = `${dayDialogId}-title`;
+        const expectedCount = Number(countRow.sign_in_count);
+        return (
+          <dialog class="admin-dialog day-sign-ins-dialog" id={dayDialogId} aria-labelledby={dayTitleId}>
+            <article class="admin-dialog__panel">
+              <header class="admin-dialog__header">
+                <div>
+                  <p class="admin-dialog__eyebrow">{expectedCount} {expectedCount === 1 ? 'volunteer' : 'volunteers'}</p>
+                  <h2 id={dayTitleId}>{formatDate(countRow.volunteer_date)}</h2>
+                </div>
+                <button class="admin-dialog__close" type="button" data-dialog-close aria-label="Close volunteer list">×</button>
+              </header>
+              <div class="admin-dialog__body day-sign-ins-dialog__body">
+                {dayRecords.length > 0 ? (
+                  <ul class="day-sign-ins-list">
+                    {dayRecords.map((signIn) => (
+                      <li>
+                        <button
+                          type="button"
+                          data-dialog-open={`sign-in-${signIn.id}`}
+                          aria-haspopup="dialog"
+                          aria-controls={`sign-in-${signIn.id}`}
+                          aria-label={`View full details for ${displayValue(signIn.full_name)}`}
+                        >
+                          <span class="day-sign-ins-list__name">
+                            <strong>{displayValue(signIn.full_name)}</strong>
+                            {isDemoSignInName(signIn.full_name) && <span class="demo-record-badge">Demo</span>}
+                          </span>
+                          <span class="day-sign-ins-list__meta">Signed in {formatTime(signIn.signed_in_at)} <span aria-hidden="true">→</span></span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p class="day-sign-ins-unavailable">Volunteer details are outside the current display limit.</p>
+                )}
+                {dayRecords.length < expectedCount && dayRecords.length > 0 && (
+                  <p class="day-sign-ins-limit">Showing the newest {dayRecords.length} of {expectedCount} sign-ins for this day.</p>
+                )}
+              </div>
+            </article>
+          </dialog>
+        );
+      })}
+    </section>
+  ) : signIns.length === 0 && params.name ? (
     <section class="admin-state">
       <h2>No matching sign-ins</h2>
-      <p>Try a different name or volunteer date.</p>
-      <a class="admin-link-button" href="/admin/sign-ins">Clear filters</a>
+      <p>Try a different volunteer name.</p>
+      <a class="admin-link-button" href="/admin/sign-ins?view=list">Clear search</a>
     </section>
   ) : signIns.length === 0 ? (
     <section class="admin-state">
@@ -157,7 +336,9 @@ function detailsFor(signIn: VolunteerSignIn): DetailGroup[] {
                 aria-controls={dialogId}
                 aria-label={`View full details for ${displayValue(signIn.full_name)}`}
               >
-                <td data-label="Volunteer"><strong>{displayValue(signIn.full_name)}</strong></td>
+                <td data-label="Volunteer">
+                  <span class="record-name"><strong>{displayValue(signIn.full_name)}</strong>{isDemoSignInName(signIn.full_name) && <span class="demo-record-badge">Demo</span>}</span>
+                </td>
                 <td data-label="Phone" class="record-contact">{displayValue(signIn.phone)}</td>
                 <td data-label="Volunteer date"><time datetime={signIn.volunteer_date}>{formatDate(signIn.volunteer_date)}</time></td>
                 <td data-label="Signed in"><time datetime={signIn.signed_in_at}>{formatDateTime(signIn.signed_in_at)}</time></td>
@@ -170,12 +351,6 @@ function detailsFor(signIn: VolunteerSignIn): DetailGroup[] {
                     aria-controls={dialogId}
                     aria-label={`View full details for ${displayValue(signIn.full_name)}`}
                   >View details</button>
-                  <AdminRecordDialog
-                    id={dialogId}
-                    title={displayValue(signIn.full_name)}
-                    eyebrow="Volunteer sign-in"
-                    groups={detailsFor(signIn)}
-                  />
                 </td>
               </tr>
             );
@@ -184,4 +359,143 @@ function detailsFor(signIn: VolunteerSignIn): DetailGroup[] {
       </table>
     </div>
   )}
+
+  {!loadError && signIns.map((signIn) => (
+    <AdminRecordDialog
+      id={`sign-in-${signIn.id}`}
+      title={displayValue(signIn.full_name)}
+      eyebrow={isDemoSignInName(signIn.full_name) ? 'Demo volunteer sign-in' : 'Volunteer sign-in'}
+      groups={detailsFor(signIn)}
+    />
+  ))}
 </AdminLayout>
+
+<style is:global>
+  .sign-ins-heading { align-items: center; }
+
+  .view-switch {
+    display: inline-flex;
+    flex: 0 0 auto;
+    padding: 0.25rem;
+    border: 1px solid #d3dbd0;
+    border-radius: 7px;
+    background: #fff;
+  }
+
+  .view-switch a {
+    min-width: 5.8rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 4px;
+    color: #596556;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .view-switch a:hover { color: #285f25; }
+  .view-switch a[aria-current='page'] { background: #34752e; color: #fff; }
+  .sign-in-search { grid-template-columns: minmax(15rem, 1fr) auto auto; }
+  .record-name,
+  .day-sign-ins-list__name { display: inline-flex; align-items: center; gap: 0.55rem; }
+
+  .demo-record-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.35rem;
+    padding: 0.1rem 0.42rem;
+    border: 1px solid #d6b968;
+    border-radius: 999px;
+    background: #fff8de;
+    color: #725813;
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .sign-in-calendar {
+    overflow: hidden;
+    border: 1px solid #dce2d9;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 14px 38px rgba(31, 42, 31, 0.05);
+  }
+
+  .calendar-toolbar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.1rem;
+    border-bottom: 1px solid #dce2d9;
+    background: #f8faf7;
+  }
+
+  .calendar-toolbar h2 { margin: 0; font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 600; text-align: center; }
+  .calendar-nav { display: inline-flex; align-items: center; gap: 0.45rem; width: fit-content; min-height: 40px; padding: 0.45rem 0.7rem; border-radius: 5px; color: #2d6927; font-size: 0.78rem; font-weight: 700; }
+  .calendar-nav:last-child { justify-self: end; }
+  .calendar-nav:hover { background: #eaf1e7; }
+  .calendar-nav--disabled { color: #98a095; cursor: not-allowed; }
+  .calendar-nav:focus-visible,
+  .view-switch a:focus-visible,
+  .calendar-day__button:focus-visible,
+  .day-sign-ins-list button:focus-visible { outline: 3px solid rgba(58, 125, 50, 0.25); outline-offset: 2px; }
+
+  .calendar-notice { margin: 0; padding: 0.75rem 1rem; border-bottom: 1px solid #eadba5; background: #fff9e6; color: #69551e; font-size: 0.8rem; text-align: center; }
+  .calendar-table { width: 100%; table-layout: fixed; border-collapse: collapse; }
+  .calendar-table th { padding: 0.7rem 0.4rem; border-bottom: 1px solid #dce2d9; background: #eef2eb; color: #5b6658; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-align: center; text-transform: uppercase; }
+  .calendar-table abbr { text-decoration: none; }
+  .calendar-day { position: relative; height: clamp(5.5rem, 10vw, 8.5rem); padding: 0.65rem; border-right: 1px solid #e3e8e1; border-bottom: 1px solid #e3e8e1; vertical-align: top; }
+  .calendar-day:last-child { border-right: 0; }
+  .calendar-table tbody tr:last-child .calendar-day { border-bottom: 0; }
+  .calendar-day--outside { background: #f8faf7; }
+  .calendar-day__date { display: block; color: #566153; font-size: 0.75rem; font-weight: 700; }
+  .calendar-day__button { position: absolute; inset: 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 0.4rem; width: 100%; padding: 0.65rem; color: #1f2a1f; text-align: left; }
+  .calendar-day__button:hover { background: #f1f6ef; }
+  .calendar-day__button .calendar-day__date { color: #285f25; }
+  .calendar-day__count { align-self: flex-end; display: flex; align-items: baseline; gap: 0.22rem; color: #3d6b38; font-size: 0.67rem; }
+  .calendar-day__count strong { font-size: clamp(1.15rem, 2.4vw, 1.8rem); font-weight: 600; line-height: 1; }
+  .calendar-empty { padding: clamp(1.75rem, 5vw, 3rem); border-top: 1px solid #dce2d9; background: #fafcf9; text-align: center; }
+  .calendar-empty h3 { margin: 0 0 0.35rem; font-size: 1.1rem; font-weight: 600; }
+  .calendar-empty p { margin: 0; color: #657063; font-size: 0.85rem; }
+
+  .day-sign-ins-dialog { width: min(92vw, 650px); }
+  .day-sign-ins-dialog__body { padding: 0; }
+  .day-sign-ins-list { margin: 0; padding: 0; list-style: none; }
+  .day-sign-ins-list li + li { border-top: 1px solid #e3e8e1; }
+  .day-sign-ins-list button { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; width: 100%; min-height: 68px; padding: 1rem clamp(1.1rem, 4vw, 2rem); color: #1f2a1f; text-align: left; }
+  .day-sign-ins-list button:hover { background: #f7faf6; }
+  .day-sign-ins-list__name { min-width: 0; }
+  .day-sign-ins-list__name strong { overflow-wrap: anywhere; font-size: 0.92rem; font-weight: 600; }
+  .day-sign-ins-list__meta { flex: 0 0 auto; color: #657063; font-size: 0.75rem; }
+  .day-sign-ins-limit,
+  .day-sign-ins-unavailable { margin: 0; padding: 1rem 1.25rem; background: #fff9e6; color: #69551e; font-size: 0.78rem; text-align: center; }
+
+  @media (max-width: 800px) {
+    .sign-ins-heading { align-items: flex-start; }
+    .sign-in-search { grid-template-columns: 1fr auto auto; }
+    .calendar-day { height: 5.2rem; padding: 0.45rem; }
+    .calendar-day__button { align-items: flex-start; flex-direction: column; padding: 0.45rem; }
+    .calendar-day__count { align-self: auto; gap: 0; flex-direction: column; }
+    .calendar-day__count strong { font-size: 1.2rem; }
+  }
+
+  @media (max-width: 520px) {
+    .view-switch { width: 100%; }
+    .view-switch a { flex: 1; }
+    .sign-in-search { grid-template-columns: 1fr; }
+    .calendar-toolbar { gap: 0.35rem; padding-inline: 0.45rem; }
+    .calendar-toolbar h2 { font-size: 1rem; }
+    .calendar-nav { padding-inline: 0.4rem; }
+    .calendar-nav span:not([aria-hidden='true']) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .calendar-table th { padding: 0.55rem 0.1rem; font-size: 0.58rem; letter-spacing: 0; }
+    .calendar-day { height: 4.25rem; padding: 0.3rem; }
+    .calendar-day__button { padding: 0.3rem; }
+    .calendar-day__date { font-size: 0.66rem; }
+    .calendar-day__count strong { font-size: 1rem; }
+    .calendar-day__count span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .day-sign-ins-list button { align-items: flex-start; flex-direction: column; gap: 0.3rem; }
+    .day-sign-ins-list__meta { flex: auto; }
+  }
+</style>

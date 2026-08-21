@@ -2,7 +2,7 @@
 id: the-9ih1
 status: closed
 deps: []
-links: [the-bgzr]
+links: [the-bgzr, the-nqz0]
 created: 2026-08-20T08:15:44Z
 type: feature
 priority: 2
