@@ -32,11 +32,37 @@ const { title, description, active } = Astro.props;
 
 <script>
   const dialogTriggers = document.querySelectorAll<HTMLElement>('[data-dialog-open]');
+  const scrollLockClass = 'admin-dialog-scroll-locked';
+
+  const syncDialogScrollLock = () => {
+    const root = document.documentElement;
+    const hasOpenDialog = Boolean(document.querySelector('dialog.admin-dialog[open]'));
+
+    if (hasOpenDialog && !root.classList.contains(scrollLockClass)) {
+      root.style.setProperty('--admin-dialog-scroll-y', `${-window.scrollY}px`);
+      root.classList.add(scrollLockClass);
+      return;
+    }
+
+    if (!hasOpenDialog && root.classList.contains(scrollLockClass)) {
+      const scrollY = Math.abs(Number.parseInt(root.style.getPropertyValue('--admin-dialog-scroll-y'), 10) || 0);
+      root.classList.remove(scrollLockClass);
+      root.style.removeProperty('--admin-dialog-scroll-y');
+      // Native dialog focus restoration can run after `close`; restore after it settles.
+      window.requestAnimationFrame(() => {
+        window.scrollTo(0, scrollY);
+        window.requestAnimationFrame(() => window.scrollTo(0, scrollY));
+      });
+    }
+  };
 
   const openDialog = (trigger: HTMLElement) => {
     const dialogId = trigger.dataset.dialogOpen;
     const dialog = dialogId ? document.getElementById(dialogId) : null;
-    if (dialog instanceof HTMLDialogElement && !dialog.open) dialog.showModal();
+    if (dialog instanceof HTMLDialogElement && !dialog.open) {
+      dialog.showModal();
+      syncDialogScrollLock();
+    }
   };
 
   dialogTriggers.forEach((trigger) => {
@@ -63,10 +89,22 @@ const { title, description, active } = Astro.props;
     dialog.addEventListener('click', (event) => {
       if (event.target === dialog) dialog.close();
     });
+    dialog.addEventListener('close', syncDialogScrollLock);
   });
 </script>
 
 <style is:global>
+  html.admin-dialog-scroll-locked {
+    overflow: hidden;
+  }
+
+  html.admin-dialog-scroll-locked body {
+    position: fixed;
+    top: var(--admin-dialog-scroll-y);
+    width: 100%;
+    overflow: hidden;
+  }
+
   .admin-shell {
     min-height: 100vh;
     background: #f5f7f3;
