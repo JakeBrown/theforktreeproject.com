@@ -220,6 +220,15 @@ function detailsFor(registration: VolunteerRegistration): DetailGroup[] {
         {loadError ? 'Registrations are unavailable.' : `${recordLabel}${registrations.length === ADMIN_RESULT_LIMIT ? ' shown' : ''}, newest first`}
       </p>
     </div>
+    <div class="registration-export">
+      <a class="admin-button registration-export__button" href="/admin/registrations.csv" download>
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+          <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 18v2h14v-2" />
+        </svg>
+        Download MailerLite CSV
+      </a>
+      <p>Most recent registration per email. Page filters aren’t applied.</p>
+    </div>
   </header>
 
   <form class="admin-filters" method="get" action="/admin/registrations" role="search">
@@ -309,3 +318,40 @@ function detailsFor(registration: VolunteerRegistration): DetailGroup[] {
     </div>
   )}
 </AdminLayout>
+
+<style>
+  .registration-export {
+    display: grid;
+    justify-items: end;
+    gap: 0.45rem;
+    max-width: 24rem;
+    text-align: right;
+  }
+
+  .registration-export__button {
+    gap: 0.55rem;
+    box-shadow: 0 6px 16px rgba(40, 95, 37, 0.16);
+  }
+
+  .registration-export__button svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+
+  .registration-export p {
+    margin: 0;
+    color: #657063;
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 800px) {
+    .registration-export {
+      justify-items: start;
+      text-align: left;
+    }
+  }
+</style>
