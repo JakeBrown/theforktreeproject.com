@@ -9,7 +9,6 @@ import {
   type VolunteerQualificationsInput,
   type VolunteerRegistrationInput,
 } from '../lib/volunteerRegistration';
-import { getAdelaideDate } from '../lib/volunteerSignIn';
 
 type FieldErrors = Record<string, string>;
 type FormStatus = 'idle' | 'submitting' | 'success';
@@ -61,6 +60,16 @@ const emptyForm = (): VolunteerRegistrationInput => ({
 
 function FieldError({ id, error }: { id: string; error?: string }) {
   return error ? <span id={id} className="registration-error">{error}</span> : null;
+}
+
+function formatAustralianDateInput(value: string): string {
+  const isoDate = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (isoDate) return `${isoDate[3]}/${isoDate[2]}/${isoDate[1]}`;
+
+  const digits = value.replace(/\D/g, '').slice(0, 8);
+  if (digits.length <= 2) return digits;
+  if (digits.length <= 4) return `${digits.slice(0, 2)}/${digits.slice(2)}`;
+  return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`;
 }
 
 export default function VolunteerRegistrationForm() {
@@ -284,7 +293,7 @@ export default function VolunteerRegistrationForm() {
           {formData.isUnder18 === true && (
             <div className="registration-field registration-field--full registration-field--compact">
               <label htmlFor="registration-date-of-birth">Date of birth <span aria-hidden="true">*</span></label>
-              <input id="registration-date-of-birth" name="dateOfBirth" type="date" autoComplete="bday" max={getAdelaideDate()} value={formData.dateOfBirth} onChange={(event) => updateField('dateOfBirth', event.target.value)} aria-invalid={Boolean(errors.dateOfBirth)} aria-describedby={errors.dateOfBirth ? 'registration-date-of-birth-error' : undefined} required />
+              <input id="registration-date-of-birth" name="dateOfBirth" type="text" inputMode="numeric" autoComplete="bday" placeholder="DD/MM/YYYY" maxLength={10} value={formData.dateOfBirth} onChange={(event) => updateField('dateOfBirth', formatAustralianDateInput(event.target.value))} aria-invalid={Boolean(errors.dateOfBirth)} aria-describedby={errors.dateOfBirth ? 'registration-date-of-birth-error' : undefined} required />
               <FieldError id="registration-date-of-birth-error" error={errors.dateOfBirth} />
             </div>
           )}
@@ -394,8 +403,8 @@ export default function VolunteerRegistrationForm() {
         )}
 
         <div className="registration-field registration-field--spaced">
-          <label htmlFor="registration-skills">Skills, qualifications and experience <span className="registration-optional">Optional</span></label>
-          <p className="registration-help" id="registration-skills-help">Tell us about any skills, qualifications, licences or experience you would like to contribute.</p>
+          <label htmlFor="registration-skills">Skills and experience <span className="registration-optional">Optional</span></label>
+          <p className="registration-help" id="registration-skills-help">Tell us about any skills or experience you would like to contribute.</p>
           <textarea id="registration-skills" name="skillsExperience" rows={5} maxLength={4000} value={formData.skillsExperience} onChange={(event) => updateField('skillsExperience', event.target.value)} aria-invalid={Boolean(errors.skillsExperience)} aria-describedby={`registration-skills-help${errors.skillsExperience ? ' registration-skills-error' : ''}`} />
           <FieldError id="registration-skills-error" error={errors.skillsExperience} />
         </div>
@@ -415,15 +424,15 @@ export default function VolunteerRegistrationForm() {
           <div className="registration-options registration-options--stacked">
             <div className="registration-option-detail">
               <label className="registration-option"><input type="checkbox" checked={formData.qualifications.firstAid} onChange={(event) => { updateQualification('firstAid', event.target.checked); if (!event.target.checked) updateQualification('firstAidExpiry', ''); }} /><span>First Aid Certificate</span></label>
-              {formData.qualifications.firstAid && <div className="registration-field"><label htmlFor="registration-first-aid-expiry">Expiry date <span aria-hidden="true">*</span></label><input id="registration-first-aid-expiry" type="date" required min={getAdelaideDate()} value={formData.qualifications.firstAidExpiry} onChange={(event) => updateQualification('firstAidExpiry', event.target.value)} aria-invalid={Boolean(errors.qualificationFirstAidExpiry)} aria-describedby={errors.qualificationFirstAidExpiry ? 'registration-first-aid-expiry-error' : undefined} /><FieldError id="registration-first-aid-expiry-error" error={errors.qualificationFirstAidExpiry} /></div>}
+              {formData.qualifications.firstAid && <div className="registration-field"><label htmlFor="registration-first-aid-expiry">Expiry date <span aria-hidden="true">*</span></label><input id="registration-first-aid-expiry" type="text" inputMode="numeric" placeholder="DD/MM/YYYY" maxLength={10} required value={formData.qualifications.firstAidExpiry} onChange={(event) => updateQualification('firstAidExpiry', formatAustralianDateInput(event.target.value))} aria-invalid={Boolean(errors.qualificationFirstAidExpiry)} aria-describedby={errors.qualificationFirstAidExpiry ? 'registration-first-aid-expiry-error' : undefined} /><FieldError id="registration-first-aid-expiry-error" error={errors.qualificationFirstAidExpiry} /></div>}
             </div>
             <div className="registration-option-detail">
               <label className="registration-option"><input type="checkbox" checked={formData.qualifications.cpr} onChange={(event) => { updateQualification('cpr', event.target.checked); if (!event.target.checked) updateQualification('cprExpiry', ''); }} /><span>CPR Certificate</span></label>
-              {formData.qualifications.cpr && <div className="registration-field"><label htmlFor="registration-cpr-expiry">Expiry date <span aria-hidden="true">*</span></label><input id="registration-cpr-expiry" type="date" required min={getAdelaideDate()} value={formData.qualifications.cprExpiry} onChange={(event) => updateQualification('cprExpiry', event.target.value)} aria-invalid={Boolean(errors.qualificationCprExpiry)} aria-describedby={errors.qualificationCprExpiry ? 'registration-cpr-expiry-error' : undefined} /><FieldError id="registration-cpr-expiry-error" error={errors.qualificationCprExpiry} /></div>}
+              {formData.qualifications.cpr && <div className="registration-field"><label htmlFor="registration-cpr-expiry">Expiry date <span aria-hidden="true">*</span></label><input id="registration-cpr-expiry" type="text" inputMode="numeric" placeholder="DD/MM/YYYY" maxLength={10} required value={formData.qualifications.cprExpiry} onChange={(event) => updateQualification('cprExpiry', formatAustralianDateInput(event.target.value))} aria-invalid={Boolean(errors.qualificationCprExpiry)} aria-describedby={errors.qualificationCprExpiry ? 'registration-cpr-expiry-error' : undefined} /><FieldError id="registration-cpr-expiry-error" error={errors.qualificationCprExpiry} /></div>}
             </div>
             <div className="registration-option-detail">
               <label className="registration-option"><input type="checkbox" checked={formData.qualifications.chemicalHandling} onChange={(event) => { updateQualification('chemicalHandling', event.target.checked); if (!event.target.checked) updateQualification('chemicalHandlingExpiry', ''); }} /><span>Chemical Handling (e.g. ChemCert)</span></label>
-              {formData.qualifications.chemicalHandling && <div className="registration-field"><label htmlFor="registration-chemical-expiry">Expiry date <span aria-hidden="true">*</span></label><input id="registration-chemical-expiry" type="date" required min={getAdelaideDate()} value={formData.qualifications.chemicalHandlingExpiry} onChange={(event) => updateQualification('chemicalHandlingExpiry', event.target.value)} aria-invalid={Boolean(errors.qualificationChemicalHandlingExpiry)} aria-describedby={errors.qualificationChemicalHandlingExpiry ? 'registration-chemical-expiry-error' : undefined} /><FieldError id="registration-chemical-expiry-error" error={errors.qualificationChemicalHandlingExpiry} /></div>}
+              {formData.qualifications.chemicalHandling && <div className="registration-field"><label htmlFor="registration-chemical-expiry">Expiry date <span aria-hidden="true">*</span></label><input id="registration-chemical-expiry" type="text" inputMode="numeric" placeholder="DD/MM/YYYY" maxLength={10} required value={formData.qualifications.chemicalHandlingExpiry} onChange={(event) => updateQualification('chemicalHandlingExpiry', formatAustralianDateInput(event.target.value))} aria-invalid={Boolean(errors.qualificationChemicalHandlingExpiry)} aria-describedby={errors.qualificationChemicalHandlingExpiry ? 'registration-chemical-expiry-error' : undefined} /><FieldError id="registration-chemical-expiry-error" error={errors.qualificationChemicalHandlingExpiry} /></div>}
             </div>
             <label className="registration-option"><input type="checkbox" checked={formData.qualifications.chainsaw} onChange={(event) => updateQualification('chainsaw', event.target.checked)} /><span>Chainsaw Qualification</span></label>
             <div className="registration-option-detail">
@@ -481,7 +490,7 @@ export default function VolunteerRegistrationForm() {
             </div>
             <div className="registration-field">
               <label htmlFor="registration-wwcc-expiry">Expiry date <span aria-hidden="true">*</span></label>
-              <input id="registration-wwcc-expiry" name="wwccExpiryDate" type="date" required min={getAdelaideDate()} value={formData.wwccExpiryDate} onChange={(event) => updateField('wwccExpiryDate', event.target.value)} aria-invalid={Boolean(errors.wwccExpiryDate)} aria-describedby={errors.wwccExpiryDate ? 'registration-wwcc-expiry-error' : undefined} />
+              <input id="registration-wwcc-expiry" name="wwccExpiryDate" type="text" inputMode="numeric" placeholder="DD/MM/YYYY" maxLength={10} required value={formData.wwccExpiryDate} onChange={(event) => updateField('wwccExpiryDate', formatAustralianDateInput(event.target.value))} aria-invalid={Boolean(errors.wwccExpiryDate)} aria-describedby={errors.wwccExpiryDate ? 'registration-wwcc-expiry-error' : undefined} />
               <FieldError id="registration-wwcc-expiry-error" error={errors.wwccExpiryDate} />
             </div>
           </div>

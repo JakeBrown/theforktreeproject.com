@@ -167,7 +167,7 @@ function detailsFor(registration: VolunteerRegistration): DetailGroup[] {
       items: [
         { label: 'Volunteer interests', value: parseJsonList(registration.interests_json, interestLabels) },
         { label: 'Other interest', value: displayValue(registration.interest_other) },
-        { label: 'Skills, qualifications and experience', value: displayValue(registration.skills_experience) },
+        { label: 'Skills and experience', value: displayValue(registration.skills_experience) },
       ],
     },
     {

@@ -1,6 +1,6 @@
 import { getAdelaideDate, normalizePhone } from './volunteerSignIn';
 
-export const VOLUNTEER_REGISTRATION_FORM_VERSION = '2026-08-14';
+export const VOLUNTEER_REGISTRATION_FORM_VERSION = '2026-08-25';
 
 export const REFERRAL_SOURCES = [
   { value: 'friend-family', label: 'Friend or family' },
@@ -150,6 +150,7 @@ const LICENCE_VALUES = new Set<string>(LICENCES.map(({ value }) => value));
 const FREQUENCY_VALUES = new Set<string>(VOLUNTEERING_FREQUENCIES.map(({ value }) => value));
 const WEEKDAY_VALUES = new Set<string>(WEEKDAYS.map(({ value }) => value));
 const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+const AU_DATE_PATTERN = /^(\d{2})\/(\d{2})\/(\d{4})$/;
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
@@ -176,6 +177,17 @@ function validIsoDate(value: string): boolean {
   );
 }
 
+export function normalizeDateInput(value: string): string | null {
+  if (validIsoDate(value)) return value;
+
+  const match = AU_DATE_PATTERN.exec(value);
+  if (!match) return null;
+
+  const [, day, month, year] = match;
+  const isoDate = `${year}-${month}-${day}`;
+  return validIsoDate(isoDate) ? isoDate : null;
+}
+
 function ageOnDate(dateOfBirth: string, today: string): number {
   const [birthYear, birthMonth, birthDay] = dateOfBirth.split('-').map(Number);
   const [currentYear, currentMonth, currentDay] = today.split('-').map(Number);
@@ -199,15 +211,16 @@ function validateDate(
     if (required) errors[field] = 'Enter a date.';
     return '';
   }
+  const normalizedValue = normalizeDateInput(value);
   if (
-    !validIsoDate(value) ||
-    (notFuture && value > today) ||
-    (notPast && value < today)
+    !normalizedValue ||
+    (notFuture && normalizedValue > today) ||
+    (notPast && normalizedValue < today)
   ) {
-    errors[field] = 'Enter a valid date.';
+    errors[field] = 'Enter a valid date in DD/MM/YYYY format.';
     return value;
   }
-  return value;
+  return normalizedValue;
 }
 
 function validateSelection<T extends string>(
@@ -315,9 +328,10 @@ export function validateVolunteerRegistration(
       errors.dateOfBirth = 'This date of birth does not indicate an age under 18.';
     }
   } else if (dateOfBirth) {
-    if (!validIsoDate(dateOfBirth) || dateOfBirth > today) {
-      errors.dateOfBirth = 'Enter a valid date of birth.';
-    } else if (ageOnDate(dateOfBirth, today) < 18) {
+    const normalizedDateOfBirth = normalizeDateInput(dateOfBirth);
+    if (!normalizedDateOfBirth || normalizedDateOfBirth > today) {
+      errors.dateOfBirth = 'Enter a valid date of birth in DD/MM/YYYY format.';
+    } else if (ageOnDate(normalizedDateOfBirth, today) < 18) {
       errors.isUnder18 = 'Select yes if you are under 18.';
     }
     dateOfBirth = '';
