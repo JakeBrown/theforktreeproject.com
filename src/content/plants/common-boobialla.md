@@ -5,7 +5,7 @@ tagline: "A coastal hero"
 month: "2026-08"
 image: "/images/plants/common-boobialla-hero.jpg"
 imageAlt: "Close-up of Common Boobialla flowers among green leaves"
-imageCredit: "Karah Lovegrove"
+imageCredit: "Kalah Lovegrove"
 ---
 
 The August plant of the month is about more than just a plant, really. But then again, it always is — when do they ever grow in isolation?
