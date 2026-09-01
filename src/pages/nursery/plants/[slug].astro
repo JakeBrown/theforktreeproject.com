@@ -33,12 +33,14 @@ const formatMonth = (ym: string) => {
   <article class="potm-post">
 
     <section class="potm-post__hero" style={`background-image: url('${plantHeroBg?.src ?? plant.data.image}'); background-position: ${plant.data.imagePosition ?? 'center'};`}>
+      {plant.data.imageAlt && <span class="sr-only">Featured image: {plant.data.imageAlt}</span>}
       <div class="potm-post__hero-inner">
         <p class="potm-post__kicker">Plant of the Month &middot; {formatMonth(plant.data.month)}</p>
         <h1 class="potm-post__title">{plant.data.title}</h1>
         <p class="potm-post__sci"><em>{plant.data.scientificName}</em></p>
         <p class="potm-post__tag">{plant.data.tagline}</p>
       </div>
+      {plant.data.imageCredit && <p class="potm-post__credit">Photo: {plant.data.imageCredit}</p>}
     </section>
 
     <section class="potm-post__body">
@@ -88,6 +90,18 @@ const formatMonth = (ym: string) => {
     z-index: 2;
     max-width: 720px;
     text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
+  }
+
+  .potm-post__credit {
+    position: absolute;
+    right: 1.25rem;
+    bottom: 0.9rem;
+    z-index: 2;
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
   }
 
   .potm-post__kicker {
