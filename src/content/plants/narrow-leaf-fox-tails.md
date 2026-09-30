@@ -17,7 +17,7 @@ This herbaceous plant is unassuming when not in bloom, but it will knock your so
 
 Though we have over 30 *Ptilotus* species in South Australia, it tends to be more of a local celebrity in Western Australia, growing in vast swathes throughout the state. WA often gets the speccy specimens (not jealous), but we think we’re bringing something pretty cool to the table with this one.
 
-The Narrow-leaf Fox tails grow from the South coast of South Australia to the Flinders Ranges. They love a dry rocky slope, but understandably don’t cope well with weeds or clearing for developments — which explains the state Endangered conservation status.
+The Narrow-leaf Fox tails grow from the South coast of South Australia to the Flinders Ranges. They love a dry rocky slope, but understandably don’t cope well with weeds or clearing for developments - which explains the state Endangered conservation status.
 
 Here in the Forktree Nursery we’ve been growing a few hundred *Ptilotus angustifolius* each year for Green Adelaide projects. We also have them growing in our rare seed orchard. We’re really proud to be helping bring more vulnerable plants back into the landscape, doing our part to protect and promote biodiversity.
 
