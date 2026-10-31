@@ -4,6 +4,7 @@ import grassDaisyHero from '../assets/images/plants/grass-daisy-hero.jpg';
 import longPurpleFlagHero from '../assets/images/plants/long-purple-flag-hero.jpg';
 import nativeLilacHero from '../assets/images/plants/native-lilac-hero.jpg';
 import narrowLeafFoxTailsHero from '../assets/images/plants/narrow-leaf-fox-tails-hero.jpg';
+import riverMintHero from '../assets/images/plants/river-mint-hero.jpg';
 
 const plantImages = {
   '/images/plants/common-boobialla-hero.jpg': commonBoobiallaHero,
@@ -12,6 +13,7 @@ const plantImages = {
   '/images/plants/long-purple-flag-hero.jpg': longPurpleFlagHero,
   '/images/plants/native-lilac-hero.jpg': nativeLilacHero,
   '/images/plants/narrow-leaf-fox-tails-hero.jpg': narrowLeafFoxTailsHero,
+  '/images/plants/river-mint-hero.jpg': riverMintHero,
 } as const;
 
 export function getPlantImage(src: string) {
