@@ -2,8 +2,13 @@ import { defineMiddleware } from 'astro:middleware';
 
 const ASSET_EXTENSIONS = /\.(js|css|png|jpg|jpeg|gif|svg|ico|webp|avif|woff2?|ttf|eot|map|json|xml|txt)$/i;
 const ADMIN_PATH = /^\/admin(?:\/|$)/;
-// Username: forktree-admin-4e7ac0. Store only the combined credential digest, not the plaintext password.
-const ADMIN_CREDENTIALS_SHA256 = 'ce198f7695cfd32644f28e4f4f9a7aeb30b4e8182a2c623e812afc709aa9d722';
+// SHA-256 digests of "username:password" for each admin login. Store only digests, never plaintext passwords.
+// Each person has their own login so access can be revoked individually by removing their line.
+const ADMIN_CREDENTIAL_DIGESTS: Readonly<Record<string, string>> = {
+  'forktree-admin-4e7ac0': 'ce198f7695cfd32644f28e4f4f9a7aeb30b4e8182a2c623e812afc709aa9d722',
+  maddie: '1d998b9d4cfc2b61680c94be1b1de255262feea31227f5b2711b6aaeb24be04f',
+  liz: 'f10876593d621a3d5c5e78443c7098ef32f981fdfdf946b284f459860a284a84',
+};
 
 function constantTimeEqual(left: string, right: string): boolean {
   if (left.length !== right.length) return false;
@@ -31,7 +36,12 @@ async function hasValidAdminCredentials(request: Request): Promise<boolean> {
 
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(credentials));
   const digestHex = Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('');
-  return constantTimeEqual(digestHex, ADMIN_CREDENTIALS_SHA256);
+  // Compare against every digest so timing does not reveal which usernames exist.
+  let matched = false;
+  for (const expected of Object.values(ADMIN_CREDENTIAL_DIGESTS)) {
+    if (constantTimeEqual(digestHex, expected)) matched = true;
+  }
+  return matched;
 }
 
 function unauthorizedResponse(): Response {
