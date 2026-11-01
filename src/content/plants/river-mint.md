@@ -13,7 +13,7 @@ The common name for this creeping plant is River Mint. This is fitting for a pla
 
 ## 1. Traditional uses
 
-River Mint grows across Australia (except for Western Australia — but they have enough to boast about). Being so widespread, it has been used traditionally by many First Nations groups. Kaurna medicinal uses include treatment for colds and headaches (take a look at [Kaurna Food & Fibre](https://www.aaeesa.org.au/kaurna-food-and-fibre/) for more information). River Mint has also been used more broadly as a digestive tonic and an insect repellent. It is equally at home in the food world — and the flavour packs a punch. It makes a bold meat seasoning and a bright but earthy brewed tea.
+River Mint grows across Australia (except for Western Australia – but they have enough to boast about). Being so widespread, it has been used traditionally by many First Nations groups. Kaurna medicinal uses include treatment for colds and headaches (take a look at this resource for more information: [Kaurna Food & Fibre](https://www.aaeesa.org.au/kaurna-food-and-fibre/)). River Mint has also been used more broadly as a digestive tonic and an insect repellent. It is equally at home in the food world – and the flavour packs a punch. It makes a bold meat seasoning and a bright but earthy brewed tea.
 
 ## 2. The fresh minty scent
 
