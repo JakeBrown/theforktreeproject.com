@@ -1,33 +1,59 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { getAdelaideDate, validateVolunteerSignIn } from '../lib/volunteerSignIn';
+import { SIGN_IN_DECLARATION_TEXT } from '../lib/volunteerAttendance';
+import { getAdelaideDate, validateVolunteerSignIn, validateVolunteerSignOut } from '../lib/volunteerSignIn';
 
 type FieldErrors = Record<string, string>;
 type FormStatus = 'idle' | 'submitting' | 'success';
+type Mode = 'sign-in' | 'sign-out';
 
 const emptyForm = () => ({
   fullName: '',
   phone: '',
+  declarationAccepted: false,
   website: '',
 });
 
 export default function VolunteerSignInForm() {
+  const [mode, setMode] = useState<Mode>('sign-in');
   const [formData, setFormData] = useState(emptyForm);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState('');
+  const [errorCode, setErrorCode] = useState('');
   const [status, setStatus] = useState<FormStatus>('idle');
+  const [signedOutName, setSignedOutName] = useState('');
   const successHeading = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     if (status === 'success') successHeading.current?.focus();
   }, [status]);
 
+  useEffect(() => {
+    // The QR poster can link straight to sign-out with ?mode=sign-out.
+    const requested = new URLSearchParams(window.location.search).get('mode');
+    if (requested === 'sign-out') setMode('sign-out');
+  }, []);
+
+  const switchMode = (next: Mode) => {
+    setMode(next);
+    setErrors({});
+    setFormError('');
+    setErrorCode('');
+    setStatus('idle');
+  };
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFormError('');
+    setErrorCode('');
 
-    const submission = { ...formData, volunteerDate: getAdelaideDate() };
+    const isSignIn = mode === 'sign-in';
+    const submission = isSignIn
+      ? { ...formData, volunteerDate: getAdelaideDate() }
+      : { phone: formData.phone, website: formData.website };
 
-    const validation = validateVolunteerSignIn(submission, submission.volunteerDate);
+    const validation = isSignIn
+      ? validateVolunteerSignIn(submission, getAdelaideDate())
+      : validateVolunteerSignOut(submission);
     if (!validation.success) {
       setErrors(validation.errors);
       return;
@@ -37,75 +63,110 @@ export default function VolunteerSignInForm() {
     setStatus('submitting');
 
     try {
-      const response = await fetch('/api/volunteer-sign-in', {
+      const response = await fetch(isSignIn ? '/api/volunteer-sign-in' : '/api/volunteer-sign-out', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(submission),
       });
       const result = (await response.json()) as {
         ok?: boolean;
+        code?: string;
+        name?: string;
         message?: string;
         errors?: FieldErrors;
       };
 
       if (!response.ok || !result.ok) {
         setErrors(result.errors || {});
-        setFormError(result.message || 'We couldn’t complete your sign-in. Please try again.');
+        setErrorCode(result.code || '');
+        setFormError(
+          result.message ||
+            (isSignIn ? 'We couldn’t complete your sign-in. Please try again.' : 'We couldn’t complete your sign-out. Please try again.')
+        );
         setStatus('idle');
         return;
       }
 
+      setSignedOutName(result.name || '');
       setFormData(emptyForm());
       setStatus('success');
     } catch {
-      setFormError('We couldn’t complete your sign-in. Please check the connection and try again.');
+      setFormError('We couldn’t reach Forktree. Please check the connection and try again.');
       setStatus('idle');
     }
   };
 
-  const startAnotherSignIn = () => {
+  const startAgain = () => {
     setErrors({});
     setFormError('');
+    setErrorCode('');
     setFormData(emptyForm());
     setStatus('idle');
   };
 
+  const isSignIn = mode === 'sign-in';
+
   return (
     <>
+      <div className="sign-in-mode" role="group" aria-label="Arriving or leaving">
+        <button type="button" aria-pressed={isSignIn} onClick={() => switchMode('sign-in')}>
+          Arriving — sign in
+        </button>
+        <button type="button" aria-pressed={!isSignIn} onClick={() => switchMode('sign-out')}>
+          Leaving — sign out
+        </button>
+      </div>
+
       {status === 'success' ? (
         <section className="sign-in-success" aria-live="polite">
           <div className="sign-in-success__mark" aria-hidden="true">✓</div>
-          <h2 ref={successHeading} tabIndex={-1}>You’re signed in</h2>
-          <p>Thank you for volunteering with The Forktree Project today.</p>
-          <button type="button" className="sign-in-button" onClick={startAnotherSignIn}>
-            Sign in another volunteer
-          </button>
+          {isSignIn ? (
+            <>
+              <h2 ref={successHeading} tabIndex={-1}>You’re signed in</h2>
+              <p>Thank you for volunteering with The Forktree Project today. Scan the same QR code to sign out when you leave.</p>
+              <button type="button" className="sign-in-button" onClick={startAgain}>
+                Sign in another volunteer
+              </button>
+            </>
+          ) : (
+            <>
+              <h2 ref={successHeading} tabIndex={-1}>
+                {signedOutName ? `Thanks, ${signedOutName}. You’re signed out` : 'You’re signed out'}
+              </h2>
+              <p>Thank you for volunteering with The Forktree Project today. Travel home safely.</p>
+              <button type="button" className="sign-in-button" onClick={startAgain}>
+                Sign out another volunteer
+              </button>
+            </>
+          )}
         </section>
       ) : (
         <form className="sign-in-form" onSubmit={handleSubmit} noValidate>
-          <div className="sign-in-field">
-            <label htmlFor="volunteer-full-name">Full name</label>
-            <input
-              id="volunteer-full-name"
-              name="fullName"
-              type="text"
-              autoComplete="name"
-              maxLength={120}
-              value={formData.fullName}
-              onChange={(event) => setFormData({ ...formData, fullName: event.target.value })}
-              aria-invalid={Boolean(errors.fullName)}
-              aria-describedby={errors.fullName ? 'volunteer-full-name-error' : undefined}
-              required
-            />
-            {errors.fullName && (
-              <span id="volunteer-full-name-error" className="sign-in-error">
-                {errors.fullName}
-              </span>
-            )}
-          </div>
+          {isSignIn && (
+            <div className="sign-in-field">
+              <label htmlFor="volunteer-full-name">Full name</label>
+              <input
+                id="volunteer-full-name"
+                name="fullName"
+                type="text"
+                autoComplete="name"
+                maxLength={120}
+                value={formData.fullName}
+                onChange={(event) => setFormData({ ...formData, fullName: event.target.value })}
+                aria-invalid={Boolean(errors.fullName)}
+                aria-describedby={errors.fullName ? 'volunteer-full-name-error' : undefined}
+                required
+              />
+              {errors.fullName && (
+                <span id="volunteer-full-name-error" className="sign-in-error">
+                  {errors.fullName}
+                </span>
+              )}
+            </div>
+          )}
 
           <div className="sign-in-field">
-            <label htmlFor="volunteer-phone">Phone number</label>
+            <label htmlFor="volunteer-phone">{isSignIn ? 'Phone number' : 'Phone number you signed in with'}</label>
             <input
               id="volunteer-phone"
               name="phone"
@@ -126,6 +187,30 @@ export default function VolunteerSignInForm() {
             )}
           </div>
 
+          {isSignIn && (
+            <div className="sign-in-declaration">
+              <p className="sign-in-declaration__heading" id="volunteer-declaration-heading">Declaration</p>
+              <label className="sign-in-declaration__label" htmlFor="volunteer-declaration">
+                <input
+                  id="volunteer-declaration"
+                  name="declarationAccepted"
+                  type="checkbox"
+                  checked={formData.declarationAccepted}
+                  onChange={(event) => setFormData({ ...formData, declarationAccepted: event.target.checked })}
+                  aria-invalid={Boolean(errors.declarationAccepted)}
+                  aria-describedby={errors.declarationAccepted ? 'volunteer-declaration-error' : undefined}
+                  required
+                />
+                <span>“{SIGN_IN_DECLARATION_TEXT}”</span>
+              </label>
+              {errors.declarationAccepted && (
+                <span id="volunteer-declaration-error" className="sign-in-error">
+                  {errors.declarationAccepted}
+                </span>
+              )}
+            </div>
+          )}
+
           <div className="sign-in-honeypot" aria-hidden="true">
             <label htmlFor="volunteer-website">Website</label>
             <input
@@ -139,20 +224,125 @@ export default function VolunteerSignInForm() {
             />
           </div>
 
-          <p className="sign-in-privacy">
-            We’ll use your name and phone number to manage today’s volunteer attendance and safety
-            records.
-          </p>
+          {isSignIn && (
+            <p className="sign-in-privacy">
+              We’ll use your name and phone number to manage today’s volunteer attendance and safety
+              records.
+            </p>
+          )}
 
-          {formError && <p className="sign-in-form-error" role="alert">{formError}</p>}
+          {formError && (
+            <div className="sign-in-form-error" role="alert">
+              <p>{formError}</p>
+              {errorCode === 'duplicate' && (
+                <button type="button" className="sign-in-inline-button" onClick={() => switchMode('sign-out')}>
+                  Sign out instead
+                </button>
+              )}
+              {errorCode === 'not-signed-in' && (
+                <button type="button" className="sign-in-inline-button" onClick={() => switchMode('sign-in')}>
+                  Sign in instead
+                </button>
+              )}
+            </div>
+          )}
 
           <button type="submit" className="sign-in-button" disabled={status === 'submitting'}>
-            {status === 'submitting' ? 'Signing you in…' : 'Sign in'}
+            {status === 'submitting'
+              ? isSignIn ? 'Signing you in…' : 'Signing you out…'
+              : isSignIn ? 'Sign in' : 'Sign out'}
           </button>
         </form>
       )}
 
       <style>{`
+        .sign-in-mode {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.35rem;
+          margin-bottom: 1.6rem;
+          padding: 0.3rem;
+          border: 1px solid #d3dbd0;
+          border-radius: 4px;
+          background: #f3f6f1;
+        }
+
+        .sign-in-mode button {
+          min-height: 48px;
+          border-radius: 2px;
+          color: #4c5849;
+          font-size: 0.74rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          padding: 0.6rem 0.5rem;
+          text-transform: uppercase;
+        }
+
+        .sign-in-mode button[aria-pressed='true'] {
+          background: #1f2a1f;
+          color: #fff;
+        }
+
+        .sign-in-mode button:focus-visible {
+          outline: 3px solid rgba(58, 125, 50, 0.25);
+          outline-offset: 2px;
+        }
+
+        .sign-in-declaration {
+          display: grid;
+          gap: 0.55rem;
+          padding: 1rem;
+          border: 1px solid #d8ded5;
+          border-radius: 2px;
+          background: #f7f9f6;
+        }
+
+        .sign-in-declaration__heading {
+          margin: 0;
+          color: #1f2a1f;
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+        }
+
+        .sign-in-declaration__label {
+          display: grid;
+          grid-template-columns: auto 1fr;
+          gap: 0.75rem;
+          align-items: start;
+          color: #2f382d;
+          font-size: 0.92rem;
+          line-height: 1.55;
+          cursor: pointer;
+        }
+
+        .sign-in-declaration__label input {
+          width: 22px;
+          height: 22px;
+          margin-top: 0.15rem;
+          accent-color: #3a7d32;
+        }
+
+        .sign-in-form-error p {
+          margin: 0;
+        }
+
+        .sign-in-inline-button {
+          margin-top: 0.6rem;
+          color: #1f2a1f;
+          font-size: 0.78rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-decoration: underline;
+          text-underline-offset: 0.2em;
+          text-transform: uppercase;
+        }
+
+        @media (max-width: 420px) {
+          .sign-in-mode { grid-template-columns: 1fr; }
+        }
+
         .sign-in-form {
           display: grid;
           gap: 1.4rem;

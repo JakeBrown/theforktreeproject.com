@@ -4,7 +4,7 @@ import BaseLayout from './BaseLayout.astro';
 interface Props {
   title: string;
   description: string;
-  active: 'sign-ins' | 'registrations';
+  active: 'calendar' | 'volunteers' | 'sign-ins' | 'registrations';
 }
 
 const { title, description, active } = Astro.props;
@@ -19,6 +19,8 @@ const { title, description, active } = Astro.props;
           <span>Forktree <strong>Admin</strong></span>
         </a>
         <nav class="admin-nav" aria-label="Admin navigation">
+          <a href="/admin/calendar" aria-current={active === 'calendar' ? 'page' : undefined}>Calendar</a>
+          <a href="/admin/volunteers" aria-current={active === 'volunteers' ? 'page' : undefined}>Volunteers</a>
           <a href="/admin/sign-ins" aria-current={active === 'sign-ins' ? 'page' : undefined}>Sign-ins</a>
           <a href="/admin/registrations" aria-current={active === 'registrations' ? 'page' : undefined}>Registrations</a>
         </nav>
@@ -220,7 +222,9 @@ const { title, description, active } = Astro.props;
     text-transform: uppercase;
   }
 
-  .admin-field input {
+  .admin-field input,
+  .admin-field select,
+  .admin-field textarea {
     width: 100%;
     min-height: 44px;
     padding: 0.65rem 0.75rem;
@@ -233,6 +237,8 @@ const { title, description, active } = Astro.props;
   }
 
   .admin-field input:focus,
+  .admin-field select:focus,
+  .admin-field textarea:focus,
   .admin-button:focus-visible,
   .admin-link-button:focus-visible,
   .record-view-button:focus-visible,
@@ -240,6 +246,39 @@ const { title, description, active } = Astro.props;
     outline: 3px solid rgba(58, 125, 50, 0.25);
     outline-offset: 2px;
   }
+
+  .admin-field textarea { min-height: 6rem; resize: vertical; line-height: 1.5; }
+
+  .attendance-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 1.5rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .attendance-badge::before { content: ''; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: currentColor; }
+  .attendance-badge--signed-in { background: #e3f1e1; color: #2a6b27; }
+  .attendance-badge--signed-out { background: #e3ebf8; color: #2c56a0; }
+  .attendance-badge--scheduled { background: #fbf0d4; color: #87600a; }
+  .attendance-badge--automatic { background: #f1ece4; color: #6e5a3c; }
+  .attendance-badge--automatic::before { display: none; }
+
+  /* Cards and form helpers shared by the volunteer profile and calendar pages. */
+  .profile-card { padding: clamp(1rem, 3vw, 1.6rem); border: 1px solid #dce2d9; border-radius: 8px; background: #fff; box-shadow: 0 14px 38px rgba(31, 42, 31, 0.05); }
+  .profile-card h2 { margin: 0 0 0.5rem; font-size: 1.1rem; font-weight: 600; }
+  .profile-error { color: #8c2020; font-size: 0.8rem; font-weight: 600; }
+  .admin-field [aria-invalid='true'] { border-color: #a43232; }
+  .profile-hint { margin: 0 0 0.9rem; color: #657063; font-size: 0.82rem; }
+  .profile-text-button { margin-top: 0.6rem; color: #8c2020; font-size: 0.8rem; font-weight: 700; text-decoration: underline; text-underline-offset: 0.18em; }
+
+  .admin-flash { margin: 0 0 1.25rem; padding: 0.85rem 1rem; border-radius: 6px; font-size: 0.88rem; }
+  .admin-flash--success { border: 1px solid #c3dcbf; background: #edf6eb; color: #275a23; }
+  .admin-flash--error { border: 1px solid #e3bcb7; background: #fbecea; color: #79231e; }
 
   .admin-button,
   .admin-link-button {

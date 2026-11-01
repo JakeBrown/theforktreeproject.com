@@ -30,7 +30,8 @@ binding = "JOURNAL_VECTORIZE"
 index_name = "forktree-journal"
 
 [triggers]
-crons = ["17 3 * * *"]
+# 17 3: journal search reindex. 30 6,7: volunteer 5pm Adelaide auto sign-out (covers ACDT and ACST).
+crons = ["17 3 * * *", "30 6,7 * * *"]
 
 [observability]
 enabled = true
