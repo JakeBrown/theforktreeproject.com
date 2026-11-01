@@ -2,6 +2,8 @@ import { defineMiddleware } from 'astro:middleware';
 
 const ASSET_EXTENSIONS = /\.(js|css|png|jpg|jpeg|gif|svg|ico|webp|avif|woff2?|ttf|eot|map|json|xml|txt)$/i;
 const ADMIN_PATH = /^\/admin(?:\/|$)/;
+// The volunteer calendar feed URL contains its secret token, so never record it in analytics.
+const PRIVATE_FEED_PATH = /^\/volunteer-calendar\//;
 // Username: forktree-admin-4e7ac0. Store only the combined credential digest, not the plaintext password.
 const ADMIN_CREDENTIALS_SHA256 = 'ce198f7695cfd32644f28e4f4f9a7aeb30b4e8182a2c623e812afc709aa9d722';
 
@@ -34,6 +36,18 @@ async function hasValidAdminCredentials(request: Request): Promise<boolean> {
   return constantTimeEqual(digestHex, ADMIN_CREDENTIALS_SHA256);
 }
 
+function isSameOriginRequest(request: Request): boolean {
+  const fetchSite = request.headers.get('sec-fetch-site');
+  if (fetchSite) return fetchSite === 'same-origin';
+  const source = request.headers.get('origin') || request.headers.get('referer');
+  if (!source) return false;
+  try {
+    return new URL(source).origin === new URL(request.url).origin;
+  } catch {
+    return false;
+  }
+}
+
 function unauthorizedResponse(): Response {
   return new Response('Authentication required.', {
     status: 401,
@@ -54,6 +68,15 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return unauthorizedResponse();
   }
 
+  // Browsers resend Basic auth credentials on cross-site form posts, so admin changes must come
+  // from an admin page on this site.
+  if (isAdminRequest && !['GET', 'HEAD'].includes(context.request.method) && !isSameOriginRequest(context.request)) {
+    return new Response('Cross-site admin requests are not allowed.', {
+      status: 403,
+      headers: { 'cache-control': 'no-store', 'content-type': 'text/plain; charset=utf-8' },
+    });
+  }
+
   const response = await next();
 
   if (isAdminRequest) {
@@ -63,8 +86,8 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return response;
   }
 
-  // Only log actual page views, not assets or prerendered builds
-  if (ASSET_EXTENSIONS.test(url.pathname) || url.pathname.startsWith('/_')) {
+  // Only log actual page views, not assets, prerendered builds or private feeds
+  if (ASSET_EXTENSIONS.test(url.pathname) || url.pathname.startsWith('/_') || PRIVATE_FEED_PATH.test(url.pathname)) {
     return response;
   }
 

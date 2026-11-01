@@ -4,6 +4,7 @@ export interface VolunteerSignInInput {
   fullName: string;
   phone: string;
   volunteerDate: string;
+  declarationAccepted?: boolean;
   website?: string;
 }
 
@@ -58,6 +59,10 @@ export function validateVolunteerSignIn(
     errors.phone = 'Enter a valid phone number.';
   }
 
+  if (input.declarationAccepted !== true) {
+    errors.declarationAccepted = 'Please read and agree to the declaration before signing in.';
+  }
+
   if (volunteerDate !== today) {
     errors.volunteerDate = 'Volunteer sign-in is only available for today.';
   }
@@ -75,4 +80,20 @@ export function validateVolunteerSignIn(
       volunteerDate,
     },
   };
+}
+
+export interface VolunteerSignOutInput {
+  phone: string;
+  website?: string;
+}
+
+export function validateVolunteerSignOut(
+  input: Partial<VolunteerSignOutInput>
+): { success: true; phone: string; phoneNormalized: string } | { success: false; errors: Record<string, string> } {
+  const phone = typeof input.phone === 'string' ? input.phone.trim().replace(/\s+/g, ' ') : '';
+  const phoneNormalized = normalizePhone(phone);
+  if (phoneNormalized.length < 8 || phoneNormalized.length > 15) {
+    return { success: false, errors: { phone: 'Enter the phone number you signed in with.' } };
+  }
+  return { success: true, phone, phoneNormalized };
 }
