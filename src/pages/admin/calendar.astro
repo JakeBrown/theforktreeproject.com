@@ -1,0 +1,408 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import '../../styles/admin-calendar.css';
+import { formatDate, formatTime } from '../../lib/admin';
+import { calendarWeeks, formatMonth, getSignInAdminParams, monthBounds, shiftMonth } from '../../lib/adminSignIns';
+import { getAdelaideDate } from '../../lib/volunteerAttendance';
+import { CALENDAR_STATUSES, statusInfo, type CalendarEntry } from '../../lib/volunteerCalendar';
+import { loadCalendarEntries } from '../../lib/volunteerCalendarData';
+import {
+  getCalendarToken,
+  getVolunteerDatabase,
+  refreshVolunteerRecords,
+  resetCalendarToken,
+} from '../../lib/volunteerDb';
+import { parsePositiveId, parseVisitForm } from '../../lib/volunteerProfiles';
+
+export const prerender = false;
+
+const database = getVolunteerDatabase(Astro.locals);
+const params = getSignInAdminParams(Astro.url.searchParams);
+const today = getAdelaideDate();
+let visitError = '';
+
+if (Astro.request.method === 'POST' && database) {
+  const form = await Astro.request.formData();
+  const action = form.get('action');
+  if (action === 'reset-token') {
+    await resetCalendarToken(database);
+    return Astro.redirect(`/admin/calendar?month=${params.month}&notice=link-created#subscribe`, 303);
+  }
+  if (action === 'add-visit') {
+    const volunteerId = parsePositiveId(form.get('volunteer_id'));
+    const parsed = parseVisitForm(form, today);
+    if (!volunteerId) {
+      visitError = 'Choose a volunteer.';
+    } else if (!parsed.success) {
+      visitError = parsed.error;
+    } else {
+      const volunteer = await database.prepare('SELECT id FROM volunteers WHERE id = ?1').bind(volunteerId).first();
+      if (!volunteer) {
+        visitError = 'That volunteer could not be found.';
+      } else {
+        await database
+          .prepare(
+            `INSERT INTO volunteer_scheduled_visits (volunteer_id, visit_date, start_time, end_time, notes, created_at)
+             VALUES (?1, ?2, ?3, ?4, ?5, ?6)`
+          )
+          .bind(volunteerId, parsed.values.visit_date, parsed.values.start_time, parsed.values.end_time, parsed.values.notes, new Date().toISOString())
+          .run();
+        return Astro.redirect(`/admin/calendar?month=${parsed.values.visit_date.slice(0, 7)}&notice=visit-added`, 303);
+      }
+    }
+  }
+}
+
+const monthLabel = formatMonth(params.month);
+const weeks = calendarWeeks(params.month);
+const [monthStart, nextMonthStart] = monthBounds(params.month);
+const previousMonth = params.month === '2000-01' ? null : shiftMonth(params.month, -1);
+const nextMonth = params.month === '2100-12' ? null : shiftMonth(params.month, 1);
+
+let entries: CalendarEntry[] = [];
+let volunteers: Array<{ id: number; full_name: string }> = [];
+let token = '';
+let loadError = false;
+
+if (!database) {
+  loadError = true;
+} else {
+  try {
+    await refreshVolunteerRecords(database);
+    const [loadedEntries, volunteerResult, loadedToken] = await Promise.all([
+      loadCalendarEntries(database, monthStart, nextMonthStart),
+      database.prepare('SELECT id, full_name FROM volunteers ORDER BY full_name COLLATE NOCASE LIMIT 2000').all<{ id: number; full_name: string }>(),
+      getCalendarToken(database),
+    ]);
+    entries = loadedEntries;
+    volunteers = volunteerResult.results || [];
+    token = loadedToken;
+  } catch (error) {
+    loadError = true;
+    console.error('Unable to load volunteer calendar', error);
+  }
+}
+
+const entriesByDate = new Map<string, CalendarEntry[]>();
+for (const entry of entries) {
+  const list = entriesByDate.get(entry.date) || [];
+  list.push(entry);
+  entriesByDate.set(entry.date, list);
+}
+const statusCounts = Object.fromEntries(CALENDAR_STATUSES.map((status) => [status.value, entries.filter((entry) => entry.status === status.value).length]));
+const origin = Astro.url.origin;
+const feeds = token
+  ? [
+      { key: 'all', label: 'Everything (one calendar)', hint: 'Colour shown by the dot at the start of each event title.' },
+      { key: 'signed-in', label: 'Signed in only', hint: '' },
+      { key: 'signed-out', label: 'Signed out only', hint: '' },
+      { key: 'scheduled', label: 'Scheduled only', hint: '' },
+    ].map((feed) => ({ ...feed, url: `${origin}/volunteer-calendar/${token}/${feed.key}.ics` }))
+  : [];
+const NOTICES: Record<string, string> = {
+  'visit-added': 'Visit scheduled.',
+  'link-created': 'A new subscription link is ready. Any older links have stopped working.',
+};
+const notice = NOTICES[Astro.url.searchParams.get('notice') || ''];
+const MAX_CHIPS = 4;
+
+function entryMeta(entry: CalendarEntry): string {
+  const parts: string[] = [];
+  if (entry.expectedTime) parts.push(`Expected ${entry.expectedTime}`);
+  if (entry.signedInAt) parts.push(`In ${formatTime(entry.signedInAt)}`);
+  if (entry.signedOutAt) parts.push(`Out ${formatTime(entry.signedOutAt)}${entry.signOutMethod === 'automatic' ? ' (automatic)' : ''}`);
+  return parts.join(' · ');
+}
+
+function contact(name: string, relationship: string, phone: string): string {
+  if (!name && !phone) return '';
+  return `${name || 'Unnamed'}${relationship ? ` (${relationship})` : ''}${phone ? ` · ${phone}` : ''}`;
+}
+---
+
+<AdminLayout title="Volunteer calendar" description="Volunteer attendance and scheduled visits." active="calendar">
+  <header class="admin-page-heading">
+    <div>
+      <p class="admin-kicker">Volunteer records</p>
+      <h1>Calendar</h1>
+      <p class="admin-summary">
+        {loadError ? 'The calendar is unavailable.' : `${monthLabel}: ${statusCounts['signed-in']} signed in, ${statusCounts['signed-out']} signed out, ${statusCounts['scheduled']} scheduled`}
+      </p>
+    </div>
+    <ul class="calendar-legend" aria-label="Colour key">
+      {CALENDAR_STATUSES.map((status) => (
+        <li><span class={`attendance-badge attendance-badge--${status.value}`}>{status.label}</span></li>
+      ))}
+    </ul>
+  </header>
+
+  {notice && <p class="admin-flash admin-flash--success" role="status">{notice}</p>}
+
+  {loadError ? (
+    <section class="admin-state" role="alert">
+      <h2>The calendar could not be loaded</h2>
+      <p>Refresh the page or try again later.</p>
+    </section>
+  ) : (
+    <>
+      <section class="sign-in-calendar volunteer-calendar" aria-labelledby="calendar-month">
+        <header class="calendar-toolbar">
+          {previousMonth ? (
+            <a class="calendar-nav" href={`/admin/calendar?month=${previousMonth}`} aria-label={`View ${formatMonth(previousMonth)}`}><span aria-hidden="true">←</span><span>Previous</span></a>
+          ) : <span class="calendar-nav calendar-nav--disabled" aria-disabled="true"><span aria-hidden="true">←</span><span>Previous</span></span>}
+          <h2 id="calendar-month">{monthLabel}</h2>
+          {nextMonth ? (
+            <a class="calendar-nav" href={`/admin/calendar?month=${nextMonth}`} aria-label={`View ${formatMonth(nextMonth)}`}><span>Next</span><span aria-hidden="true">→</span></a>
+          ) : <span class="calendar-nav calendar-nav--disabled" aria-disabled="true"><span>Next</span><span aria-hidden="true">→</span></span>}
+        </header>
+        <div class="calendar-table-wrap">
+          <table class="calendar-table">
+            <caption class="sr-only">Volunteers for {monthLabel}, Monday to Sunday</caption>
+            <thead>
+              <tr>
+                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
+                  <th scope="col"><abbr title={day}>{day.slice(0, 3)}</abbr></th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {weeks.map((week) => (
+                <tr>
+                  {week.days.map((day) => {
+                    if (!day) return <td class="calendar-day calendar-day--outside" aria-hidden="true"></td>;
+                    const dayEntries = entriesByDate.get(day.date) || [];
+                    const dialogId = `calendar-day-${day.date}`;
+                    return (
+                      <td class:list={['calendar-day', 'volunteer-calendar__day', { 'calendar-day--today': day.date === today }]}>
+                        {dayEntries.length > 0 ? (
+                          <button type="button" class="volunteer-calendar__button" data-dialog-open={dialogId} aria-haspopup="dialog" aria-controls={dialogId} aria-label={`${formatDate(day.date)}, ${dayEntries.length} ${dayEntries.length === 1 ? 'volunteer' : 'volunteers'}`}>
+                            <time class="calendar-day__date" datetime={day.date}>{day.dayNumber}</time>
+                            <span class="volunteer-calendar__chips">
+                              {dayEntries.slice(0, MAX_CHIPS).map((entry) => (
+                                <span class={`volunteer-chip volunteer-chip--${entry.status}`}>{entry.volunteer.fullName}</span>
+                              ))}
+                              {dayEntries.length > MAX_CHIPS && <span class="volunteer-chip volunteer-chip--more">+{dayEntries.length - MAX_CHIPS} more</span>}
+                            </span>
+                            <span class="volunteer-calendar__dots" aria-hidden="true">
+                              {CALENDAR_STATUSES.map((status) => {
+                                const count = dayEntries.filter((entry) => entry.status === status.value).length;
+                                return count > 0 ? <span class={`volunteer-dot volunteer-dot--${status.value}`}>{count}</span> : null;
+                              })}
+                            </span>
+                          </button>
+                        ) : (
+                          <time class="calendar-day__date" datetime={day.date}>{day.dayNumber}</time>
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {[...entriesByDate.entries()].map(([date, dayEntries]) => {
+          const dialogId = `calendar-day-${date}`;
+          return (
+            <dialog class="admin-dialog day-sign-ins-dialog" id={dialogId} aria-labelledby={`${dialogId}-title`}>
+              <article class="admin-dialog__panel">
+                <header class="admin-dialog__header">
+                  <div>
+                    <p class="admin-dialog__eyebrow">{dayEntries.length} {dayEntries.length === 1 ? 'volunteer' : 'volunteers'}</p>
+                    <h2 id={`${dialogId}-title`}>{formatDate(date)}</h2>
+                  </div>
+                  <button class="admin-dialog__close" type="button" data-dialog-close aria-label="Close volunteer list">×</button>
+                </header>
+                <div class="admin-dialog__body day-sign-ins-dialog__body">
+                  <ul class="calendar-day-list">
+                    {dayEntries.map((entry) => {
+                      const primary = contact(entry.volunteer.emergencyContactName, entry.volunteer.emergencyContactRelationship, entry.volunteer.emergencyContactPhone);
+                      const secondary = contact(entry.volunteer.secondaryEmergencyContactName, entry.volunteer.secondaryEmergencyContactRelationship, entry.volunteer.secondaryEmergencyContactPhone);
+                      return (
+                        <li>
+                          <div class="calendar-day-list__top">
+                            {entry.volunteer.id ? <a href={`/admin/volunteers/${entry.volunteer.id}`}><strong>{entry.volunteer.fullName}</strong></a> : <strong>{entry.volunteer.fullName}</strong>}
+                            <span class={`attendance-badge attendance-badge--${entry.status}`}>{statusInfo(entry.status).label}</span>
+                            {entry.signOutMethod === 'automatic' && <span class="attendance-badge attendance-badge--automatic">Automatic</span>}
+                          </div>
+                          {entryMeta(entry) && <p>{entryMeta(entry)}</p>}
+                          {entry.visitNotes && <p>{entry.visitNotes}</p>}
+                          <p>Phone: {entry.volunteer.phone || 'Not provided'}</p>
+                          <p>Emergency: {primary || 'Not provided'}{secondary && <><br />Second: {secondary}</>}</p>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </article>
+            </dialog>
+          );
+        })}
+      </section>
+
+      <div class="calendar-panels">
+        <section class="profile-card" id="schedule" aria-labelledby="schedule-heading">
+          <h2 id="schedule-heading">Schedule a visit</h2>
+          <form class="calendar-schedule-form" method="post" action={`/admin/calendar?month=${params.month}#schedule`}>
+            <input type="hidden" name="action" value="add-visit" />
+            <div class="admin-field calendar-schedule-form__wide">
+              <label for="schedule-volunteer">Volunteer</label>
+              <select id="schedule-volunteer" name="volunteer_id" required>
+                <option value="">Choose a volunteer</option>
+                {volunteers.map((volunteer) => <option value={String(volunteer.id)}>{volunteer.full_name}</option>)}
+              </select>
+            </div>
+            <div class="admin-field">
+              <label for="schedule-date">Date</label>
+              <input id="schedule-date" name="visit_date" type="date" min={today} required />
+            </div>
+            <div class="admin-field">
+              <label for="schedule-start">Expected arrival</label>
+              <input id="schedule-start" name="start_time" type="time" />
+            </div>
+            <div class="admin-field">
+              <label for="schedule-end">Expected finish</label>
+              <input id="schedule-end" name="end_time" type="time" />
+            </div>
+            <div class="admin-field calendar-schedule-form__wide">
+              <label for="schedule-notes">Notes (optional)</label>
+              <input id="schedule-notes" name="visit_notes" type="text" maxlength="300" placeholder="e.g. Nursery potting" />
+            </div>
+            {visitError && <p class="profile-error calendar-schedule-form__wide" role="alert">{visitError}</p>}
+            <button class="admin-button calendar-schedule-form__wide" type="submit">Schedule visit</button>
+          </form>
+          <p class="profile-hint calendar-schedule-hint">To change or remove a visit, open the volunteer’s profile.</p>
+        </section>
+
+        <section class="profile-card" id="subscribe" aria-labelledby="subscribe-heading">
+          <h2 id="subscribe-heading">Subscribe in Outlook</h2>
+          <p class="profile-hint">
+            A live calendar of all-day events with each volunteer’s phone, emergency contacts and expected time. It covers the last 6 months and the next 12.
+          </p>
+          {feeds.length === 0 ? (
+            <form method="post" action={`/admin/calendar?month=${params.month}`}>
+              <input type="hidden" name="action" value="reset-token" />
+              <button class="admin-button" type="submit">Create subscription link</button>
+            </form>
+          ) : (
+            <>
+              <ul class="calendar-feeds">
+                {feeds.map((feed) => (
+                  <li>
+                    <label for={`feed-${feed.key}`}>{feed.label}</label>
+                    <div class="calendar-feeds__row">
+                      <input id={`feed-${feed.key}`} type="text" readonly value={feed.url} />
+                      <button class="admin-link-button" type="button" data-copy={`feed-${feed.key}`}>Copy</button>
+                    </div>
+                    {feed.hint && <span class="calendar-feeds__hint">{feed.hint}</span>}
+                  </li>
+                ))}
+              </ul>
+              <details class="calendar-howto">
+                <summary>How to add it to Outlook</summary>
+                <ol>
+                  <li>Copy a link above.</li>
+                  <li>Outlook on the web or new Outlook: Calendar → Add calendar → Subscribe from web, paste the link and choose a colour.</li>
+                  <li>Classic Outlook for Windows: Calendar → Add calendar → From Internet, paste the link.</li>
+                </ol>
+                <p>Outlook ignores colours set inside a shared calendar, so every event title starts with a coloured dot: 🟢 signed in, 🔵 signed out, 🟡 scheduled. For full colour blocks, subscribe to the three separate links and give each its own colour in Outlook. Outlook refreshes subscribed calendars every few hours, so changes are not instant.</p>
+              </details>
+              <p class="calendar-feeds__warning">Anyone with these links can see volunteers’ contact and emergency details. Only share them with coordinators.</p>
+              <form method="post" action={`/admin/calendar?month=${params.month}`} data-confirm="Replace the link? Every existing subscription will stop updating until it is re-added with the new link.">
+                <input type="hidden" name="action" value="reset-token" />
+                <button class="profile-text-button" type="submit">Replace link (stops all existing subscriptions)</button>
+              </form>
+            </>
+          )}
+        </section>
+      </div>
+    </>
+  )}
+</AdminLayout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const input = document.getElementById(button.dataset.copy || '') as HTMLInputElement | null;
+      if (!input) return;
+      input.select();
+      try {
+        await navigator.clipboard.writeText(input.value);
+        button.textContent = 'Copied';
+        window.setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+      } catch {
+        // The text stays selected so it can be copied manually.
+      }
+    });
+  });
+
+  document.querySelectorAll<HTMLFormElement>('form[data-confirm]').forEach((form) => {
+    let confirmed = false;
+    form.addEventListener('submit', (event) => {
+      if (confirmed) return;
+      event.preventDefault();
+      const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (!button) return;
+      // Two-step confirmation without a blocking browser dialog.
+      button.textContent = 'Click again to replace the link';
+      confirmed = true;
+    });
+  });
+</script>
+
+<style is:global>
+  .calendar-legend { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+  .calendar-day--today { box-shadow: inset 0 0 0 2px #34752e; }
+  .volunteer-calendar__day { height: clamp(6.5rem, 11vw, 9.5rem); }
+  .volunteer-calendar__button { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 0.35rem; width: 100%; padding: 0.55rem; overflow: hidden; color: #1f2a1f; text-align: left; }
+  .volunteer-calendar__button:hover { background: #f7faf6; }
+  .volunteer-calendar__button:focus-visible { outline: 3px solid rgba(58, 125, 50, 0.25); outline-offset: -3px; }
+  .volunteer-calendar__chips { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+  .volunteer-chip { display: block; overflow: hidden; padding: 0.1rem 0.4rem; border-left: 3px solid; border-radius: 3px; font-size: 0.68rem; font-weight: 600; line-height: 1.45; text-overflow: ellipsis; white-space: nowrap; }
+  .volunteer-chip--signed-in { border-color: #2f7d32; background: #e3f1e1; color: #23561f; }
+  .volunteer-chip--signed-out { border-color: #3b6fb6; background: #e3ebf8; color: #244a8a; }
+  .volunteer-chip--scheduled { border-color: #c98a12; background: #fbf0d4; color: #6f4f07; }
+  .volunteer-chip--more { border-color: transparent; background: transparent; color: #566153; }
+  .volunteer-calendar__dots { display: none; gap: 0.2rem; flex-wrap: wrap; }
+  .volunteer-dot { display: inline-grid; min-width: 1.15rem; height: 1.15rem; place-items: center; border-radius: 999px; color: #fff; font-size: 0.6rem; font-weight: 700; }
+  .volunteer-dot--signed-in { background: #2f7d32; }
+  .volunteer-dot--signed-out { background: #3b6fb6; }
+  .volunteer-dot--scheduled { background: #c98a12; }
+  .calendar-day-list { margin: 0; padding: 0; list-style: none; }
+  .calendar-day-list li { padding: 1rem clamp(1.1rem, 4vw, 2rem); border-bottom: 1px solid #e3e8e1; }
+  .calendar-day-list li:last-child { border-bottom: 0; }
+  .calendar-day-list__top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; }
+  .calendar-day-list__top a { color: #1f2a1f; }
+  .calendar-day-list__top a:hover { color: #285f25; text-decoration: underline; }
+  .calendar-day-list p { margin: 0.15rem 0 0; color: #566153; font-size: 0.82rem; }
+  .calendar-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem; align-items: start; }
+  .calendar-schedule-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; margin-top: 0.75rem; }
+  .calendar-schedule-form__wide { grid-column: 1 / -1; }
+  .calendar-schedule-hint { margin: 0.9rem 0 0; }
+  .calendar-feeds { display: grid; gap: 0.85rem; margin: 0 0 1rem; padding: 0; list-style: none; }
+  .calendar-feeds label { display: block; margin-bottom: 0.3rem; color: #4e5a4b; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+  .calendar-feeds__row { display: flex; gap: 0.5rem; }
+  .calendar-feeds__row input { flex: 1; min-width: 0; min-height: 44px; padding: 0.55rem 0.7rem; border: 1px solid #bdc8ba; border-radius: 5px; background: #f8faf7; color: #1f2a1f; font: inherit; font-size: 0.78rem; }
+  .calendar-feeds__hint { display: block; margin-top: 0.25rem; color: #657063; font-size: 0.75rem; }
+  .calendar-howto { margin-bottom: 1rem; font-size: 0.84rem; }
+  .calendar-howto summary { color: #2d6927; font-weight: 700; cursor: pointer; }
+  .calendar-howto ol { margin: 0.6rem 0; padding-left: 1.2rem; list-style: decimal; }
+  .calendar-howto li + li { margin-top: 0.3rem; }
+  .calendar-howto p { margin: 0; color: #566153; }
+  .calendar-feeds__warning { margin: 0 0 0.25rem; padding: 0.7rem 0.85rem; border-radius: 5px; background: #fff9e6; color: #69551e; font-size: 0.8rem; }
+
+  @media (max-width: 1000px) {
+    .calendar-panels { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 800px) {
+    .volunteer-calendar__day { height: 5.2rem; }
+    .volunteer-calendar__chips { display: none; }
+    .volunteer-calendar__dots { display: flex; }
+    .volunteer-calendar__button { padding: 0.4rem; }
+  }
+  @media (max-width: 520px) {
+    .calendar-schedule-form { grid-template-columns: 1fr; }
+    .volunteer-calendar__day { height: 4.6rem; }
+  }
+</style>

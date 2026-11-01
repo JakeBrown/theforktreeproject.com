@@ -1,0 +1,450 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { formatDate, formatTime } from '../../../lib/admin';
+import {
+  SIGN_IN_DECLARATION_VERSION,
+  formatExpectedTime,
+  getAdelaideDate,
+} from '../../../lib/volunteerAttendance';
+import {
+  VOLUNTEER_PROFILE_COLUMNS,
+  getVolunteerDatabase,
+  refreshVolunteerRecords,
+  type VolunteerProfile,
+} from '../../../lib/volunteerDb';
+import {
+  MAX_PHOTO_BYTES,
+  PROFILE_DETAIL_FIELDS,
+  PROFILE_EMERGENCY_FIELDS,
+  PROFILE_FIELDS,
+  PROFILE_NOTE_FIELDS,
+  parsePositiveId,
+  parseProfileForm,
+  parseVisitForm,
+  type ProfileFieldDefinition,
+} from '../../../lib/volunteerProfiles';
+
+export const prerender = false;
+
+interface AttendanceRow {
+  sign_in_id: number;
+  volunteer_date: string;
+  signed_in_at: string;
+  signed_out_at: string | null;
+  sign_out_method: string | null;
+  declaration_version: string | null;
+}
+
+interface VisitRow {
+  id: number;
+  visit_date: string;
+  start_time: string;
+  end_time: string;
+  notes: string;
+}
+
+const id = parsePositiveId(Astro.params.id);
+const database = getVolunteerDatabase(Astro.locals);
+if (!id) return new Response('Not found', { status: 404 });
+
+const today = getAdelaideDate();
+let formErrors: Record<string, string> = {};
+let submittedValues: Record<string, string> | null = null;
+let visitError = '';
+let visitValues = { visit_date: '', start_time: '', end_time: '', visit_notes: '' };
+
+if (Astro.request.method === 'POST' && database) {
+  const form = await Astro.request.formData();
+  const action = form.get('action');
+
+  if (action === 'save-profile') {
+    const parsed = parseProfileForm(form);
+    if (!parsed.success) {
+      formErrors = parsed.errors;
+      submittedValues = parsed.values;
+    } else {
+      const values = parsed.values;
+      const clash = values.phone_normalized
+        ? await database
+            .prepare('SELECT id, full_name FROM volunteers WHERE phone_normalized = ?1 AND id <> ?2 LIMIT 1')
+            .bind(values.phone_normalized, id)
+            .first<{ id: number; full_name: string }>()
+        : null;
+      if (clash) {
+        formErrors = { phone: `This phone number is already on ${clash.full_name}’s profile (#${clash.id}).` };
+        submittedValues = values;
+      } else {
+        const columns = PROFILE_FIELDS.map((field) => field.name);
+        const assignments = [...columns, 'phone_normalized'].map((column, index) => `${column} = ?${index + 1}`);
+        await database
+          .prepare(
+            `UPDATE volunteers SET ${assignments.join(', ')}, updated_at = ?${columns.length + 2}
+             WHERE id = ?${columns.length + 3}`
+          )
+          .bind(...columns.map((column) => values[column]), values.phone_normalized, new Date().toISOString(), id)
+          .run();
+        return Astro.redirect(`/admin/volunteers/${id}?notice=saved`, 303);
+      }
+    }
+  } else if (action === 'add-visit') {
+    const parsed = parseVisitForm(form, today);
+    visitValues = {
+      visit_date: String(form.get('visit_date') || ''),
+      start_time: String(form.get('start_time') || ''),
+      end_time: String(form.get('end_time') || ''),
+      visit_notes: String(form.get('visit_notes') || '').slice(0, 300),
+    };
+    if (!parsed.success) {
+      visitError = parsed.error;
+    } else {
+      await database
+        .prepare(
+          `INSERT INTO volunteer_scheduled_visits (volunteer_id, visit_date, start_time, end_time, notes, created_at)
+           VALUES (?1, ?2, ?3, ?4, ?5, ?6)`
+        )
+        .bind(id, parsed.values.visit_date, parsed.values.start_time, parsed.values.end_time, parsed.values.notes, new Date().toISOString())
+        .run();
+      return Astro.redirect(`/admin/volunteers/${id}?notice=visit-added#visits`, 303);
+    }
+  } else if (action === 'delete-visit') {
+    const visitId = parsePositiveId(form.get('visit_id'));
+    if (visitId) {
+      await database
+        .prepare('DELETE FROM volunteer_scheduled_visits WHERE id = ?1 AND volunteer_id = ?2')
+        .bind(visitId, id)
+        .run();
+    }
+    return Astro.redirect(`/admin/volunteers/${id}?notice=visit-removed#visits`, 303);
+  }
+}
+
+let volunteer: VolunteerProfile | null = null;
+let attendance: AttendanceRow[] = [];
+let visits: VisitRow[] = [];
+let photoUpdated = '';
+let loadError = false;
+
+if (!database) {
+  loadError = true;
+} else {
+  try {
+    await refreshVolunteerRecords(database);
+    volunteer = await database
+      .prepare(`SELECT ${VOLUNTEER_PROFILE_COLUMNS} FROM volunteers v WHERE v.id = ?1`)
+      .bind(id)
+      .first<VolunteerProfile>();
+    if (volunteer) {
+      const [attendanceResult, visitResult, photo] = await Promise.all([
+        database
+          .prepare(
+            `SELECT s.id AS sign_in_id, s.volunteer_date, s.signed_in_at, a.signed_out_at, a.sign_out_method, a.declaration_version
+             FROM volunteer_attendance a JOIN volunteer_sign_ins s ON s.id = a.sign_in_id
+             WHERE a.volunteer_id = ?1
+             ORDER BY s.volunteer_date DESC, s.signed_in_at DESC
+             LIMIT 500`
+          )
+          .bind(id)
+          .all<AttendanceRow>(),
+        database
+          .prepare(
+            `SELECT id, visit_date, start_time, end_time, notes FROM volunteer_scheduled_visits
+             WHERE volunteer_id = ?1 AND visit_date >= ?2
+             ORDER BY visit_date ASC, start_time ASC LIMIT 200`
+          )
+          .bind(id, today)
+          .all<VisitRow>(),
+        database
+          .prepare('SELECT updated_at FROM volunteer_photos WHERE volunteer_id = ?1')
+          .bind(id)
+          .first<{ updated_at: string }>(),
+      ]);
+      attendance = attendanceResult.results || [];
+      visits = visitResult.results || [];
+      photoUpdated = photo?.updated_at || '';
+    }
+  } catch (error) {
+    loadError = true;
+    console.error('Unable to load volunteer profile', error);
+  }
+}
+
+if (!loadError && !volunteer) return new Response('Volunteer not found', { status: 404 });
+
+const values: Record<string, string> = submittedValues
+  || Object.fromEntries(PROFILE_FIELDS.map((field) => [field.name, String((volunteer as any)?.[field.name] ?? '')]));
+
+const maxPhotoMegabytes = (MAX_PHOTO_BYTES * 1e-6).toFixed(1);
+const NOTICES: Record<string, { text: string; error?: boolean }> = {
+  saved: { text: 'Profile saved.' },
+  created: { text: 'Volunteer added. Fill in their details below.' },
+  exists: { text: 'A volunteer with that phone number already exists, so their profile is shown instead.' },
+  'visit-added': { text: 'Visit scheduled.' },
+  'visit-removed': { text: 'Scheduled visit removed.' },
+  'photo-saved': { text: 'Photo saved.' },
+  'photo-removed': { text: 'Photo removed.' },
+  'photo-missing': { text: 'Choose a photo to upload.', error: true },
+  'photo-too-large': { text: `That photo is too large. Use an image under ${maxPhotoMegabytes} MB.`, error: true },
+  'photo-invalid': { text: 'That file is not a JPEG, PNG or WebP image.', error: true },
+};
+const notice = NOTICES[Astro.url.searchParams.get('notice') || ''];
+const todayRecord = attendance.find((row) => row.volunteer_date === today);
+const confirmedCount = attendance.filter((row) => row.sign_out_method === 'confirmed').length;
+const automaticCount = attendance.filter((row) => row.sign_out_method === 'automatic').length;
+const initials = (volunteer?.full_name || '?').split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]?.toUpperCase()).join('');
+
+function inputType(field: ProfileFieldDefinition) {
+  return field.type || 'text';
+}
+---
+
+<AdminLayout title={volunteer?.full_name || 'Volunteer'} description="Volunteer profile." active="volunteers">
+  {loadError || !volunteer ? (
+    <section class="admin-state" role="alert">
+      <h2>This profile could not be loaded</h2>
+      <p>Refresh the page or try again later.</p>
+    </section>
+  ) : (
+    <>
+      <a class="profile-back" href="/admin/volunteers">← All volunteers</a>
+      <header class="admin-page-heading profile-heading">
+        <div class="profile-heading__identity">
+          {photoUpdated ? (
+            <img class="profile-photo" src={`/admin/volunteers/${id}/photo?v=${encodeURIComponent(photoUpdated)}`} alt={`Photo of ${volunteer.full_name}`} width="96" height="96" />
+          ) : (
+            <span class="profile-photo profile-photo--initials" aria-hidden="true">{initials}</span>
+          )}
+          <div>
+            <p class="admin-kicker">Volunteer profile</p>
+            <h1>{volunteer.full_name}</h1>
+            <p class="admin-summary">
+              {attendance.length} {attendance.length === 1 ? 'visit' : 'visits'} recorded
+              {todayRecord && (
+                todayRecord.signed_out_at
+                  ? <span class="attendance-badge attendance-badge--signed-out">Signed out today</span>
+                  : <span class="attendance-badge attendance-badge--signed-in">Signed in today</span>
+              )}
+              {visits[0] && <span class="attendance-badge attendance-badge--scheduled">Next visit {formatDate(visits[0].visit_date)}</span>}
+            </p>
+          </div>
+        </div>
+      </header>
+
+      {notice && <p class:list={['admin-flash', notice.error ? 'admin-flash--error' : 'admin-flash--success']} role="status">{notice.text}</p>}
+
+      <div class="profile-layout">
+        <form class="profile-card profile-form" method="post" action={`/admin/volunteers/${id}`}>
+          <input type="hidden" name="action" value="save-profile" />
+          {[
+            { heading: 'Details', fields: PROFILE_DETAIL_FIELDS },
+            { heading: 'Emergency contacts', fields: PROFILE_EMERGENCY_FIELDS },
+            { heading: 'Notes', fields: PROFILE_NOTE_FIELDS },
+          ].map((group) => (
+            <fieldset>
+              <legend>{group.heading}</legend>
+              <div class="profile-fields">
+                {group.fields.map((field) => (
+                  <div class:list={['admin-field', { 'profile-field--wide': field.multiline }]}>
+                    <label for={`profile-${field.name}`}>{field.label}</label>
+                    {field.multiline ? (
+                      <textarea id={`profile-${field.name}`} name={field.name} maxlength={field.maxLength} aria-invalid={formErrors[field.name] ? 'true' : undefined}>{values[field.name]}</textarea>
+                    ) : (
+                      <input id={`profile-${field.name}`} name={field.name} type={inputType(field)} maxlength={field.maxLength} value={values[field.name]} autocomplete="off" aria-invalid={formErrors[field.name] ? 'true' : undefined} required={field.name === 'full_name'} />
+                    )}
+                    {formErrors[field.name] && <span class="profile-error">{formErrors[field.name]}</span>}
+                  </div>
+                ))}
+              </div>
+            </fieldset>
+          ))}
+          <div class="profile-form__footer">
+            {volunteer.registration_id && (
+              <a class="admin-link-button" href={`/admin/registrations?name=${encodeURIComponent(volunteer.full_name)}`}>View registration form</a>
+            )}
+            <button class="admin-button" type="submit">Save profile</button>
+          </div>
+        </form>
+
+        <aside class="profile-side">
+          <section class="profile-card" id="photo" aria-labelledby="photo-heading">
+            <h2 id="photo-heading">Photo</h2>
+            <p class="profile-hint">Optional. Photos are resized in the browser before upload and are only visible to admins.</p>
+            <form method="post" action={`/admin/volunteers/${id}/photo`} enctype="multipart/form-data" class="profile-photo-form" data-photo-form>
+              <div class="admin-field">
+                <label for="profile-photo-input">{photoUpdated ? 'Replace photo' : 'Upload photo'}</label>
+                <input id="profile-photo-input" name="photo" type="file" accept="image/jpeg,image/png,image/webp" required />
+              </div>
+              <input type="hidden" name="action" value="upload" />
+              <button class="admin-button" type="submit">Save photo</button>
+            </form>
+            {photoUpdated && (
+              <form method="post" action={`/admin/volunteers/${id}/photo`} enctype="multipart/form-data">
+                <input type="hidden" name="action" value="remove" />
+                <button class="profile-text-button" type="submit">Remove photo</button>
+              </form>
+            )}
+          </section>
+
+          <section class="profile-card" id="visits" aria-labelledby="visits-heading">
+            <h2 id="visits-heading">Scheduled visits</h2>
+            {visits.length === 0 ? (
+              <p class="profile-hint">No upcoming visits scheduled.</p>
+            ) : (
+              <ul class="profile-visits">
+                {visits.map((visit) => (
+                  <li>
+                    <div>
+                      <strong>{formatDate(visit.visit_date)}</strong>
+                      <span>{formatExpectedTime(visit.start_time, visit.end_time) || 'No time set'}</span>
+                      {visit.notes && <span class="profile-visits__notes">{visit.notes}</span>}
+                    </div>
+                    <form method="post" action={`/admin/volunteers/${id}`}>
+                      <input type="hidden" name="action" value="delete-visit" />
+                      <input type="hidden" name="visit_id" value={String(visit.id)} />
+                      <button class="profile-text-button" type="submit" aria-label={`Remove visit on ${formatDate(visit.visit_date)}`}>Remove</button>
+                    </form>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <form class="profile-visit-form" method="post" action={`/admin/volunteers/${id}#visits`}>
+              <input type="hidden" name="action" value="add-visit" />
+              <div class="admin-field profile-field--wide">
+                <label for="visit-date">Date</label>
+                <input id="visit-date" name="visit_date" type="date" min={today} value={visitValues.visit_date} required />
+              </div>
+              <div class="admin-field">
+                <label for="visit-start">Expected arrival</label>
+                <input id="visit-start" name="start_time" type="time" value={visitValues.start_time} />
+              </div>
+              <div class="admin-field">
+                <label for="visit-end">Expected finish</label>
+                <input id="visit-end" name="end_time" type="time" value={visitValues.end_time} />
+              </div>
+              <div class="admin-field profile-field--wide">
+                <label for="visit-notes">Notes (optional)</label>
+                <input id="visit-notes" name="visit_notes" type="text" maxlength="300" value={visitValues.visit_notes} placeholder="e.g. Nursery potting" />
+              </div>
+              {visitError && <p class="profile-error profile-field--wide" role="alert">{visitError}</p>}
+              <button class="admin-button profile-field--wide" type="submit">Schedule visit</button>
+            </form>
+          </section>
+        </aside>
+      </div>
+
+      <section class="profile-history" aria-labelledby="history-heading">
+        <div class="profile-history__heading">
+          <h2 id="history-heading">Attendance history</h2>
+          <p class="admin-summary">{confirmedCount} confirmed and {automaticCount} automatic sign-outs</p>
+        </div>
+        {attendance.length === 0 ? (
+          <section class="admin-state"><h2>No attendance yet</h2><p>Sign-ins will appear here.</p></section>
+        ) : (
+          <div class="records-table-wrap">
+            <table class="records-table">
+              <caption class="sr-only">Attendance history for {volunteer.full_name}, newest first</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Signed in</th>
+                  <th scope="col">Signed out</th>
+                  <th scope="col">Declaration</th>
+                </tr>
+              </thead>
+              <tbody>
+                {attendance.map((row) => (
+                  <tr>
+                    <td data-label="Date"><time datetime={row.volunteer_date}>{formatDate(row.volunteer_date)}</time></td>
+                    <td data-label="Signed in">{formatTime(row.signed_in_at)}</td>
+                    <td data-label="Signed out">
+                      {row.signed_out_at ? (
+                        <span class="profile-signout">
+                          {formatTime(row.signed_out_at)}
+                          {row.sign_out_method === 'automatic'
+                            ? <span class="attendance-badge attendance-badge--automatic" title="Not confirmed by the volunteer">Automatic</span>
+                            : <span class="attendance-badge attendance-badge--signed-out">Confirmed</span>}
+                        </span>
+                      ) : <span class="attendance-badge attendance-badge--signed-in">Still signed in</span>}
+                    </td>
+                    <td data-label="Declaration">
+                      {row.declaration_version
+                        ? `Agreed${row.declaration_version === SIGN_IN_DECLARATION_VERSION ? '' : ` (${row.declaration_version})`}`
+                        : 'Before declaration'}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
+    </>
+  )}
+</AdminLayout>
+
+<script>
+  // Resize photos in the browser so uploads stay small (phone photos are often 3-8 MB).
+  const MAX_DIMENSION = 800;
+  document.querySelectorAll<HTMLFormElement>('[data-photo-form]').forEach((form) => {
+    const input = form.querySelector<HTMLInputElement>('input[type="file"]');
+    if (!input) return;
+    input.addEventListener('change', async () => {
+      const file = input.files?.[0];
+      if (!file || !file.type.startsWith('image/') || typeof createImageBitmap !== 'function') return;
+      try {
+        const bitmap = await createImageBitmap(file);
+        const scale = Math.min(1, MAX_DIMENSION / Math.max(bitmap.width, bitmap.height));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.round(bitmap.width * scale);
+        canvas.height = Math.round(bitmap.height * scale);
+        canvas.getContext('2d')?.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+        const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.85));
+        if (!blob) return;
+        const transfer = new DataTransfer();
+        transfer.items.add(new File([blob], 'photo.jpg', { type: 'image/jpeg' }));
+        input.files = transfer.files;
+      } catch {
+        // Keep the original file; the server enforces the size limit.
+      }
+    });
+  });
+</script>
+
+<style is:global>
+  .profile-back { display: inline-block; margin-bottom: 1rem; color: #2d6927; font-size: 0.82rem; font-weight: 700; }
+  .profile-back:hover { text-decoration: underline; }
+  .profile-heading__identity { display: flex; align-items: center; gap: 1.25rem; }
+  .profile-heading .admin-summary { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+  .profile-photo { flex: 0 0 auto; width: 96px; height: 96px; border-radius: 50%; object-fit: cover; background: #e7efe3; box-shadow: 0 0 0 4px #fff, 0 6px 18px rgba(31, 42, 31, 0.12); }
+  .profile-photo--initials { display: grid; place-items: center; color: #3d6b38; font-size: 1.8rem; font-weight: 600; }
+  .profile-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(18rem, 1fr); gap: 1.25rem; align-items: start; }
+  .profile-side { display: grid; gap: 1.25rem; }
+  .profile-form fieldset { margin: 0; padding: 0; border: 0; }
+  .profile-form fieldset + fieldset { margin-top: 1.6rem; padding-top: 1.4rem; border-top: 1px solid #e3e8e1; }
+  .profile-form legend { margin-bottom: 0.9rem; color: #386333; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
+  .profile-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem 1rem; }
+  .profile-field--wide { grid-column: 1 / -1; }
+  .profile-form__footer { display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.6rem; }
+  .profile-photo-form { display: grid; gap: 0.75rem; }
+  .profile-visits { margin: 0 0 1rem; padding: 0; list-style: none; }
+  .profile-visits li { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid #e5e9e3; }
+  .profile-visits li div { display: grid; gap: 0.1rem; font-size: 0.86rem; }
+  .profile-visits li span { color: #566153; }
+  .profile-visits__notes { font-size: 0.78rem; }
+  .profile-visits .profile-text-button { margin-top: 0; }
+  .profile-visit-form { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .profile-history { margin-top: 2rem; }
+  .profile-history__heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 0.9rem; }
+  .profile-history__heading h2 { margin: 0; font-size: 1.35rem; font-weight: 600; }
+  .profile-history__heading .admin-summary { margin: 0; }
+  .profile-signout { display: inline-flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+
+  @media (max-width: 1000px) {
+    .profile-layout { grid-template-columns: 1fr; }
+    .profile-fields { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 520px) {
+    .profile-heading__identity { align-items: flex-start; flex-direction: column; }
+    .profile-fields, .profile-visit-form { grid-template-columns: 1fr; }
+    .profile-history__heading { flex-direction: column; gap: 0.25rem; }
+  }
+</style>

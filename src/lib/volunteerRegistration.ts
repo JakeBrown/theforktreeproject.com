@@ -1,4 +1,4 @@
-import { getAdelaideDate, normalizePhone } from './volunteerSignIn';
+import { getAdelaideDate, normalizePhone } from './volunteerSignIn.ts';
 
 export const VOLUNTEER_REGISTRATION_FORM_VERSION = '2026-08-25';
 
