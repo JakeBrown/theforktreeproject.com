@@ -9,7 +9,7 @@
 - Deployment is via **git push** to the main branch. Cloudflare Pages/Workers automatically builds and deploys on push.
 - Do NOT use `npx wrangler deploy` directly.
 - **Workers URL:** https://theforktreeprojectdotcom.jake8335.workers.dev/
-- **Production URL:** https://www.theforktreeproject.com/ (currently still Squarespace)
+- **Production URL:** https://www.theforktreeproject.com/ (served by the Cloudflare Workers site)
 
 ## Stack
 - Astro 5 with SSR mode (`output: 'server'`) and Cloudflare Workers adapter
