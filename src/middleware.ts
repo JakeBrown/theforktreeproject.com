@@ -61,6 +61,10 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (isAdminRequest && !identity) {
     return unauthorizedResponse();
   }
+  if (identity) {
+    // Shown in admin audit trails (e.g. attendance corrections).
+    (context.locals as any).adminActor = identity.email || `test token ${identity.serviceTokenId}`;
+  }
 
   // Browsers send the Access cookie with some cross-site requests, so changes made by a signed-in
   // person must come from an admin page on this site. Service tokens are sent explicitly by scripts.

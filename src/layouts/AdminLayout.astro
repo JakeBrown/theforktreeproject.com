@@ -27,6 +27,7 @@ const { title, description, active } = Astro.props;
     <main class="admin-main">
       <slot />
     </main>
+    <div id="admin-live" class="sr-only" aria-live="assertive"></div>
   </div>
 </BaseLayout>
 
@@ -90,6 +91,28 @@ const { title, description, active } = Astro.props;
       if (event.target === dialog) dialog.close();
     });
     dialog.addEventListener('close', syncDialogScrollLock);
+  });
+
+  // Two-step confirmation for destructive forms, without a blocking browser dialog.
+  const liveRegion = document.getElementById('admin-live');
+  document.querySelectorAll<HTMLFormElement>('form[data-confirm-label]').forEach((form) => {
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (!button) return;
+    const originalLabel = button.textContent || '';
+    let confirmed = false;
+    form.addEventListener('submit', (event) => {
+      if (confirmed) return;
+      event.preventDefault();
+      const label = form.dataset.confirmLabel || 'Click again to confirm';
+      button.textContent = label;
+      if (liveRegion) liveRegion.textContent = label;
+      confirmed = true;
+    });
+    // Closing the dialog cancels a half-finished confirmation.
+    form.closest('dialog')?.addEventListener('close', () => {
+      confirmed = false;
+      button.textContent = originalLabel;
+    });
   });
 </script>
 

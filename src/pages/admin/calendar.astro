@@ -337,7 +337,7 @@ function contact(name: string, relationship: string, phone: string): string {
                 <p>Outlook ignores colours set inside a shared calendar, so every event title starts with an emoji: ✅ signed in, 👋 signed out, 📅 scheduled. For full colour blocks, subscribe to the three separate links and give each its own colour in Outlook. Outlook refreshes subscribed calendars every few hours, so changes are not instant.</p>
               </details>
               <p class="calendar-feeds__warning">Anyone with these links can see volunteers’ contact and emergency details. Only share them with coordinators.</p>
-              <form method="post" action={`/admin/calendar?month=${params.month}`} data-confirm="Replace the link? Every existing subscription will stop updating until it is re-added with the new link.">
+              <form method="post" action={`/admin/calendar?month=${params.month}`} data-confirm-label="Click again to replace the link">
                 <input type="hidden" name="action" value="reset-token" />
                 <button class="profile-text-button" type="submit">Replace link (stops all existing subscriptions)</button>
               </form>
@@ -362,19 +362,6 @@ function contact(name: string, relationship: string, phone: string): string {
       } catch {
         // The text stays selected so it can be copied manually.
       }
-    });
-  });
-
-  document.querySelectorAll<HTMLFormElement>('form[data-confirm]').forEach((form) => {
-    let confirmed = false;
-    form.addEventListener('submit', (event) => {
-      if (confirmed) return;
-      event.preventDefault();
-      const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-      if (!button) return;
-      // Two-step confirmation without a blocking browser dialog.
-      button.textContent = 'Click again to replace the link';
-      confirmed = true;
     });
   });
 </script>

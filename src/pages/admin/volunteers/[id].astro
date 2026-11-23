@@ -1,6 +1,7 @@
 ---
 import AdminDetailGroups from '../../../components/AdminDetailGroups.astro';
 import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { addManualVisit, adelaideTimeInputValue, deleteVisit, editVisitTimes } from '../../../lib/attendanceEdits';
 import { formatDate, formatDateTime, formatTime } from '../../../lib/admin';
 import {
   REGISTRATION_COLUMNS,
@@ -41,6 +42,10 @@ interface AttendanceRow {
   signed_out_at: string | null;
   sign_out_method: string | null;
   declaration_version: string | null;
+  last_edit_action: string | null;
+  last_edited_by: string | null;
+  last_edited_at: string | null;
+  was_added: number;
 }
 
 interface VisitRow {
@@ -59,6 +64,11 @@ const today = getAdelaideDate();
 let formErrors: Record<string, string> = {};
 let submittedValues: Record<string, string> | null = null;
 let visitError = '';
+let attendanceError = '';
+// Which dialog to reopen with the error, and what the admin typed, so nothing has to be re-entered.
+let attendanceErrorDialog = '';
+let attendanceValues: Record<string, string> = {};
+const editedBy = String((Astro.locals as any).adminActor || 'admin');
 let visitValues = { visit_date: '', start_time: '', end_time: '', visit_notes: '' };
 
 if (Astro.request.method === 'POST' && database) {
@@ -114,6 +124,37 @@ if (Astro.request.method === 'POST' && database) {
         .run();
       return Astro.redirect(`/admin/volunteers/${id}?notice=visit-added#visits`, 303);
     }
+  } else if (action === 'add-attendance' || action === 'edit-attendance' || action === 'delete-attendance') {
+    const times = { signIn: String(form.get('sign_in') || ''), signOut: String(form.get('sign_out') || '') };
+    const signInId = parsePositiveId(form.get('sign_in_id'));
+    attendanceValues = { date: String(form.get('date') || ''), sign_in: times.signIn, sign_out: times.signOut };
+    let result: { ok: true } | { ok: false; error: string } = { ok: false, error: 'That visit could not be found.' };
+    if (action === 'add-attendance') {
+      const profile = await database
+        .prepare('SELECT id, full_name, phone, phone_normalized FROM volunteers WHERE id = ?1')
+        .bind(id)
+        .first<{ id: number; full_name: string; phone: string; phone_normalized: string }>();
+      if (profile) {
+        result = await addManualVisit(database, { volunteer: profile, date: String(form.get('date') || ''), times, editedBy, today });
+      }
+    } else if (signInId && action === 'edit-attendance') {
+      result = await editVisitTimes(database, {
+        signInId,
+        volunteerId: id,
+        times,
+        expected: { signedInAt: String(form.get('expected_sign_in') || ''), signedOutAt: String(form.get('expected_sign_out') || '') },
+        editedBy,
+        today,
+      });
+    } else if (signInId) {
+      result = await deleteVisit(database, { signInId, volunteerId: id, editedBy });
+    }
+    if (result.ok) {
+      const notice = action === 'add-attendance' ? 'attendance-added' : action === 'edit-attendance' ? 'attendance-saved' : 'attendance-deleted';
+      return Astro.redirect(`/admin/volunteers/${id}?notice=${notice}#history`, 303);
+    }
+    attendanceError = result.error;
+    attendanceErrorDialog = action === 'add-attendance' ? 'attendance-add' : signInId ? `attendance-edit-${signInId}` : '';
   } else if (action === 'delete-visit') {
     const visitId = parsePositiveId(form.get('visit_id'));
     if (visitId) {
@@ -146,8 +187,13 @@ if (!database) {
       const [attendanceResult, visitResult, photo] = await Promise.all([
         database
           .prepare(
-            `SELECT s.id AS sign_in_id, s.volunteer_date, s.signed_in_at, a.signed_out_at, a.sign_out_method, a.declaration_version
+            `SELECT s.id AS sign_in_id, s.volunteer_date, s.signed_in_at, a.signed_out_at, a.sign_out_method, a.declaration_version,
+               e.action AS last_edit_action, e.edited_by AS last_edited_by, e.edited_at AS last_edited_at,
+               EXISTS (SELECT 1 FROM volunteer_attendance_edits e3 WHERE e3.sign_in_id = s.id AND e3.action = 'add') AS was_added
              FROM volunteer_attendance a JOIN volunteer_sign_ins s ON s.id = a.sign_in_id
+             LEFT JOIN volunteer_attendance_edits e ON e.id = (
+               SELECT MAX(e2.id) FROM volunteer_attendance_edits e2 WHERE e2.sign_in_id = s.id
+             )
              WHERE a.volunteer_id = ?1
              ORDER BY s.volunteer_date DESC, s.signed_in_at DESC
              LIMIT 500`
@@ -202,6 +248,9 @@ const NOTICES: Record<string, { text: string; error?: boolean }> = {
   'visit-added': { text: 'Visit scheduled.' },
   'visit-removed': { text: 'Scheduled visit removed.' },
   'photo-saved': { text: 'Photo saved.' },
+  'attendance-added': { text: 'Visit added to the attendance history.' },
+  'attendance-saved': { text: 'Visit times updated.' },
+  'attendance-deleted': { text: 'Visit deleted.' },
   'photo-removed': { text: 'Photo removed.' },
   'photo-missing': { text: 'Choose a photo to upload.', error: true },
   'photo-too-large': { text: `That photo is too large. Use an image under ${maxPhotoMegabytes} MB.`, error: true },
@@ -386,11 +435,15 @@ function inputType(field: ProfileFieldDefinition) {
         </dialog>
       )}
 
-      <section class="profile-history" aria-labelledby="history-heading">
+      <section class="profile-history" id="history" aria-labelledby="history-heading">
         <div class="profile-history__heading">
-          <h2 id="history-heading">Attendance history</h2>
-          <p class="admin-summary">{confirmedCount} confirmed and {automaticCount} automatic sign-outs</p>
+          <div>
+            <h2 id="history-heading">Attendance history</h2>
+            <p class="admin-summary">{confirmedCount} confirmed and {automaticCount} automatic sign-outs</p>
+          </div>
+          <button type="button" class="admin-button" data-dialog-open="attendance-add" aria-haspopup="dialog" aria-controls="attendance-add">Add a visit</button>
         </div>
+        {attendanceError && !attendanceErrorDialog && <p class="admin-flash admin-flash--error" role="alert">{attendanceError}</p>}
         {attendance.length === 0 ? (
           <section class="admin-state"><h2>No attendance yet</h2><p>Sign-ins will appear here.</p></section>
         ) : (
@@ -403,34 +456,114 @@ function inputType(field: ProfileFieldDefinition) {
                   <th scope="col">Signed in</th>
                   <th scope="col">Signed out</th>
                   <th scope="col">Declaration</th>
+                  <th scope="col"><span class="sr-only">Actions</span></th>
                 </tr>
               </thead>
               <tbody>
-                {attendance.map((row) => (
-                  <tr>
-                    <td data-label="Date"><time datetime={row.volunteer_date}>{formatDate(row.volunteer_date)}</time></td>
-                    <td data-label="Signed in">{formatTime(row.signed_in_at)}</td>
-                    <td data-label="Signed out">
-                      {row.signed_out_at ? (
-                        <span class="profile-signout">
-                          {formatTime(row.signed_out_at)}
-                          {row.sign_out_method === 'automatic'
-                            ? <span class="attendance-badge attendance-badge--automatic" title="Not confirmed by the volunteer">Automatic</span>
-                            : <span class="attendance-badge attendance-badge--signed-out">Confirmed</span>}
-                        </span>
-                      ) : <span class="attendance-badge attendance-badge--signed-in">Still signed in</span>}
-                    </td>
-                    <td data-label="Declaration">
-                      {row.declaration_version
-                        ? `Agreed${row.declaration_version === SIGN_IN_DECLARATION_VERSION ? '' : ` (${row.declaration_version})`}`
-                        : 'Before declaration'}
-                    </td>
-                  </tr>
-                ))}
+                {attendance.map((row) => {
+                  const dialogId = `attendance-edit-${row.sign_in_id}`;
+                  const hasError = attendanceErrorDialog === dialogId;
+                  const editedNote = row.last_edited_at
+                    ? `${row.last_edit_action === 'add' ? 'Added' : 'Edited'} by ${row.last_edited_by} on ${formatDateTime(row.last_edited_at)}`
+                    : '';
+                  return (
+                    <tr>
+                      <td data-label="Date">
+                        <time datetime={row.volunteer_date}>{formatDate(row.volunteer_date)}</time>
+                        {editedNote && <span class="attendance-edited" title={editedNote}>{row.was_added ? 'Added by admin' : 'Edited'}</span>}
+                      </td>
+                      <td data-label="Signed in">{formatTime(row.signed_in_at)}</td>
+                      <td data-label="Signed out">
+                        {row.signed_out_at ? (
+                          <span class="profile-signout">
+                            {formatTime(row.signed_out_at)}
+                            {row.sign_out_method === 'automatic'
+                              ? <span class="attendance-badge attendance-badge--automatic" title="Not confirmed by the volunteer">Automatic</span>
+                              : <span class="attendance-badge attendance-badge--signed-out">Confirmed</span>}
+                          </span>
+                        ) : <span class="attendance-badge attendance-badge--signed-in">Still signed in</span>}
+                      </td>
+                      <td data-label="Declaration">
+                        {row.declaration_version
+                          ? `Agreed${row.declaration_version === SIGN_IN_DECLARATION_VERSION ? '' : ` (${row.declaration_version})`}`
+                          : row.was_added ? 'Not applicable' : 'Before declaration'}
+                      </td>
+                      <td data-label="Actions" class="record-actions">
+                        <button type="button" class="record-view-button" data-dialog-open={dialogId} aria-haspopup="dialog" aria-controls={dialogId} aria-label={`Edit visit on ${formatDate(row.volunteer_date)}`}>Edit</button>
+                        <dialog class="admin-dialog attendance-dialog" id={dialogId} aria-labelledby={`${dialogId}-title`} data-open-on-load={hasError ? '' : undefined}>
+                          <article class="admin-dialog__panel">
+                            <header class="admin-dialog__header">
+                              <div>
+                                <p class="admin-dialog__eyebrow">Edit visit{editedNote ? ` · ${editedNote}` : ''}</p>
+                                <h2 id={`${dialogId}-title`}>{formatDate(row.volunteer_date)}</h2>
+                              </div>
+                              <button class="admin-dialog__close" type="button" data-dialog-close aria-label="Close">×</button>
+                            </header>
+                            <div class="admin-dialog__body">
+                              <form class="attendance-form" method="post" action={`/admin/volunteers/${id}#history`}>
+                                <input type="hidden" name="action" value="edit-attendance" />
+                                <input type="hidden" name="sign_in_id" value={String(row.sign_in_id)} />
+                                <input type="hidden" name="expected_sign_in" value={row.signed_in_at} />
+                                <input type="hidden" name="expected_sign_out" value={row.signed_out_at || ''} />
+                                {hasError && <p class="admin-flash admin-flash--error attendance-form__wide" role="alert">{attendanceError}</p>}
+                                <div class="admin-field">
+                                  <label for={`${dialogId}-in`}>Signed in</label>
+                                  <input id={`${dialogId}-in`} name="sign_in" type="time" value={hasError ? attendanceValues.sign_in : adelaideTimeInputValue(row.signed_in_at)} required />
+                                </div>
+                                <div class="admin-field">
+                                  <label for={`${dialogId}-out`}>Signed out</label>
+                                  <input id={`${dialogId}-out`} name="sign_out" type="time" value={hasError ? attendanceValues.sign_out : adelaideTimeInputValue(row.signed_out_at)} required={row.volunteer_date < today} />
+                                </div>
+                                {row.sign_out_method === 'automatic' && <p class="profile-hint attendance-form__wide">This was an automatic 5pm sign-out. Saving records the time you enter instead.</p>}
+                                <button class="admin-button attendance-form__wide" type="submit">Save times</button>
+                              </form>
+                              <form class="attendance-delete" method="post" action={`/admin/volunteers/${id}#history`} data-confirm-label="Click again to delete this visit">
+                                <input type="hidden" name="action" value="delete-attendance" />
+                                <input type="hidden" name="sign_in_id" value={String(row.sign_in_id)} />
+                                <button class="profile-text-button" type="submit">Delete this visit</button>
+                              </form>
+                            </div>
+                          </article>
+                        </dialog>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
         )}
+        <dialog class="admin-dialog attendance-dialog" id="attendance-add" aria-labelledby="attendance-add-title" data-open-on-load={attendanceErrorDialog === 'attendance-add' ? '' : undefined}>
+          <article class="admin-dialog__panel">
+            <header class="admin-dialog__header">
+              <div>
+                <p class="admin-dialog__eyebrow">Attendance history</p>
+                <h2 id="attendance-add-title">Add a missed visit</h2>
+              </div>
+              <button class="admin-dialog__close" type="button" data-dialog-close aria-label="Close">×</button>
+            </header>
+            <div class="admin-dialog__body">
+              <form class="attendance-form" method="post" action={`/admin/volunteers/${id}#history`}>
+                <input type="hidden" name="action" value="add-attendance" />
+                {attendanceErrorDialog === 'attendance-add' && <p class="admin-flash admin-flash--error attendance-form__wide" role="alert">{attendanceError}</p>}
+                <div class="admin-field attendance-form__wide">
+                  <label for="attendance-add-date">Date</label>
+                  <input id="attendance-add-date" name="date" type="date" max={today} value={attendanceErrorDialog === 'attendance-add' ? attendanceValues.date : ''} required />
+                </div>
+                <div class="admin-field">
+                  <label for="attendance-add-in">Signed in</label>
+                  <input id="attendance-add-in" name="sign_in" type="time" value={attendanceErrorDialog === 'attendance-add' ? attendanceValues.sign_in : ''} required />
+                </div>
+                <div class="admin-field">
+                  <label for="attendance-add-out">Signed out</label>
+                  <input id="attendance-add-out" name="sign_out" type="time" value={attendanceErrorDialog === 'attendance-add' ? attendanceValues.sign_out : ''} />
+                </div>
+                <p class="profile-hint attendance-form__wide">Use this when someone worked but didn’t sign in. Sign-out time is required for past days.</p>
+                <button class="admin-button attendance-form__wide" type="submit">Add visit</button>
+              </form>
+            </div>
+          </article>
+        </dialog>
       </section>
     </>
   )}
@@ -440,6 +573,9 @@ function inputType(field: ProfileFieldDefinition) {
   // Links to /admin/volunteers/<id>#registration (from the Volunteers list) open the form directly.
   // Wait for load so the shared dialog handlers in AdminLayout are attached first.
   window.addEventListener('load', () => {
+    // Reopen an attendance dialog that came back with a validation error.
+    const failed = document.querySelector<HTMLDialogElement>('dialog[data-open-on-load]');
+    if (failed) document.querySelector<HTMLElement>(`[data-dialog-open="${failed.id}"]`)?.click();
     if (window.location.hash === '#registration') {
       document.querySelector<HTMLElement>('[data-dialog-open="registration-dialog"]')?.click();
     }
@@ -508,6 +644,13 @@ function inputType(field: ProfileFieldDefinition) {
   .profile-history__heading h2 { margin: 0; font-size: 1.35rem; font-weight: 600; }
   .profile-history__heading .admin-summary { margin: 0; }
   .profile-signout { display: inline-flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+  .profile-history__heading { align-items: end; }
+  .attendance-edited { display: block; margin-top: 0.15rem; color: #6e5a3c; font-size: 0.7rem; font-weight: 600; cursor: help; }
+  /* Edit dialogs live inside a right-aligned, no-wrap table cell; reset what they would inherit. */
+  .attendance-dialog { width: min(92vw, 480px); white-space: normal; text-align: left; }
+  .attendance-form { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem 1rem; }
+  .attendance-form__wide { grid-column: 1 / -1; margin: 0; }
+  .attendance-delete { margin-top: 1.4rem; padding-top: 1rem; border-top: 1px solid #e3e8e1; }
 
   @media (max-width: 1000px) {
     .profile-layout { grid-template-columns: 1fr; }

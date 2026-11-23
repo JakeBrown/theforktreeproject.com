@@ -100,6 +100,17 @@ export const VOLUNTEER_SCHEMA_STATEMENTS = [
     value TEXT NOT NULL,
     updated_at TEXT NOT NULL
   )`,
+  // Admin corrections to attendance (see attendanceEdits.ts): who changed what, with a before/after snapshot.
+  `CREATE TABLE IF NOT EXISTS volunteer_attendance_edits (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    sign_in_id INTEGER NOT NULL,
+    volunteer_id INTEGER NOT NULL,
+    action TEXT NOT NULL CHECK (action IN ('add', 'edit', 'delete')),
+    edited_by TEXT NOT NULL,
+    edited_at TEXT NOT NULL,
+    details_json TEXT NOT NULL DEFAULT '{}'
+  )`,
+  `CREATE INDEX IF NOT EXISTS volunteer_attendance_edits_sign_in ON volunteer_attendance_edits (sign_in_id)`,
   // MailerLite sync state per registration (see mailerliteSync.ts). synced_at is '' until it succeeds.
   `CREATE TABLE IF NOT EXISTS volunteer_registration_mailerlite (
     registration_id INTEGER PRIMARY KEY,
