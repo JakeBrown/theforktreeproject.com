@@ -11,6 +11,8 @@ import { refreshVolunteerRecords, type D1Database } from './lib/volunteerDb';
 // 5pm in Adelaide is 06:30 UTC during daylight saving (ACDT) and 07:30 UTC otherwise (ACST).
 // The job runs at both times; it only signs out records whose 5pm Adelaide time has passed.
 const VOLUNTEER_AUTO_SIGN_OUT_CRON = '30 6,7 * * *';
+// Hourly: send volunteer registrations that have not reached MailerLite yet, retrying failures.
+const MAILERLITE_SYNC_CRON = '5 * * * *';
 
 export function createExports(manifest: any) {
   const app = new App(manifest);
@@ -46,7 +48,15 @@ export function createExports(manifest: any) {
                 console.error('volunteer auto sign-out failed', error);
               })
             );
-            // Also retry volunteer registrations that have not reached MailerLite yet.
+            break;
+          }
+
+          case MAILERLITE_SYNC_CRON: {
+            const database = (env as JournalSearchEnv & { VOLUNTEER_SIGN_INS?: D1Database }).VOLUNTEER_SIGN_INS;
+            if (!database) {
+              console.error('MailerLite sync skipped: D1 binding unavailable');
+              break;
+            }
             ctx.waitUntil(
               syncRegistrationsToMailerLite(database, env as MailerLiteEnv, { limit: 20 }).then((result) => {
                 if (result.attempted || result.skipped) console.log('MailerLite sync', result);

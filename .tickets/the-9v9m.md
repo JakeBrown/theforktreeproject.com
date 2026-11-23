@@ -18,3 +18,7 @@ Every volunteer registrant (Jake's decision 2026-11-24: no opt-in checkbox) is u
 **2026-11-23T22:37:04Z**
 
 Independent review fixes: per-registration sync targets only the new registration id; no attempt cap (cron retries failures every run, so fixing a bad key recovers everything); a failed overlapping run cannot undo a recorded success; superseded failures are not counted on the badge; cron batch 20 rows to stay inside subrequest limits; response bodies always read. Verified: 32 tests, build. MAILERLITE_API_KEY secret uploaded; group 204968455775978608 and fields preferred_name, under_18, volunteer_interests, volunteer_frequency, preferred_days, volunteer_registered created via API.
+
+**2026-11-23T22:45:25Z**
+
+Sync schedule changed to hourly (cron '5 * * * *', separate from the auto sign-out cron) at Jake's request.

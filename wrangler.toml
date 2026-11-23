@@ -40,7 +40,8 @@ index_name = "forktree-journal"
 
 [triggers]
 # 17 3: journal search reindex. 30 6,7: volunteer 5pm Adelaide auto sign-out (covers ACDT and ACST).
-crons = ["17 3 * * *", "30 6,7 * * *"]
+# 5 *: hourly MailerLite sync of volunteer registrations (retries failures).
+crons = ["17 3 * * *", "30 6,7 * * *", "5 * * * *"]
 
 [observability]
 enabled = true

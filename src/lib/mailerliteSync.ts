@@ -2,7 +2,7 @@
  * Copies volunteer registrations into MailerLite as subscribers in the "Volunteers" group.
  *
  * Runs right after each registration (in the background, so the form never waits on MailerLite)
- * and from the twice-daily volunteer cron, which retries anything that failed. Only the newest
+ * and from an hourly cron, which retries anything that failed. Only the newest
  * registration per email is sent. Existing subscribers are updated in place; MailerLite never
  * resubscribes someone who unsubscribed because no status is sent.
  */
