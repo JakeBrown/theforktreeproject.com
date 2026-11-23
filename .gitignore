@@ -35,3 +35,6 @@ pnpm-debug.log*
 # Local legacy issue-tracker state
 .dolt/
 *.db
+
+# Local credentials (never commit)
+CREDS.md

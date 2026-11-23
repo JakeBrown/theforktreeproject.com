@@ -13,6 +13,12 @@ routes = [
 directory = "./dist"
 binding = "ASSETS"
 
+# Cloudflare Access protects /admin ("Forktree Project Admin" app in the Windy Bit Zero Trust org).
+# The Worker also verifies the Access JWT against these, and refuses /admin if they are missing.
+[vars]
+CF_ACCESS_TEAM_DOMAIN = "windybit.cloudflareaccess.com"
+CF_ACCESS_AUD = "af86c6e509114e047cfce88cde840f10695f5792e6b402d8f4962ed461a53889"
+
 [[analytics_engine_datasets]]
 binding = "ANALYTICS"
 dataset = "forktree_pageviews"

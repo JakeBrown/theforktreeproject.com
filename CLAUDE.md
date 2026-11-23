@@ -20,6 +20,11 @@
 - Journal post pages use `export const prerender = true` for static generation in SSR mode
 - Background images on full-bleed sections use CSS `background-image` with dark overlays
 
+## Admin access
+- `/admin` is protected by Cloudflare Access (email one-time PIN for Liz, Maddie and Jake; app "Forktree Project Admin" in the Windy Bit Zero Trust org). `src/middleware.ts` also verifies the `Cf-Access-Jwt-Assertion` JWT using `CF_ACCESS_TEAM_DOMAIN` / `CF_ACCESS_AUD` in `wrangler.toml`.
+- Any route that reads or returns volunteer data must live under `/admin/...`, never `/api/...`, so both Access and the middleware check cover it.
+- For programmatic testing, send `CF-Access-Client-Id` / `CF-Access-Client-Secret` from the gitignored `CREDS.md` (service token `forktree-admin-test`).
+
 ## Section background rule (footer adjacency)
 - The site footer is dark olive `#1f2a1f`. **The last content section before `<Footer />` must NOT also be `#1f2a1f`** — otherwise the footer visually merges into the last section and the page looks like it has no end.
 - Pages that alternate `--plain` (`#fafaf9`) and `--olive` (`#1f2a1f`) sections should plan the alternation so the FINAL section is `--plain`. If you need an even number of content sections, start with `--olive` (right after the hero) and alternate, ending on `--plain`. See `team-days.astro` and `nursery.astro` for the established pattern.

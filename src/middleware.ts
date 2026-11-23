@@ -1,49 +1,20 @@
 import { defineMiddleware } from 'astro:middleware';
+import { verifyAccessJwt, type AccessIdentity } from './lib/cloudflareAccess';
 
 const ASSET_EXTENSIONS = /\.(js|css|png|jpg|jpeg|gif|svg|ico|webp|avif|woff2?|ttf|eot|map|json|xml|txt)$/i;
-const ADMIN_PATH = /^\/admin(?:\/|$)/;
+const ADMIN_PATH = /^\/admin(?:\/|$)/i;
 // The volunteer calendar feed URL contains its secret token, so never record it in analytics.
 const PRIVATE_FEED_PATH = /^\/volunteer-calendar\//;
-// SHA-256 digests of "username:password" for each admin login. Store only digests, never plaintext passwords.
-// Each person has their own login so access can be revoked individually by removing their line.
-const ADMIN_CREDENTIAL_DIGESTS: Readonly<Record<string, string>> = {
-  'forktree-admin-4e7ac0': 'ce198f7695cfd32644f28e4f4f9a7aeb30b4e8182a2c623e812afc709aa9d722',
-  maddie: '1d998b9d4cfc2b61680c94be1b1de255262feea31227f5b2711b6aaeb24be04f',
-  liz: 'f10876593d621a3d5c5e78443c7098ef32f981fdfdf946b284f459860a284a84',
-};
 
-function constantTimeEqual(left: string, right: string): boolean {
-  if (left.length !== right.length) return false;
-
-  let difference = 0;
-  for (let index = 0; index < left.length; index += 1) {
-    difference |= left.charCodeAt(index) ^ right.charCodeAt(index);
-  }
-  return difference === 0;
-}
-
-async function hasValidAdminCredentials(request: Request): Promise<boolean> {
-  const authorization = request.headers.get('authorization');
-  if (!authorization) return false;
-
-  const [scheme, encodedCredentials, extra] = authorization.trim().split(/\s+/);
-  if (scheme?.toLowerCase() !== 'basic' || !encodedCredentials || extra) return false;
-
-  let credentials: string;
+// Astro decodes the pathname before matching routes, so /%61dmin reaches the /admin pages. Match on
+// the decoded path too, and treat undecodable paths as admin so they can never skip the check.
+function isAdminPath(pathname: string): boolean {
+  if (ADMIN_PATH.test(pathname)) return true;
   try {
-    credentials = atob(encodedCredentials);
+    return ADMIN_PATH.test(decodeURI(pathname));
   } catch {
-    return false;
+    return true;
   }
-
-  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(credentials));
-  const digestHex = Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('');
-  // Compare against every digest so timing does not reveal which usernames exist.
-  let matched = false;
-  for (const expected of Object.values(ADMIN_CREDENTIAL_DIGESTS)) {
-    if (constantTimeEqual(digestHex, expected)) matched = true;
-  }
-  return matched;
 }
 
 function isSameOriginRequest(request: Request): boolean {
@@ -59,28 +30,46 @@ function isSameOriginRequest(request: Request): boolean {
 }
 
 function unauthorizedResponse(): Response {
-  return new Response('Authentication required.', {
-    status: 401,
+  return new Response('Sign in through Cloudflare Access to view this page.', {
+    status: 403,
     headers: {
       'cache-control': 'no-store',
       'content-type': 'text/plain; charset=utf-8',
-      'www-authenticate': 'Basic realm="Forktree admin", charset="UTF-8"',
       'x-robots-tag': 'noindex, nofollow',
     },
   });
 }
 
+// Cloudflare Access protects /admin. The Worker re-checks the signed Access token so that requests
+// reaching it without Access (for example via a hostname Access does not cover) are refused.
+async function adminIdentity(request: Request, env: Record<string, unknown> | undefined): Promise<AccessIdentity | null> {
+  // `astro dev` has no Access in front of it; production builds never take this branch.
+  if (import.meta.env.DEV) return { email: 'local-dev' };
+  return verifyAccessJwt(request.headers.get('cf-access-jwt-assertion'), {
+    teamDomain: String(env?.CF_ACCESS_TEAM_DOMAIN ?? ''),
+    audience: String(env?.CF_ACCESS_AUD ?? ''),
+  });
+}
+
 export const onRequest = defineMiddleware(async (context, next) => {
   const url = new URL(context.request.url);
-  const isAdminRequest = ADMIN_PATH.test(url.pathname);
+  const isAdminRequest = isAdminPath(url.pathname);
 
-  if (isAdminRequest && !(await hasValidAdminCredentials(context.request))) {
+  const env = (context.locals as any).runtime?.env as Record<string, unknown> | undefined;
+  const identity = isAdminRequest ? await adminIdentity(context.request, env) : null;
+
+  if (isAdminRequest && !identity) {
     return unauthorizedResponse();
   }
 
-  // Browsers resend Basic auth credentials on cross-site form posts, so admin changes must come
-  // from an admin page on this site.
-  if (isAdminRequest && !['GET', 'HEAD'].includes(context.request.method) && !isSameOriginRequest(context.request)) {
+  // Browsers send the Access cookie with some cross-site requests, so changes made by a signed-in
+  // person must come from an admin page on this site. Service tokens are sent explicitly by scripts.
+  if (
+    isAdminRequest &&
+    identity?.email &&
+    !['GET', 'HEAD'].includes(context.request.method) &&
+    !isSameOriginRequest(context.request)
+  ) {
     return new Response('Cross-site admin requests are not allowed.', {
       status: 403,
       headers: { 'cache-control': 'no-store', 'content-type': 'text/plain; charset=utf-8' },
