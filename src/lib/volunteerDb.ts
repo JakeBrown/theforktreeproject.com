@@ -100,6 +100,14 @@ export const VOLUNTEER_SCHEMA_STATEMENTS = [
     value TEXT NOT NULL,
     updated_at TEXT NOT NULL
   )`,
+  // MailerLite sync state per registration (see mailerliteSync.ts). synced_at is '' until it succeeds.
+  `CREATE TABLE IF NOT EXISTS volunteer_registration_mailerlite (
+    registration_id INTEGER PRIMARY KEY,
+    synced_at TEXT NOT NULL DEFAULT '',
+    attempts INTEGER NOT NULL DEFAULT 0,
+    last_error TEXT NOT NULL DEFAULT '',
+    last_attempt_at TEXT NOT NULL DEFAULT ''
+  )`,
 ];
 
 const schemaReady = new WeakMap<D1Database, Promise<void>>();

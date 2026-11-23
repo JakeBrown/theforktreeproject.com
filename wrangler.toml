@@ -18,6 +18,9 @@ binding = "ASSETS"
 [vars]
 CF_ACCESS_TEAM_DOMAIN = "windybit.cloudflareaccess.com"
 CF_ACCESS_AUD = "af86c6e509114e047cfce88cde840f10695f5792e6b402d8f4962ed461a53889"
+# MailerLite "Volunteers" group that registrations sync into. The API key is the
+# MAILERLITE_API_KEY secret (wrangler secret put), never in this file.
+MAILERLITE_VOLUNTEERS_GROUP_ID = "204968455775978608"
 
 [[analytics_engine_datasets]]
 binding = "ANALYTICS"

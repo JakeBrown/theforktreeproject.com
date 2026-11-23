@@ -4,6 +4,7 @@ import {
   validateVolunteerRegistration,
   type VolunteerRegistrationInput,
 } from '../../lib/volunteerRegistration';
+import { syncRegistrationsToMailerLite } from '../../lib/mailerliteSync';
 
 export const prerender = false;
 
@@ -248,7 +249,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const entry = validation.data;
 
   try {
-    await database
+    const inserted = await database
       .prepare(
         `INSERT INTO volunteer_registrations (
           full_name,
@@ -328,6 +329,13 @@ export const POST: APIRoute = async ({ request, locals }) => {
         new Date().toISOString()
       )
       .run();
+
+    // Send this volunteer to MailerLite after responding; the cron retries any failure.
+    const registrationId = Number((inserted as any)?.meta?.last_row_id);
+    const runtime = (locals as any).runtime;
+    if (registrationId > 0) {
+      runtime?.ctx?.waitUntil?.(syncRegistrationsToMailerLite(database, runtime.env || {}, { registrationId, limit: 1 }));
+    }
 
     return jsonResponse({ ok: true }, 201);
   } catch {

@@ -5,6 +5,7 @@ import {
   runJournalSearchReindex,
   type JournalSearchEnv,
 } from './lib/journalSearch';
+import { syncRegistrationsToMailerLite, type MailerLiteEnv } from './lib/mailerliteSync';
 import { refreshVolunteerRecords, type D1Database } from './lib/volunteerDb';
 
 // 5pm in Adelaide is 06:30 UTC during daylight saving (ACDT) and 07:30 UTC otherwise (ACST).
@@ -43,6 +44,12 @@ export function createExports(manifest: any) {
             ctx.waitUntil(
               refreshVolunteerRecords(database).catch((error) => {
                 console.error('volunteer auto sign-out failed', error);
+              })
+            );
+            // Also retry volunteer registrations that have not reached MailerLite yet.
+            ctx.waitUntil(
+              syncRegistrationsToMailerLite(database, env as MailerLiteEnv, { limit: 20 }).then((result) => {
+                if (result.attempted || result.skipped) console.log('MailerLite sync', result);
               })
             );
             break;
