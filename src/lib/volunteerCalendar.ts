@@ -5,14 +5,14 @@ export type CalendarStatus = 'signed-in' | 'signed-out' | 'scheduled';
 export const CALENDAR_STATUSES: ReadonlyArray<{
   value: CalendarStatus;
   label: string;
-  /** Emoji dot in the event title: the one colour cue every calendar app shows, including Outlook. */
+  /** Emoji shown on admin badges and at the start of feed event titles (every calendar app shows it, including Outlook). */
   marker: string;
   /** RFC 7986 COLOR (a CSS colour name), used by Apple Calendar and some others. */
   icsColor: string;
 }> = [
-  { value: 'signed-in', label: 'Signed in', marker: '🟢', icsColor: 'forestgreen' },
-  { value: 'signed-out', label: 'Signed out', marker: '🔵', icsColor: 'royalblue' },
-  { value: 'scheduled', label: 'Scheduled', marker: '🟡', icsColor: 'goldenrod' },
+  { value: 'signed-in', label: 'Signed in', marker: '✅', icsColor: 'forestgreen' },
+  { value: 'signed-out', label: 'Signed out', marker: '👋', icsColor: 'royalblue' },
+  { value: 'scheduled', label: 'Scheduled', marker: '📅', icsColor: 'goldenrod' },
 ];
 
 export function isCalendarStatus(value: string): value is CalendarStatus {

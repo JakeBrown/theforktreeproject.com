@@ -1,7 +1,7 @@
 ---
 import AdminDetailGroups from '../../../components/AdminDetailGroups.astro';
 import AdminLayout from '../../../layouts/AdminLayout.astro';
-import { formatDate, formatDateTime, formatTime, yesNo } from '../../../lib/admin';
+import { formatDate, formatDateTime, formatTime } from '../../../lib/admin';
 import {
   REGISTRATION_COLUMNS,
   mediaConsentLabel,
@@ -361,10 +361,10 @@ function inputType(field: ProfileFieldDefinition) {
         {registration ? (
           <div class="profile-card">
             <ul class="registration-flags" aria-label="Key registration details">
-              <li class:list={{ 'registration-flags--alert': Boolean(registration.is_under_18) }}>Under 18: {yesNo(registration.is_under_18)}</li>
-              <li>WWCC: {wwccLabel(registration.wwcc_status)}</li>
-              <li class:list={{ 'registration-flags--alert': registration.media_consent === 'decline' }}>{mediaConsentLabel(registration.media_consent)}</li>
-              {registration.medical_information && <li class="registration-flags--alert">Medical information provided</li>}
+              <li>{registration.is_under_18 ? '⚠️ Under 18' : '🧑 Adult'}</li>
+              <li>🪪 WWCC: {wwccLabel(registration.wwcc_status)}</li>
+              <li>{registration.media_consent === 'decline' ? '🚫' : '📸'} {mediaConsentLabel(registration.media_consent)}</li>
+              {registration.medical_information && <li>🩺 Medical information provided</li>}
             </ul>
             <AdminDetailGroups groups={registrationDetailGroups(registration)} />
             {earlierRegistrations.map((earlier) => (
@@ -486,7 +486,6 @@ function inputType(field: ProfileFieldDefinition) {
   .profile-history, .profile-registration { margin-top: 2rem; }
   .registration-flags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.6rem; padding: 0; list-style: none; }
   .registration-flags li { padding: 0.3rem 0.7rem; border-radius: 999px; background: #eef3ec; color: #2f4a2c; font-size: 0.78rem; font-weight: 600; }
-  .registration-flags li.registration-flags--alert { background: #fbf0d4; color: #7a5608; }
   .registration-earlier { margin-top: 2rem; padding-top: 1.4rem; border-top: 1px solid #e3e8e1; }
   .registration-earlier summary { cursor: pointer; color: #2d6927; font-size: 0.86rem; font-weight: 700; }
   .registration-earlier[open] summary { margin-bottom: 1.4rem; }

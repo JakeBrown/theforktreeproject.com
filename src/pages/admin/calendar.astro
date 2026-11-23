@@ -129,7 +129,7 @@ function contact(name: string, relationship: string, phone: string): string {
         {loadError ? 'The calendar is unavailable.' : `${monthLabel}: ${statusCounts['signed-in']} signed in, ${statusCounts['signed-out']} signed out, ${statusCounts['scheduled']} scheduled`}
       </p>
     </div>
-    <ul class="calendar-legend" aria-label="Colour key">
+    <ul class="calendar-legend" aria-label="Status key">
       {CALENDAR_STATUSES.map((status) => (
         <li><span class={`attendance-badge attendance-badge--${status.value}`}>{status.label}</span></li>
       ))}
@@ -179,14 +179,14 @@ function contact(name: string, relationship: string, phone: string): string {
                             <time class="calendar-day__date" datetime={day.date}>{day.dayNumber}</time>
                             <span class="volunteer-calendar__chips">
                               {dayEntries.slice(0, MAX_CHIPS).map((entry) => (
-                                <span class={`volunteer-chip volunteer-chip--${entry.status}`}>{entry.volunteer.fullName}</span>
+                                <span class={`volunteer-chip volunteer-chip--${entry.status}`}><span aria-hidden="true">{statusInfo(entry.status).marker}</span> {entry.volunteer.fullName}</span>
                               ))}
                               {dayEntries.length > MAX_CHIPS && <span class="volunteer-chip volunteer-chip--more">+{dayEntries.length - MAX_CHIPS} more</span>}
                             </span>
                             <span class="volunteer-calendar__dots" aria-hidden="true">
                               {CALENDAR_STATUSES.map((status) => {
                                 const count = dayEntries.filter((entry) => entry.status === status.value).length;
-                                return count > 0 ? <span class={`volunteer-dot volunteer-dot--${status.value}`}>{count}</span> : null;
+                                return count > 0 ? <span class={`volunteer-dot volunteer-dot--${status.value}`}><span aria-hidden="true">{status.marker}</span> {count}</span> : null;
                               })}
                             </span>
                           </button>
@@ -306,7 +306,7 @@ function contact(name: string, relationship: string, phone: string): string {
                   <li>Outlook on the web or new Outlook: Calendar → Add calendar → Subscribe from web, paste the link and choose a colour.</li>
                   <li>Classic Outlook for Windows: Calendar → Add calendar → From Internet, paste the link.</li>
                 </ol>
-                <p>Outlook ignores colours set inside a shared calendar, so every event title starts with a coloured dot: 🟢 signed in, 🔵 signed out, 🟡 scheduled. For full colour blocks, subscribe to the three separate links and give each its own colour in Outlook. Outlook refreshes subscribed calendars every few hours, so changes are not instant.</p>
+                <p>Outlook ignores colours set inside a shared calendar, so every event title starts with an emoji: ✅ signed in, 👋 signed out, 📅 scheduled. For full colour blocks, subscribe to the three separate links and give each its own colour in Outlook. Outlook refreshes subscribed calendars every few hours, so changes are not instant.</p>
               </details>
               <p class="calendar-feeds__warning">Anyone with these links can see volunteers’ contact and emergency details. Only share them with coordinators.</p>
               <form method="post" action={`/admin/calendar?month=${params.month}`} data-confirm="Replace the link? Every existing subscription will stop updating until it is re-added with the new link.">
@@ -359,16 +359,10 @@ function contact(name: string, relationship: string, phone: string): string {
   .volunteer-calendar__button:hover { background: #f7faf6; }
   .volunteer-calendar__button:focus-visible { outline: 3px solid rgba(58, 125, 50, 0.25); outline-offset: -3px; }
   .volunteer-calendar__chips { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
-  .volunteer-chip { display: block; overflow: hidden; padding: 0.1rem 0.4rem; border-left: 3px solid; border-radius: 3px; font-size: 0.68rem; font-weight: 600; line-height: 1.45; text-overflow: ellipsis; white-space: nowrap; }
-  .volunteer-chip--signed-in { border-color: #2f7d32; background: #e3f1e1; color: #23561f; }
-  .volunteer-chip--signed-out { border-color: #3b6fb6; background: #e3ebf8; color: #244a8a; }
-  .volunteer-chip--scheduled { border-color: #c98a12; background: #fbf0d4; color: #6f4f07; }
-  .volunteer-chip--more { border-color: transparent; background: transparent; color: #566153; }
+  .volunteer-chip { display: block; overflow: hidden; padding: 0.1rem 0.35rem; border-radius: 3px; background: #f1f4ef; color: #1f2a1f; font-size: 0.68rem; font-weight: 600; line-height: 1.45; text-overflow: ellipsis; white-space: nowrap; }
+  .volunteer-chip--more { background: transparent; color: #566153; }
   .volunteer-calendar__dots { display: none; gap: 0.2rem; flex-wrap: wrap; }
-  .volunteer-dot { display: inline-grid; min-width: 1.15rem; height: 1.15rem; place-items: center; border-radius: 999px; color: #fff; font-size: 0.6rem; font-weight: 700; }
-  .volunteer-dot--signed-in { background: #2f7d32; }
-  .volunteer-dot--signed-out { background: #3b6fb6; }
-  .volunteer-dot--scheduled { background: #c98a12; }
+  .volunteer-dot { display: inline-flex; align-items: center; gap: 0.15rem; padding: 0 0.3rem; border-radius: 999px; background: #f1f4ef; color: #1f2a1f; font-size: 0.66rem; font-weight: 700; line-height: 1.6; }
   .calendar-day-list { margin: 0; padding: 0; list-style: none; }
   .calendar-day-list li { padding: 1rem clamp(1.1rem, 4vw, 2rem); border-bottom: 1px solid #e3e8e1; }
   .calendar-day-list li:last-child { border-bottom: 0; }

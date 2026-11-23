@@ -54,8 +54,8 @@ test('ICS output has all-day events with status markers, contacts and folded lin
   assert.ok(ics.endsWith('END:VCALENDAR\r\n'));
   assert.match(unfolded, /DTSTART;VALUE=DATE:20261103\r\nDTEND;VALUE=DATE:20261104/);
   assert.match(unfolded, /DTSTART;VALUE=DATE:20261231\r\nDTEND;VALUE=DATE:20270101/);
-  assert.match(unfolded, /SUMMARY:🔵 Cam Ng · Signed out\\, auto/);
-  assert.match(unfolded, /SUMMARY:🟡 Ann Lee · Scheduled · from 9:00 am/);
+  assert.match(unfolded, /SUMMARY:👋 Cam Ng · Signed out\\, auto/);
+  assert.match(unfolded, /SUMMARY:📅 Ann Lee · Scheduled · from 9:00 am/);
   assert.match(unfolded, /Signed out: 5:00 pm \(automatic\\, not confirmed by volunteer\)/);
   assert.match(unfolded, /Emergency contact: Bo Lee \(Partner\): 0400 000 000/);
   assert.match(unfolded, /Visit notes: Bring gloves\\, hat\\; water/);

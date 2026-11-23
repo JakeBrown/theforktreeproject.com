@@ -254,17 +254,19 @@ const { title, description, active } = Astro.props;
     min-height: 1.5rem;
     padding: 0.15rem 0.55rem;
     border-radius: 999px;
+    background: #f1f4ef;
+    color: #1f2a1f;
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     white-space: nowrap;
   }
-  .attendance-badge::before { content: ''; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: currentColor; }
-  .attendance-badge--signed-in { background: #e3f1e1; color: #2a6b27; }
-  .attendance-badge--signed-out { background: #e3ebf8; color: #2c56a0; }
-  .attendance-badge--scheduled { background: #fbf0d4; color: #87600a; }
-  .attendance-badge--automatic { background: #f1ece4; color: #6e5a3c; }
-  .attendance-badge--automatic::before { display: none; }
+  /* Status is shown by emoji, not colour. The "/ ''" alt text stops screen readers announcing it. */
+  .attendance-badge::before { font-size: 0.85em; }
+  .attendance-badge--signed-in::before { content: '✅' / ''; }
+  .attendance-badge--signed-out::before { content: '👋' / ''; }
+  .attendance-badge--scheduled::before { content: '📅' / ''; }
+  .attendance-badge--automatic::before { content: '⏰' / ''; }
 
   /* Cards and form helpers shared by the volunteer profile and calendar pages. */
   .profile-card { padding: clamp(1rem, 3vw, 1.6rem); border: 1px solid #dce2d9; border-radius: 8px; background: #fff; box-shadow: 0 14px 38px rgba(31, 42, 31, 0.05); }
