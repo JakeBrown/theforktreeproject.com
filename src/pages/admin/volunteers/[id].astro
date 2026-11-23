@@ -249,6 +249,13 @@ function inputType(field: ProfileFieldDefinition) {
             </p>
           </div>
         </div>
+        {registration ? (
+          <button type="button" class="admin-button profile-registration-button" data-dialog-open="registration-dialog" aria-haspopup="dialog" aria-controls="registration-dialog">
+            View registration form
+          </button>
+        ) : (
+          <p class="profile-hint profile-registration-missing">No registration form on file</p>
+        )}
       </header>
 
       {notice && <p class:list={['admin-flash', notice.error ? 'admin-flash--error' : 'admin-flash--success']} role="status">{notice.text}</p>}
@@ -279,7 +286,6 @@ function inputType(field: ProfileFieldDefinition) {
             </fieldset>
           ))}
           <div class="profile-form__footer">
-            {registration && <a class="admin-link-button" href="#registration">View registration form</a>}
             <button class="admin-button" type="submit">Save profile</button>
           </div>
         </form>
@@ -351,36 +357,34 @@ function inputType(field: ProfileFieldDefinition) {
         </aside>
       </div>
 
-      <section class="profile-registration" id="registration" aria-labelledby="registration-heading">
-        <div class="profile-history__heading">
-          <h2 id="registration-heading">Registration form</h2>
-          <p class="admin-summary">
-            {registration ? `Submitted ${formatDateTime(registration.registered_at)}` : 'No registration form on file'}
-          </p>
-        </div>
-        {registration ? (
-          <div class="profile-card">
-            <ul class="registration-flags" aria-label="Key registration details">
-              <li>{registration.is_under_18 ? 'Under 18' : 'Adult'}</li>
-              <li>WWCC: {wwccLabel(registration.wwcc_status)}</li>
-              <li>{mediaConsentLabel(registration.media_consent)}</li>
-              {registration.medical_information && <li>Medical information provided</li>}
-            </ul>
-            <AdminDetailGroups groups={registrationDetailGroups(registration)} />
-            {earlierRegistrations.map((earlier) => (
-              <details class="registration-earlier">
-                <summary>Earlier registration form, submitted {formatDateTime(earlier.registered_at)}</summary>
-                <AdminDetailGroups groups={registrationDetailGroups(earlier)} />
-              </details>
-            ))}
-          </div>
-        ) : (
-          <section class="admin-state">
-            <h2>No registration form</h2>
-            <p>This volunteer hasn’t completed the online registration form, or registered with a different phone number.</p>
-          </section>
-        )}
-      </section>
+      {registration && (
+        <dialog class="admin-dialog" id="registration-dialog" aria-labelledby="registration-dialog-title">
+          <article class="admin-dialog__panel">
+            <header class="admin-dialog__header">
+              <div>
+                <p class="admin-dialog__eyebrow">Registration form · submitted {formatDateTime(registration.registered_at)}</p>
+                <h2 id="registration-dialog-title">{registration.full_name}</h2>
+              </div>
+              <button class="admin-dialog__close" type="button" data-dialog-close aria-label="Close registration form">×</button>
+            </header>
+            <div class="admin-dialog__body">
+              <ul class="registration-flags" aria-label="Key registration details">
+                <li>{registration.is_under_18 ? 'Under 18' : 'Adult'}</li>
+                <li>WWCC: {wwccLabel(registration.wwcc_status)}</li>
+                <li>{mediaConsentLabel(registration.media_consent)}</li>
+                {registration.medical_information && <li>Medical information provided</li>}
+              </ul>
+              <AdminDetailGroups groups={registrationDetailGroups(registration)} />
+              {earlierRegistrations.map((earlier) => (
+                <details class="registration-earlier">
+                  <summary>Earlier registration form, submitted {formatDateTime(earlier.registered_at)}</summary>
+                  <AdminDetailGroups groups={registrationDetailGroups(earlier)} />
+                </details>
+              ))}
+            </div>
+          </article>
+        </dialog>
+      )}
 
       <section class="profile-history" aria-labelledby="history-heading">
         <div class="profile-history__heading">
@@ -433,6 +437,14 @@ function inputType(field: ProfileFieldDefinition) {
 </AdminLayout>
 
 <script>
+  // Links to /admin/volunteers/<id>#registration (from the Volunteers list) open the form directly.
+  // Wait for load so the shared dialog handlers in AdminLayout are attached first.
+  window.addEventListener('load', () => {
+    if (window.location.hash === '#registration') {
+      document.querySelector<HTMLElement>('[data-dialog-open="registration-dialog"]')?.click();
+    }
+  });
+
   // Resize photos in the browser so uploads stay small (phone photos are often 3-8 MB).
   const MAX_DIMENSION = 800;
   document.querySelectorAll<HTMLFormElement>('[data-photo-form]').forEach((form) => {
@@ -483,7 +495,10 @@ function inputType(field: ProfileFieldDefinition) {
   .profile-visits__notes { font-size: 0.78rem; }
   .profile-visits .profile-text-button { margin-top: 0; }
   .profile-visit-form { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-  .profile-history, .profile-registration { margin-top: 2rem; }
+  .profile-history { margin-top: 2rem; }
+  .profile-heading { align-items: center; }
+  .profile-registration-button { flex: 0 0 auto; }
+  .profile-registration-missing { margin: 0; }
   .registration-flags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.6rem; padding: 0; list-style: none; }
   .registration-flags li { padding: 0.3rem 0.7rem; border-radius: 999px; background: #eef3ec; color: #2f4a2c; font-size: 0.78rem; font-weight: 600; }
   .registration-earlier { margin-top: 2rem; padding-top: 1.4rem; border-top: 1px solid #e3e8e1; }
