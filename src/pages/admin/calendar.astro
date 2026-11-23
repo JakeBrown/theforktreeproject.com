@@ -4,7 +4,7 @@ import '../../styles/admin-calendar.css';
 import { formatDate, formatTime } from '../../lib/admin';
 import { calendarWeeks, formatMonth, getCalendarMonth, monthBounds, shiftMonth } from '../../lib/adminCalendar';
 import { getAdelaideDate } from '../../lib/volunteerAttendance';
-import { CALENDAR_STATUSES, statusInfo, type CalendarEntry } from '../../lib/volunteerCalendar';
+import { CALENDAR_STATUSES, isCalendarStatus, statusInfo, type CalendarEntry } from '../../lib/volunteerCalendar';
 import { loadCalendarEntries } from '../../lib/volunteerCalendarData';
 import {
   getCalendarToken,
@@ -59,6 +59,21 @@ const [monthStart, nextMonthStart] = monthBounds(params.month);
 const previousMonth = params.month === '2000-01' ? null : shiftMonth(params.month, -1);
 const nextMonth = params.month === '2100-12' ? null : shiftMonth(params.month, 1);
 
+// Status filter (?show=signed-in,scheduled). Missing or empty means every status is shown.
+const allStatuses = CALENDAR_STATUSES.map((status) => status.value);
+const requestedShow = (Astro.url.searchParams.get('show') || '').split(',').filter(isCalendarStatus);
+const shownStatuses = new Set(requestedShow.length > 0 ? requestedShow : allStatuses);
+const isFiltered = shownStatuses.size < allStatuses.length;
+const showQuery = isFiltered ? `&show=${allStatuses.filter((value) => shownStatuses.has(value)).join(',')}` : '';
+function toggleHref(value: (typeof allStatuses)[number]): string {
+  const next = new Set(shownStatuses);
+  if (next.has(value)) next.delete(value);
+  else next.add(value);
+  // Turning off the last status, or turning everything on, goes back to showing everything.
+  const query = next.size === 0 || next.size === allStatuses.length ? '' : `&show=${allStatuses.filter((item) => next.has(item)).join(',')}`;
+  return `/admin/calendar?month=${params.month}${query}`;
+}
+
 let entries: CalendarEntry[] = [];
 let volunteers: Array<{ id: number; full_name: string }> = [];
 let token = '';
@@ -85,6 +100,7 @@ if (!database) {
 
 const entriesByDate = new Map<string, CalendarEntry[]>();
 for (const entry of entries) {
+  if (!shownStatuses.has(entry.status)) continue;
   const list = entriesByDate.get(entry.date) || [];
   list.push(entry);
   entriesByDate.set(entry.date, list);
@@ -129,11 +145,23 @@ function contact(name: string, relationship: string, phone: string): string {
         {loadError ? 'The calendar is unavailable.' : `${monthLabel}: ${statusCounts['signed-in']} signed in, ${statusCounts['signed-out']} signed out, ${statusCounts['scheduled']} scheduled`}
       </p>
     </div>
-    <ul class="calendar-legend" aria-label="Status key">
-      {CALENDAR_STATUSES.map((status) => (
-        <li><span class={`attendance-badge attendance-badge--${status.value}`}>{status.label}</span></li>
-      ))}
-    </ul>
+    <nav class="calendar-filter" aria-label="Show statuses">
+      <ul class="calendar-legend">
+        {CALENDAR_STATUSES.map((status) => {
+          const shown = shownStatuses.has(status.value);
+          return (
+            <li>
+              <a
+                class:list={['attendance-badge', `attendance-badge--${status.value}`, 'calendar-filter__toggle', { 'calendar-filter__toggle--off': !shown }]}
+                href={toggleHref(status.value)}
+                aria-label={`${status.label}: ${shown ? 'shown, select to hide' : 'hidden, select to show'}`}
+              >{status.label}</a>
+            </li>
+          );
+        })}
+      </ul>
+      {isFiltered && <a class="calendar-filter__reset" href={`/admin/calendar?month=${params.month}`}>Show all</a>}
+    </nav>
   </header>
 
   {notice && <p class="admin-flash admin-flash--success" role="status">{notice}</p>}
@@ -148,11 +176,11 @@ function contact(name: string, relationship: string, phone: string): string {
       <section class="sign-in-calendar volunteer-calendar" aria-labelledby="calendar-month">
         <header class="calendar-toolbar">
           {previousMonth ? (
-            <a class="calendar-nav" href={`/admin/calendar?month=${previousMonth}`} aria-label={`View ${formatMonth(previousMonth)}`}><span aria-hidden="true">←</span><span>Previous</span></a>
+            <a class="calendar-nav" href={`/admin/calendar?month=${previousMonth}${showQuery}`} aria-label={`View ${formatMonth(previousMonth)}`}><span aria-hidden="true">←</span><span>Previous</span></a>
           ) : <span class="calendar-nav calendar-nav--disabled" aria-disabled="true"><span aria-hidden="true">←</span><span>Previous</span></span>}
           <h2 id="calendar-month">{monthLabel}</h2>
           {nextMonth ? (
-            <a class="calendar-nav" href={`/admin/calendar?month=${nextMonth}`} aria-label={`View ${formatMonth(nextMonth)}`}><span>Next</span><span aria-hidden="true">→</span></a>
+            <a class="calendar-nav" href={`/admin/calendar?month=${nextMonth}${showQuery}`} aria-label={`View ${formatMonth(nextMonth)}`}><span>Next</span><span aria-hidden="true">→</span></a>
           ) : <span class="calendar-nav calendar-nav--disabled" aria-disabled="true"><span>Next</span><span aria-hidden="true">→</span></span>}
         </header>
         <div class="calendar-table-wrap">
@@ -352,7 +380,14 @@ function contact(name: string, relationship: string, phone: string): string {
 </script>
 
 <style is:global>
+  .calendar-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
   .calendar-legend { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+  .calendar-filter__toggle { min-height: 2rem; padding: 0.3rem 0.8rem; border: 1px solid #cdd6ca; font-size: 0.74rem; cursor: pointer; transition: opacity 120ms, background 120ms; }
+  .calendar-filter__toggle:hover { background: #e6ede3; }
+  .calendar-filter__toggle:focus-visible { outline: 3px solid rgba(58, 125, 50, 0.25); outline-offset: 2px; }
+  .calendar-filter__toggle--off { border-style: dashed; background: transparent; color: #7a8577; text-decoration: line-through; opacity: 0.75; }
+  .calendar-filter__reset { color: #2d6927; font-size: 0.78rem; font-weight: 700; }
+  .calendar-filter__reset:hover { text-decoration: underline; }
   .calendar-day--today { box-shadow: inset 0 0 0 2px #34752e; }
   .volunteer-calendar__day { height: clamp(6.5rem, 11vw, 9.5rem); }
   .volunteer-calendar__button { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 0.35rem; width: 100%; padding: 0.55rem; overflow: hidden; color: #1f2a1f; text-align: left; }

@@ -361,10 +361,10 @@ function inputType(field: ProfileFieldDefinition) {
         {registration ? (
           <div class="profile-card">
             <ul class="registration-flags" aria-label="Key registration details">
-              <li>{registration.is_under_18 ? '⚠️ Under 18' : '🧑 Adult'}</li>
-              <li>🪪 WWCC: {wwccLabel(registration.wwcc_status)}</li>
-              <li>{registration.media_consent === 'decline' ? '🚫' : '📸'} {mediaConsentLabel(registration.media_consent)}</li>
-              {registration.medical_information && <li>🩺 Medical information provided</li>}
+              <li>{registration.is_under_18 ? 'Under 18' : 'Adult'}</li>
+              <li>WWCC: {wwccLabel(registration.wwcc_status)}</li>
+              <li>{mediaConsentLabel(registration.media_consent)}</li>
+              {registration.medical_information && <li>Medical information provided</li>}
             </ul>
             <AdminDetailGroups groups={registrationDetailGroups(registration)} />
             {earlierRegistrations.map((earlier) => (
