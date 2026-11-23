@@ -2,14 +2,6 @@ const MONTH_PATTERN = /^(\d{4})-(\d{2})$/;
 const MIN_ADMIN_YEAR = 2000;
 const MAX_ADMIN_YEAR = 2100;
 
-export type SignInAdminView = 'calendar' | 'list';
-
-export interface SignInAdminParams {
-  view: SignInAdminView;
-  month: string;
-  name: string;
-}
-
 export interface CalendarDay {
   date: string;
   dayNumber: number;
@@ -45,16 +37,10 @@ export function currentAdelaideMonth(now = new Date()): string {
   return year && month ? `${year}-${month}` : now.toISOString().slice(0, 7);
 }
 
-export function getSignInAdminParams(searchParams: URLSearchParams, now = new Date()): SignInAdminParams {
-  const requestedView = searchParams.get('view');
+/** The calendar month requested in the URL (?month=YYYY-MM), or the current Adelaide month. */
+export function getCalendarMonth(searchParams: URLSearchParams, now = new Date()): string {
   const requestedMonth = (searchParams.get('month') || '').trim();
-  const name = (searchParams.get('name') || '').trim().replace(/\s+/g, ' ').slice(0, 100);
-
-  return {
-    view: requestedView === 'list' ? 'list' : 'calendar',
-    month: monthParts(requestedMonth) ? requestedMonth : currentAdelaideMonth(now),
-    name,
-  };
+  return monthParts(requestedMonth) ? requestedMonth : currentAdelaideMonth(now);
 }
 
 export function shiftMonth(value: string, offset: number): string {
@@ -95,8 +81,4 @@ export function calendarWeeks(value: string): CalendarWeek[] {
     weeks.push({ days: cells.slice(index, index + 7) });
   }
   return weeks;
-}
-
-export function isDemoSignInName(value: string): boolean {
-  return value.trimStart().startsWith('DEMO —');
 }

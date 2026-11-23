@@ -1,0 +1,29 @@
+---
+import type { DetailGroup } from '../lib/admin';
+
+interface Props {
+  groups: DetailGroup[];
+}
+
+const { groups } = Astro.props;
+---
+
+{groups.map((group) => (
+  <section class="admin-detail-group">
+    <h3>{group.heading}</h3>
+    <dl class="admin-detail-list">
+      {group.items.map((item) => (
+        <div>
+          <dt>{item.label}</dt>
+          <dd>
+            {Array.isArray(item.value) ? (
+              item.value.length > 0 ? (
+                <ul>{item.value.map((value) => <li>{value}</li>)}</ul>
+              ) : 'Not provided'
+            ) : item.value}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+))}

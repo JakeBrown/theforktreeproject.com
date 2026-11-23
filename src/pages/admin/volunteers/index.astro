@@ -18,6 +18,7 @@ interface VolunteerRow {
   last_date: string | null;
   next_visit: string | null;
   photo_updated: string | null;
+  registered_at: string | null;
 }
 
 const database = getVolunteerDatabase(Astro.locals);
@@ -81,7 +82,8 @@ if (!database) {
         (SELECT COUNT(*) FROM volunteer_attendance a WHERE a.volunteer_id = v.id) AS visit_count,
         (SELECT MAX(s.volunteer_date) FROM volunteer_sign_ins s JOIN volunteer_attendance a ON a.sign_in_id = s.id WHERE a.volunteer_id = v.id) AS last_date,
         (SELECT MIN(sv.visit_date) FROM volunteer_scheduled_visits sv WHERE sv.volunteer_id = v.id AND sv.visit_date >= ?1) AS next_visit,
-        (SELECT p.updated_at FROM volunteer_photos p WHERE p.volunteer_id = v.id) AS photo_updated
+        (SELECT p.updated_at FROM volunteer_photos p WHERE p.volunteer_id = v.id) AS photo_updated,
+        (SELECT r.registered_at FROM volunteer_registrations r WHERE r.id = v.registration_id) AS registered_at
        FROM volunteers v
        ${where}
        ORDER BY v.full_name COLLATE NOCASE ASC, v.id ASC
@@ -107,6 +109,15 @@ const initials = (value: string) =>
       <p class="admin-summary">
         {loadError ? 'Volunteer profiles are unavailable.' : `${volunteers.length} ${volunteers.length === 1 ? 'profile' : 'profiles'}${name ? ' matching' : ''}. Profiles are created automatically from sign-ins and registrations.`}
       </p>
+    </div>
+    <div class="registration-export">
+      <a class="admin-button registration-export__button" href="/admin/registrations.csv" download>
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+          <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 18v2h14v-2" />
+        </svg>
+        Download MailerLite CSV
+      </a>
+      <p>Everyone who has registered, most recent form per email.</p>
     </div>
   </header>
 
@@ -156,6 +167,7 @@ const initials = (value: string) =>
             <th scope="col">Visits</th>
             <th scope="col">Last attended</th>
             <th scope="col">Next scheduled</th>
+            <th scope="col">Registered</th>
           </tr>
         </thead>
         <tbody>
@@ -187,6 +199,9 @@ const initials = (value: string) =>
               <td data-label="Next scheduled">
                 {volunteer.next_visit ? <span class="attendance-badge attendance-badge--scheduled">{formatDate(volunteer.next_visit)}</span> : '—'}
               </td>
+              <td data-label="Registered">
+                {volunteer.registered_at ? <a href={`/admin/volunteers/${volunteer.id}#registration`}>{formatDate(volunteer.registered_at.slice(0, 10))}</a> : <span class="volunteer-missing">No form</span>}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -206,6 +221,13 @@ const initials = (value: string) =>
   .volunteer-avatar--initials { display: inline-grid; place-items: center; color: #3d6b38; font-size: 0.75rem; font-weight: 700; }
   .volunteer-preferred { display: block; color: #657063; font-size: 0.78rem; }
   .volunteer-missing { color: #8c5a12; font-size: 0.8rem; font-weight: 600; }
+  .registration-export { display: grid; justify-items: end; gap: 0.45rem; max-width: 24rem; text-align: right; }
+  .registration-export__button { gap: 0.55rem; box-shadow: 0 6px 16px rgba(40, 95, 37, 0.16); }
+  .registration-export__button svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; }
+  .registration-export p { margin: 0; color: #657063; font-size: 0.78rem; line-height: 1.4; }
+  @media (max-width: 800px) {
+    .registration-export { justify-items: start; text-align: left; }
+  }
 
   @media (max-width: 1000px) {
     .volunteer-tools { grid-template-columns: 1fr; gap: 0; }

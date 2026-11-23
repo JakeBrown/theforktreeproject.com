@@ -2,7 +2,7 @@
 import AdminLayout from '../../layouts/AdminLayout.astro';
 import '../../styles/admin-calendar.css';
 import { formatDate, formatTime } from '../../lib/admin';
-import { calendarWeeks, formatMonth, getSignInAdminParams, monthBounds, shiftMonth } from '../../lib/adminSignIns';
+import { calendarWeeks, formatMonth, getCalendarMonth, monthBounds, shiftMonth } from '../../lib/adminCalendar';
 import { getAdelaideDate } from '../../lib/volunteerAttendance';
 import { CALENDAR_STATUSES, statusInfo, type CalendarEntry } from '../../lib/volunteerCalendar';
 import { loadCalendarEntries } from '../../lib/volunteerCalendarData';
@@ -17,7 +17,7 @@ import { parsePositiveId, parseVisitForm } from '../../lib/volunteerProfiles';
 export const prerender = false;
 
 const database = getVolunteerDatabase(Astro.locals);
-const params = getSignInAdminParams(Astro.url.searchParams);
+const params = { month: getCalendarMonth(Astro.url.searchParams) };
 const today = getAdelaideDate();
 let visitError = '';
 

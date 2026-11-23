@@ -4,7 +4,7 @@ import BaseLayout from './BaseLayout.astro';
 interface Props {
   title: string;
   description: string;
-  active: 'calendar' | 'volunteers' | 'sign-ins' | 'registrations';
+  active: 'calendar' | 'volunteers';
 }
 
 const { title, description, active } = Astro.props;
@@ -14,15 +14,13 @@ const { title, description, active } = Astro.props;
   <div class="admin-shell">
     <header class="admin-header">
       <div class="admin-header__inner">
-        <a class="admin-brand" href="/admin/sign-ins" aria-label="Forktree admin home">
+        <a class="admin-brand" href="/admin/calendar" aria-label="Forktree admin home">
           <img src="/images/logo.png" alt="" width="54" height="54" />
           <span>Forktree <strong>Admin</strong></span>
         </a>
         <nav class="admin-nav" aria-label="Admin navigation">
           <a href="/admin/calendar" aria-current={active === 'calendar' ? 'page' : undefined}>Calendar</a>
           <a href="/admin/volunteers" aria-current={active === 'volunteers' ? 'page' : undefined}>Volunteers</a>
-          <a href="/admin/sign-ins" aria-current={active === 'sign-ins' ? 'page' : undefined}>Sign-ins</a>
-          <a href="/admin/registrations" aria-current={active === 'registrations' ? 'page' : undefined}>Registrations</a>
         </nav>
       </div>
     </header>
