@@ -23,6 +23,7 @@
 ## Admin access
 - `/admin` is protected by Cloudflare Access (email one-time PIN for Liz, Maddie and Jake; app "Forktree Project Admin" in the Windy Bit Zero Trust org). `src/middleware.ts` also verifies the `Cf-Access-Jwt-Assertion` JWT using `CF_ACCESS_TEAM_DOMAIN` / `CF_ACCESS_AUD` in `wrangler.toml`.
 - Any route that reads or returns volunteer data must live under `/admin/...`, never `/api/...`, so both Access and the middleware check cover it.
+- `/admin` is the admin home (links to Calendar, Volunteers, the public forms and printable QR posters, plus a short how-it-works). Keep it short and update it when admin features change.
 - For programmatic testing, send `CF-Access-Client-Id` / `CF-Access-Client-Secret` from the gitignored `CREDS.md` (service token `forktree-admin-test`).
 
 ## Section background rule (footer adjacency)

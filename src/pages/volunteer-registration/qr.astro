@@ -1,0 +1,21 @@
+---
+import QrPoster from '../../components/QrPoster.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Volunteer Registration QR Code — The Forktree Project"
+  description="Print a QR code for The Forktree Project volunteer registration form."
+  headerVariant="dark"
+  norobots={true}
+>
+  <QrPoster
+    kicker="Join the Forktree team"
+    title="Register to volunteer"
+    instruction="Scan the QR code with your phone camera to fill in the volunteer registration form."
+    image="/images/volunteer-registration-qr.svg"
+    alt="QR code for the Forktree volunteer registration form"
+    path="/volunteer-registration"
+    backLabel="Back to registration form"
+  />
+</PageLayout>

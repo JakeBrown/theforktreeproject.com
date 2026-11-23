@@ -1,0 +1,121 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { getAdelaideDate } from '../../lib/volunteerAttendance';
+import { getVolunteerDatabase, refreshVolunteerRecords } from '../../lib/volunteerDb';
+
+export const prerender = false;
+
+const database = getVolunteerDatabase(Astro.locals);
+let today: { onSite: number; signedOut: number; scheduled: number } | null = null;
+
+if (database) {
+  try {
+    await refreshVolunteerRecords(database);
+    const date = getAdelaideDate();
+    const row = await database
+      .prepare(
+        `SELECT
+          (SELECT COUNT(*) FROM volunteer_sign_ins s JOIN volunteer_attendance a ON a.sign_in_id = s.id
+            WHERE s.volunteer_date = ?1 AND a.signed_out_at = '') AS on_site,
+          (SELECT COUNT(*) FROM volunteer_sign_ins s JOIN volunteer_attendance a ON a.sign_in_id = s.id
+            WHERE s.volunteer_date = ?1 AND a.signed_out_at <> '') AS signed_out,
+          (SELECT COUNT(*) FROM volunteer_scheduled_visits WHERE visit_date = ?1) AS scheduled`
+      )
+      .bind(date)
+      .first<{ on_site: number; signed_out: number; scheduled: number }>();
+    if (row) today = { onSite: Number(row.on_site), signedOut: Number(row.signed_out), scheduled: Number(row.scheduled) };
+  } catch (error) {
+    console.error('Unable to load admin home summary', error);
+  }
+}
+
+const forms = [
+  {
+    title: 'Volunteer registration',
+    text: 'New volunteers fill this in once.',
+    href: '/volunteer-registration',
+    qr: '/volunteer-registration/qr',
+  },
+  {
+    title: 'Sign in & out',
+    text: 'Scan on arrival, scan again when leaving.',
+    href: '/volunteer-sign-in',
+    qr: '/volunteer-sign-in/qr',
+  },
+];
+---
+
+<AdminLayout title="Admin home" description="Forktree volunteer admin." active="home">
+  <header class="admin-page-heading">
+    <div>
+      <p class="admin-kicker">Forktree admin</p>
+      <h1>Home</h1>
+      {today && (
+        <p class="admin-summary">
+          Today: {today.onSite} on site · {today.signedOut} signed out · {today.scheduled} scheduled
+        </p>
+      )}
+    </div>
+  </header>
+
+  <section class="home-section" aria-labelledby="home-admin">
+    <h2 id="home-admin">Admin</h2>
+    <div class="home-cards">
+      <a class="home-card" href="/admin/calendar">
+        <strong>Calendar</strong>
+        <span>Who came in, who’s scheduled, and the Outlook calendar link.</span>
+      </a>
+      <a class="home-card" href="/admin/volunteers">
+        <strong>Volunteers</strong>
+        <span>Profiles, registration forms, attendance and photos.</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="home-section" aria-labelledby="home-forms">
+    <h2 id="home-forms">Volunteer forms</h2>
+    <div class="home-cards">
+      {forms.map((form) => (
+        <article class="home-card home-card--static">
+          <strong>{form.title}</strong>
+          <span>{form.text}</span>
+          <div class="home-card__links">
+            <a href={form.href} target="_blank" rel="noopener">Open form</a>
+            <a href={form.qr} target="_blank" rel="noopener">Print QR poster</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="home-section" aria-labelledby="home-how">
+    <h2 id="home-how">How it works</h2>
+    <ul class="home-how">
+      <li>Registering online creates the volunteer’s profile automatically.</li>
+      <li>Anyone not signed out by 5pm is signed out automatically.</li>
+      <li>Fix a missed or wrong sign-in from the volunteer’s profile, under <em>Attendance history</em>.</li>
+      <li>Schedule upcoming visits from the Calendar or a profile.</li>
+      <li>New registrations are added to the MailerLite <em>Volunteers</em> group every hour.</li>
+      <li>Admins sign in with a code sent to their email. Ask Jake to add someone.</li>
+    </ul>
+  </section>
+</AdminLayout>
+
+<style>
+  .home-section { margin-top: 2rem; }
+  .home-section h2 { margin: 0 0 0.9rem; color: #386333; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
+  .home-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .home-card { display: grid; gap: 0.35rem; padding: 1.25rem 1.4rem; border: 1px solid #dfe5dc; border-radius: 6px; background: #fff; color: #1f2a1f; }
+  .home-card strong { font-size: 1.05rem; font-weight: 600; }
+  .home-card span { color: #566153; font-size: 0.86rem; }
+  a.home-card:hover { border-color: #9cbf95; box-shadow: 0 6px 18px rgba(31, 42, 31, 0.07); }
+  a.home-card:hover strong { color: #285f25; }
+  a.home-card:focus-visible, .home-card__links a:focus-visible { outline: 3px solid rgba(58, 125, 50, 0.25); outline-offset: 2px; }
+  .home-card__links { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 0.5rem; }
+  .home-card__links a { color: #2d6927; font-size: 0.86rem; font-weight: 700; }
+  .home-card__links a:hover { text-decoration: underline; }
+  .home-how { display: grid; gap: 0.5rem; margin: 0; padding-left: 1.2rem; color: #2f3a2e; font-size: 0.9rem; line-height: 1.5; }
+  @media (max-width: 700px) {
+    .home-cards { grid-template-columns: 1fr; }
+  }
+</style>
