@@ -22,3 +22,7 @@ Independent review fixes: per-registration sync targets only the new registratio
 **2026-11-23T22:45:25Z**
 
 Sync schedule changed to hourly (cron '5 * * * *', separate from the auto sign-out cron) at Jake's request.
+
+**2026-11-23T23:08:20Z**
+
+First hourly run 2026-11-23T23:05Z synced 13/14. Registration 7 returned 422 'subscriber is not active and cannot be imported' (bounced/unsubscribed in MailerLite); that response is now recorded as done with a note instead of failing and retrying forever.

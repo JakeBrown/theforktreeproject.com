@@ -122,6 +122,7 @@ export async function syncRegistrationsToMailerLite(
       result.attempted += 1;
       const attemptedAt = (options.now ?? new Date()).toISOString();
       let error = '';
+      let note = '';
       try {
         const response = await fetcher(API_URL, {
           method: 'POST',
@@ -135,8 +136,13 @@ export async function syncRegistrationsToMailerLite(
         });
         // Always read the body so the connection is released before the next request.
         const body = await response.text();
-        // MailerLite error bodies describe fields, not values; keep a short excerpt for admins.
-        if (!response.ok) error = `HTTP ${response.status}: ${body.slice(0, 200)}`;
+        if (response.status === 422 && /not active and cannot be imported/i.test(body)) {
+          // Unsubscribed or bounced in MailerLite. Leaving them alone is correct, so count it as done.
+          note = 'Not added: unsubscribed or bounced in MailerLite';
+        } else if (!response.ok) {
+          // MailerLite error bodies describe fields, not values; keep a short excerpt for admins.
+          error = `HTTP ${response.status}: ${body.slice(0, 200)}`;
+        }
       } catch (fetchError) {
         error = fetchError instanceof Error ? fetchError.name : 'Request failed';
       }
@@ -152,7 +158,7 @@ export async function syncRegistrationsToMailerLite(
              last_error = CASE WHEN volunteer_registration_mailerlite.synced_at <> '' THEN '' ELSE excluded.last_error END,
              last_attempt_at = excluded.last_attempt_at`
         )
-        .bind(row.id, error ? '' : attemptedAt, error, attemptedAt)
+        .bind(row.id, error ? '' : attemptedAt, error || note, attemptedAt)
         .run();
 
       if (error) {

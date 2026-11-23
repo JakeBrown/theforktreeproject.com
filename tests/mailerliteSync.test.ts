@@ -183,3 +183,19 @@ test('a failure superseded by a newer registration is not shown as failed', asyn
   await syncRegistrationsToMailerLite(db, env, { fetcher: recorder().fetcher });
   assert.equal((await getMailerLiteSyncStatus(db)).failed, 0);
 });
+
+test('an unsubscribed or bounced subscriber is left alone and not shown as failed', async () => {
+  const db = database();
+  insertRegistration(db, 1, 'a@example.com');
+  const fetcher = async () => ({
+    ok: false,
+    status: 422,
+    text: async () => '{"message":"The given data was invalid.","errors":{"email":["This subscriber is not active and cannot be imported"]}}',
+  });
+  const result = await syncRegistrationsToMailerLite(db, env, { fetcher, now: new Date('2026-11-24T00:00:00Z') });
+  assert.equal(result.synced, 1);
+  assert.deepEqual(await getMailerLiteSyncStatus(db), { lastSyncedAt: '2026-11-24T00:00:00.000Z', failed: 0, pending: 0 });
+  const calls = recorder();
+  await syncRegistrationsToMailerLite(db, env, { fetcher: calls.fetcher });
+  assert.equal(calls.calls.length, 0);
+});
