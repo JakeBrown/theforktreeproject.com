@@ -177,9 +177,9 @@ export function entryTitle(entry: CalendarEntry): string {
   const name = entry.volunteer.preferredName && entry.volunteer.preferredName !== entry.volunteer.fullName
     ? `${entry.volunteer.fullName} (${entry.volunteer.preferredName})`
     : entry.volunteer.fullName;
-  const automatic = entry.status === 'signed-out' && entry.signOutMethod === 'automatic' ? ', auto' : '';
+  // The emoji carries the status; details such as an automatic sign-out are in the description.
   const time = entry.status === 'scheduled' && entry.expectedTime ? ` · ${entry.expectedTime}` : '';
-  return `${info.marker} ${name} · ${info.label}${automatic}${time}`;
+  return `${info.marker} ${name}${time}`;
 }
 
 export function escapeIcsText(value: string): string {
