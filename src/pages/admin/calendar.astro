@@ -2,6 +2,7 @@
 import AdminLayout from '../../layouts/AdminLayout.astro';
 import '../../styles/admin-calendar.css';
 import { formatDate, formatTime } from '../../lib/admin';
+import { addManualVisit, adelaideTimeInputValue } from '../../lib/attendanceEdits';
 import { calendarWeeks, formatMonth, getCalendarMonth, monthBounds, shiftMonth } from '../../lib/adminCalendar';
 import { getAdelaideDate } from '../../lib/volunteerAttendance';
 import { CALENDAR_STATUSES, isCalendarStatus, statusInfo, type CalendarEntry } from '../../lib/volunteerCalendar';
@@ -20,6 +21,26 @@ const database = getVolunteerDatabase(Astro.locals);
 const params = { month: getCalendarMonth(Astro.url.searchParams) };
 const today = getAdelaideDate();
 let visitError = '';
+// A failed "Sign in" from a scheduled visit reopens that day with the admin's values and the error.
+let signInError = '';
+let signInErrorKey = '';
+let signInValues = { sign_in: '', sign_out: '' };
+const editedBy = String((Astro.locals as any).adminActor || 'admin');
+
+// Status filter (?show=signed-in,scheduled). Missing or empty means every status is shown.
+const allStatuses = CALENDAR_STATUSES.map((status) => status.value);
+const requestedShow = (Astro.url.searchParams.get('show') || '').split(',').filter(isCalendarStatus);
+const shownStatuses = new Set(requestedShow.length > 0 ? requestedShow : allStatuses);
+const isFiltered = shownStatuses.size < allStatuses.length;
+const showQuery = isFiltered ? `&show=${allStatuses.filter((value) => shownStatuses.has(value)).join(',')}` : '';
+function toggleHref(value: (typeof allStatuses)[number]): string {
+  const next = new Set(shownStatuses);
+  if (next.has(value)) next.delete(value);
+  else next.add(value);
+  // Turning off the last status, or turning everything on, goes back to showing everything.
+  const query = next.size === 0 || next.size === allStatuses.length ? '' : `&show=${allStatuses.filter((item) => next.has(item)).join(',')}`;
+  return `/admin/calendar?month=${params.month}${query}`;
+}
 
 if (Astro.request.method === 'POST' && database) {
   const form = await Astro.request.formData();
@@ -30,7 +51,7 @@ if (Astro.request.method === 'POST' && database) {
   }
   if (action === 'add-visit') {
     const volunteerId = parsePositiveId(form.get('volunteer_id'));
-    const parsed = parseVisitForm(form, today);
+    const parsed = parseVisitForm(form);
     if (!volunteerId) {
       visitError = 'Choose a volunteer.';
     } else if (!parsed.success) {
@@ -47,9 +68,34 @@ if (Astro.request.method === 'POST' && database) {
           )
           .bind(volunteerId, parsed.values.visit_date, parsed.values.start_time, parsed.values.end_time, parsed.values.notes, new Date().toISOString())
           .run();
-        return Astro.redirect(`/admin/calendar?month=${parsed.values.visit_date.slice(0, 7)}&notice=visit-added`, 303);
+        return Astro.redirect(`/admin/calendar?month=${parsed.values.visit_date.slice(0, 7)}${showQuery}&notice=visit-added`, 303);
       }
     }
+  }
+  if (action === 'sign-in-visit') {
+    const volunteerId = parsePositiveId(form.get('volunteer_id'));
+    const date = String(form.get('date') || '');
+    const times = { signIn: String(form.get('sign_in') || ''), signOut: String(form.get('sign_out') || '') };
+    signInValues = { sign_in: times.signIn, sign_out: times.signOut };
+    signInErrorKey = `${volunteerId}|${date}`;
+    const volunteer = volunteerId
+      ? await database
+          .prepare('SELECT id, full_name, phone, phone_normalized FROM volunteers WHERE id = ?1')
+          .bind(volunteerId)
+          .first<{ id: number; full_name: string; phone: string; phone_normalized: string }>()
+      : null;
+    const result = volunteer
+      ? await addManualVisit(database, { volunteer, date, times, editedBy, today })
+      : { ok: false as const, error: 'That volunteer could not be found.' };
+    if (result.ok) {
+      return Astro.redirect(`/admin/calendar?month=${date.slice(0, 7)}${showQuery}&notice=signed-in`, 303);
+    }
+    signInError = result.error;
+  }
+  if (action === 'delete-visit') {
+    const visitId = parsePositiveId(form.get('visit_id'));
+    if (visitId) await database.prepare('DELETE FROM volunteer_scheduled_visits WHERE id = ?1').bind(visitId).run();
+    return Astro.redirect(`/admin/calendar?month=${params.month}${showQuery}&notice=visit-removed`, 303);
   }
 }
 
@@ -58,21 +104,6 @@ const weeks = calendarWeeks(params.month);
 const [monthStart, nextMonthStart] = monthBounds(params.month);
 const previousMonth = params.month === '2000-01' ? null : shiftMonth(params.month, -1);
 const nextMonth = params.month === '2100-12' ? null : shiftMonth(params.month, 1);
-
-// Status filter (?show=signed-in,scheduled). Missing or empty means every status is shown.
-const allStatuses = CALENDAR_STATUSES.map((status) => status.value);
-const requestedShow = (Astro.url.searchParams.get('show') || '').split(',').filter(isCalendarStatus);
-const shownStatuses = new Set(requestedShow.length > 0 ? requestedShow : allStatuses);
-const isFiltered = shownStatuses.size < allStatuses.length;
-const showQuery = isFiltered ? `&show=${allStatuses.filter((value) => shownStatuses.has(value)).join(',')}` : '';
-function toggleHref(value: (typeof allStatuses)[number]): string {
-  const next = new Set(shownStatuses);
-  if (next.has(value)) next.delete(value);
-  else next.add(value);
-  // Turning off the last status, or turning everything on, goes back to showing everything.
-  const query = next.size === 0 || next.size === allStatuses.length ? '' : `&show=${allStatuses.filter((item) => next.has(item)).join(',')}`;
-  return `/admin/calendar?month=${params.month}${query}`;
-}
 
 let entries: CalendarEntry[] = [];
 let volunteers: Array<{ id: number; full_name: string }> = [];
@@ -117,10 +148,28 @@ const feeds = token
   : [];
 const NOTICES: Record<string, string> = {
   'visit-added': 'Visit scheduled.',
+  'signed-in': 'Signed in.',
+  'visit-removed': 'Scheduled visit removed.',
   'link-created': 'A new subscription link is ready. Any older links have stopped working.',
 };
 const notice = NOTICES[Astro.url.searchParams.get('notice') || ''];
+// Shown at the top when the failed sign-in has no matching scheduled entry to show it next to.
+const signInErrorInDialog = entries.some((entry) => entry.status === 'scheduled' && `${entry.volunteer.id}|${entry.date}` === signInErrorKey);
 const MAX_CHIPS = 4;
+const nowTime = adelaideTimeInputValue(new Date().toISOString());
+
+function isFuture(date: string): boolean {
+  return date > today;
+}
+
+/** Starting values for signing in a scheduled volunteer: the expected times, capped at now for today. */
+function signInDefaults(entry: CalendarEntry): { sign_in: string; sign_out: string } {
+  if (entry.date === today) {
+    const start = entry.visitStartTime && entry.visitStartTime <= nowTime ? entry.visitStartTime : nowTime;
+    return { sign_in: start, sign_out: '' };
+  }
+  return { sign_in: entry.visitStartTime, sign_out: entry.visitEndTime };
+}
 
 function entryMeta(entry: CalendarEntry): string {
   const parts: string[] = [];
@@ -165,6 +214,7 @@ function contact(name: string, relationship: string, phone: string): string {
   </header>
 
   {notice && <p class="admin-flash admin-flash--success" role="status">{notice}</p>}
+  {signInError && !signInErrorInDialog && <p class="admin-flash admin-flash--error" role="alert">{signInError}</p>}
 
   {loadError ? (
     <section class="admin-state" role="alert">
@@ -233,7 +283,7 @@ function contact(name: string, relationship: string, phone: string): string {
         {[...entriesByDate.entries()].map(([date, dayEntries]) => {
           const dialogId = `calendar-day-${date}`;
           return (
-            <dialog class="admin-dialog day-sign-ins-dialog" id={dialogId} aria-labelledby={`${dialogId}-title`}>
+            <dialog class="admin-dialog day-sign-ins-dialog" id={dialogId} aria-labelledby={`${dialogId}-title`} data-open-on-load={signInErrorInDialog && signInErrorKey.endsWith(`|${date}`) ? '' : undefined}>
               <article class="admin-dialog__panel">
                 <header class="admin-dialog__header">
                   <div>
@@ -247,6 +297,11 @@ function contact(name: string, relationship: string, phone: string): string {
                     {dayEntries.map((entry) => {
                       const primary = contact(entry.volunteer.emergencyContactName, entry.volunteer.emergencyContactRelationship, entry.volunteer.emergencyContactPhone);
                       const secondary = contact(entry.volunteer.secondaryEmergencyContactName, entry.volunteer.secondaryEmergencyContactRelationship, entry.volunteer.secondaryEmergencyContactPhone);
+                      const canSignIn = entry.status === 'scheduled' && Boolean(entry.volunteer.id) && !isFuture(entry.date);
+                      const formId = `sign-in-${entry.volunteer.id}-${entry.date}`;
+                      const hasError = Boolean(signInError) && signInErrorKey === `${entry.volunteer.id}|${entry.date}`;
+                      const values = hasError ? signInValues : signInDefaults(entry);
+                      const isPast = entry.date !== today;
                       return (
                         <li>
                           <div class="calendar-day-list__top">
@@ -258,6 +313,33 @@ function contact(name: string, relationship: string, phone: string): string {
                           {entry.visitNotes && <p>{entry.visitNotes}</p>}
                           <p>Phone: {entry.volunteer.phone || 'Not provided'}</p>
                           <p>Emergency: {primary || 'Not provided'}{secondary && <><br />Second: {secondary}</>}</p>
+                          {canSignIn && (
+                              <details class="calendar-sign-in" open={hasError} data-live-default={!hasError && entry.date === today ? (entry.visitStartTime || '') : undefined}>
+                                <summary>Sign in</summary>
+                                <form class="calendar-sign-in__form" method="post" action={`/admin/calendar?month=${params.month}${showQuery}`}>
+                                  <input type="hidden" name="action" value="sign-in-visit" />
+                                  <input type="hidden" name="volunteer_id" value={String(entry.volunteer.id)} />
+                                  <input type="hidden" name="date" value={entry.date} />
+                                  {hasError && <p class="admin-flash admin-flash--error calendar-sign-in__wide" role="alert">{signInError}</p>}
+                                  <div class="admin-field">
+                                    <label for={`${formId}-in`}>Signed in</label>
+                                    <input id={`${formId}-in`} name="sign_in" type="time" value={values.sign_in} required />
+                                  </div>
+                                  <div class="admin-field">
+                                    <label for={`${formId}-out`}>Signed out{isPast ? '' : ' (optional)'}</label>
+                                    <input id={`${formId}-out`} name="sign_out" type="time" value={values.sign_out} required={isPast} />
+                                  </div>
+                                  <button class="admin-button calendar-sign-in__wide" type="submit">Sign in {entry.volunteer.fullName}</button>
+                                </form>
+                              </details>
+                          )}
+                          {entry.status === 'scheduled' && entry.visitId && (
+                            <form class="calendar-remove-visit" method="post" action={`/admin/calendar?month=${params.month}${showQuery}`} data-confirm-label="Click again to remove">
+                              <input type="hidden" name="action" value="delete-visit" />
+                              <input type="hidden" name="visit_id" value={String(entry.visitId)} />
+                              <button class="profile-text-button" type="submit">Remove scheduled visit</button>
+                            </form>
+                          )}
                         </li>
                       );
                     })}
@@ -283,7 +365,7 @@ function contact(name: string, relationship: string, phone: string): string {
             </div>
             <div class="admin-field">
               <label for="schedule-date">Date</label>
-              <input id="schedule-date" name="visit_date" type="date" min={today} required />
+              <input id="schedule-date" name="visit_date" type="date" required />
             </div>
             <div class="admin-field">
               <label for="schedule-start">Expected arrival (optional)</label>
@@ -350,6 +432,27 @@ function contact(name: string, relationship: string, phone: string): string {
 </AdminLayout>
 
 <script>
+  // Reopen the day whose sign-in came back with an error. Wait for AdminLayout's dialog handlers.
+  window.addEventListener('load', () => {
+    const failed = document.querySelector<HTMLDialogElement>('dialog[data-open-on-load]');
+    if (failed) document.querySelector<HTMLElement>(`[data-dialog-open="${failed.id}"]`)?.click();
+  });
+
+  // For today's visits, fill the sign-in time when the form is opened, not when the page loaded:
+  // the expected start, or now if that's still in the future.
+  document.querySelectorAll<HTMLDetailsElement>('details[data-live-default]').forEach((details) => {
+    details.addEventListener('toggle', () => {
+      const input = details.querySelector<HTMLInputElement>('input[name="sign_in"]');
+      if (!details.open || !input || input.dataset.touched) return;
+      const now = new Intl.DateTimeFormat('en-AU', { timeZone: 'Australia/Adelaide', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date());
+      const expected = details.dataset.liveDefault || '';
+      input.value = expected && expected <= now ? expected : now;
+    });
+    details.querySelector('input[name="sign_in"]')?.addEventListener('input', (event) => {
+      (event.target as HTMLInputElement).dataset.touched = '1';
+    });
+  });
+
   document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) => {
     button.addEventListener('click', async () => {
       const input = document.getElementById(button.dataset.copy || '') as HTMLInputElement | null;
@@ -392,6 +495,12 @@ function contact(name: string, relationship: string, phone: string): string {
   .calendar-day-list__top a { color: #1f2a1f; }
   .calendar-day-list__top a:hover { color: #285f25; text-decoration: underline; }
   .calendar-day-list p { margin: 0.15rem 0 0; color: #566153; font-size: 0.82rem; }
+  .calendar-sign-in { margin-top: 0.6rem; }
+  .calendar-remove-visit { margin-top: 0.4rem; }
+  .calendar-sign-in summary { display: inline-block; color: #2d6927; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+  .calendar-sign-in summary:hover { text-decoration: underline; }
+  .calendar-sign-in__form { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.6rem; }
+  .calendar-sign-in__wide { grid-column: 1 / -1; margin: 0; }
   .calendar-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem; align-items: start; }
   .calendar-schedule-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; margin-top: 0.75rem; }
   .calendar-schedule-form__wide { grid-column: 1 / -1; }

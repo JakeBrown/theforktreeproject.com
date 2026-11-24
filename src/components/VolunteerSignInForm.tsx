@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { SIGN_IN_DECLARATION_TEXT } from '../lib/volunteerAttendance';
-import { getAdelaideDate, validateVolunteerSignIn, validateVolunteerSignOut } from '../lib/volunteerSignIn';
+import { getAdelaideDate, getAdelaideTime, validateVolunteerSignIn, validateVolunteerSignOut } from '../lib/volunteerSignIn';
 
 type FieldErrors = Record<string, string>;
 type FormStatus = 'idle' | 'submitting' | 'success';
@@ -10,6 +10,8 @@ const emptyForm = () => ({
   fullName: '',
   phone: '',
   declarationAccepted: false,
+  arrival: 'now' as 'now' | 'earlier',
+  arrivalTime: '',
   website: '',
 });
 
@@ -48,9 +50,20 @@ export default function VolunteerSignInForm() {
 
     const isSignIn = mode === 'sign-in';
     const submission = isSignIn
-      ? { ...formData, volunteerDate: getAdelaideDate() }
+      ? {
+          fullName: formData.fullName,
+          phone: formData.phone,
+          declarationAccepted: formData.declarationAccepted,
+          website: formData.website,
+          volunteerDate: getAdelaideDate(),
+          arrivalTime: formData.arrival === 'earlier' ? formData.arrivalTime : '',
+        }
       : { phone: formData.phone, website: formData.website };
 
+    if (isSignIn && formData.arrival === 'earlier' && !formData.arrivalTime) {
+      setErrors({ arrivalTime: 'Choose the time you arrived.' });
+      return;
+    }
     const validation = isSignIn
       ? validateVolunteerSignIn(submission, getAdelaideDate())
       : validateVolunteerSignOut(submission);
@@ -188,6 +201,50 @@ export default function VolunteerSignInForm() {
           </div>
 
           {isSignIn && (
+            <fieldset className="sign-in-arrival">
+              <legend>Arrival time</legend>
+              <div className="sign-in-arrival__options">
+                {(['now', 'earlier'] as const).map((option) => (
+                  <label key={option} className="sign-in-arrival__option">
+                    <input
+                      type="radio"
+                      name="arrival"
+                      value={option}
+                      checked={formData.arrival === option}
+                      onChange={() => {
+                        setFormData({ ...formData, arrival: option });
+                        setErrors(({ arrivalTime: _cleared, ...rest }) => rest);
+                      }}
+                    />
+                    <span>{option === 'now' ? 'Now' : 'Earlier'}</span>
+                  </label>
+                ))}
+              </div>
+              {formData.arrival === 'earlier' && (
+                <div className="sign-in-field">
+                  <label htmlFor="volunteer-arrival-time">What time did you arrive?</label>
+                  <input
+                    id="volunteer-arrival-time"
+                    name="arrivalTime"
+                    type="time"
+                    max={getAdelaideTime()}
+                    value={formData.arrivalTime}
+                    onChange={(event) => setFormData({ ...formData, arrivalTime: event.target.value })}
+                    aria-invalid={Boolean(errors.arrivalTime)}
+                    aria-describedby={errors.arrivalTime ? 'volunteer-arrival-time-error' : undefined}
+                    required
+                  />
+                </div>
+              )}
+              {errors.arrivalTime && (
+                <span id="volunteer-arrival-time-error" className="sign-in-error">
+                  {errors.arrivalTime}
+                </span>
+              )}
+            </fieldset>
+          )}
+
+          {isSignIn && (
             <div className="sign-in-declaration">
               <p className="sign-in-declaration__heading" id="volunteer-declaration-heading">Declaration</p>
               <label className="sign-in-declaration__label" htmlFor="volunteer-declaration">
@@ -286,6 +343,53 @@ export default function VolunteerSignInForm() {
         .sign-in-mode button:focus-visible {
           outline: 3px solid rgba(58, 125, 50, 0.25);
           outline-offset: 2px;
+        }
+
+        .sign-in-arrival {
+          display: grid;
+          gap: 0.75rem;
+          margin: 0;
+          padding: 0;
+          border: 0;
+        }
+
+        .sign-in-arrival legend {
+          margin-bottom: 0.45rem;
+          padding: 0;
+          color: #1f2a1f;
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+        }
+
+        .sign-in-arrival__options {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.5rem;
+        }
+
+        .sign-in-arrival__option {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          min-height: 52px;
+          padding: 0.7rem 0.9rem;
+          border: 1px solid #b8bdb5;
+          border-radius: 2px;
+          color: #1f2a1f;
+          cursor: pointer;
+        }
+
+        .sign-in-arrival__option:has(input:checked) {
+          border-color: #3a7d32;
+          background: #f3f8f1;
+        }
+
+        .sign-in-arrival__option input {
+          width: 20px;
+          height: 20px;
+          accent-color: #3a7d32;
         }
 
         .sign-in-declaration {

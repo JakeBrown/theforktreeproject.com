@@ -4,7 +4,7 @@ import {
   validateVolunteerSignIn,
   type VolunteerSignInInput,
 } from '../../lib/volunteerSignIn';
-import { SIGN_IN_DECLARATION_VERSION } from '../../lib/volunteerAttendance';
+import { SIGN_IN_DECLARATION_VERSION, adelaideTimeToUtc } from '../../lib/volunteerAttendance';
 import { ensureVolunteerSchema, getVolunteerDatabase } from '../../lib/volunteerDb';
 import {
   isRateLimited,
@@ -73,6 +73,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
     if (duplicate) return jsonResponse(DUPLICATE, 409);
 
     const now = new Date().toISOString();
+    // Someone who forgot to sign in on arrival can give an earlier time (validated as not after now).
+    const [arrivalHour, arrivalMinute] = entry.arrivalTime.split(':').map(Number);
+    const signedInAt = entry.arrivalTime
+      ? adelaideTimeToUtc(entry.volunteerDate, arrivalHour, arrivalMinute).toISOString()
+      : now;
     const inserted = await database
       .prepare(
         `INSERT INTO volunteer_sign_ins (
@@ -81,7 +86,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
         ) VALUES (?1, '', '', ?2, ?3, ?4, 0, ?5)
         RETURNING id`
       )
-      .bind(entry.fullName, entry.phone, entry.phoneNormalized, entry.volunteerDate, now)
+      .bind(entry.fullName, entry.phone, entry.phoneNormalized, entry.volunteerDate, signedInAt)
       .first<{ id: number }>();
 
     if (inserted) {

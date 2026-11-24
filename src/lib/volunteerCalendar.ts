@@ -61,6 +61,11 @@ export interface CalendarEntry {
   status: CalendarStatus;
   volunteer: CalendarVolunteer;
   expectedTime: string;
+  /** The scheduled visit behind this entry, if any. */
+  visitId: number | null;
+  /** Raw "HH:MM" times from the scheduled visit, if any. */
+  visitStartTime: string;
+  visitEndTime: string;
   visitNotes: string;
   signedInAt: string;
   signedOutAt: string;
@@ -96,6 +101,9 @@ export function buildCalendarEntries(
       status: record.signedOutAt ? 'signed-out' : 'signed-in',
       volunteer: record.volunteer,
       expectedTime: visit ? formatExpectedTime(visit.startTime, visit.endTime) : '',
+      visitId: visit?.visitId ?? null,
+      visitStartTime: visit?.startTime || '',
+      visitEndTime: visit?.endTime || '',
       visitNotes: visit?.notes || '',
       signedInAt: record.signedInAt,
       signedOutAt: record.signedOutAt,
@@ -113,6 +121,9 @@ export function buildCalendarEntries(
       status: 'scheduled',
       volunteer: visit.volunteer,
       expectedTime: formatExpectedTime(visit.startTime, visit.endTime),
+      visitId: visit.visitId,
+      visitStartTime: visit.startTime,
+      visitEndTime: visit.endTime,
       visitNotes: visit.notes,
       signedInAt: '',
       signedOutAt: '',

@@ -70,8 +70,7 @@ export interface VisitValues {
 }
 
 export function parseVisitForm(
-  form: FormData,
-  today: string
+  form: FormData
 ): { success: true; values: VisitValues } | { success: false; error: string } {
   const text = (name: string) => {
     const value = form.get(name);
@@ -85,7 +84,6 @@ export function parseVisitForm(
   };
 
   if (!isValidIsoDate(values.visit_date)) return { success: false, error: 'Choose a date for the visit.' };
-  if (values.visit_date < today) return { success: false, error: 'Scheduled visits must be today or later.' };
   if (values.start_time && !isValidTime(values.start_time)) return { success: false, error: 'Enter a valid start time.' };
   if (values.end_time && !isValidTime(values.end_time)) return { success: false, error: 'Enter a valid finish time.' };
   if (values.start_time && values.end_time && values.end_time <= values.start_time) {

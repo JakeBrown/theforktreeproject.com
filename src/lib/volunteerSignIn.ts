@@ -5,6 +5,8 @@ export interface VolunteerSignInInput {
   phone: string;
   volunteerDate: string;
   declarationAccepted?: boolean;
+  /** "HH:MM" Adelaide time for someone who arrived earlier and forgot to sign in. Empty means now. */
+  arrivalTime?: string;
   website?: string;
 }
 
@@ -13,6 +15,7 @@ export interface ValidatedVolunteerSignIn {
   phone: string;
   phoneNormalized: string;
   volunteerDate: string;
+  arrivalTime: string;
 }
 
 export type VolunteerSignInValidationResult =
@@ -31,6 +34,18 @@ export function getAdelaideDate(date = new Date()): string {
   return `${values.year}-${values.month}-${values.day}`;
 }
 
+/** Current "HH:MM" in Adelaide. */
+export function getAdelaideTime(date = new Date()): string {
+  const parts = new Intl.DateTimeFormat('en-AU', {
+    timeZone: ADELAIDE_TIME_ZONE,
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h23',
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+  return `${values.hour}:${values.minute}`;
+}
+
 export function normalizePhone(phone: string): string {
   let digits = phone.replace(/\D/g, '');
 
@@ -43,12 +58,14 @@ export function normalizePhone(phone: string): string {
 
 export function validateVolunteerSignIn(
   input: Partial<VolunteerSignInInput>,
-  today = getAdelaideDate()
+  today = getAdelaideDate(),
+  nowTime = getAdelaideTime()
 ): VolunteerSignInValidationResult {
   const fullName = typeof input.fullName === 'string' ? input.fullName.trim().replace(/\s+/g, ' ') : '';
   const phone = typeof input.phone === 'string' ? input.phone.trim().replace(/\s+/g, ' ') : '';
   const volunteerDate = typeof input.volunteerDate === 'string' ? input.volunteerDate : '';
   const phoneNormalized = normalizePhone(phone);
+  const arrivalTime = typeof input.arrivalTime === 'string' ? input.arrivalTime.trim() : '';
   const errors: Record<string, string> = {};
 
   if (fullName.length < 2 || fullName.length > 120) {
@@ -61,6 +78,12 @@ export function validateVolunteerSignIn(
 
   if (input.declarationAccepted !== true) {
     errors.declarationAccepted = 'Please read and agree to the declaration before signing in.';
+  }
+
+  if (arrivalTime && !/^([01]\d|2[0-3]):[0-5]\d$/.test(arrivalTime)) {
+    errors.arrivalTime = 'Choose the time you arrived.';
+  } else if (arrivalTime && arrivalTime > nowTime) {
+    errors.arrivalTime = 'Your arrival time can’t be later than now.';
   }
 
   if (volunteerDate !== today) {
@@ -78,6 +101,7 @@ export function validateVolunteerSignIn(
       phone,
       phoneNormalized,
       volunteerDate,
+      arrivalTime,
     },
   };
 }
